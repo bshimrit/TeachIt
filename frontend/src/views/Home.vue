@@ -2,7 +2,7 @@
   <div class="home">
     <FilterCmp/>
     MostPopular
-    <topicPreview/>
+    <topicPreview :topics="topics"/>
     Categories
     <topicPreview/>
   </div>
@@ -18,6 +18,12 @@ export default {
   components: {
     FilterCmp,
     TopicPreview
+  },
+  computed: {
+    topics() {     
+      return this.$store.getters.topicsForDisplay;
+    }
   }
+  
 }
 </script>

@@ -14,6 +14,7 @@
     "vue": "^2.5.16",
     "vue-icons": "^2.0.0",
     "vue-router": "^3.0.1",
+    "vue-star-rating": "^1.6.0",
     "vue2-google-maps": "^0.9.6",
     "vuex": "^3.0.1"
   },
@@ -24,6 +25,7 @@
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "vue-materialize": "^1.0.0",
+    "vue-svg-loader": "^0.5.0",
     "vue-template-compiler": "^2.5.13"
   },
   "babel": {
