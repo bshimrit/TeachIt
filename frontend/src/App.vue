@@ -3,10 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-<<<<<<< HEAD
-=======
       <router-link to="/search">Search</router-link> 
->>>>>>> 84a64ee1a2e1a1ed3dbe52644e949a532b709a27
       <router-link to="/profile">Profile</router-link> |
 
     </div>
