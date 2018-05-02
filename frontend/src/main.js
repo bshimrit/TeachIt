@@ -6,7 +6,6 @@ import axios from 'axios'
 import './registerServiceWorker'
 import "vue-materialize"
 import 'font-awesome/css/font-awesome.css';
-import axios from 'axios'
 // import * as VueGoogleMaps from 'vue2-google-maps'
 
 import _ from 'lodash'
