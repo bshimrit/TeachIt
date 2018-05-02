@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import VueMaterealize from "vue-materialize"
+import 'font-awesome/css/font-awesome.css';
 
 Vue.config.productionTip = false
 
