@@ -49,7 +49,7 @@
 <script>
 // @ is an alias to /src
 import TopicReview from '@/components/review/TopicReview.vue'
-import UserService from '@/services/userService.js'
+import UserService from '@/services/UserService.js'
 
 export default {
   name: 'profile',
