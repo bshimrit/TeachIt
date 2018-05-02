@@ -3,11 +3,7 @@ const TopicService = require('../services/TopicService')
 
 module.exports = (app) => {
     app.get(TOPIC_URL, (req, res)=>{
-
-        console.log(req.query);
-
         TopicService.query(req.query).then(topics => {
-            console.log('ROUTE TOPICS: ', topics);
             res.json(topics);
         })
     })

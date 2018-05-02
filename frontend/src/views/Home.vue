@@ -1,17 +1,23 @@
 <template>
   <div class="home">
-    <Search/>
+    <FilterCmp/>
+    MostPopular
+    <topicPreview/>
+    Categories
+    <topicPreview/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Search from '@/components/Search.vue'
+import FilterCmp from '@/components/FilterCmp.vue'
+import TopicPreview from '@/components/topic/topicPreview.vue'
 
 export default {
   name: 'home',
   components: {
-    Search
+    FilterCmp,
+    TopicPreview
   }
 }
 </script>

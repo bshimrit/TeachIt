@@ -9,35 +9,44 @@
         <label> Price
             <input type="range" min="0" max="1000" />
         </label>
-        <label> Topic
-            <select>
-                
-            </select>
-        </label>
+        <div>
+            <label> Topic
+                <select v-model="filterBy.topic">
+                    <option v-for="topic in topics" :key="topic._id" :value="topic.title">{{topic.subtitle}}</option>
+                </select>
+            </label>
+        </div>
   </section>
 </template>
 
 <script>
 export default {
     name:'search',
+    created(){
+         this.$store.dispatch({type: 'loadTopics'})
+    },
     data() {
         return {
             filterBy: {text:'', price:0, topic:null}
         }
     },
+    computed:{
+        topics(){
+            return this.$store.getters.topicsForDisplay;
+        }
+    },
     methods: {
     emitFilter(){
         this.$emit('filtered',this.filterBy);
-    },
-    searchByFilter: _.debounce(function (e) {
-            this.emitFilter();
-    }, 500),
-    
-}
+        }
+    }
 }
 </script>
 
 <style scoped>
+select {
+    display:inline;
+}
 .box{
   margin: 100px auto;
   width: 300px;

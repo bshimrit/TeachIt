@@ -12,6 +12,8 @@ app.use(bodyParser());
 
 const addUserRoutes = require ('./routes/UserRoute')
 addUserRoutes(app)
+const addTopicRoutes = require ('./routes/TopicRoute')
+addTopicRoutes(app)
 
 app.listen(3000, 
     () => console.log('Example app listening on port 3000!')
