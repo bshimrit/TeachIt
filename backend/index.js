@@ -10,9 +10,10 @@ app.use(cors({
 }))
 app.use(bodyParser());
 
-const addToyRoutes = require ('./routes/UserRoute')
-addToyRoutes(app)
+const addUserRoutes = require ('./routes/UserRoute')
+addUserRoutes(app)
 
 app.listen(3000, 
     () => console.log('Example app listening on port 3000!')
 )
+

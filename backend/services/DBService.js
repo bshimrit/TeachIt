@@ -1,4 +1,4 @@
-var DB_URL = 'mongodb://localhost:27017/Toys';
+var DB_URL = 'mongodb://localhost:27017/teachit_db';
 const mongo = require('mongodb');
 
 var MongoClient = mongo.MongoClient;
