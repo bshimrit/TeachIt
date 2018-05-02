@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="topic-preview">
       <div class="row">
             <div v-for="topic in topics" :key="topic._id" class="col s12 m3">
                 <div class="card">
@@ -10,7 +10,7 @@
                     </div>
                     <h5>Teacher Name</h5>
                     <div class="card-content">
-                    <StarRating v-model="rating" :read-only="true" :show-rating="false"/>
+                    <StarRating :star-size=30 :increment=0.1 v-model="rating" :read-only="true" :show-rating="false"/>
                     <h4>Topic</h4>
                     <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                     </div>
@@ -44,5 +44,7 @@ export default {
         width: 80px;
         height:80px;
     }
-    
+    .topic-preview {
+        max-width: 100%;
+    }
 </style>
