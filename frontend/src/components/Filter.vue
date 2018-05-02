@@ -29,9 +29,9 @@ export default {
     emitFilter(){
         this.$emit('filtered',this.filterBy);
     },
-    searchByFilter: _.debounce(function (e) {
-            this.emitFilter();
-    }, 500),
+    // searchByFilter: _.debounce(function (e) {
+    //         this.emitFilter();
+    // }, 500),
     
 }
 }

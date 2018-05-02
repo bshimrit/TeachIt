@@ -5,6 +5,7 @@ import store from './store'
 import './registerServiceWorker'
 import VueMaterealize from "vue-materialize"
 import 'font-awesome/css/font-awesome.css';
+import _ from 'lodash'
 
 Vue.config.productionTip = false
 
