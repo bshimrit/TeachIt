@@ -49,16 +49,28 @@
 <script>
 // @ is an alias to /src
 import TopicReview from '@/components/review/TopicReview.vue'
+import UserService from '@/services/userService.js'
 
 export default {
   name: 'profile',
   data () {
     return {
-      user: {name:'Dani Bern', img:'../assets/logo.png',quote:'Anyone Can Learn',desc:'Hi! I\'m Colt. I\'m a developer with a serious love for teaching. I\'ve spent the last few years teaching people to program at 2 different immersive bootcamps where I\'ve helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square.', education:'A Degree', socialMedia: {facebook:'http://f.com/user',twitter:'t.com/user'}}
+      user: {name:'Dani Bern', img:'https://randomuser.me/api/portraits/men/43.jpg',quote:'Anyone Can Learn',desc:'Hi! I\'m Colt. I\'m a developer with a serious love for teaching. I\'ve spent the last few years teaching people to program at 2 different immersive bootcamps where I\'ve helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square.', education:'A Degree', socialMedia: {facebook:'http://f.com/user',twitter:'t.com/user'}}
     }
   },
+  created() {
+        var userId = this.$route.params.userId;
+        console.log('userId', userId);
+        UserService.getUserById(userId)
+         .then(user => this.user = user)
+         .catch(err => {
+            console.log('err:', err);
+             //this.$router.push('/')
+         })
+    },
   components: {
-    TopicReview
+    TopicReview,
+    UserService
   }
 }
 </script>

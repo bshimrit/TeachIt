@@ -7,7 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.10",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-icons": "^2.0.0",

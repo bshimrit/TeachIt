@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <Search/>
+    <!-- <Filter/> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Search from '@/components/Search.vue'
+// import Filter from '@/components/Filter.vue'
 
 export default {
   name: 'home',
   components: {
-    Search
+    // Filter
   }
 }
 </script>
