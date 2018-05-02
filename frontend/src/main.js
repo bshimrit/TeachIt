@@ -7,6 +7,7 @@ import VueMaterealize from "vue-materialize"
 import 'font-awesome/css/font-awesome.css';
 import axios from 'axios'
 
+import _ from 'lodash'
 
 Vue.config.productionTip = false
 
