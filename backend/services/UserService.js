@@ -6,7 +6,7 @@ function query(criteria = {}) {
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
-                db.collection('users').find(criteria).toArray((err, users) => {
+                db.collection('user').find(criteria).toArray((err, users) => {
                     if (err) return reject(err);
                     resolve(users);
                 })
@@ -19,7 +19,7 @@ function add(user) {
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
-                db.collection('users').insert(user, (err, res) => {
+                db.collection('user').insert(user, (err, res) => {
                     if (err) return reject(err);
                     resolve(res.ops);
                     db.close();
@@ -35,7 +35,7 @@ function remove(userId) {
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('users').deleteOne({_id: userIdObj}, function (err, res) {
+            db.collection('user').deleteOne({_id: userIdObj}, function (err, res) {
                 if (err)    reject(err)
                 else        resolve();
                 db.close();
@@ -50,7 +50,7 @@ function update(user) {
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('users').updateOne({_id : user._id}, user, function (err, updatedUser) {
+            db.collection('user').updateOne({_id : user._id}, user, function (err, updatedUser) {
                 if (err)    reject(err)
                 else        resolve(updatedUser);
                 db.close();
@@ -64,7 +64,7 @@ function getById(userId) {
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('users').findOne({_id: userId}, function (err, user) {
+            db.collection('user').findOne({_id: userId}, function (err, user) {
                 if (err)    reject(err)
                 else        resolve(user);
                 db.close();

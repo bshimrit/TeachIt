@@ -32,6 +32,7 @@ module.exports = (app) => {
 
     app.get(`${USER_URL}/:userId`, (req, res) => {
         const userId = req.params.userId;
+      
         UserService.getById(userId)
             .then(user => {
                 res.json(user)
