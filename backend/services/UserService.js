@@ -14,7 +14,7 @@ const mongo = require('mongodb');
 // }
 
 function query(criteria = {}) {
-    criteria.name = {$regex : `.*${criteria.name}.*`};
+    // criteria.name = {$regex : `.*${criteria.name}.*`};
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {

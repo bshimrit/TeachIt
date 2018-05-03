@@ -18,7 +18,7 @@
             </form>
         </div>
       </div>
-      logged in user: {{loggedInUser}}
+      logged in user: {{loggedInUser.userName}}
       <h4>Not a member?</h4>
       <a class="waves-effect waves-light btn">Sign up</a> <br>
       <!-- <a class="waves-effect waves-light btn">Return to home page</a> -->
@@ -33,19 +33,24 @@ export default {
     data() {
         return {
             credentials: {
-                userName: '',
-                password: ''
+                userName: 'Oz',
+                password: '1234'
             }
         }
     },
     methods: {
-        checkLogin(credentials) {
-            this.$store.dispatch({type: 'checkLogin', credentials})
+        checkLogin() {
+            var creds = this.credentials
+            console.log('Sending credentials', creds);
+            
+            this.$store.dispatch({type: 'checkLogin', creds})
         }
     },
     computed: {
         loggedInUser() {
-            return this.$store.loggedInUser
+            console.log('user from store:',this.$store.getters.loggedUser );
+            
+            return this.$store.getters.loggedUser || {name:''}
         }
     }
 };
