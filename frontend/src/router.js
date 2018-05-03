@@ -7,6 +7,7 @@ import Search from './views/Search.vue'
 // import UserEdit from './views/UserEdit.vue'
 // import ReviewEdit from './views/ReviewEdit.vue'
 import Profile from './views/Profile.vue'
+import EditProfile from './views/EditProfile.vue'
 
 Vue.use(Router)
 
@@ -18,6 +19,8 @@ export default new Router({
     // { path: '/login', name: 'login', component: Login},
     // { path: '/user/edit', name: 'user edit', component: UserEdit},
     // { path: '/review/edit', name: 'review edit', component: ReviewEdit},
-    { path: '/profile/:userId', name: 'profile', component: Profile}
+    { path: '/profile/edit', name: 'edit', component: EditProfile},
+    { path: '/profile/:userId', name: 'profile', component: Profile},
+    
   ]
 })
