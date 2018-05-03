@@ -5,7 +5,7 @@
         :center="{lat:32.08, lng:34.79}"
         :zoom="13"
         map-type-id="terrain"
-        style="width: 100%; height: 100%; border: 1px solid"
+        style="width: 100%; height: 100%; border: 1px solid #577594"
         >
         <GmapMarker
             :key="index"

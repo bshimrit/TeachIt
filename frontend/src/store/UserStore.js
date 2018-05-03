@@ -31,14 +31,17 @@ export default {
     // }
   },
   getters: {
+      loggedUser(state) {
+          return state.loggedinUser
+      }
     // usersForDisplay(state) {
     //   return state.users;
     // },
 
   },
   actions: {
-      checkLogin(store, {credentials}) {
-        return UserService.checkLogin(credentials)
+      checkLogin(store, {creds}) {
+        return UserService.checkLogin(creds)
             .then(user => {
                 store.commit({type: 'setUser', user})
             })

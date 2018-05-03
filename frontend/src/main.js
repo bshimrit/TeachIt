@@ -4,7 +4,8 @@ import router from './router'
 import store from './store/index.js'
 import axios from 'axios'
 import './registerServiceWorker'
-import "vue-materialize"
+import '../node_modules/materialize-css/dist/css/materialize.min.css'
+import '../node_modules/materialize-css/dist/js/materialize.min.js'
 import 'font-awesome/css/font-awesome.css';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import _ from 'lodash'
