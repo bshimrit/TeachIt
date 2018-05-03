@@ -9,7 +9,7 @@
                   <p>Rating: (computed avg rating)</p>
                     <a :href="user.socialMedia.facebook">Facebook</a> |
                     <a :href="user.socialMedia.twitter">Twitter</a></div>
-                <div class="col s6"> <p> {{user.description}}</p></div>
+                <div class="col s6"> <p> {{user.desc}}</p></div>
          </div>
          <div class="row">
               <h3>Avaliable Classes:</h3>

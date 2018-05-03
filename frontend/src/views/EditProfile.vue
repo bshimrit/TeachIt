@@ -3,7 +3,7 @@
       <div class="container">
           <h4>Edit Profile</h4>
               <div class="row">
-                  <form class="col s12">
+                  <form class="col s12" @submit.prevent="saveUser">
                     <div class="row">
                           <div class="input-field col s6">
                               <input  type="text" class="validate" placeholder="first Name">
@@ -62,7 +62,7 @@
 
                       <div class="row">
                         <h5 class="left-align">Classes</h5>
-                         <p>topic-preview</p>
+                         
                          <button class="btn" id="show-modal" @click="showModal = true">Add Class</button>
                           <transition name="modal" v-if="showModal" @close="showModal = false">
                             <div class="modal-mask">
@@ -88,17 +88,20 @@
                                         <div class="input-field col s12">
                                             <input  type="text" class="validate" placeholder="Image url">
                                         </div>
+                                        
+                                           <div class="input-field col s12">
+                                            <input  type="text" class="validate" placeholder="Address">
+                                        </div>
                                           <button class="btn green accent-3">Add Class</button>
                                   </slot>
                                 </div>
                               </div>
                             </div>
                           </transition>
-                         
                   
                           </div>
 
-        <button class="waves-effect waves-light btn">Save</button>
+               <button class="waves-effect waves-light btn">Save</button>
               
             </form>
         </div>
@@ -108,13 +111,32 @@
 </template>
 
 <script>
+import UserService from '@/services/UserService.js';
+
 export default {
- data () {
+  data() {
     return {
-     showModal:false
+      showModal: false,
+      userToUpdate: UserService.emptyUser()
+    };
+  },
+  methods: {
+    saveUser() {
+      console.log(this.userToUpdate);
+      UserService.register(this.userToUpdate)
+      // this.$store.dispatch({type:'saveUser',user: this.userToUpdate})
+      //     .then(addedUser => {
+      //        console.log('added');
+      //     })
+      //     .catch(err => {
+      //         console.log('failed');
+      //     })
     }
+  },
+  components: {
+    UserService,
   }
-}
+};
 </script>
 
 
@@ -125,7 +147,7 @@ export default {
   padding: 20px;
 }
 a {
-    margin: 10px
+  margin: 10px;
 }
 
 .modal-mask {
@@ -135,9 +157,9 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -151,8 +173,8 @@ a {
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
 
