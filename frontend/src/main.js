@@ -7,10 +7,8 @@ import './registerServiceWorker'
 import "vue-materialize"
 import 'font-awesome/css/font-awesome.css';
 import * as VueGoogleMaps from 'vue2-google-maps'
-// import 'vue-svg-loader'
-
 import _ from 'lodash'
-
+import './css/main.css'
 
 Vue.config.productionTip = false
 

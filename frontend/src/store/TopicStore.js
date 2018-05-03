@@ -30,6 +30,7 @@ export default {
   },
   getters: {
     topicsForDisplay(state) {
+      console.log(state.topics)
       return state.topics;
     },
     popularTopicsForDisplay(state) {
