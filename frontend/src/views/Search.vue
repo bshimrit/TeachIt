@@ -2,6 +2,7 @@
     <section class="search">
         Filter: by topic | by price <br>
         Sort: by topic | by price<br>
+        <h4>Teachers is Tel Aviv:</h4>
         <div class="map-list">
             <teacher-list :topics="topics" class="teacher-list"></teacher-list>
             <teacher-map class="teacher-map"></teacher-map>
