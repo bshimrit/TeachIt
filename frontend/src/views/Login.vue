@@ -6,7 +6,8 @@
             <form class="col s12" @submit.prevent="checkLogin">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input v-model="credentials.userName" type="text" class="validate" placeholder="User Name">
+                        <label for="userName">User name</label>
+                        <input id="userName" v-model="credentials.userName" type="text" class="validate">
                     </div>
                 </div>
                 <div class="row">
@@ -20,7 +21,7 @@
       </div>
       logged in user: {{loggedInUser.userName}}
       <h4>Not a member?</h4>
-      <a class="waves-effect waves-light btn">Sign up</a> <br>
+      <router-link class="waves-effect waves-light btn" to="/profile/edit">Sign up</router-link> <br>
       <!-- <a class="waves-effect waves-light btn">Return to home page</a> -->
   </section>
 </template>
