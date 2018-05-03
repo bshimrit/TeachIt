@@ -1,55 +1,34 @@
 <template>
-  <div class="profile">
+      <div class="container">
+        <div class="row">
+              <div class="col s4"> <img :src="user.img" alt="profile_img"></div>
+              <div class="col s8"> <h1>{{user.name}} </h1>  <button class="waves-effect waves-light btn">Connect(open chat)</button></div>
+         </div>
+         <div class="row">
+                <div class="col s6">
+                  <p>Rating: (computed avg rating)</p>
+                    <a :href="user.socialMedia.facebook">Facebook</a> |
+                    <a :href="user.socialMedia.twitter">Twitter</a></div>
+                <div class="col s6"> <p> {{user.description}}</p></div>
+         </div>
+         <div class="row">
+              <h3>Avaliable Classes:</h3>
+               <TopicPreview></TopicPreview>
+         </div>
+       
+         <div class="row">
+               <topic-review></topic-review>
+         </div>
 
-    <div class="user-info">
-        <h1>{{user.name}} </h1>
-        <img :src="user.img" alt="profile_img">
-        <a :href="user.socialMedia.facebook">Facebook</a> |
-        <a :href="user.socialMedia.twitter">Twitter</a>
-        <h3>Rating: (computed avg rating)</h3>
-        <h3>{{user.quote}}</h3>
-        <p>      {{user.desc}}      </p>
-        <p>  Education:    {{user.education}}      </p>
-    </div>
-       <div class="topic-container">
-          <h3>Avaliable Classes:</h3>
-                <table class="centered highlight">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Subtitle</th>
-                      <th>Level</th>
-                      <th>Price/Hour</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Development</td>
-                        <td>Javascript</td>
-                        <td>Beginner</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                      <td>Development</td>
-                        <td>C#</td>
-                        <td>Beginner</td>
-                        <td>100</td>
-                    </tr>
-                  </tbody>
-                </table>
-       </div>
-      
-     <button class="waves-effect waves-light btn">Connect(open chat)</button>
 
-     <topic-review></topic-review>
-
-  </div>
+      </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import TopicReview from '@/components/review/TopicReview.vue'
 import UserService from '@/services/UserService.js'
+import TopicPreview from '@/components/topic/topicPreview.vue'
 
 export default {
   name: 'profile',
@@ -60,25 +39,32 @@ export default {
   },
   created() {
         var userId = this.$route.params.userId;
+        if (!userId) userId= "5ae973a5f8cdd2dafed7a1f0";
         console.log('userId', userId);
         UserService.getUserById(userId)
          .then(user => this.user = user)
          .catch(err => {
             console.log('err:', err);
-             //this.$router.push('/')
+           
          })
     },
   components: {
     TopicReview,
-    UserService
+    UserService,
+    TopicPreview
+  },
+   computed: {
+    topics() {     
+      return this.$store.getters.topicsForDisplay;
+    }
   }
 }
 </script>
 
 
 <style scoped>
-div {
+/* div {
   border: 1px black solid;
-}
+} */
 </style>
 

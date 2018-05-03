@@ -4,6 +4,7 @@ export default {
   strict: true,
   state: {
     topics: [],
+    popularTeacherTopics:[],
     topicFilter: '',
   },
   mutations: {
@@ -31,6 +32,9 @@ export default {
     topicsForDisplay(state) {
       return state.topics;
     },
+    popularTopicsForDisplay(state) {
+      return state.popularTeacherTopics;
+    }
 
   },
   actions: {

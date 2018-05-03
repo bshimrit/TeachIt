@@ -4,9 +4,9 @@
             <li v-for="teacher in teachers" :key="teacher._id" @click="openProfile(teacher._id)" class="collection-item avatar">
                 <div class="card">
                     <div class="card-image">
-                        <img src="../../assets/topics/matha.jpg">
+                        <img src="../../../public/img/topics/topic1.jpg" />
                         <span class="card-title">{{topics.title}}</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red btn-large"><img src="../../assets/users/1.jpg" /></a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red btn-large"><img src="../../../public/img/users/user1.jpg" /></a>
                     </div>
                     <h5>{{teacher.name}}</h5>
                     <div class="card-content">
