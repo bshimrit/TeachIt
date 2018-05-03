@@ -1,48 +1,63 @@
 <template>
   <section class="loginPage">
       <div class="container">
-      <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="first_name" type="text" class="validate">
-                    <label for="first_name">First Name</label>
+          <h4>Log in to Teacht It</h4>
+        <div class="row">
+            <form class="col s12" @submit.prevent="checkLogin">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input v-model="credentials.userName" type="text" class="validate" placeholder="User Name">
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate">
-                    <label for="last_name">Last Name</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                    <input v-model="credentials.password" type="password" class="validate" placeholder="Password">
+                    </div>
+                    <button class="waves-effect waves-light btn">Submit</button>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                <input id="email" type="email" class="validate">
-                <label for="email">Email</label>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
       </div>
+      logged in user: {{loggedInUser}}
+      <h4>Not a member?</h4>
+      <a class="waves-effect waves-light btn">Sign up</a> <br>
+      <!-- <a class="waves-effect waves-light btn">Return to home page</a> -->
   </section>
 </template>
 
 <script>
+import UserService from '../services/UserService'
+
 export default {
-  created() {
-    console.log("Logging in!");
-  }
+    name: 'loginPage',
+    data() {
+        return {
+            credentials: {
+                userName: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        checkLogin(credentials) {
+            this.$store.dispatch({type: 'checkLogin', credentials})
+        }
+    },
+    computed: {
+        loggedInUser() {
+            return this.$store.loggedInUser
+        }
+    }
 };
 </script>
 
-<style>
+<style scopped>
 .container {
   width: 50%;
-  border: 2px solid black;
-  padding: 10px
+  border: 2px solid #577594;
+  padding: 20px;
+}
+a {
+    margin: 10px
 }
 </style>

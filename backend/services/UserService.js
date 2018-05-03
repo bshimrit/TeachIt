@@ -1,6 +1,18 @@
 const DBService = require('./DBService')
 const mongo = require('mongodb');
 
+// function checkLogin(creds) {
+//     return new Promise((resolve, reject) => {
+//         getUsers()
+//             .then(users => {
+//                 const user = users.find(user => user.email === creds.email
+//                     && user.password === creds.password)
+//                 if (user) resolve(user)
+//                 else reject('wrong details')
+//             })
+//     })
+// }
+
 function query(criteria = {}) {
     criteria.name = {$regex : `.*${criteria.name}.*`};
     return new Promise((resolve, reject) => {
