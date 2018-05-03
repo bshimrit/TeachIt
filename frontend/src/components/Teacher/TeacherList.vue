@@ -63,7 +63,7 @@ ul {
     flex-wrap: wrap;
 }
 li {
-    border: 1px solid black;
+    border: 1px solid #577594;
     text-align: left;
     width: 33.333%
 }

@@ -2,6 +2,32 @@
     <section class="search">
         Filter: by topic | by price <br>
         Sort: by topic | by price<br>
+         <!-- <form action="#"> -->
+    <!-- <p> Filter by:
+      <label>
+        <input name="group1" type="radio" checked />
+        <span>Topic</span>
+      </label>
+    </p>
+    <p>
+      <label>
+        <input name="group1" type="radio" />
+        <span>Price</span>
+      </label>
+    </p>
+    <p> Sort by:
+      <label>
+        <input class="with-gap" name="group1" type="radio"  />
+        <span>Topic</span>
+      </label>
+    </p>
+    <p>
+      <label>
+        <input class="with-gap" name="group1" type="radio" />
+        <span>Price</span>
+      </label>
+    </p> -->
+  <!-- </form> -->
         <h4>Teachers is Tel Aviv:</h4>
         <div class="map-list">
             <teacher-list :topics="topics" class="teacher-list"></teacher-list>
