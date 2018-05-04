@@ -1,5 +1,5 @@
 <template>
-<div class="navbar-fixed">
+<div class="navbar">
   <nav>
     <div class="nav-wrapper">
       <a href=# class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
