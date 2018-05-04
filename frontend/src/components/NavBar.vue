@@ -7,7 +7,8 @@
         <li><router-link to="/">Home</router-link></li> 
         <li><router-link to="/about">About</router-link></li> 
         <li><router-link to="/search">Search</router-link></li> 
-        <li><router-link to="/login">Log in</router-link></li>
+        <li v-if="loggedUser"><router-link to="/login">Log in</router-link></li>
+        <li v-else><router-link :to="'/profile + ${loggedinUser.Id}'">My profile</router-link></li>
       </ul>
     </div>
   </nav>
@@ -16,7 +17,10 @@
 
 <script>
 export default {
-    components: {
+    computed: {
+        loggedUser() {
+            return this.$store.state.loggedinUser
+        }
     }
 }
 </script>

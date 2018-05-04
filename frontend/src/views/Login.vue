@@ -43,14 +43,16 @@ export default {
         checkLogin() {
             var creds = this.credentials
             console.log('Sending credentials', creds);
-            
             this.$store.dispatch({type: 'checkLogin', creds})
+            // setTimeout(()=>{
+            //     if (this.$store.getters.loggedUser) this.$router.push('/')
+            // },0)
+        // if (this.$store.getters.loggedUser) this.$router.push('/')
         }
     },
     computed: {
         loggedInUser() {
             console.log('user from store:',this.$store.getters.loggedUser );
-            
             return this.$store.getters.loggedUser || {name:''}
         }
     }
