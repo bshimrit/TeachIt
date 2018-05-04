@@ -4,15 +4,23 @@ export default {
   strict: true,
   state: {
     loggedinUser: null,
+    dropdown: false
     // userFilter: '',
   },
   mutations: {
     setUser(state, {user}) {
-        state.loggedinUser = user
+        state.loggedinUser = user;
+        state.dropdown = false
     },
     logOut(state) {
         delete sessionStorage.user
         state.loggedinUser = null
+    },
+    toggleDropdown(state) {
+        state.dropdown = !state.dropdown
+    },
+    closeDrowpdown(state) {
+        state.dropdown = false
     }
     
     // setUserFilter(state, { filter }) {
@@ -37,9 +45,10 @@ export default {
   },
   getters: {
       loggedUser(state) {
-          console.log('Getting user', state.loggedinUser);
-          
           return state.loggedinUser
+      },
+      dropdown(state) {
+          return state.dropdown
       }
     // usersForDisplay(state) {
     //   return state.users;

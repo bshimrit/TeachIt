@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="closeDrowpdown">
     <div id="nav">
       <NavBar/>
     </div>
@@ -19,6 +19,11 @@
         this.$store.dispatch({type: 'loadUser', userId: user._id})
     }
   },
+  methods: {
+    closeDrowpdown() {
+        this.$store.commit({type: 'closeDrowpdown'})
+    }
+  }
   }
 </script>
 <style lang="scss">
