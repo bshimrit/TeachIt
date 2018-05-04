@@ -15,6 +15,7 @@
     "vue": "^2.5.16",
     "vue-icons": "^2.0.0",
     "vue-router": "^3.0.1",
+    "vue-slider-component": "^2.6.2",
     "vue-star-rating": "^1.6.0",
     "vue2-google-maps": "^0.9.6",
     "vuex": "^3.0.1"

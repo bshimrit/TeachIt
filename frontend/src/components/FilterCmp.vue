@@ -1,33 +1,36 @@
 <template>
-  <section>
-    <div class="box">
-            <div class="container-1">
-                <span class="icon"><i class="fa fa-search"></i></span>
-                <input v-model="filterBy.text" type="search" id="search" placeholder="Search..." />
-            </div>
-        </div>
-        <label> Price
-            <input type="range" min="0" max="1000" />
-        </label>
-        <div>
-            <label> Topic
-                <select v-model="filterBy.topic">
-                    <option v-for="topic in topics" :key="topic._id" :value="topic.title">{{topic.subtitle}}</option>
-                </select>
-            </label>
-        </div>
+  <section class="container filter-cmp flex space-between align-center">
+    <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search..">
+    <div class="flex align-center">
+        <div v-if="!isSearching && showExtraSearch">Price</div>
+        <vueSlider v-model="filterBy.price" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+    </div>
+    <div class="input-field col s12">
+        <select v-model="filterBy.topics" ref="myInput" multiple>
+        <option value="" disabled selected>Choose your topics</option>
+        <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
+        </select>
+    </div>
   </section>
 </template>
 
 <script>
+import vueSlider from 'vue-slider-component';
+
 export default {
     name:'search',
+    props:{showExtraSearch:{default: true}},
     created(){
-         this.$store.dispatch({type: 'loadTopics'})
+        this.$store.dispatch({type: 'loadTopics'})
+    },
+    mounted() {
+        if (this.showExtraSearch)
+            $('select').material_select()
     },
     data() {
         return {
-            filterBy: {text:'', price:0, topic:null}
+            filterBy: {text:'', price:[20,50], topics:[]},
+            isSearching: false,
         }
     },
     computed:{
@@ -39,63 +42,43 @@ export default {
     emitFilter(){
         this.$emit('filtered',this.filterBy);
         }
+    },
+    watch:{
+        isSearching: function(newVal) {
+            if (this.showExtraSearch){
+                if (newVal) $('select').material_select('destroy')
+                    else $('select').material_select();
+            }
+        }
+    },
+    components: {
+        vueSlider
     }
 }
 </script>
 
 <style scoped>
-select {
-    display:inline;
+/* .filter-cmp {
+    width: 100%
+} */
+input[type=text] {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../../public/img/searchicon.png');
+    background-size: 25px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
-.box{
-  margin: 100px auto;
-  width: 300px;
-  height: 50px;
+
+input[type=text]:focus {
+    width: 100%;
 }
-.container-1{
-  width: 300px;
-  vertical-align: middle;
-  white-space: nowrap;
-  position: relative;
-}
-.container-1 input#search{
-  width: 300px;
-  height: 50px;
-  background: #2b303b;
-  border: none;
-  font-size: 10pt;
-  float: left;
-  color: #63717f;
-  padding-left: 45px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.container-1 input#search::-webkit-input-placeholder {
-   color: #65737e;
-}
- 
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
-}
- 
-.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
-}
- 
-.container-1 input#search:-ms-input-placeholder {  
-   color: #65737e;  
-}
-.container-1 .icon{
-  position: absolute;
-  top: 50%;
-  margin-left: 17px;
-  margin-top: 17px;
-  z-index: 1;
-  color: #4f5b66;
-}
-.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
-    outline:none;
-    background: #ffffff;
-  }
+
 </style>
