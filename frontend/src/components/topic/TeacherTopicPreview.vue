@@ -1,22 +1,22 @@
 <template>
-  <section v-if="teacherTopic">
+  <section >
         <div class="card">
-            <div class="card-image">
-                <img v-if="showTeacher" class="topic-img" :src="teacherTopic.topicImg" />
-                <a @click="goToProfile" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacherImg" /></a>
-            </div>
-                <h4 class="card-title">{{teacherTopic.topic}}</h4>
-                <p>{{teacherTopic.teacher}}</p>
-            <div class="card-content">
-                <StarRating v-model="teacherTopic.rating" :star-size="30" :read-only="true" :show-rating="false"/>
-                <h4>{{teacherTopic.subtitle}}</h4>
-                <p>{{teacherTopic.shortDes}}</p>
-                <div v-if="showLongDesc">
-                    <p class="long-desc">{{teacherTopic.longDes}}</p>
-                    <a @click="goToProfile">Read More</a>                    
+                <div class="card-image">
+                    <img v-if="showTeacher" class="topic-img" :src="teacherTopic.topicImage" />
+                    <a @click="goToProfile" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
+                </div>
+                    <h4>{{teacherTopic.topic.subtitle}}</h4>
+                    <h5>{{teacherTopic.teacher.name}}</h5>
+                <div class="card-content">
+                    <StarRating v-model="teacherTopic.rating" :star-size="30" :read-only="true" :show-rating="false"/>
+                    <p class="bold">{{teacherTopic.level}}</p>
+                    <p>{{teacherTopic.shortDes}}</p>
+                    <div v-if="showLongDesc">
+                        <p class="long-desc">{{teacherTopic.longDes}}</p>
+                        <a @click="goToProfile">Read More</a>                    
+                    </div> 
                 </div>
             </div>
-        </div>
     </section>
 </template>
 
@@ -24,7 +24,7 @@
 
 import StarRating from 'vue-star-rating'
 export default {
-    props: {teacherTopic:{},showTeacher:{default:true},showLongDesc:{default:true}},
+    props: {teacherTopic:null,showTeacher:{default:true},showLongDesc:{default:true}},
     data(){
         return {}
     },

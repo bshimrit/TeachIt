@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style scopped>
+<style scoped>
 .container {
   width: 50%;
   border: 2px solid #577594;

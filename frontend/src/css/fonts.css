@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'MontRegular';
+    src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MontBold';
+    src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf');
+    font-weight: bold;
+    font-style: bold;
+}
+
+.mont-regular {
+    font-family: 'MontRegular', sans-serif;
+}
+.mont-bold {
+    font-family: 'MontBold', sans-serif;
+}

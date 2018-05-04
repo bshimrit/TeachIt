@@ -17,17 +17,20 @@
 </script>
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #577594;
+  // color: #577594;
+      font-family: 'MontRegular', sans-serif;
+    font-size: 20px;
+    text-transform:initial;
 }
 #nav {
     // padding: 0 30px;
   a {
     font-weight: bold;
-    color: #577594;
+    color: #9fb6ce;
     &.router-link-exact-active {
       color: #ffe75a;
     }

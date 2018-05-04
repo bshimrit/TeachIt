@@ -13,7 +13,7 @@
          </div>
          <div class="row">
               <h3>Avaliable Classes:</h3>
-               <TopicPreview></TopicPreview>
+               <TeacherTopicPreview></TeacherTopicPreview>
          </div>
        
          <div class="row">
@@ -28,7 +28,7 @@
 // @ is an alias to /src
 import TopicReview from '@/components/review/TopicReview.vue'
 import UserService from '@/services/UserService.js'
-import TopicPreview from '@/components/topic/topicPreview.vue'
+import TeacherTopicPreview from '@/components/topic/TeacherTopicPreview.vue'
 
 export default {
   name: 'profile',
@@ -51,7 +51,7 @@ export default {
   components: {
     TopicReview,
     UserService,
-    TopicPreview
+    TeacherTopicPreview
   },
    computed: {
     topics() {     
