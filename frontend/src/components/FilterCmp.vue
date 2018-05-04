@@ -81,7 +81,4 @@ input[type=text]:focus {
     width: 100%;
 }
 
-.extra-filter {
-    width: 100%;
-}
 </style>
