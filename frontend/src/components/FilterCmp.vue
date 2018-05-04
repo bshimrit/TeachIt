@@ -19,7 +19,7 @@ import vueSlider from 'vue-slider-component';
 
 export default {
     name:'search',
-    props:{showExtraSearch:{default: false}},
+    props:{showExtraSearch:{default: true}},
     created(){
         this.$store.dispatch({type: 'loadTopics'})
     },
