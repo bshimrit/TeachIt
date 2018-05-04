@@ -9,7 +9,12 @@ export default {
   mutations: {
     setUser(state, {user}) {
         state.loggedinUser = user
+    },
+    logOut(state) {
+        delete sessionStorage.user
+        state.loggedinUser = null
     }
+    
     // setUserFilter(state, { filter }) {
     //   state.userFilter = filter;
     // },
@@ -32,6 +37,8 @@ export default {
   },
   getters: {
       loggedUser(state) {
+          console.log('Getting user', state.loggedinUser);
+          
           return state.loggedinUser
       }
     // usersForDisplay(state) {
@@ -45,20 +52,20 @@ export default {
             .then(user => {
                 store.commit({type: 'setUser', user})
             })
-      }
+      },
     // loadusers(store) {
     //   return userService.getusers(store.state.userFilter)
     //   .then(users => {
     //       store.commit({ type: 'setusers', users });
     //   })
     // },
-    // loaduser(store, {userId}) {
-    //   return userService.getById(userId)
-    //   .then(user => {
-    //     store.commit({type: 'setSelecteduser', user});
-    //     return user;
-    //   })
-    // },
+    loadUser(store, {userId}) {
+      return UserService.getUserById(userId)
+      .then(user => {
+        store.commit({type: 'setUser', user});
+        return user;
+      })
+    },
     // deleteuser(store, {userId}) {
     //   return userService.deleteuser(userId)
     //   .then(()=>{

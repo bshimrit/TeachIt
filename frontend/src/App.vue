@@ -12,7 +12,13 @@
   export default{
     components: {
       NavBar
+    },
+    created() {
+    if (sessionStorage.user) {
+        var user = JSON.parse(sessionStorage.user)
+        this.$store.dispatch({type: 'loadUser', userId: user._id})
     }
+  },
   }
 </script>
 <style lang="scss">

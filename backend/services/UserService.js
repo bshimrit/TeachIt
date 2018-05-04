@@ -20,6 +20,8 @@ function query(criteria = {}) {
             .then(db => {
                 db.collection('user').find(criteria).toArray((err, users) => {
                     if (err) return reject(err);
+                    delete users.password
+                    console.log(users);
                     resolve(users);
                 })
             })

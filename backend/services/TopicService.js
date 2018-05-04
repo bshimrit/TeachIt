@@ -7,7 +7,7 @@ function query(criteria = {}) {
         return DBService.dbConnect()
             .then(db => {
                 db.collection('topic').find().toArray((err, topics) => {
-                    console.log(topics)
+                    // console.log(topics)
                     if (err) return reject(err);
                     resolve(topics);
                 })

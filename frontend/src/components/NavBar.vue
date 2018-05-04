@@ -7,8 +7,11 @@
         <li><router-link to="/">Home</router-link></li> 
         <li><router-link to="/about">About</router-link></li> 
         <li><router-link to="/search">Search</router-link></li> 
-        <li v-if="loggedUser"><router-link to="/login">Log in</router-link></li>
-        <li v-else><router-link :to="'/profile + ${loggedinUser.Id}'">My profile</router-link></li>
+        <li v-if="!loggedUser"><router-link to="/login">Log in</router-link></li>
+        <template v-else>
+        <li><a @click="logOut">Log out</a></li>
+        <li><router-link :to="`/profile/${loggedUser._id}`">{{loggedUser.userName}} Profile</router-link></li>
+        </template>
       </ul>
     </div>
   </nav>
@@ -17,9 +20,16 @@
 
 <script>
 export default {
+    methods: {
+        logOut() {
+            console.log('logging out');
+            this.$store.commit({type: 'logOut'})
+            this.$router.push('/')
+        }
+    },
     computed: {
         loggedUser() {
-            return this.$store.state.loggedinUser
+            return this.$store.getters.loggedUser
         }
     }
 }
