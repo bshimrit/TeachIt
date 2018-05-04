@@ -1,18 +1,15 @@
 <template>
-  <section class="container filter-cmp flex flex-column align-start">
-    <input v-model="filterBy.text" type="text" name="search" placeholder="Search..">
-    <div>
-        <div class="margin-top20 flex align-center">
-            <div>Price</div>
-            <vueSlider v-model="filterBy.price" :width="300"></vueSlider>
-        </div>
-        <div class="margin-top20 flex align-center">
-            <div>Topic</div>
-            <select v-model="filterBy.topic">
-                <option value="" disabled selected>Choose a topic</option>
-                <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
-            </select>
-        </div>
+  <section class="container filter-cmp flex space-between align-center">
+    <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search..">
+    <div class="flex align-center">
+        <div v-if="!isSearching && showExtraSearch">Price</div>
+        <vueSlider v-model="filterBy.price" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+    </div>
+    <div class="input-field col s12">
+        <select v-model="filterBy.topics" ref="myInput" multiple>
+        <option value="" disabled selected>Choose your topics</option>
+        <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
+        </select>
     </div>
   </section>
 </template>
@@ -22,12 +19,18 @@ import vueSlider from 'vue-slider-component';
 
 export default {
     name:'search',
+    props:{showExtraSearch:{default: false}},
     created(){
-         this.$store.dispatch({type: 'loadTopics'})
+        this.$store.dispatch({type: 'loadTopics'})
+    },
+    mounted() {
+        if (this.showExtraSearch)
+            $('select').material_select()
     },
     data() {
         return {
-            filterBy: {text:'', price:[20,50], topic:null},
+            filterBy: {text:'', price:[20,50], topics:[]},
+            isSearching: false,
         }
     },
     computed:{
@@ -38,6 +41,14 @@ export default {
     methods: {
     emitFilter(){
         this.$emit('filtered',this.filterBy);
+        }
+    },
+    watch:{
+        isSearching: function(newVal) {
+            if (this.showExtraSearch){
+                if (newVal) $('select').material_select('destroy')
+                    else $('select').material_select();
+            }
         }
     },
     components: {
@@ -67,6 +78,10 @@ input[type=text] {
 }
 
 input[type=text]:focus {
+    width: 100%;
+}
+
+.extra-filter {
     width: 100%;
 }
 </style>

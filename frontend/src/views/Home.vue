@@ -4,7 +4,7 @@
       <h2 class="tt-header">Most Popular</h2>
       <div class="row">
           <div class="col s12 m3" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
-              <TopicPreview :teacherTopic="teacherTopic"></TopicPreview>
+              <TopicPreview :teacherTopic="teacherTopic" :showLongDesc="false"></TopicPreview>
           </div>
       </div>        
       <h2 class="tt-header">Categories</h2>
