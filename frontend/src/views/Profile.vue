@@ -15,7 +15,7 @@
             <div style="color: rgba(0,0,0,0.5)">
               <i>"{{user.quote}}"</i>
             </div>
-            <p>{{user.desc}}</p>
+            <p>{{user.description}}</p>
             <div style="margin-top: 20px;">
               <a href="#">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -29,21 +29,25 @@
             </div>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-light btn-large">
-              <i class="material-icons left">email</i>Contact Me!</a>
+            <a class="waves-effect waves-light btn">
+              Contact Me!</a>
           </div>
         </div>
       </div>
     </div>
-
     <h3>What I Teach:</h3>
+    <div class="row">
+      <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+        <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="true" :showTeacher="false"></TeacherTopic>
+      </div>
+    </div>
+
     <div class="row">
       <ul class="collection">
         <li>
-
           <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="..\..\public\img\topics\topic1.jpg">
+              <img class="activator" src="../../public/img/topics/topic7.png">
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">Javascript
@@ -54,6 +58,7 @@
               </span>
               <span style="float: unset; margin: 0px;" class="new badge" data-badge-caption="">Web Development</span>
               <br />
+              <p>100$/Hour</p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Description
@@ -65,10 +70,11 @@
               <a href="#">Schedule</a>
             </div>
           </div>
-
         </li>
       </ul>
     </div>
+
+     <h3>Reviews:</h3>
   </div>
 </template>
 
@@ -76,7 +82,7 @@
 // @ is an alias to /src
 import TopicReview from "@/components/review/TopicReview.vue";
 import UserService from "@/services/UserService.js";
-import TeacherTopicPreview from "@/components/topic/TeacherTopicPreview.vue";
+import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
 
 export default {
   name: "profile",
@@ -94,6 +100,7 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch({ type: "loadTeacherTopics" });
     var userId = this.$route.params.userId;
     if (!userId) userId = "5ae973a5f8cdd2dafed7a1f0";
     console.log("userId", userId);
@@ -106,10 +113,14 @@ export default {
   components: {
     TopicReview,
     UserService,
-    TeacherTopicPreview
+    TeacherTopic
   },
-   computed: {
-    topics() {     
+  computed: {
+    topics() {
+      return this.$store.getters.teacherTopicsForDisplay;
+    },
+    teacherTopics() {
+      console.log(this.$store.getters.teacherTopicsForDisplay);
       return this.$store.getters.teacherTopicsForDisplay;
     }
   }
