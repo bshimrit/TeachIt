@@ -32,14 +32,25 @@ function checkLogin(creds) {
 }
 
 function register(user) {
-  console.log('hifgf');
-  // return axios
-  //   .post(`${BASE_URL}/register`, user)
-  //   .then(res => console.log(res.data))
-  //   .catch(err => {
-  //     throw new Error("Register Failed");
-  //   });
+  console.log(user);
+  return axios
+    .post(USER_URL, user)
+    .then(res => console.log(res.data))
+    .catch(err => {
+      throw new Error("Register Failed");
+    });
 }
+
+function saveUser(user) {
+
+  if (user._id) {
+    return axios.put(_getUserUrl(user._id), user)
+  } else {
+    return axios.post(USER_URL, user);
+  }
+ 
+}
+
 
 function logout() {
   return axios
@@ -58,14 +69,14 @@ function emptyUser() {
     password: "",
     isTeacher: false,
     isAdmin: false,
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     desc: "",
     quote: "",
     education: "",
     img: "",
     socialMedia: [],
-    topics: []
+    topics: [] 
   };
 }
 
@@ -76,10 +87,6 @@ function getUsers() {
     .catch(e => console.log("No Users", e));
 }
 
-// function saveUser(user) {
-//   if (user._id) return axios.put(_getUserUrl(user._id), user)
-//   else return axios.post(USER_URL, user);
-// }
 
 function deleteUser(userId) {
   return axios.delete(_getUserUrl(userId));
@@ -100,6 +107,7 @@ export default {
   getUsers,
   deleteUser,
   emptyUser,
+  saveUser,
   getUserById,
   checkLogin
 };
