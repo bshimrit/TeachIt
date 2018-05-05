@@ -22,6 +22,10 @@ import TeacherMap from "@/components/Teacher/TeacherMap.vue";
 
 export default {
   created(){
+    var curFilter = this.$router.history.current.query;
+    curFilter.price = [];
+    curFilter.topics = [];
+    this.$store.commit({type:'setTeacherTopicFilter', filter: curFilter})
     this.$store.dispatch({type: 'loadTeacherTopics'})
   },
   data(){
