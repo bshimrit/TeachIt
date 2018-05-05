@@ -2,8 +2,8 @@ const DBService = require('./DBService')
 const mongo = require('mongodb');
 
 function query(criteria = {}) {
-    var regExVal = new RegExp('^' + criteria.name,"ig");
-    criteria.name = {$regex : regExVal};
+    var regExVal = new RegExp('^' + criteria.text,"ig");
+    criteria.text = {$regex : regExVal};
     // if (criteria.sortByTopic) {
     //     criteria.sort = {topicId: criteria.sortByTopic}
     // } else if (!criteria.sort) {
@@ -38,9 +38,9 @@ function query(criteria = {}) {
                         $unwind: "$topic"
                     },
                     {
-                        $match: { $or: [{ 'topic.subtitle': criteria.name },
-                                        { 'topic.title': criteria.name },                
-                                        {'teacher.name':criteria.name}
+                        $match: { $or: [{ 'topic.subtitle': criteria.text },
+                                        { 'topic.title': criteria.text },                
+                                        {'teacher.name':criteria.text}
                         ]}
                     }
                     ]).toArray((err, teacherTopics) => {

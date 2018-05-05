@@ -8,7 +8,7 @@ function emptyTeacherTopic() {
 function getTeacherTopics(filter) {
     var criteria = {}
     if (filter){
-        criteria = `?name=${filter.text || ''}`
+        criteria = `?text=${filter.text || ''}`
     }
     return axios
             .get(TOPIC_TEACHER_URL + criteria)

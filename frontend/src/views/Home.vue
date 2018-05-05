@@ -57,7 +57,7 @@ export default {
   methods: {
     filterTeacherTopic(filter){
       this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
-      this.$router.push('/search/')
+      this.$router.push('/search/?text='+filter.text)
       }
   },
   components: {
