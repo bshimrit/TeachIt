@@ -6,9 +6,18 @@ function emptyTeacherTopic() {
 }
 
 function getTeacherTopics(filter) {
-    var criteria = {}
+    var criteria = '?';
     if (filter){
-        criteria = `?text=${filter.text || ''}`
+        if (filter.text) criteria += `text=${filter.text}&`;
+        if (filter.price.length){
+            criteria += `minprice=${filter.price[0]}&maxprice=${filter.price[1]}&`
+        }
+        console.log(criteria)
+        // if (filter.topics){
+        //     for(var i = 0; i < filter.topics.length; i++){
+        //         criteria += `&topic=${filter.topics[i]}`
+        //     }
+        // }
     }
     return axios
             .get(TOPIC_TEACHER_URL + criteria)
