@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="closeDrowpdown">
     <div id="nav">
       <NavBar/>
     </div>
@@ -12,7 +12,18 @@
   export default{
     components: {
       NavBar
+    },
+    created() {
+    if (sessionStorage.user) {
+        var user = JSON.parse(sessionStorage.user)
+        this.$store.dispatch({type: 'loadUser', userId: user._id})
     }
+  },
+  methods: {
+    closeDrowpdown() {
+        this.$store.commit({type: 'closeDrowpdown'})
+    }
+  }
   }
 </script>
 <style lang="scss">

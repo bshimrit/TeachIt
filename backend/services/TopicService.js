@@ -7,6 +7,10 @@ function query(criteria = {}) {
         return DBService.dbConnect()
             .then(db => {
                 db.collection('topic').find().toArray((err, topics) => {
+<<<<<<< HEAD
+                    // console.log(topics)
+=======
+>>>>>>> dfbc4a9623dc0e93b71071bdd63ce17353cd5739
                     if (err) return reject(err);
                     resolve(topics);
                 })

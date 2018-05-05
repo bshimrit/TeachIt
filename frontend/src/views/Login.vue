@@ -1,5 +1,5 @@
 <template>
-  <section class="loginPage">
+  <section class="loginPage container">
       <div class="container">
           <h4>Log in to Teach It</h4>
         <div class="row">
@@ -19,10 +19,10 @@
             </form>
         </div>
       </div>
-      logged in user: {{loggedInUser.userName}}
       <h4>Not a member?</h4>
       <router-link class="waves-effect waves-light btn" to="/profile/edit">Sign up</router-link> <br>
       <!-- <a class="waves-effect waves-light btn">Return to home page</a> -->
+      <div v-if="loggedInUser"></div>      
   </section>
 </template>
 
@@ -42,16 +42,20 @@ export default {
     methods: {
         checkLogin() {
             var creds = this.credentials
-            console.log('Sending credentials', creds);
-            
+            console.log('Sending credentials');
             this.$store.dispatch({type: 'checkLogin', creds})
+            // setTimeout(()=>{
+            //     if (this.$store.getters.loggedUser) this.$router.push('/')
+            // },0)
+        // if (this.$store.getters.loggedUser) this.$router.push('/')
         }
     },
     computed: {
         loggedInUser() {
-            console.log('user from store:',this.$store.getters.loggedUser );
-            
-            return this.$store.getters.loggedUser || {name:''}
+            if (this.$store.getters.loggedUser) {
+                this.$router.push('/')
+                // return this.$store.getters.loggedUser || {name:''}
+            }
         }
     }
 };
