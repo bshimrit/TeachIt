@@ -1,8 +1,8 @@
 <template>
-<div class="navbar">
+<div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
-      <a href=# class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
+      <a href="/" class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
       <ul id="nav-mobile" class="right hide-on-small-and-down lower">
         <li><router-link to="/">Home</router-link></li> 
         <li><router-link to="/about">About</router-link></li> 
@@ -52,7 +52,6 @@ export default {
         width: 100vw;
         height: 100px;
         padding: 10px 0;
-        margin-bottom: 20px;
         background-color: #2b303b;
         text-align: left;
     }
@@ -83,5 +82,8 @@ export default {
         padding: 20px;
         background-color: #2b303b;
         z-index: 10;
+    }
+    .navbar-fixed {
+        margin-bottom: 50px
     }
 </style>
