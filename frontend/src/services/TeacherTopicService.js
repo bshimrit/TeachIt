@@ -6,9 +6,12 @@ function emptyTeacherTopic() {
 }
 
 function getTeacherTopics(filter) {
-    var criteria = "";
+    var criteria = {}
+    if (filter){
+        criteria = `?name=${filter.text || ''}`
+    }
     return axios
-            .get(TOPIC_TEACHER_URL)
+            .get(TOPIC_TEACHER_URL + criteria)
             .then(res => res.data)
             .catch(e => console.log('No Topic for Teacher', e))
 }

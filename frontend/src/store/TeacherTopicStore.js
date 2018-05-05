@@ -49,14 +49,12 @@ export default {
   },
   actions: {
     loadTeacherTopics(store) {
-      var extendedPTT = [];
-      return TeacherTopicService.getTeacherTopics({})
+      return TeacherTopicService.getTeacherTopics(store.state.teacherTopicFilter)
       .then(teacherTopics => {
             store.commit({ type: 'setTeacherTopics', teacherTopics });
         })
     },
     loadPopularTeacherTopics(store) {
-      var extendedPTT = [];
       return TeacherTopicService.getTeacherTopics({})
       .then(popularTeacherTopics => {
           popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_POPULAR);
