@@ -2,12 +2,13 @@ const DBService = require('./DBService')
 const mongo = require('mongodb');
 
 function query(criteria = {}) {
-    //criteria.name = {$regex : `.*${criteria.name}.*`};
-    if (criteria.sortByTopic) {
-        criteria.sort = {topicId: criteria.sortByTopic}
-    } else if (!criteria.sort) {
-        criteria.sort = {rating: -1};
-    } 
+    var regExVal = new RegExp('^' + criteria.text,"ig");
+    criteria.text = {$regex : regExVal};
+    // if (criteria.sortByTopic) {
+    //     criteria.sort = {topicId: criteria.sortByTopic}
+    // } else if (!criteria.sort) {
+    //     criteria.sort = {rating: -1};
+    // } 
 
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
@@ -35,22 +36,18 @@ function query(criteria = {}) {
                     },
                     {
                         $unwind: "$topic"
+                    },
+                    {
+                        $match: { $or: [{ 'topic.subtitle': criteria.text },
+                                        { 'topic.title': criteria.text },                
+                                        {'teacher.name':criteria.text}
+                        ]}
                     }
                     ]).toArray((err, teacherTopics) => {
-                    console.log(teacherTopics)
                     if (err) return reject(err);
                     resolve(teacherTopics);
                 })
             })
-        // return DBService.dbConnect()
-        //     .then(db => {
-        //         db.collection('teacherTopic').find().sort(criteria.sort).toArray((err, teacherTopics) => {
-        //             // console.log(teacherTopics)
-        //             if (err) return reject(err);
-        //             resolve(teacherTopics);
-        //         })
-        //     })
-
     });
 }
 

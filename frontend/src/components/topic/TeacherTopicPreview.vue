@@ -2,8 +2,8 @@
   <section >
         <div class="card">
                 <div class="card-image">
-                    <img @click="goToTeacherTopicProfile" v-if="showTeacher" class="topic-img" :src="teacherTopic.topicImage" />
-                    <a @click="goToTeacherProfile" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
+                    <img @click="goToTeacherTopicProfile"  class="topic-img" :src="teacherTopic.topicImage" />
+                    <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
                 </div>
                     <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.name}} </p>
                 <div class="card-content">

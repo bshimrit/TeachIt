@@ -1,6 +1,6 @@
 <template>
     <section class="search container">
-      <FilterCmp :showExtraSearch="true"/>
+      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true"/>
         Sort: by topic | by price<br>
         <div class="map-list">
             <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
@@ -23,23 +23,23 @@ import TeacherMap from "@/components/Teacher/TeacherMap.vue";
 export default {
   created(){
     this.$store.dispatch({type: 'loadTeacherTopics'})
-    
   },
   data(){
     return {
     }
   },
   computed: {
-    // topics() {
-    //   return this.$store.getters.topicsForDisplay;
-    // }
     teacherTopics(){
-      console.log(this.$store.getters.teacherTopicsForDisplay);
       return this.$store.getters.teacherTopicsForDisplay;
     }
   },
+  methods: {
+  filterTeacherTopic(filter){
+    this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
+    this.$store.dispatch({type: 'loadTeacherTopics'});
+    }
+  },
   components: {
-    // TeacherList,
     FilterCmp,
     TeacherTopic,
     TeacherMap

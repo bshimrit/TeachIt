@@ -35,6 +35,7 @@ function add(user) {
             .then(db => {
                 db.collection('user').insert(user, (err, res) => {
                     if (err) return reject(err);
+                    console.log('the:'+res.ops);
                     resolve(res.ops);
                     db.close();
                 })

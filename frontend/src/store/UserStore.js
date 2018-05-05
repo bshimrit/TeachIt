@@ -4,6 +4,7 @@ export default {
   strict: true,
   state: {
     loggedinUser: null,
+    users:[],
     dropdown: false
     // userFilter: '',
   },
@@ -21,7 +22,7 @@ export default {
     },
     closeDrowpdown(state) {
         state.dropdown = false
-    }
+    },
     
     // setUserFilter(state, { filter }) {
     //   state.userFilter = filter;
@@ -32,13 +33,15 @@ export default {
     // setSelecteduser(state, { user }) {
     //   state.selecteduser = user;
     // },
-    // adduser(state, { user }) {
-    //   state.users = [user, ...state.users];
-    // },
-    // updateuser(state, { user }) {
-    //   const userIdx = state.users.findIndex(curruser => curruser.id === user.id)
-    //   state.users.splice(userIdx, 1, user)
-    // },
+    addUser(state, { user }) {
+      console.log('Mut',user);
+      
+      state.users = [user, ...state.users];
+    },
+    updateUser(state, { user }) {
+      const userIdx = state.users.findIndex(curruser => curruser.id === user.id)
+      state.users.splice(userIdx, 1, user)
+    },
     // setusers(state, {users}) {
     //   state.users = users;
     // }
@@ -81,15 +84,18 @@ export default {
     //     store.commit({type: 'deleteuser', userId});
     //   })
     // },
-    // saveuser(store, {user}) {
-    //   const isEdit = !!user.id;
-    //   return userService.saveuser(user)
-    //   .then(user => {
-    //     if (isEdit) store.commit({type: 'updateuser', user})
-    //     else store.commit({type: 'adduser', user})
-    //     return user;
-    //   })
-    // },
+    saveUser(store, {user}) {
+      
+      const isEdit = !!user.id;
+      return UserService.saveUser(user)
+      .then(res => {
+        let retUser = res.data[0];
+        console.log('resUser:', retUser);
+        if (isEdit) store.commit({type: 'updateUser', retUser})
+        else store.commit({type: 'addUser', retUser})
+        return retUser;
+      })
+    },
     // getuserById(store, {userId}) {
     //       return userService.getuserById(userId)
     //         .then(user => {
