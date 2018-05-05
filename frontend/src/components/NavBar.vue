@@ -7,7 +7,17 @@
         <li><router-link to="/">Home</router-link></li> 
         <li><router-link to="/about">About</router-link></li> 
         <li><router-link to="/search">Search</router-link></li> 
-        <li><router-link to="/login">Log in</router-link></li>
+        <li v-if="!loggedUser"><router-link to="/login">Log in</router-link></li>
+        <template v-else>
+        <li></li>
+        <li><router-link :to="`/profile/${loggedUser._id}`"></router-link></li>
+        <li @click.stop><a @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
+        <ul class="dropdown" v-if="dropdown" @click.stop>
+            <li><router-link :to="`/profile/${loggedUser._id}`">My profile</router-link></li>
+            <li><a href="#">Become a teacher</a></li>
+            <li><a @click="logOut">Log out</a></li>
+        </ul>
+        </template>
       </ul>
     </div>
   </nav>
@@ -16,7 +26,23 @@
 
 <script>
 export default {
-    components: {
+    methods: {
+        logOut() {
+            console.log('logging out');
+            this.$store.commit({type: 'logOut'})
+            this.$router.push('/')
+        },
+        toggleDropdown() {
+            this.$store.commit({type: 'toggleDropdown'})
+        }
+    },
+    computed: {
+        loggedUser() {
+            return this.$store.getters.loggedUser
+        },
+        dropdown() {
+            return this.$store.getters.dropdown
+        }
     }
 }
 </script>
@@ -42,5 +68,20 @@ export default {
     }
     .lower {
         padding-top: 12px
+    }
+    img.profile {
+        height: 55px;
+        width: 55px;
+        border-radius: 50%;
+    }
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        padding: 20px;
+        background-color: #2b303b;
+        z-index: 10;
     }
 </style>

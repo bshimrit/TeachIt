@@ -4,13 +4,26 @@ export default {
   strict: true,
   state: {
     loggedinUser: null,
-    users:[]
+    users:[],
+    dropdown: false
     // userFilter: '',
   },
   mutations: {
     setUser(state, {user}) {
-        state.loggedinUser = user
+        state.loggedinUser = user;
+        state.dropdown = false
     },
+    logOut(state) {
+        delete sessionStorage.user
+        state.loggedinUser = null
+    },
+    toggleDropdown(state) {
+        state.dropdown = !state.dropdown
+    },
+    closeDrowpdown(state) {
+        state.dropdown = false
+    },
+    
     // setUserFilter(state, { filter }) {
     //   state.userFilter = filter;
     // },
@@ -36,6 +49,9 @@ export default {
   getters: {
       loggedUser(state) {
           return state.loggedinUser
+      },
+      dropdown(state) {
+          return state.dropdown
       }
     // usersForDisplay(state) {
     //   return state.users;
@@ -55,13 +71,13 @@ export default {
     //       store.commit({ type: 'setusers', users });
     //   })
     // },
-    // loaduser(store, {userId}) {
-    //   return userService.getById(userId)
-    //   .then(user => {
-    //     store.commit({type: 'setSelecteduser', user});
-    //     return user;
-    //   })
-    // },
+    loadUser(store, {userId}) {
+      return UserService.getUserById(userId)
+      .then(user => {
+        store.commit({type: 'setUser', user});
+        return user;
+      })
+    },
     // deleteuser(store, {userId}) {
     //   return userService.deleteuser(userId)
     //   .then(()=>{

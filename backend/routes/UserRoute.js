@@ -4,10 +4,10 @@ const UserService = require('../services/UserService')
 module.exports = (app) => {
     app.get(USER_URL, (req, res)=>{
 
-        console.log('req.query:', req.query);
+        // console.log('req.query:', req.query);
 
         UserService.query(req.query).then(users => {
-            console.log('ROUTE USERS: ', users);
+            // console.log('ROUTE USERS: ', users);
             res.json(users);
         })
     })
@@ -41,7 +41,7 @@ module.exports = (app) => {
 
     app.get(`${USER_URL}/:userId`, (req, res) => {
         const userId = req.params.userId;
-      
+        
         UserService.getById(userId)
             .then(user => {
                 res.json(user)

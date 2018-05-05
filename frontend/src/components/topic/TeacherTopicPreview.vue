@@ -2,15 +2,14 @@
   <section >
         <div class="card">
                 <div class="card-image">
-                    <img v-if="showTeacher" class="topic-img" :src="teacherTopic.topicImage" />
-                    <a @click="goToProfile" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
+                    <img @click="goToTeacherTopicProfile" v-if="showTeacher" class="topic-img" :src="teacherTopic.topicImage" />
+                    <a @click="goToTeacherProfile" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
                 </div>
-                    <h4>{{teacherTopic.topic.subtitle}}</h4>
-                    <h5>{{teacherTopic.teacher.name}}</h5>
+                    <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.name}} </p>
                 <div class="card-content">
-                    <StarRating v-model="teacherTopic.rating" :star-size="30" :read-only="true" :show-rating="false"/>
-                    <p class="bold">{{teacherTopic.level}}</p>
+                    <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
                     <p>{{teacherTopic.shortDes}}</p>
+                    <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
                     <div v-if="showLongDesc">
                         <p class="long-desc">{{teacherTopic.longDes}}</p>
                         <a @click="goToProfile">Read More</a>                    
@@ -34,8 +33,11 @@ export default {
         StarRating
     },
     methods: {
-        goToProfile(){
-            this.$router.push('/profile/' + this.teacherTopic._id)
+        goToTeacherProfile(){
+            this.$router.push('/profile/' + this.teacherTopic.teacherId)
+        },
+        goToTeacherTopicProfile(){
+            this.$router.push('/profile/topic/' + this.teacherTopic._id)
         }
     }
 }
@@ -43,6 +45,7 @@ export default {
 
 <style scoped>
     .card {
+        text-align: left;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
@@ -57,7 +60,7 @@ export default {
 
     .vue-star-rating {
         width: 100%;
-        justify-content: center;
+        justify-content: start;
     }
 
     .long-desc {
@@ -71,6 +74,7 @@ export default {
 
     .card .card-image {
         height: 200px;
+        text-align:center;
     }
 
     a.teacher-img {
@@ -79,6 +83,15 @@ export default {
         height:80px;
         bottom: 40px;
         /* top: -10px; */
+    }
+
+    .card-header {
+        margin: 0;
+        padding: 0 5px;
+    }
+    .card-content {
+        padding: 0 5px;
+        font-size: 14px;
     }
 
 </style>

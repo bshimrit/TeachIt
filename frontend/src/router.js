@@ -21,6 +21,7 @@ export default new Router({
     // { path: '/review/edit', name: 'review edit', component: ReviewEdit},
     { path: '/profile/edit', name: 'edit', component: EditProfile},
     { path: '/profile/:userId', name: 'profile', component: Profile},
+    { path: '/profile/topic/:teacherTopicId', name: 'teacherTopicProfile', component: Profile},
     
   ]
 })

@@ -108,9 +108,9 @@ export default {
     UserService,
     TeacherTopicPreview
   },
-  computed: {
-    topics() {
-      return this.$store.getters.topicsForDisplay;
+   computed: {
+    topics() {     
+      return this.$store.getters.teacherTopicsForDisplay;
     }
   }
 };

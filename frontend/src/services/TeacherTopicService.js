@@ -6,7 +6,7 @@ function emptyTeacherTopic() {
 }
 
 function getTeacherTopics(filter) {
-    var criteria = {}
+    var criteria = "";
     return axios
             .get(TOPIC_TEACHER_URL)
             .then(res => res.data)

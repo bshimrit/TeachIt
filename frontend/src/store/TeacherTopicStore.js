@@ -8,7 +8,7 @@ export default {
   state: {
     teacherTopics: [],
     popularTeacherTopics:[],
-    teacherTopicFilter: '',
+    teacherTopicFilter: {text:'',price:[0,10],topics:[]},
     MAX_POPULAR: 4
   },
   mutations: {
@@ -31,8 +31,8 @@ export default {
     setTeacherTopics(state, {teacherTopics}) {
       state.teacherTopics = teacherTopics;
     },
-    setPopularTeacherTopics(state, {extendedPTT}) {
-      state.popularTeacherTopics = extendedPTT;
+    setPopularTeacherTopics(state, {popularTeacherTopics}) {
+      state.popularTeacherTopics = popularTeacherTopics;
     }
   },
   getters: {
@@ -41,41 +41,26 @@ export default {
     },
     popularTeacherTopicsForDisplay(state) {
       return state.popularTeacherTopics;
+    },
+    teacherTopicFilter(state) {
+        return state.teacherTopicFilter;
     }
     
   },
   actions: {
     loadTeacherTopics(store) {
-      return TeacherTopicService.getTeacherTopics(store.state.teacherTopicFilter)
+      var extendedPTT = [];
+      return TeacherTopicService.getTeacherTopics({})
       .then(teacherTopics => {
-        store.commit({ type: 'setTeacherTopics', teacherTopics });
-      })
-    },
-    loadTeacherTopics(store) {
-      return TeacherTopicService.getTeacherTopics(store.state.teacherTopicFilter)
-      .then(teacherTopics => {
-        store.commit({ type: 'setTeacherTopics', teacherTopics });
-      })
+            store.commit({ type: 'setTeacherTopics', teacherTopics });
+        })
     },
     loadPopularTeacherTopics(store) {
       var extendedPTT = [];
-      return TeacherTopicService.getTeacherTopics(store.state.teacherTopicFilter)
+      return TeacherTopicService.getTeacherTopics({})
       .then(popularTeacherTopics => {
           popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_POPULAR);
-          var pTTPrms = popularTeacherTopics.map(popularTeacherTopic => {
-            return UserService.getUserById(popularTeacherTopic.teacherId)
-              .then(user => {
-                popularTeacherTopic.teacher = user;
-                return TopicService.getTopicById(popularTeacherTopic.topicId)
-                  .then(topic => {
-                      popularTeacherTopic.topic = topic;
-                      extendedPTT.push(popularTeacherTopic)
-                  })
-                })
-              })
-            return Promise.all(pTTPrms);
-          }).then((pTTPrms) => {
-            store.commit({ type: 'setPopularTeacherTopics', extendedPTT });
+          store.commit({ type: 'setPopularTeacherTopics', popularTeacherTopics });
         })
     }, 
      deleteTeacherTopic(store, {teacherTopicId}) {

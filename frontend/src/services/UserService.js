@@ -17,12 +17,15 @@ function login(user) {
 
 function checkLogin(creds) {
   return new Promise((resolve, reject) => {
-    getUsers().then(users => {
+    getUsers().then(users => {   //** Has to be done in backend - password shouldn't appear in front! */
       const user = users.find(
         user =>
           user.userName === creds.userName && user.password === creds.password
       );
-      if (user) resolve(user);
+      if (user) {
+            sessionStorage.user = JSON.stringify(user);
+            resolve(user)
+        }
       else reject("wrong credentials");
     });
   });

@@ -1,16 +1,18 @@
 <template>
-  <section class="container filter-cmp flex space-between align-center">
-    <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search..">
-    <div class="flex align-center">
-        <div v-if="!isSearching && showExtraSearch">Price</div>
-        <vueSlider v-model="filterBy.price" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
-    </div>
-    <div class="input-field col s12">
-        <select v-model="filterBy.topics" ref="myInput" multiple>
-        <option value="" disabled selected>Choose your topics</option>
-        <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
-        </select>
-    </div>
+  <section class="container">
+    <form class="filter-cmp flex space-between align-center" @submit.prevent="emitFilter">
+        <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search teacher\topic\location..">
+        <div class="flex align-center">
+            <div v-if="!isSearching && showExtraSearch">Price</div>
+            <vueSlider v-model="filterBy.price" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+        </div>
+        <div class="input-field col s12">
+            <select v-model="filterBy.topics" ref="myInput" multiple>
+            <option value="" disabled selected>Choose your topics</option>
+            <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
+            </select>
+        </div>
+    </form>
   </section>
 </template>
 
@@ -19,9 +21,10 @@ import vueSlider from 'vue-slider-component';
 
 export default {
     name:'search',
-    props:{showExtraSearch:{default: true}},
+    props:{showExtraSearch:{default: false}},
     created(){
         this.$store.dispatch({type: 'loadTopics'})
+        this.filterBy = JSON.parse(JSON.stringify(this.$store.getters.teacherTopicFilter));
     },
     mounted() {
         if (this.showExtraSearch)
@@ -29,7 +32,7 @@ export default {
     },
     data() {
         return {
-            filterBy: {text:'', price:[20,50], topics:[]},
+            filterBy: {}, //{text:'', price:[20,50], topics:[]},
             isSearching: false,
         }
     },
@@ -40,6 +43,7 @@ export default {
     },
     methods: {
     emitFilter(){
+        console.log(this.filterBy)
         this.$emit('filtered',this.filterBy);
         }
     },
