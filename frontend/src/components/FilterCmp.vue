@@ -4,7 +4,7 @@
         <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search teacher\topic\location..">
         <div class="flex align-center">
             <div v-if="!isSearching && showExtraSearch">Price</div>
-            <vueSlider v-model="filterBy.price" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+            <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
         </div>
         <div class="input-field col s12">
             <select v-model="filterBy.topics" ref="myInput" multiple>
@@ -23,8 +23,8 @@ export default {
     name:'search',
     props:{showExtraSearch:{default: false}},
     created(){
-        this.$store.dispatch({type: 'loadTopics'})
         this.filterBy = JSON.parse(JSON.stringify(this.$store.getters.teacherTopicFilter));
+        this.$store.dispatch({type: 'loadTopics'})
     },
     mounted() {
         if (this.showExtraSearch)
@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            filterBy: {}, //{text:'', price:[20,50], topics:[]},
+            filterBy: {text:'', price:[0,500], topics:[]},
             isSearching: false,
         }
     },
@@ -43,7 +43,6 @@ export default {
     },
     methods: {
     emitFilter(){
-        console.log(this.filterBy)
         this.$emit('filtered',this.filterBy);
         }
     },

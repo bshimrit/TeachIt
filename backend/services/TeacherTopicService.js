@@ -2,14 +2,16 @@ const DBService = require('./DBService')
 const mongo = require('mongodb');
 
 function query(criteria = {}) {
-    var regExVal = new RegExp('^' + criteria.text,"ig");
+    var regExVal = new RegExp('^' + (criteria.text || '.*'),"ig");
     criteria.text = {$regex : regExVal};
+    if (!criteria.minprice) criteria.minprice = -Infinity;
+    if (!criteria.maxprice) criteria.maxprice = Infinity;
     // if (criteria.sortByTopic) {
     //     criteria.sort = {topicId: criteria.sortByTopic}
     // } else if (!criteria.sort) {
     //     criteria.sort = {rating: -1};
     // } 
-
+    // console.log('backend',criteria)
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
@@ -41,10 +43,13 @@ function query(criteria = {}) {
                         $match: { $or: [{ 'topic.subtitle': criteria.text },
                                         { 'topic.title': criteria.text },                
                                         {'teacher.name':criteria.text}
-                        ]}
+                                    ],
+                                $and: [{'pricePerHour': { $gt: +criteria.minprice, $lt: +criteria.maxprice }}] 
+                        }
                     }
                     ]).toArray((err, teacherTopics) => {
                     if (err) return reject(err);
+                    // console.log(teacherTopics)
                     resolve(teacherTopics);
                 })
             })

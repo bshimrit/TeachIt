@@ -30,9 +30,9 @@ export default {
     return {}
   },
   created(){
+    this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[0,500],topics:[]}})
     this.$store.dispatch({type: 'loadPopularTeacherTopics'})
-    this.$store.dispatch({type: 'loadTeacherTopics'})
-    this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[0,10],topics:[]}})
+    // this.$store.dispatch({type: 'loadTeacherTopics'})
   },
   computed: {
     popularTeacherTopics() {     
@@ -42,7 +42,7 @@ export default {
       return this.$store.getters.teacherTopicsForDisplay;
     },
     categoryTeacherTopics() {
-      console.log(this.$store.getters.teacherTopicsForDisplay)
+      // console.log(this.$store.getters.teacherTopicsForDisplay)
       return [
         {topic: 'English', 
           teacherTopics: [
