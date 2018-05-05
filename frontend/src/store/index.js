@@ -1,5 +1,6 @@
 import TopicStore from './TopicStore.js'
 import UserStore from './UserStore'
+import TeacherTopicStore from './TeacherTopicStore'
 
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -11,7 +12,8 @@ export default new Vuex.Store({
   state: {},
   modules: {
     TopicStore,
-    UserStore
+    UserStore,
+    TeacherTopicStore
   }
   
 })

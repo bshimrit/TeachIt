@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import TopicPreview from '@/components/topic/topicPreview.vue'
+import TeacherTopicPreview from '@/components/topic/TeacherTopicPreview.vue'
 import StarRating from 'vue-star-rating'
 
 export default {
@@ -51,7 +51,7 @@ methods: {
     }
 },
 components: {
-    TopicPreview,
+    TeacherTopicPreview,
     StarRating
 }
 }
