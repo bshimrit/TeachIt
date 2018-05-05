@@ -34,8 +34,9 @@ export default {
 <style>
 .map {
   display: inline-block;
-  width: 100%;
+  width: 40%;
   height: 300px;
   background-color: greenyellow;
+  margin: 10px 20px
 }
 </style>
