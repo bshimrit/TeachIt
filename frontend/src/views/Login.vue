@@ -1,5 +1,5 @@
 <template>
-  <section class="loginPage">
+  <section class="loginPage container">
       <div class="container">
           <h4>Log in to Teacht It</h4>
         <div class="row">
@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style scopped>
+<style scoped>
 .container {
   width: 50%;
   border: 2px solid #577594;
