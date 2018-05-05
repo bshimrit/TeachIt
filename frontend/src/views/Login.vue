@@ -1,7 +1,7 @@
 <template>
   <section class="loginPage">
       <div class="container">
-          <h4>Log in to Teacht It</h4>
+          <h4>Log in to Teach It</h4>
         <div class="row">
             <form class="col s12" @submit.prevent="checkLogin">
                 <div class="row">

@@ -1,53 +1,47 @@
 <template>
-    <section class="search">
-        Filter: by topic | by price <br>
+    <section class="search container">
+      <FilterCmp :showExtraSearch="true"/>
         Sort: by topic | by price<br>
-         <!-- <form action="#"> -->
-    <!-- <p> Filter by:
-      <label>
-        <input name="group1" type="radio" checked />
-        <span>Topic</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input name="group1" type="radio" />
-        <span>Price</span>
-      </label>
-    </p>
-    <p> Sort by:
-      <label>
-        <input class="with-gap" name="group1" type="radio"  />
-        <span>Topic</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input class="with-gap" name="group1" type="radio" />
-        <span>Price</span>
-      </label>
-    </p> -->
-  <!-- </form> -->
-        <h4>Teachers is Tel Aviv:</h4>
         <div class="map-list">
-            <teacher-list :topics="topics" class="teacher-list"></teacher-list>
+            <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
+            <div class="row">
+              <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+                  <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+              </div>
+            </div>   
             <teacher-map class="teacher-map"></teacher-map>
         </div>
     </section> 
 </template>
 
 <script>
-import TeacherList from "@/components/Teacher/TeacherList.vue";
+// import TeacherList from "@/components/Teacher/TeacherList.vue";
+import FilterCmp from '@/components/FilterCmp.vue'
+import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue'
 import TeacherMap from "@/components/Teacher/TeacherMap.vue";
 
 export default {
+  created(){
+    this.$store.dispatch({type: 'loadTeacherTopics'})
+    
+  },
+  data(){
+    return {
+    }
+  },
   computed: {
-    topics() {
-      return this.$store.getters.topicsForDisplay;
+    // topics() {
+    //   return this.$store.getters.topicsForDisplay;
+    // }
+    teacherTopics(){
+      console.log(this.$store.getters.teacherTopicsForDisplay);
+      return this.$store.getters.teacherTopicsForDisplay;
     }
   },
   components: {
-    TeacherList,
+    // TeacherList,
+    FilterCmp,
+    TeacherTopic,
     TeacherMap
   }
 };

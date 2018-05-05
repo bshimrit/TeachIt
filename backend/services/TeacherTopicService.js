@@ -3,15 +3,53 @@ const mongo = require('mongodb');
 
 function query(criteria = {}) {
     //criteria.name = {$regex : `.*${criteria.name}.*`};
+    if (criteria.sortByTopic) {
+        criteria.sort = {topicId: criteria.sortByTopic}
+    } else if (!criteria.sort) {
+        criteria.sort = {rating: -1};
+    } 
+
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
-                db.collection('teacherTopic').find().sort({rating: -1}).toArray((err, teacherTopics) => {
-                    // console.log(teacherTopics)
+                db.collection('teacherTopic').aggregate([
+                    {
+                        $lookup:
+                            {
+                                from: "user",
+                                localField: "teacherId",
+                                foreignField: "_id",
+                                as: "teacher"
+                            },
+                    },
+                    {
+                        $unwind: "$teacher"
+                    },
+                    {
+                        $lookup: {
+                            from: "topic",
+                            localField: "topicId",
+                            foreignField: "_id",
+                            as: "topic"
+                        }
+                    },
+                    {
+                        $unwind: "$topic"
+                    }
+                    ]).toArray((err, teacherTopics) => {
+                    console.log(teacherTopics)
                     if (err) return reject(err);
                     resolve(teacherTopics);
                 })
             })
+        // return DBService.dbConnect()
+        //     .then(db => {
+        //         db.collection('teacherTopic').find().sort(criteria.sort).toArray((err, teacherTopics) => {
+        //             // console.log(teacherTopics)
+        //             if (err) return reject(err);
+        //             resolve(teacherTopics);
+        //         })
+        //     })
 
     });
 }

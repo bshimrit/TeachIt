@@ -55,7 +55,7 @@ export default {
   },
    computed: {
     topics() {     
-      return this.$store.getters.topicsForDisplay;
+      return this.$store.getters.teacherTopicsForDisplay;
     }
   }
 }
