@@ -1,10 +1,16 @@
 <template>
   <div class="topic-review">
-    <form class="flex flex-column justify-start" @submit.prevent="addReview">
-            <h3>Add Review</h3>
+
+ 
+
+ <div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel">
+            <form class="flex flex-column justify-start" @submit.prevent="addReview">
+            <h5>Add Review</h5>
             <label>
                 Name
-                <input type="text" v-model="review.fullName"  placeholder="Full name" />
+                <input type="text" v-model="review.fullName"/>
             </label>
             <label>
                 Rate Class
@@ -15,8 +21,13 @@
                 Review
                 <input type="text" v-model="review.text" />
             </label>
-            <button class="clear-btn1" type="submit" :disabled="!isValid">Add review</button>
+            <button class="btn" type="submit" :disabled="!isValid">Add review</button>
         </form>
+      </div>
+    </div>
+  </div>
+
+   
 
   </div>
 </template>
@@ -38,7 +49,7 @@ export default {
     methods: {
         getEmptyReview() {
             return {
-                fullName: 'miki levi',
+                fullName: 'loggedIn username',
                 rate: 0,
                 readAt: (new Date()),
                 text: 'Great Class'

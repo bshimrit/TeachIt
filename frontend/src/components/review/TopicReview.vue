@@ -1,8 +1,8 @@
 <template>
   <div class="topic-review">
-    <h3>review-graph</h3>
-    <h3>review-filter</h3>
-    <filter-cmp></filter-cmp>
+    <h5>review-graph</h5>
+    <h5>review-filter</h5>
+  
     <review-add></review-add>
     <review-list></review-list>
   </div>
@@ -27,8 +27,8 @@ export default {
 
 
 <style scoped>
-div {
+/* div {
   border: 1px black solid;
-}
+} */
 </style>
 

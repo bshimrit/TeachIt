@@ -75,6 +75,7 @@
     </div>
 
      <h3>Reviews:</h3>
+     <topic-review></topic-review>
      
   </div>
 </template>
@@ -122,7 +123,7 @@ export default {
     },
     teacherTopics() {
       console.log(this.$store.getters.teacherTopicsForDisplay);
-      return this.$store.getters.teacherTopicsForDisplay;
+      return this.$store.getters.teacherTopicsForDisplay.filter((topic)=>topic.teacherId == this.$route.params.userId);
     }
   }
 };
