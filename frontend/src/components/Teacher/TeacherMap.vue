@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="map">
       <!-- <div class="map"></div> -->
       <GmapMap
         :center="{lat:32.08, lng:34.79}"
