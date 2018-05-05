@@ -75,6 +75,7 @@
     </div>
 
      <h3>Reviews:</h3>
+     
   </div>
 </template>
 
@@ -92,7 +93,7 @@ export default {
         name: "Dani Bern",
         img: "https://randomuser.me/api/portraits/men/43.jpg",
         quote: "Anyone Can Learn",
-        desc:
+        description:
           "Hi! I'm Colt. I'm a developer with a serious love for teaching. I've spent the last few years teaching people to program at 2 different immersive bootcamps where I've helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square.",
         education: "A Degree",
         socialMedia: { facebook: "http://f.com/user", twitter: "t.com/user" }
