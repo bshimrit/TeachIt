@@ -12,20 +12,12 @@ function getTeacherTopics(filter) {
         if (filter.price.length){
             criteria += `minprice=${filter.price[0]}&maxprice=${filter.price[1]}&`
         }
-<<<<<<< HEAD
-        // if (filter.topics){
-        //     for(var i = 0; i < filter.topics.length; i++){
-        //         criteria += `&topic=${filter.topics[i]}`
-        //     }
-        // }
-=======
         if (filter.topics){
             for(var i = 0; i < filter.topics.length; i++){
                 criteria += `&topics=${filter.topics[i]}`
             }
         }
         criteria
->>>>>>> 4eefa8ec8560693b22aa159c0d3324deee8ade35
     }
     return axios
             .get(TOPIC_TEACHER_URL + criteria)
@@ -45,15 +37,8 @@ function deleteTeacherTopic(teacherTopicId) {
 
 function getTeacherTopicById(teacherTopicId) {
     return axios
-<<<<<<< HEAD
-    .get(`/teacherTopic/${teacherTopicId}`)
-    .then(res => {
-        return res.data
-    })
-=======
     .get(_getTeacherTopicUrl(teacherTopicId))
     .then(res => res.data)
->>>>>>> 4eefa8ec8560693b22aa159c0d3324deee8ade35
 }
 
 
