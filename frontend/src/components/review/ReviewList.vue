@@ -2,7 +2,7 @@
     <section class="review-list">
         <ul>
             <li v-for="review in reviews" :key="review._id">
-                <!-- <p>By: {{reviewerName}}</p> -->
+                <p>By: {{teacherTopic.teacher.fullName}} <img :src="teacherTopic.teacher.img"></p>
                 <p>Contnet: {{review.topicReview}}</p>
                 <p>Rating: {{review.topicRating}} </p>
             </li>
@@ -44,8 +44,8 @@ export default {
         this.$store.dispatch({type: 'loadReviews', teacherTopicId})
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {
-            this.teacherTopic = teacherTopic;
-            console.log('teacherTopic in reviewList',teacherTopic);
+            this.teacherTopic = teacherTopic[0];
+            console.log('teacherTopic in reviewList',this.teacherTopic);
             })
   },
   computed: {
@@ -64,6 +64,14 @@ export default {
 
 
 <style scoped>
+li {
+    border: 1px solid black
+}
+img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%
+}
 /* div {
   border: 1px black solid;
 } */

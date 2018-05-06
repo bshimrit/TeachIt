@@ -66,9 +66,9 @@ export default {
 .map-list {
     display: flex
 }
-.teacher-list {
+.cards {
   display: inline-block;
-  width: 70%;
+  width: 66%;
 }
 .teacher-map {
     margin-top: 0.5rem;
