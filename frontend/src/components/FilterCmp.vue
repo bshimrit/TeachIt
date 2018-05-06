@@ -7,7 +7,7 @@
             <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
         </div>
         <div class="input-field col s12">
-            <select v-model="filterBy.topics" ref="myInput" multiple>
+            <select v-model="filterBy.topics" ref="selectTopics" multiple>
             <option value="" disabled selected>Choose your topics</option>
             <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
             </select>
@@ -24,12 +24,15 @@ export default {
     props:{showExtraSearch:{default: false}},
     created(){
         this.filterBy = JSON.parse(JSON.stringify(this.$store.getters.teacherTopicFilter));
-        this.$store.dispatch({type: 'loadTopics'})
+        if (this.showExtraSearch) {
+            this.$store.dispatch({type: 'loadTopics'}).then(topics => {
+                $('select').material_select()
+                this.$refs.selectTopics.onchange = this.emitFilter;
+            })
+        }
     },
     mounted() {
-        if (this.showExtraSearch)
-            $('select').material_select()
-    },
+        },
     data() {
         return {
             filterBy: {text:'', price:[], topics:[]},
@@ -43,6 +46,7 @@ export default {
     },
     methods: {
     emitFilter(){
+        this.filterBy.topics = $('select').val()
         this.$emit('filtered',this.filterBy);
         }
     },

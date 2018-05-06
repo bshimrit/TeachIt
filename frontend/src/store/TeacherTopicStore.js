@@ -85,6 +85,8 @@ export default {
       })
     },
     getTeacherTopicById(store, {teacherTopicId}) {
+        console.log('ID in store:', teacherTopicId);
+        
           return TeacherTopicService.getTeacherTopicById(teacherTopicId)
             .then(teacherTopic => {
               return teacherTopic;

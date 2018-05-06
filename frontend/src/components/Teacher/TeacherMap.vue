@@ -35,14 +35,15 @@ export default {
 <style>
 .map {
   display: inline-block;
-  position: fixed;
-  right: 15px;
-  width: 30%;
-  height: 62%;
   background-color: greenyellow;
+  width: 100%;
+  height: 100%;
 }
 .map-container {
-    width: 400px;
-    margin: 10px 10px 10px 20px
+    /* width: 300px; */
+    margin: 10px 10px 10px 20px;
+    position: fixed;
+    right: 15px;
+    height: 63%; 
 }
 </style>
