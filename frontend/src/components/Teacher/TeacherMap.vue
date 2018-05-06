@@ -1,6 +1,6 @@
 <template>
-  <section class="map">
-      <!-- <div class="map"></div> -->
+  <section class="map-container">
+      <div class="map">
       <GmapMap
         :center="{lat:32.08, lng:34.79}"
         :zoom="13"
@@ -16,6 +16,7 @@
             @click="center=m.position"
         />
         </GmapMap>
+      </div>
   </section>
 </template>
 
@@ -34,9 +35,14 @@ export default {
 <style>
 .map {
   display: inline-block;
-  width: 40%;
-  height: 300px;
+  position: fixed;
+  right: 15px;
+  width: 30%;
+  height: 62%;
   background-color: greenyellow;
-  margin: 10px 20px
+}
+.map-container {
+    width: 400px;
+    margin: 10px 10px 10px 20px
 }
 </style>

@@ -105,7 +105,6 @@ export default {
     this.$store.dispatch({ type: "loadTeacherTopics" });
     var userId = this.$route.params.userId;
     if (!userId) userId = "5ae973a5f8cdd2dafed7a1f0";
-    console.log("userId", userId);
     UserService.getUserById(userId)
       .then(user => (this.user = user))
       .catch(err => {
@@ -122,7 +121,7 @@ export default {
       return this.$store.getters.teacherTopicsForDisplay;
     },
     teacherTopics() {
-      console.log(this.$store.getters.teacherTopicsForDisplay);
+    //   console.log(this.$store.getters.teacherTopicsForDisplay);
       return this.$store.getters.teacherTopicsForDisplay.filter((topic)=>topic.teacherId == this.$route.params.userId);
     }
   }
@@ -133,6 +132,7 @@ export default {
 <style scoped>
 .container {
   text-align: left;
+  max-width: 900px;
 }
 ul {
   display: flex;

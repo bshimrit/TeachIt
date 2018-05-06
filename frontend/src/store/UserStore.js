@@ -52,6 +52,12 @@ export default {
       },
       dropdown(state) {
           return state.dropdown
+      },
+      onlineUserName(state) {
+          if (state.loggedinUser) return state.loggedinUser.fullName
+      },
+      onlineUserImg(state) {
+        if (state.loggedinUser) return state.loggedinUser.img
       }
     // usersForDisplay(state) {
     //   return state.users;

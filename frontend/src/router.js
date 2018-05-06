@@ -15,7 +15,7 @@ export default new Router({
     { path: '/', name: 'home', component: Home},
     { path: '/about', name: 'about', component: About},
     { path: '/search', name: 'search', component: Search},
-    { path: '/search/:filter', name: 'search', component: Search},
+    { path: '/search/:filter', name: 'searchFilter', component: Search},
     { path: '/login', name: 'login', component: Login},
     { path: '/register', name: 'register', component: Register},
     { path: '/profile/:userId', name: 'profile', component: Profile},

@@ -9,7 +9,8 @@ export default {
     teacherTopics: [],
     popularTeacherTopics:[],
     teacherTopicFilter: {text:'',price:[0,500],topics:[]},
-    MAX_POPULAR: 4
+    popularByTopics: [],
+    MAX_VIEW: 4
   },
   mutations: {
     setTeacherTopicFilter(state, { filter }) {
@@ -33,6 +34,9 @@ export default {
     },
     setPopularTeacherTopics(state, {popularTeacherTopics}) {
       state.popularTeacherTopics = popularTeacherTopics;
+    },
+    setPopularByTopics(state, {popularByTopics}) {
+      state.popularByTopics = popularByTopics;
     }
   },
   getters: {
@@ -41,6 +45,9 @@ export default {
     },
     popularTeacherTopicsForDisplay(state) {
       return state.popularTeacherTopics;
+    },
+    popularByTopicsForDisplay(state) {
+      return state.popularByTopics;
     },
     teacherTopicFilter(state) {
         return state.teacherTopicFilter;
@@ -57,8 +64,7 @@ export default {
     loadPopularTeacherTopics(store) {
       return TeacherTopicService.getTeacherTopics({text:'',price:[],topics:[]})
       .then(popularTeacherTopics => {
-          popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_POPULAR);
-          console.log(popularTeacherTopics)
+          popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_VIEW);
           store.commit({ type: 'setPopularTeacherTopics', popularTeacherTopics });
         })
     }, 
@@ -88,6 +94,16 @@ export default {
       return TeacherTopicService.getTopicsByTeacherId(teacherId)
             .then(teacherTopics => {
               return teacherTopics;
+        })
+    },
+    loadPopularTopics(store) {
+      return TeacherTopicService.getPopularTopics()
+          .then(popularTopics => {
+            if (popularByTopics) popularByTopics = popularByTopics.slice(0,store.state.MAX_VIEW);
+            var popularByTopics = popularTopics.map(popularTopic => {
+              return {topic: popularTopic[0].topic,teacherTopics:popularTopic}
+            })
+            store.commit({ type: 'setPopularByTopics', popularByTopics });
         })
     }
   }

@@ -12,6 +12,8 @@ app.use(bodyParser());
 
 const addUserRoutes = require ('./routes/UserRoute')
 addUserRoutes(app)
+const addReviewRoutes = require ('./routes/ReviewRoute')
+addReviewRoutes(app)
 const addTopicRoutes = require ('./routes/TopicRoute')
 addTopicRoutes(app)
 const addTeacherTopicRoutes = require ('./routes/TeacherTopicRoute')

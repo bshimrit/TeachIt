@@ -1,6 +1,6 @@
 <template>
   <section class="teacherList">
-        <ul class="collection">
+        <ul class="collection flex flex-wrap">
             <li v-for="teacher in teachers" :key="teacher._id" @click="openProfile(teacher._id)" class="collection-item avatar">
                 <div class="card">
                     <div class="card-image">

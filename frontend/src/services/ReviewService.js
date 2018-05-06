@@ -1,4 +1,4 @@
-const REVIEW_URL = "/review";
+const REVIEW_URL = "http://localhost:3000/review";
 
 function emptyReview() {
   return {
@@ -10,12 +10,14 @@ function emptyReview() {
   };
 }
 
-function getReviews(filter) {
-  var criteria = {};
-  return axios
-    .get(REVIEW_URL)
-    .then(res => res.data)
-    .catch(e => console.log("No Reviews", e));
+function getReviews(teacherTopicId) {
+    // var criteria = {teacherTopicId};
+    console.log('sending request for reviews to DB:', teacherTopicId);
+    
+    return axios
+        .get(REVIEW_URL, teacherTopicId)
+        .then(res => res.data)
+        .catch(e => console.log("No Reviews", e));
 }
 
 function saveReview(review) {
@@ -27,8 +29,10 @@ function deleteReview(reviewId) {
   return axios.delete(_getReviewUrl(reviewId));
 }
 
-function getReviewById(reviewId) {
-  return axios.get(_getReviewUrl(reviewId)).then(res => res.data);
+function getReviewsById(reviewId) {
+  return axios.get(_getReviewUrl(reviewId)).then(res => {
+    return res.data
+});
 }
 
 function _getReviewUrl(reviewId) {
@@ -40,5 +44,5 @@ export default {
   saveReview,
   deleteReview,
   emptyReview,
-  getReviewById
+  getReviewsById
 };
