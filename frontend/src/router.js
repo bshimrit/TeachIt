@@ -4,8 +4,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Search from './views/Search.vue'
 import Login from './views/Login.vue'
-// import UserEdit from './views/UserEdit.vue'
-// import ReviewEdit from './views/ReviewEdit.vue'
+import Register from './views/Register.vue'
 import Profile from './views/Profile.vue'
 import EditProfile from './views/EditProfile.vue'
 
@@ -18,10 +17,9 @@ export default new Router({
     { path: '/search', name: 'search', component: Search},
     { path: '/search/:filter', name: 'searchFilter', component: Search},
     { path: '/login', name: 'login', component: Login},
-    // { path: '/user/edit', name: 'user edit', component: UserEdit},
-    // { path: '/review/edit', name: 'review edit', component: ReviewEdit},
-    { path: '/profile/edit', name: 'edit', component: EditProfile},
+    { path: '/register', name: 'register', component: Register},
     { path: '/profile/:userId', name: 'profile', component: Profile},
+    { path: '/profile/edit/:userId', name: 'edit', component: EditProfile},
     { path: '/profile/topic/:teacherTopicId', name: 'teacherTopicProfile', component: Profile},
     
   ]

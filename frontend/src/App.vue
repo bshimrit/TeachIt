@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="closeDrowpdown">
+  <div id="app" @click="closeDropdown">
     <div id="nav">
       <NavBar/>
     </div>
@@ -20,8 +20,8 @@
     }
   },
   methods: {
-    closeDrowpdown() {
-        this.$store.commit({type: 'closeDrowpdown'})
+    closeDropdown() {
+        this.$store.commit({type: 'closeDropdown'})
     }
   }
   }

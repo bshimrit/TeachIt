@@ -20,7 +20,7 @@ export default {
     toggleDropdown(state) {
         state.dropdown = !state.dropdown
     },
-    closeDrowpdown(state) {
+    closeDropdown(state) {
         state.dropdown = false
     },
     
@@ -103,10 +103,9 @@ export default {
       })
     },
     getUserById(store, {userId}) {
+    
           return UserService.getUserById(userId)
             .then(user => {
-                console.log('user by ID:', user);
-                
               return user;
         })   
     },
