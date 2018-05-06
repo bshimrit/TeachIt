@@ -1,5 +1,5 @@
 <template>
-  <div class="topic-review">
+  <div class="topic-review container">
     <h5>review-graph</h5>
     <h5>review-filter</h5>
   

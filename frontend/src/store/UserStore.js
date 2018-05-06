@@ -20,7 +20,7 @@ export default {
     toggleDropdown(state) {
         state.dropdown = !state.dropdown
     },
-    closeDrowpdown(state) {
+    closeDropdown(state) {
         state.dropdown = false
     },
     
@@ -52,6 +52,12 @@ export default {
       },
       dropdown(state) {
           return state.dropdown
+      },
+      onlineUserName(state) {
+          if (state.loggedinUser) return state.loggedinUser.fullName
+      },
+      onlineUserImg(state) {
+        if (state.loggedinUser) return state.loggedinUser.img
       }
     // usersForDisplay(state) {
     //   return state.users;
@@ -96,11 +102,12 @@ export default {
         return retUser;
       })
     },
-    // getuserById(store, {userId}) {
-    //       return userService.getuserById(userId)
-    //         .then(user => {
-    //           return user;
-    //     })   
-    // },
+    getUserById(store, {userId}) {
+    
+          return UserService.getUserById(userId)
+            .then(user => {
+              return user;
+        })   
+    },
   }
 }

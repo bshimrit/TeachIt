@@ -65,17 +65,18 @@ function logout() {
 
 function emptyUser() {
   return {
-    username: "",
+    userName: "",
     password: "",
+    email:"",
     isTeacher: false,
     isAdmin: false,
-    name: "",
+    fullName: "",
     desc: "",
     quote: "",
     education: "",
     img: "",
-    socialMedia: [],
-    topics: [] 
+    socialLinks: {facebook:'',twitter:''},
+    
   };
 }
 

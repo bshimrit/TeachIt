@@ -20,7 +20,7 @@
         </div>
       </div>
       <h4>Not a member?</h4>
-      <router-link class="waves-effect waves-light btn" to="/profile/edit">Sign up</router-link> <br>
+      <router-link class="waves-effect waves-light btn" to="/register">Sign up</router-link> <br>
       <!-- <a class="waves-effect waves-light btn">Return to home page</a> -->
       <div v-if="loggedInUser"></div>      
   </section>
@@ -62,11 +62,11 @@ export default {
 </script>
 
 <style scoped>
-.container {
+/* .container {
   width: 50%;
   border: 2px solid #577594;
   padding: 20px;
-}
+} */
 a {
     margin: 10px
 }

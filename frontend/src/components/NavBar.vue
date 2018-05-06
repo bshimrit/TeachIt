@@ -1,5 +1,5 @@
 <template>
-<div class="navbar-fixed">
+<div class="navbar-fixed" v-show="scrolled">
   <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
@@ -26,64 +26,84 @@
 
 <script>
 export default {
-    methods: {
-        logOut() {
-            console.log('logging out');
-            this.$store.commit({type: 'logOut'})
-            this.$router.push('/')
-        },
-        toggleDropdown() {
-            this.$store.commit({type: 'toggleDropdown'})
+    data() {
+        return {
+            scrolled: true,
+            YOffset: 0
         }
     },
-    computed: {
-        loggedUser() {
-            return this.$store.getters.loggedUser
-        },
-        dropdown() {
-            return this.$store.getters.dropdown
-        }
+  methods: {
+    logOut() {
+      console.log('logging out');
+      this.$store.commit({ type: 'logOut' });
+      this.$router.push('/');
+    },
+    toggleDropdown() {
+      this.$store.commit({ type: 'toggleDropdown' });
+    },
+//     handleScroll () {
+//         this.scrolled = (window.scrollY <= this.YOffset) 
+//         console.log('window.scrollY:', window.scrollY, 'this.scrollY:', this.YOffset);
+//         this.YOffset = window.scrollY;
+//   }
+  },
+  computed: {
+    loggedUser() {
+      return this.$store.getters.loggedUser;
+    },
+    dropdown() {
+      return this.$store.getters.dropdown;
     }
-}
+  },
+//   created() {
+//     window.addEventListener('scroll', this.handleScroll);
+//   },
+//   destroyed() {
+//     window.removeEventListener('scroll', this.handleScroll);
+//   }
+};
 </script>
 
 <style scoped>
-    nav {
-        width: 100vw;
-        height: 100px;
-        padding: 10px 0;
-        background-color: #2b303b;
-        text-align: left;
-    }
-    .nav-wrapper {
-        padding: 0 30px;
-    }
-    .logo-img {
-        width: 150px;
-        margin: 10px auto;
-    }
-    #nav-mobile {
-        margin: auto 0
-    }
-    .lower {
-        padding-top: 12px
-    }
-    img.profile {
-        height: 55px;
-        width: 55px;
-        border-radius: 50%;
-    }
-    .dropdown {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        padding: 20px;
-        background-color: #2b303b;
-        z-index: 10;
-    }
-    .navbar-fixed {
-        margin-bottom: 50px
-    }
+nav {
+  width: 100vw;
+  height: 100px;
+  padding: 10px 0;
+  background-color: #2b303b;
+  text-align: left;
+}
+.nav-wrapper {
+  padding: 0 30px;
+}
+.logo-img {
+  width: 150px;
+  margin: 10px auto;
+}
+#nav-mobile {
+  margin: auto 0;
+}
+.lower {
+  padding-top: 12px;
+}
+img.profile {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+}
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  padding: 20px;
+  background-color: #2b303b;
+  z-index: 10;
+}
+.navbar-fixed {
+  margin-bottom: 50px;
+}
+.hide-nav {
+    top: -100%
+}
 </style>

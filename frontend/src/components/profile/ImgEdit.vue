@@ -1,7 +1,22 @@
 <template>
     <section>
-        <input type="file" @change="onFileChanged">
-        <button @click="onUpload">Upload!</button>
+      <h5>Image</h5>
+      
+          <div class="row">
+            <div class="input-field col s12">
+              <input v-model="userToUpdate.img" type="text" class="validate">
+              <label class="left active" for="image">Image url</label>
+            </div>
+          </div>
+
+
+           <div class="row">
+            <div class="input-field col s12">
+              <input type="file" @change="onFileChanged">
+              <button @click="onUpload">Upload!</button>
+            </div>
+          </div>
+       
 
     </section>
 </template>
@@ -11,7 +26,7 @@ export default {
   data() {
     return { selectedFile: null };
   },
-  props: {},
+    props: ['userToUpdate'],
   watch: {},
   computed: {},
   methods: {

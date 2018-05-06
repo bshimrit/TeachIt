@@ -1,15 +1,17 @@
 <template>
     <section class="search container">
-      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true"/>
+      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" class="fix-filter"/>
         Sort: by topic | by price<br>
         <div class="map-list">
             <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
-            <div class="row">
-              <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-                  <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-              </div>
+            <div class="cards">
+                <div class="row">
+                    <div class="col s12 m4" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+                        <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+                    </div>
+                </div>
             </div>   
-            <teacher-map class="teacher-map"></teacher-map>
+            <teacher-map class="teacher-map relative"></teacher-map>
         </div>
     </section> 
 </template>
@@ -58,17 +60,27 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .map-list {
     display: flex
 }
-.teacher-list {
+.cards {
   display: inline-block;
-  width: 70%;
+  width: 66%;
 }
 .teacher-map {
     margin-top: 0.5rem;
     display: inline-block;
     width: 30%;
+}
+.fix-filter {
+    position: fixed;
+    top: 100px;
+    background-color: white;
+    z-index: 2;
+    left: 0;
+}
+.search {
+    margin-top: 110px
 }
 </style>
