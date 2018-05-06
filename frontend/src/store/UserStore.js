@@ -20,7 +20,7 @@ export default {
     toggleDropdown(state) {
         state.dropdown = !state.dropdown
     },
-    closeDrowpdown(state) {
+    closeDrodown(state) {
         state.dropdown = false
     },
     
