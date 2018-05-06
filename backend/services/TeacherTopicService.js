@@ -105,7 +105,7 @@ function getById(teacherTopicId) {
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('teacherTopics').findOne({_id: teacherTopicId}, function (err, teacherTopic) {
+            db.collection('teacherTopic').findOne({_id: teacherTopicId}, function (err, teacherTopic) {
                 if (err)    reject(err)
                 else        resolve(teacherTopic);
                 db.close();

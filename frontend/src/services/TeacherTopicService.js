@@ -36,8 +36,10 @@ function deleteTeacherTopic(teacherTopicId) {
 
 function getTeacherTopicById(teacherTopicId) {
     return axios
-    .get(_getTeacherTopicUrl(teacherTopicId,'topic'))
-    .then(res => res.data)
+    .get(`/teacherTopic/${teacherTopicId}`)
+    .then(res => {
+        return res.data
+    })
 }
 
 function getTopicsByTeacherId(teacherId) {

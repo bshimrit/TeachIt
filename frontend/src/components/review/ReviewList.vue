@@ -42,12 +42,11 @@ export default {
   created() {
       var teacherTopicId = this.$route.params.teacherTopicId
         this.$store.dispatch({type: 'loadReviews', teacherTopicId})
-        // this.$store.dispatch({type: 'getTeacherTopicById'})
-        // .then(teacherTopic => {
-        //     this.teacherTopic = teacherTopic;
-        //     console.log('teacherTopic',teacherTopic);
-            
-        //     })
+        this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
+        .then(teacherTopic => {
+            this.teacherTopic = teacherTopic;
+            console.log('teacherTopic in reviewList',teacherTopic);
+            })
   },
   computed: {
       reviews() {
