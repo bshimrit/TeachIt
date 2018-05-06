@@ -68,6 +68,8 @@ function query(criteria = {}) {
 }
 
 function add(teacherTopic) {
+    teacherTopic.teacherId = mongo.ObjectID(teacherTopic.teacherId);
+    teacherTopic.topicId = mongo.ObjectID(teacherTopic.topicId);
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {

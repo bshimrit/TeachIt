@@ -81,9 +81,9 @@ export default {
   computed: {},
   methods: {
     saveLesson() {
-       var userId = this.$route.params.userId;
+       if(!this.lessonToUpdate.topicId) this.lessonToUpdate.topicId= "5ae97336b8ed24ed05f66112";
        this.lessonToUpdate.teacherId= this.$route.params.userId;
-       this.lessonToUpdate.topicId= "5ae97336b8ed24ed05f66112";
+       
       console.log('lesson', this.lessonToUpdate);
       this.$store
         .dispatch({ type: "saveTeacherTopic", teacherTopic: this.lessonToUpdate })
