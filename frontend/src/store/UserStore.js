@@ -20,7 +20,7 @@ export default {
     toggleDropdown(state) {
         state.dropdown = !state.dropdown
     },
-    closeDrodown(state) {
+    closeDropdown(state) {
         state.dropdown = false
     },
     
@@ -96,11 +96,12 @@ export default {
         return retUser;
       })
     },
-    // getuserById(store, {userId}) {
-    //       return userService.getuserById(userId)
-    //         .then(user => {
-    //           return user;
-    //     })   
-    // },
+    getUserById(store, {userId}) {
+    
+          return UserService.getUserById(userId)
+            .then(user => {
+              return user;
+        })   
+    },
   }
 }
