@@ -19,15 +19,12 @@
 import FilterCmp from '@/components/FilterCmp.vue'
 import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue'
 import TeacherMap from "@/components/Teacher/TeacherMap.vue";
+import TeacherTopicService from '@/services/TeacherTopicService.js'
+
 
 export default {
   created(){
-    var curQuery = this.$router.history.current.query;
-    console.log(curQuery)
-    var curFilter = {text: curQuery.text};
-    curFilter.price = [(curQuery.minprice || 0),(curQuery.maxprice || 500)];
-    curFilter.topics = [];
-    this.$store.commit({type:'setTeacherTopicFilter', filter: curFilter})
+    this.$store.commit({type:'setTeacherTopicFilter', filter: this.setFilter()})
     this.$store.dispatch({type: 'loadTeacherTopics'})
   },
   data(){
@@ -40,9 +37,19 @@ export default {
     }
   },
   methods: {
-  filterTeacherTopic(filter){
-    this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
-    this.$store.dispatch({type: 'loadTeacherTopics'});
+    filterTeacherTopic(filter){
+      console.log(filter)
+      this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
+      this.$store.dispatch({type: 'loadTeacherTopics'});
+    },
+    setFilter(){
+      var curFilter = TeacherTopicService.emptyTeacherTopic();
+      var curQuery = this.$router.history.current.query;
+      if (curQuery.text) curFilter = {text: curQuery.text};
+      if (curQuery.minprice && curQuery.maxprice) curFilter.price = [curQuery.minprice,curQuery.maxprice];
+      if (curQuery.topics) curFilter.topics.push(curQuery.topics);
+      console.log(curFilter)
+      return curFilter;
     }
   },
   components: {

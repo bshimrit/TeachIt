@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            filterBy: {text:'', price:[0,500], topics:[]},
+            filterBy: {text:'', price:[], topics:[]},
             isSearching: false,
         }
     },

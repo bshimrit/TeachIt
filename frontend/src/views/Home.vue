@@ -30,9 +30,8 @@ export default {
     return {}
   },
   created(){
-    this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[0,500],topics:[]}})
+    this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[],topics:[]}})
     this.$store.dispatch({type: 'loadPopularTeacherTopics'})
-    // this.$store.dispatch({type: 'loadTeacherTopics'})
   },
   computed: {
     popularTeacherTopics() {     

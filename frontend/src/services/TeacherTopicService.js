@@ -2,7 +2,7 @@
 const TOPIC_TEACHER_URL = '/teacherTopic'
 
 function emptyTeacherTopic() {
-    return {title:'',subtitle:''}
+    return {text:'',price:[], topics:[]}
 }
 
 function getTeacherTopics(filter) {
@@ -12,12 +12,12 @@ function getTeacherTopics(filter) {
         if (filter.price.length){
             criteria += `minprice=${filter.price[0]}&maxprice=${filter.price[1]}&`
         }
-        console.log(criteria)
-        // if (filter.topics){
-        //     for(var i = 0; i < filter.topics.length; i++){
-        //         criteria += `&topic=${filter.topics[i]}`
-        //     }
-        // }
+        if (filter.topics){
+            for(var i = 0; i < filter.topics.length; i++){
+                criteria += `&topics=${filter.topics[i]}`
+            }
+        }
+        criteria
     }
     return axios
             .get(TOPIC_TEACHER_URL + criteria)
@@ -37,24 +37,26 @@ function deleteTeacherTopic(teacherTopicId) {
 
 function getTeacherTopicById(teacherTopicId) {
     return axios
-    .get(_getTeacherTopicUrl(teacherTopicId,'topic'))
+    .get(_getTeacherTopicUrl(teacherTopicId))
     .then(res => res.data)
 }
+
 
 function getTopicsByTeacherId(teacherId) {
     return axios
-    .get(_getTeacherTopicUrl(teacherId,'teacherTopics'))
+    .get(_getTeacherTopicUrl(teacherId,'teacher'))
     .then(res => res.data)
 }
 
-function getTeachersByTopicId(topicId) {
-    return axios
-    .get(_getTeacherTopicUrl(topicId,'teacherTopics'))
-    .then(res => res.data)
-}
+// function getTeachersByTopicId(topicId) {
+//     return axios
+//     .get(_getTeacherTopicUrl(topicId,'teacherTopics'))
+//     .then(res => res.data)
+// }
 
 function _getTeacherTopicUrl(id,type) {
-    return `${TOPIC_TEACHER_URL}/${type}/${id}`;
+    if (type) return `${TOPIC_TEACHER_URL}/${type}/${id}`;
+    else return `${TOPIC_TEACHER_URL}/${id}`;
 }
 
 export default {
@@ -62,5 +64,6 @@ export default {
     saveTeacherTopic,
     deleteTeacherTopic,
     emptyTeacherTopic,
-    getTeacherTopicById
+    getTeacherTopicById,
+    getTopicsByTeacherId
 }

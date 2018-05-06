@@ -35,6 +35,15 @@ module.exports = (app) => {
             .catch(err => res.status(500).send(err.message))
     })
 
+    app.get(`${TEACHER_TOPIC_URL}/teacher/:teacherId`, (req, res) => {
+        const teacherId = req.params.teacherId;
+        TeacherTopicService.getTeacherTopicsById(teacherId)
+            .then(teacherTopic => {
+                res.json(teacherTopic)
+            })
+            .catch(err => res.status(500).send(err.message))
+    })
+
     app.put(TEACHER_TOPIC_URL, (req, res) => {
         const teacherTopic = req.body;
         TeacherTopicService

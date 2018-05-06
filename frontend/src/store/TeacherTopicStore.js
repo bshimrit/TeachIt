@@ -84,5 +84,11 @@ export default {
               return teacherTopic;
         })   
     },
+    getTopicsByTeacherId(store, {teacherId}) {
+      return TeacherTopicService.getTopicsByTeacherId(teacherId)
+            .then(teacherTopics => {
+              return teacherTopics;
+        })
+    }
   }
 }
