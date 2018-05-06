@@ -1,7 +1,7 @@
 <template>
-<div class="navbar-fixed" v-show="scrolled">
+<div class=" navbar-fixed" v-show="scrolled">
   <nav>
-    <div class="nav-wrapper">
+    <div class="container nav-wrapper">
       <a href="/" class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
       <ul id="nav-mobile" class="right hide-on-small-and-down lower">
         <li><router-link to="/">Home</router-link></li> 
@@ -73,7 +73,7 @@ nav {
   text-align: left;
 }
 .nav-wrapper {
-  padding: 0 30px;
+  /* padding: 0 30px; */
 }
 .logo-img {
   width: 150px;
