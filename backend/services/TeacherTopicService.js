@@ -114,14 +114,6 @@ function getById(teacherTopicId) {
     teacherTopicId = new mongo.ObjectID(teacherTopicId);
     return new Promise((resolve, reject)=> { 
         DBService.dbConnect()
-<<<<<<< HEAD
-        .then(db=>{
-            db.collection('teacherTopic').findOne({_id: teacherTopicId}, function (err, teacherTopic) {
-                if (err)    reject(err)
-                else        resolve(teacherTopic);
-                db.close();
-            });
-=======
         .then(db => {
             db.collection('teacherTopic').aggregate([
                 {
@@ -154,7 +146,6 @@ function getById(teacherTopicId) {
                 if (err) return reject(err);
                 resolve(teacherTopic);
             })
->>>>>>> 4eefa8ec8560693b22aa159c0d3324deee8ade35
         })
     })
 }
