@@ -4,12 +4,14 @@
         Sort: by topic | by price<br>
         <div class="map-list">
             <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
-            <div class="row">
-              <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-                  <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-              </div>
+            <div class="cards">
+                <div class="row">
+                    <div class="col s12 m4" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+                        <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+                    </div>
+                </div>
             </div>   
-            <teacher-map class="teacher-map"></teacher-map>
+            <teacher-map class="teacher-map relative"></teacher-map>
         </div>
     </section> 
 </template>

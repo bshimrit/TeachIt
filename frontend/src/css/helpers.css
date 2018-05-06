@@ -4,6 +4,9 @@
     top: 0;
     left: 0;
 }
+.relative {
+    position: relative;
+}
 .clean-list {
     list-style-type: none;
     margin: 0;

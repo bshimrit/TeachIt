@@ -62,11 +62,11 @@ export default {
 </script>
 
 <style scoped>
-.container {
+/* .container {
   width: 50%;
   border: 2px solid #577594;
   padding: 20px;
-}
+} */
 a {
     margin: 10px
 }
