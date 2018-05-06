@@ -5,14 +5,11 @@
       <div class="row">
         <form class="col s12" @submit.prevent="saveUser">
           <div class="row">
-            <div class="input-field col s6">
-              <input v-model="userToUpdate.firstName" type="text" class="validate">
-              <label for="first_name">First Name</label>
+            <div class="input-field col s12">
+              <input v-model="userToUpdate.name" type="text" class="validate">
+              <label for="name">Name</label>
             </div>
-            <div class="input-field col s6">
-              <input v-model="userToUpdate.lastName" type="text" class="validate">
-              <label for="first_name">Last Name</label>
-            </div>
+           
           </div>
 
           <div class="row">
@@ -31,9 +28,9 @@
 
           <div class="row">
             <div class="input-field col s12">
-              <input v-model="userToUpdate.img" type="text" class="validate">
-              <label class="left" for="image">Image url</label>
-             
+              <!-- <input v-model="userToUpdate.img" type="text" class="validate">
+              <label class="left" for="image">Image url</label> -->
+
             </div>
           </div>
 
@@ -60,13 +57,18 @@
 
           <div class="row">
             <h5 class="left-align">Links</h5>
-            
+
           </div>
 
           <div class="row">
             <h5 class="left-align">Classes</h5>
+           <topic-edit></topic-edit>
           </div>
-
+          <div class="row">
+            <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+              <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="true" :showTeacher="false"></TeacherTopic>
+            </div>
+          </div>
           <button class="waves-effect waves-light btn">Save</button>
 
         </form>
@@ -78,28 +80,44 @@
 
 <script>
 import UserService from "@/services/UserService.js";
+import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
+import TopicEdit from "@/components/profile/TopicEdit.vue";
 
 export default {
   data() {
     return {
-      showModal: false,
+     
       userToUpdate: UserService.emptyUser()
     };
   },
   methods: {
     saveUser() {
       console.log(this.userToUpdate);
-      this.$store.dispatch({type:'saveUser',user: this.userToUpdate})
-          .then(addedUser => {
-             console.log('added');
-          })
-          .catch(err => {
-              console.log('failed:' + err);
-          })
+      this.$store
+        .dispatch({ type: "saveUser", user: this.userToUpdate })
+        .then(addedUser => {
+          console.log("added");
+        })
+        .catch(err => {
+          console.log("failed:" + err);
+        });
+    }
+  },
+  created() {
+    this.$store.dispatch({ type: "loadTeacherTopics" });
+   
+  },
+   computed: {
+   
+    teacherTopics() {
+      console.log(this.$store.getters.teacherTopicsForDisplay);
+      return this.$store.getters.teacherTopicsForDisplay;
     }
   },
   components: {
-    UserService
+    UserService,
+    TeacherTopic,
+    TopicEdit
   }
 };
 </script>
@@ -114,7 +132,6 @@ export default {
 a {
   margin: 10px;
 }
-
 </style>
 
 

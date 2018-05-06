@@ -5,33 +5,43 @@
               <div class="modal-mask">
                 <div class="modal-wrapper">
                   <div class="modal-container">
-                    <button class="modal-default-button btn" @click="showModal = false">
-                      X
-                    </button>
+                    <div style="float:right; font-size: 30px;" @click="showModal = false">
+                      &times;
+                    </div>
 
-                    <slot>
-                      <div class="input-field col s6">
-                        <input type="text" class="validate" placeholder="Title">
+                    <div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input type="text" class="validate" placeholder="Title">
+                        </div>
                       </div>
-                      <div class="input-field col s6">
-                        <input type="text" class="validate" placeholder="Subtitle">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input type="text" class="validate" placeholder="Subtitle">
+                        </div>
                       </div>
-                      <div class="input-field col s12">
-                        <textarea class="materialize-textarea" placeholder="Description"></textarea>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <textarea class="materialize-textarea" placeholder="Description"></textarea>
+                        </div>
                       </div>
-                      <div class="input-field col s12">
-                        <input type="number" class="validate" placeholder="Price/Hour">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input type="number" class="validate" placeholder="Price/Hour">
+                        </div>
                       </div>
-
-                      <div class="input-field col s12">
-                        <input type="text" class="validate" placeholder="Image url">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input type="text" class="validate" placeholder="Image url">
+                        </div>
                       </div>
-
-                      <div class="input-field col s12">
-                        <input type="text" class="validate" placeholder="Address">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input type="text" class="validate" placeholder="Address">
+                        </div>
                       </div>
                       <button class="btn green accent-3">Add Class</button>
-                    </slot>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -46,6 +56,7 @@
   export default {
       data () {
           return {
+             showModal: false
           }
       },
       props: {
@@ -80,7 +91,7 @@
 }
 
 .modal-container {
-  width: 300px;
+  width: 40%;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;

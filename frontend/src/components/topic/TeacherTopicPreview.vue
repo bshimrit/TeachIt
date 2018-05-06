@@ -12,6 +12,10 @@
                     <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
                     <div v-if="showLongDesc">
                         <p class="long-desc">{{teacherTopic.longDes}}</p>
+<<<<<<< HEAD
+=======
+                        <a>Read More</a>                    
+>>>>>>> 6f1ab3ecb635f906934eec17ff027f7d8c91fd07
                     </div> 
                 </div>
             </div>
@@ -33,10 +37,12 @@ export default {
     },
     methods: {
         goToTeacherProfile(){
-            this.$router.push('/profile/' + this.teacherTopic.teacherId)
+            if (this.showTeacher)  this.$router.push('/profile/' + this.teacherTopic.teacherId);
+           
+            
         },
         goToTeacherTopicProfile(){
-            this.$router.push('/profile/topic/' + this.teacherTopic._id)
+            // this.$router.push('/profile/topic/' + this.teacherTopic._id)
         }
     }
 }
