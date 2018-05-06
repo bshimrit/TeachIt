@@ -2,7 +2,7 @@
 const TOPIC_TEACHER_URL = '/teacherTopic'
 
 function emptyTeacherTopic() {
-    return {title:'',subtitle:''}
+    return {text:'',price:[], topics:[]}
 }
 
 function getTeacherTopics(filter) {
@@ -12,11 +12,20 @@ function getTeacherTopics(filter) {
         if (filter.price.length){
             criteria += `minprice=${filter.price[0]}&maxprice=${filter.price[1]}&`
         }
+<<<<<<< HEAD
         // if (filter.topics){
         //     for(var i = 0; i < filter.topics.length; i++){
         //         criteria += `&topic=${filter.topics[i]}`
         //     }
         // }
+=======
+        if (filter.topics){
+            for(var i = 0; i < filter.topics.length; i++){
+                criteria += `&topics=${filter.topics[i]}`
+            }
+        }
+        criteria
+>>>>>>> 4eefa8ec8560693b22aa159c0d3324deee8ade35
     }
     return axios
             .get(TOPIC_TEACHER_URL + criteria)
@@ -36,26 +45,34 @@ function deleteTeacherTopic(teacherTopicId) {
 
 function getTeacherTopicById(teacherTopicId) {
     return axios
+<<<<<<< HEAD
     .get(`/teacherTopic/${teacherTopicId}`)
     .then(res => {
         return res.data
     })
+=======
+    .get(_getTeacherTopicUrl(teacherTopicId))
+    .then(res => res.data)
+>>>>>>> 4eefa8ec8560693b22aa159c0d3324deee8ade35
 }
+
 
 function getTopicsByTeacherId(teacherId) {
     return axios
-    .get(_getTeacherTopicUrl(teacherId,'teacherTopics'))
+    .get(_getTeacherTopicUrl(teacherId,'teacher'))
     .then(res => res.data)
 }
 
-function getTeachersByTopicId(topicId) {
+function getPopularTopics() {
     return axios
-    .get(_getTeacherTopicUrl(topicId,'teacherTopics'))
-    .then(res => res.data)
+        .get('/popularTopics')
+        .then(res => res.data)
 }
+
 
 function _getTeacherTopicUrl(id,type) {
-    return `${TOPIC_TEACHER_URL}/${type}/${id}`;
+    if (type) return `${TOPIC_TEACHER_URL}/${type}/${id}`;
+    else return `${TOPIC_TEACHER_URL}/${id}`;
 }
 
 export default {
@@ -63,5 +80,7 @@ export default {
     saveTeacherTopic,
     deleteTeacherTopic,
     emptyTeacherTopic,
-    getTeacherTopicById
+    getTeacherTopicById,
+    getTopicsByTeacherId,
+    getPopularTopics
 }

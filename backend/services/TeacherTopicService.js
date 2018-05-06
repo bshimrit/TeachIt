@@ -2,16 +2,34 @@ const DBService = require('./DBService')
 const mongo = require('mongodb');
 
 function query(criteria = {}) {
-    var regExVal = new RegExp('^' + (criteria.text || '.*'),"ig");
+    var regExVal = new RegExp('^' + (criteria.text || '.*'),'ig');
     criteria.text = {$regex : regExVal};
-    if (!criteria.minprice) criteria.minprice = -Infinity;
-    if (!criteria.maxprice) criteria.maxprice = Infinity;
-    // if (criteria.sortByTopic) {
-    //     criteria.sort = {topicId: criteria.sortByTopic}
-    // } else if (!criteria.sort) {
-    //     criteria.sort = {rating: -1};
-    // } 
-    // console.log('backend',criteria)
+    var matchQuery = {
+        $match: { $or: [{ 'topic.subtitle': criteria.text },
+                        { 'topic.title': criteria.text },                
+                        {'teacher.fullName':criteria.text}
+                    ]
+                }
+            }
+    if (criteria.maxprice || criteria.topics) matchQuery.$match.$and = []
+    if (criteria.maxprice && criteria.minprice) {
+        matchQuery.$match.$and.push({'pricePerHour': { $gt: +criteria.minprice, $lt: +criteria.maxprice }})
+    }
+    if (criteria.topics) {
+        matchQuery.$match.$and.push({'topic.subtitle': {$in : criteria.topics.split(',')}});
+    }
+
+    var sortValue = {};
+    if (criteria.sort){
+            sortValue = {
+                $sort : {[criteria.sort] : 1}
+        }
+    } else {
+        sortValue = {
+            $sort : {'rating' : -1}
+        }
+    }
+
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
@@ -19,37 +37,30 @@ function query(criteria = {}) {
                     {
                         $lookup:
                             {
-                                from: "user",
-                                localField: "teacherId",
-                                foreignField: "_id",
-                                as: "teacher"
+                                from: 'user',
+                                localField: 'teacherId',
+                                foreignField: '_id',
+                                as: 'teacher'
                             },
                     },
                     {
-                        $unwind: "$teacher"
+                        $unwind: '$teacher'
                     },
                     {
                         $lookup: {
-                            from: "topic",
-                            localField: "topicId",
-                            foreignField: "_id",
-                            as: "topic"
+                            from: 'topic',
+                            localField: 'topicId',
+                            foreignField: '_id',
+                            as: 'topic'
                         }
                     },
                     {
-                        $unwind: "$topic"
+                        $unwind: '$topic'
                     },
-                    {
-                        $match: { $or: [{ 'topic.subtitle': criteria.text },
-                                        { 'topic.title': criteria.text },                
-                                        {'teacher.name':criteria.text}
-                                    ],
-                                $and: [{'pricePerHour': { $gt: +criteria.minprice, $lt: +criteria.maxprice }}] 
-                        }
-                    }
+                    matchQuery,
+                    sortValue
                     ]).toArray((err, teacherTopics) => {
                     if (err) return reject(err);
-                    // console.log(teacherTopics)
                     resolve(teacherTopics);
                 })
             })
@@ -70,9 +81,7 @@ function add(teacherTopic) {
 }
 
 function remove(teacherTopicId) {
-    console.log(teacherTopicId); 
     var teacherTopicIdObj = mongo.ObjectID(teacherTopicId);
-    console.log(teacherTopicIdObj);
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
@@ -100,18 +109,159 @@ function update(teacherTopic) {
     });
 }
 
+// gets a specific teacherTopic by _id
 function getById(teacherTopicId) {
     teacherTopicId = new mongo.ObjectID(teacherTopicId);
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject)=> { 
         DBService.dbConnect()
+<<<<<<< HEAD
         .then(db=>{
             db.collection('teacherTopic').findOne({_id: teacherTopicId}, function (err, teacherTopic) {
                 if (err)    reject(err)
                 else        resolve(teacherTopic);
                 db.close();
             });
+=======
+        .then(db => {
+            db.collection('teacherTopic').aggregate([
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'teacherId',
+                            foreignField: '_id',
+                            as: 'teacher'
+                        },
+                },
+                {
+                    $unwind: '$teacher'
+                },
+                {
+                    $lookup: {
+                        from: 'topic',
+                        localField: 'topicId',
+                        foreignField: '_id',
+                        as: 'topic'
+                    }
+                },
+                {
+                    $unwind: '$topic'
+                },
+                {
+                    $match: {'_id': teacherTopicId}
+                }
+            ]).toArray((err, teacherTopic) => {
+                if (err) return reject(err);
+                resolve(teacherTopic);
+            })
+>>>>>>> 4eefa8ec8560693b22aa159c0d3324deee8ade35
         })
-    });
+    })
+}
+
+// gets a specific all topics for a specific teacher by teacherId
+function getTeacherTopicsById(teacherId) {
+    teacherId = new mongo.ObjectID(teacherId);
+    return new Promise((resolve, reject)=> { 
+        DBService.dbConnect()
+        .then(db => {
+            db.collection('teacherTopic').aggregate([
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'teacherId',
+                            foreignField: '_id',
+                            as: 'teacher'
+                        },
+                },
+                {
+                    $unwind: '$teacher'
+                },
+                {
+                    $lookup: {
+                        from: 'topic',
+                        localField: 'topicId',
+                        foreignField: '_id',
+                        as: 'topic'
+                    }
+                },
+                {
+                    $unwind: '$topic'
+                },
+                {
+                    $match: {'teacher._id': teacherId}
+                }
+            ]).toArray((err, teacherTopics) => {
+                if (err) return reject(err);
+                resolve(teacherTopics);
+            })
+        })
+    })
+}
+
+// gets a specific all topics for a specific teacher by teacherId
+function getTopicsByTopicId(topicId) {
+    topicId = new mongo.ObjectID(topicId);
+    return new Promise((resolve, reject)=> { 
+        DBService.dbConnect()
+        .then(db => {
+            db.collection('teacherTopic').aggregate([
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'teacherId',
+                            foreignField: '_id',
+                            as: 'teacher'
+                        },
+                },
+                {
+                    $unwind: '$teacher'
+                },
+                {
+                    $lookup: {
+                        from: 'topic',
+                        localField: 'topicId',
+                        foreignField: '_id',
+                        as: 'topic'
+                    }
+                },
+                {
+                    $unwind: '$topic'
+                },
+                {
+                    $match: {'topic._id': topicId}
+                }
+            ]).toArray((err, teacherTopics) => {
+                if (err) return reject(err);
+                resolve(teacherTopics);
+            })
+        })
+    })
+}
+
+function getPopularTopics(){
+    var allPopularTopics = [];
+    return new Promise((resolve, reject)=> { 
+        var popularTopicsPrms = [];
+        DBService.dbConnect()
+        .then(db => {
+            db.collection('teacherTopic').aggregate([
+                    {$group: {_id: "$topicId",count: {$sum: 1} }},
+                    {$limit: 3},
+                    {$sort: {count: -1}}
+            ]).toArray((err, popularTopics) => {
+                if (err) return reject(err);
+                const promises = popularTopics.map( topic => getTopicsByTopicId(topic._id))
+                Promise
+                    .all(promises)
+                    .then( arrayOfTopics => {
+                        resolve(arrayOfTopics)
+                    })
+            })
+        })
+    })
 }
 
 module.exports = {
@@ -119,5 +269,7 @@ module.exports = {
     add,
     remove,
     update,
-    getById
+    getById,
+    getTeacherTopicsById,
+    getPopularTopics
 }
