@@ -46,7 +46,7 @@ export default {
       this.$store.dispatch({type: 'loadTeacherTopics'});
     },
     setFilter(){
-      var curFilter = TeacherTopicService.emptyTeacherTopic();
+      var curFilter = TeacherTopicService.emptyTeacherTopicFilter();
       var curQuery = this.$router.history.current.query;
       if (curQuery.text) curFilter = {text: curQuery.text};
       if (curQuery.minprice && curQuery.maxprice) curFilter.price = [curQuery.minprice,curQuery.maxprice];

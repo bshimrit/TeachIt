@@ -25,6 +25,8 @@
 // @ is an alias to /src
 import FilterCmp from '@/components/FilterCmp.vue'
 import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue'
+import TeacherTopicService from '@/services/TeacherTopicService.js'
+
 
 export default {
   name: 'home',
@@ -32,7 +34,7 @@ export default {
     return {}
   },
   created(){
-    this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[],topics:[]}})
+    this.$store.commit({type:'setTeacherTopicFilter', filter: TeacherTopicService.emptyTeacherTopicFilter()})
     this.$store.dispatch({type: 'loadPopularTeacherTopics'})
     this.$store.dispatch({type: 'loadPopularTopics'})
   },
@@ -55,7 +57,8 @@ export default {
   },
   components: {
     FilterCmp,
-    TeacherTopic
+    TeacherTopic,
+    TeacherTopicService
   },
   
 }
@@ -64,6 +67,5 @@ export default {
 .tt-header{
   text-align:left;
   display:block;
-  /* margin-left: 20px; */
 }
 </style>

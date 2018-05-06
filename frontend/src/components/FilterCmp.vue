@@ -9,8 +9,8 @@
                 </div>
                 <div class="input-field ">
                     <select v-model="filterBy.topics" ref="selectTopics" multiple>
-                    <option value="" disabled selected>Choose your topics</option>
-                    <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
+                        <option value="" disabled selected>Choose your topics</option>
+                        <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
                     </select>
                 </div>
             </form>
@@ -20,12 +20,14 @@
 
 <script>
 import vueSlider from 'vue-slider-component';
+import TeacherTopicService from '@/services/TeacherTopicService.js'
 
 export default {
     name:'search',
     props:{showExtraSearch:{default: false}},
     created(){
         this.filterBy = JSON.parse(JSON.stringify(this.$store.getters.teacherTopicFilter));
+        console.log(this.filterBy)
         if (this.showExtraSearch) {
             this.$store.dispatch({type: 'loadTopics'}).then(topics => {
                 $('select').material_select()
@@ -37,7 +39,7 @@ export default {
         },
     data() {
         return {
-            filterBy: {text:'', price:[], topics:[]},
+            filterBy: TeacherTopicService.emptyTeacherTopicFilter(),
             isSearching: false,
         }
     },
@@ -61,7 +63,8 @@ export default {
         }
     },
     components: {
-        vueSlider
+        vueSlider,
+        TeacherTopicService
     }
 }
 </script>

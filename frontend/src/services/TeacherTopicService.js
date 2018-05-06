@@ -1,7 +1,7 @@
 
 const TOPIC_TEACHER_URL = '/teacherTopic'
 
-function emptyTeacherTopic() {
+function emptyTeacherTopicFilter() {
     return {text:'',price:[0,500], topics:[]}
 }
 
@@ -63,7 +63,7 @@ export default {
     getTeacherTopics,
     saveTeacherTopic,
     deleteTeacherTopic,
-    emptyTeacherTopic,
+    emptyTeacherTopicFilter,
     getTeacherTopicById,
     getTopicsByTeacherId,
     getPopularTopics
