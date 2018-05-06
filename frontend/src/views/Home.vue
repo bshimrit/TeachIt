@@ -6,13 +6,13 @@
           <div class="col s12 m3" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
             <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
           </div>
-      </div>        
+      </div>
       <h2 class="tt-header">Categories</h2>
-          <div v-for="category in categoryTeacherTopics" :key="category.topic">
-            <h4 class="tt-header">{{category.topic}}</h4>
+          <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
+            <h4 class="tt-header">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</h4>
             <div class="row">
-            <div class="col s12 m3" v-for="teacherTopic in category.teacherTopics" :key="teacherTopic._id">
-                <!-- <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic> -->
+            <div class="col s12 m3" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
+                <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
             </div>
           </div>
       </div>
@@ -32,6 +32,7 @@ export default {
   created(){
     this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[],topics:[]}})
     this.$store.dispatch({type: 'loadPopularTeacherTopics'})
+    this.$store.dispatch({type: 'loadPopularTopics'})
   },
   computed: {
     popularTeacherTopics() {     
@@ -40,23 +41,14 @@ export default {
     teacherTopics(){
       return this.$store.getters.teacherTopicsForDisplay;
     },
-    categoryTeacherTopics() {
-      // console.log(this.$store.getters.teacherTopicsForDisplay)
-      return [
-        {topic: 'English', 
-          teacherTopics: [
-            {_id: '1', teacher: 'firstTeacher', rating: 3, teacherImg:'./img/users/user1.jpg', topic: 'English',shortDes: 'English is the best', longDes: 'English is the best', topicImg:'./img/topics/topic4.jpg'},
-            {_id: '3', teacher: 'secondTeacher', rating: 3, teacherImg:'./img/users/user2.jpg', topic: 'English',shortDes: 'English is the best', longDes: 'English is the best', topicImg:'./img/topics/topic5.jpg'}
-          ]},
-          {topic: 'Spanish', teacherTopics: [{_id: '2', teacher: 'firstTeacher', rating: 4, teacherImg:'./img/users/user1.jpg', topic: 'Spanish',shortDes: 'Spanish is the best', longDes: 'English is the best', topicImg:'./img/topics/topic3.jpg'}]},
-          {topic: 'Algebra', teacherTopics: [{_id: '4', teacher: 'thirdTeacher', rating: 5, teacherImg:'./img/users/user3.jpg', topic: 'Algebra',shortDes: 'Algebra is the best', longDes: 'English is the best', topicImg:'./img/topics/topic1.jpg'}]}
-          ]
+    popularByTopics() {
+      return this.$store.getters.popularByTopicsForDisplay;
     }
   },
   methods: {
     filterTeacherTopic(filter){
       this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
-      this.$router.push('/search/?text='+filter.text)
+      this.$router.push('/search/?text='+ filter.text)
       }
   },
   components: {

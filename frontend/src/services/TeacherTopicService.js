@@ -48,11 +48,12 @@ function getTopicsByTeacherId(teacherId) {
     .then(res => res.data)
 }
 
-// function getTeachersByTopicId(topicId) {
-//     return axios
-//     .get(_getTeacherTopicUrl(topicId,'teacherTopics'))
-//     .then(res => res.data)
-// }
+function getPopularTopics() {
+    return axios
+        .get('/popularTopics')
+        .then(res => res.data)
+}
+
 
 function _getTeacherTopicUrl(id,type) {
     if (type) return `${TOPIC_TEACHER_URL}/${type}/${id}`;
@@ -65,5 +66,6 @@ export default {
     deleteTeacherTopic,
     emptyTeacherTopic,
     getTeacherTopicById,
-    getTopicsByTeacherId
+    getTopicsByTeacherId,
+    getPopularTopics
 }

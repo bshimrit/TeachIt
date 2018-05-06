@@ -38,7 +38,7 @@ export default {
             
         },
         goToTeacherTopicProfile(){
-            // this.$router.push('/profile/topic/' + this.teacherTopic._id)
+            this.$router.push('/profile/topic/' + this.teacherTopic._id)
         }
     }
 }

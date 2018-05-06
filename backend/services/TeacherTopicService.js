@@ -19,6 +19,16 @@ function query(criteria = {}) {
         matchQuery.$match.$and.push({'topic.subtitle': {$in : criteria.topics.split(',')}});
     }
 
+    var sortValue = {};
+    if (criteria.sort){
+            sortValue = {
+                $sort : {[criteria.sort] : 1}
+        }
+    } else {
+        sortValue = {
+            $sort : {'rating' : -1}
+        }
+    }
 
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
@@ -47,7 +57,8 @@ function query(criteria = {}) {
                     {
                         $unwind: '$topic'
                     },
-                    matchQuery
+                    matchQuery,
+                    sortValue
                     ]).toArray((err, teacherTopics) => {
                     if (err) return reject(err);
                     resolve(teacherTopics);
@@ -180,7 +191,69 @@ function getTeacherTopicsById(teacherId) {
     })
 }
 
+// gets a specific all topics for a specific teacher by teacherId
+function getTopicsByTopicId(topicId) {
+    topicId = new mongo.ObjectID(topicId);
+    return new Promise((resolve, reject)=> { 
+        DBService.dbConnect()
+        .then(db => {
+            db.collection('teacherTopic').aggregate([
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'teacherId',
+                            foreignField: '_id',
+                            as: 'teacher'
+                        },
+                },
+                {
+                    $unwind: '$teacher'
+                },
+                {
+                    $lookup: {
+                        from: 'topic',
+                        localField: 'topicId',
+                        foreignField: '_id',
+                        as: 'topic'
+                    }
+                },
+                {
+                    $unwind: '$topic'
+                },
+                {
+                    $match: {'topic._id': topicId}
+                }
+            ]).toArray((err, teacherTopics) => {
+                if (err) return reject(err);
+                resolve(teacherTopics);
+            })
+        })
+    })
+}
 
+function getPopularTopics(){
+    var allPopularTopics = [];
+    return new Promise((resolve, reject)=> { 
+        var popularTopicsPrms = [];
+        DBService.dbConnect()
+        .then(db => {
+            db.collection('teacherTopic').aggregate([
+                    {$group: {_id: "$topicId",count: {$sum: 1} }},
+                    {$limit: 3},
+                    {$sort: {count: -1}}
+            ]).toArray((err, popularTopics) => {
+                if (err) return reject(err);
+                const promises = popularTopics.map( topic => getTopicsByTopicId(topic._id))
+                Promise
+                    .all(promises)
+                    .then( arrayOfTopics => {
+                        resolve(arrayOfTopics)
+                    })
+            })
+        })
+    })
+}
 
 module.exports = {
     query,
@@ -188,5 +261,6 @@ module.exports = {
     remove,
     update,
     getById,
-    getTeacherTopicsById
+    getTeacherTopicsById,
+    getPopularTopics
 }
