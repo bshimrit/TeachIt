@@ -1,6 +1,6 @@
 <template>
     <section class="search container">
-      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true"/>
+      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" class="fix-filter"/>
         Sort: by topic | by price<br>
         <div class="map-list">
             <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
@@ -55,7 +55,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .map-list {
     display: flex
 }
@@ -67,5 +67,15 @@ export default {
     margin-top: 0.5rem;
     display: inline-block;
     width: 30%;
+}
+.fix-filter {
+    position: fixed;
+    top: 100px;
+    background-color: white;
+    z-index: 2;
+    left: 0;
+}
+.search {
+    margin-top: 110px
 }
 </style>

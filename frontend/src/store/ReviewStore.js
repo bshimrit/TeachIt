@@ -30,48 +30,48 @@ export default {
   },
   getters: {
     reviewsForDisplay(state) {
-      console.log(state.reviews)
       return state.reviews;
     },
     popularReviewsForDisplay(state) {
       return state.popularTeacherReviews;
-    }
+    },
 
   },
   actions: {
-    loadReviews(store) {
-      return reviewService.getReviews(store.state.reviewFilter)
+    loadReviews(store, {teacherTopicId}) {
+      return reviewService.getReviewsById(teacherTopicId)
       .then(reviews => {
           store.commit({ type: 'setReviews', reviews });
       })
     },
-    loadReview(store, {reviewId}) {
-      return reviewService.getById(reviewId)
-      .then(review => {
-        store.commit({type: 'setSelectedReview', review});
-        return review;
-      })
-    },
-    deleteReview(store, {reviewId}) {
-      return reviewService.deleteReview(reviewId)
-      .then(()=>{
-        store.commit({type: 'deleteReview', reviewId});
-      })
-    },
-    saveReview(store, {review}) {
-      const isEdit = !!review.id;
-      return reviewService.saveReview(review)
-      .then(review => {
-        if (isEdit) store.commit({type: 'updateReview', review})
-        else store.commit({type: 'addReview', review})
-        return review;
-      })
-    },
-    getReviewById(store, {reviewId}) {
-          return reviewService.getReviewById(reviewId)
-            .then(review => {
-              return review;
-        })   
-    },
+    
+    // loadReview(store, {reviewId}) {
+    //   return reviewService.getById(reviewId)
+    //   .then(review => {
+    //     store.commit({type: 'setSelectedReview', review});
+    //     return review;
+    //   })
+    // },
+    // deleteReview(store, {reviewId}) {
+    //   return reviewService.deleteReview(reviewId)
+    //   .then(()=>{
+    //     store.commit({type: 'deleteReview', reviewId});
+    //   })
+    // },
+    // saveReview(store, {review}) {
+    //   const isEdit = !!review.id;
+    //   return reviewService.saveReview(review)
+    //   .then(review => {
+    //     if (isEdit) store.commit({type: 'updateReview', review})
+    //     else store.commit({type: 'addReview', review})
+    //     return review;
+    //   })
+    // },
+    // getReviewById(store, {reviewId}) {
+    //       return reviewService.getReviewById(reviewId)
+    //         .then(review => {
+    //           return review;
+    //     })   
+    // },
   }
 }

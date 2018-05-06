@@ -21,20 +21,23 @@ module.exports = (app) => {
 
     app.delete(`${REVIEW_URL}/:reviewId`, (req, res) => {
         const reviewId = req.params.reviewId;
+        
         if (!reviewId) {
             res.status(500).send('Missing reviewId to delete')
         }
         ReviewService
-            .remove(reviewId)
-            .then(_ => res.end())
-            .catch(err => res.status(500).send('Could not delete review'))
+        .remove(reviewId)
+        .then(_ => res.end())
+        .catch(err => res.status(500).send('Could not delete review'))
     })
-
+    
     app.get(`${REVIEW_URL}/:reviewId`, (req, res) => {
         const reviewId = req.params.reviewId;
+        console.log('Getting review by id in DB:', reviewId);
+
         ReviewService.getById(reviewId)
-            .then(review => {
-                res.json(review)
+            .then(reviews => {
+                res.json(reviews)
             })
             .catch(err => res.status(500).send(err.message))
     })

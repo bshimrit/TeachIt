@@ -23,6 +23,7 @@
 
 import StarRating from 'vue-star-rating'
 export default {
+    name: 'TeacherTopicPreview',
     props: {teacherTopic:null,showTeacher:{default:true},showLongDesc:{default:true}},
     data(){
         return {}
@@ -39,7 +40,7 @@ export default {
             
         },
         goToTeacherTopicProfile(){
-            // this.$router.push('/profile/topic/' + this.teacherTopic._id)
+            this.$router.push('/profile/topic/' + this.teacherTopic._id)
         }
     }
 }

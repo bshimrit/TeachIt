@@ -19,7 +19,7 @@ function add(review) {
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
-                db.collection('reviews').insert(review, (err, res) => {
+                db.collection('review').insert(review, (err, res) => {
                     if (err) return reject(err);
                     resolve(res.ops);
                     db.close();
@@ -60,13 +60,14 @@ function update(review) {
 }
 
 function getById(reviewId) {
-    reviewId = new mongo.ObjectID(reviewId);
+    // reviewId = new mongo.ObjectID(reviewId);
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('reviews').findOne({_id: reviewId}, function (err, review) {
+            db.collection('review').find({teacherTopicId: reviewId}).toArray(function (err, reviews) {
+                // console.log('reviews in DB:', reviews);
                 if (err)    reject(err)
-                else        resolve(review);
+                else        resolve(reviews);
                 db.close();
             });
         })

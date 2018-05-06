@@ -38,12 +38,10 @@ export default {
   position: fixed;
   right: 15px;
   width: 30%;
-  height: 350px;
+  height: 62%;
   background-color: greenyellow;
-  /* margin: 10px 20px */
 }
 .map-container {
-    position: relative;
     width: 400px;
     margin: 10px 10px 10px 20px
 }

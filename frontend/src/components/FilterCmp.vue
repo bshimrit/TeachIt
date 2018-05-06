@@ -84,4 +84,8 @@ input[type=text]:focus {
     width: 100%;
 }
 
+.filter-cmp {
+    padding-top: 10px
+}
+
 </style>

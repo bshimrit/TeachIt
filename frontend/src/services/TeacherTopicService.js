@@ -12,7 +12,6 @@ function getTeacherTopics(filter) {
         if (filter.price.length){
             criteria += `minprice=${filter.price[0]}&maxprice=${filter.price[1]}&`
         }
-        console.log(criteria)
         // if (filter.topics){
         //     for(var i = 0; i < filter.topics.length; i++){
         //         criteria += `&topic=${filter.topics[i]}`
