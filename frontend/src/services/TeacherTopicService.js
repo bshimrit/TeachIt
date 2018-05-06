@@ -2,7 +2,7 @@
 const TOPIC_TEACHER_URL = '/teacherTopic'
 
 function emptyTeacherTopic() {
-    return {text:'',price:[], topics:[]}
+    return {text:'',price:[0,500], topics:[]}
 }
 
 function getTeacherTopics(filter) {
@@ -14,10 +14,9 @@ function getTeacherTopics(filter) {
         }
         if (filter.topics){
             for(var i = 0; i < filter.topics.length; i++){
-                criteria += `&topics=${filter.topics[i]}`
+                criteria += `${i > 0 ? '&' : ''}topics=${filter.topics[i]}`
             }
         }
-        criteria
     }
     return axios
             .get(TOPIC_TEACHER_URL + criteria)

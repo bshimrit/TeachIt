@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     filterTeacherTopic(filter){
-      console.log(filter)
       this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
       this.$store.dispatch({type: 'loadTeacherTopics'});
     },
@@ -47,8 +46,7 @@ export default {
       var curQuery = this.$router.history.current.query;
       if (curQuery.text) curFilter = {text: curQuery.text};
       if (curQuery.minprice && curQuery.maxprice) curFilter.price = [curQuery.minprice,curQuery.maxprice];
-      if (curQuery.topics) curFilter.topics.push(curQuery.topics);
-      console.log(curFilter)
+      if (curQuery.topics) curFilter.topics = (Array.isArray(curQuery.topics) ? curQuery.topics : [curQuery.topics]) 
       return curFilter;
     }
   },
