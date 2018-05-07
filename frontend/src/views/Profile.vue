@@ -74,7 +74,7 @@
 
      <h3>Reviews:</h3>
      <topic-review></topic-review>
-     
+     <uploadImg></uploadImg>
   </div>
 </template>
 
@@ -85,6 +85,7 @@ import UserService from "@/services/UserService.js";
 import TeacherTopicService from "@/services/TeacherTopicService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
 import StarRating from "vue-star-rating";
+import UploadImg from '@/components/uploadImg/Upload.vue';
 
 export default {
   name: "profile",
@@ -137,7 +138,8 @@ export default {
     TopicReview,
     UserService,
     TeacherTopic,
-    StarRating
+    StarRating,
+    UploadImg
   },
   computed: {
     topics() {
