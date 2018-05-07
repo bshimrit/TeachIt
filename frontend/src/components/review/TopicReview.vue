@@ -2,9 +2,8 @@
   <div class="topic-review container">
     <h5>review-graph</h5>
     <h5>review-filter</h5>
-  
-    <review-add></review-add>
-    <review-list></review-list>
+    <review-add :userId="userId"></review-add>
+    <review-list :userId="userId"></review-list>
   </div>
 </template>
 
@@ -14,6 +13,8 @@ import ReviewAdd from "./ReviewAdd.vue";
 import FilterCmp from "@/components/FilterCmp.vue";
 
 export default {
+    name: 'TopicReview',
+    props: ['userId'],
   data() {
     return {};
   },

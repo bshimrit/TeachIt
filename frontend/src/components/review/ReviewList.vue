@@ -17,6 +17,8 @@
 <script>
 
 export default {
+    name: 'reviewList',
+    props: ['userId'],
   data () {
     return {
             teacherTopic: {
@@ -26,7 +28,7 @@ export default {
         }
   },
   created() {
-      var teacherTopicId = this.$route.params.teacherTopicId
+      var teacherTopicId = this.userId || this.$route.params.teacherTopicId
         this.$store.dispatch({type: 'loadReviews', teacherTopicId})
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {
