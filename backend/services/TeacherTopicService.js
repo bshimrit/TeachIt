@@ -16,7 +16,7 @@ function query(criteria = {}) {
         matchQuery.$match.$and.push({'pricePerHour': { $gt: +criteria.minprice, $lt: +criteria.maxprice }})
     }
     if (criteria.topics) {
-        matchQuery.$match.$and.push({'topic.subtitle': {$in : criteria.topics.split(',')}});
+        matchQuery.$match.$and.push({'topic.subtitle': {$in : (Array.isArray(criteria.topics) ? criteria.topics : [criteria.topics])}});
     }
 
     var sortValue = {};
@@ -68,6 +68,9 @@ function query(criteria = {}) {
 }
 
 function add(teacherTopic) {
+    console.log(teacherTopic.teacherId)
+    teacherTopic.teacherId = mongo.ObjectID(teacherTopic.teacherId);
+    teacherTopic.topicId = mongo.ObjectID(teacherTopic.topicId);
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {

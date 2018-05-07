@@ -8,12 +8,14 @@ export default {
   state: {
     teacherTopics: [],
     popularTeacherTopics:[],
-    teacherTopicFilter: {text:'',price:[0,500],topics:[]},
+    teacherTopicFilter: TeacherTopicService.emptyTeacherTopicFilter(),
     popularByTopics: [],
     MAX_VIEW: 4
   },
   mutations: {
     setTeacherTopicFilter(state, { filter }) {
+      console.log('storeFilterBefore',state.teacherTopicFilter.price[0],state.teacherTopicFilter.price[1])
+      console.log('storeFilter',filter.price[0],filter.price[1])
       state.teacherTopicFilter = filter;
     },
     deleteTeacherTopic(state, { teacherTopicId }) {
@@ -62,7 +64,7 @@ export default {
         })
     },
     loadPopularTeacherTopics(store) {
-      return TeacherTopicService.getTeacherTopics({text:'',price:[],topics:[]})
+      return TeacherTopicService.getTeacherTopics(TeacherTopicService.emptyTeacherTopicFilter())
       .then(popularTeacherTopics => {
           popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_VIEW);
           store.commit({ type: 'setPopularTeacherTopics', popularTeacherTopics });

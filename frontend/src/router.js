@@ -18,7 +18,7 @@ export default new Router({
     { path: '/search/:filter', name: 'searchFilter', component: Search},
     { path: '/login', name: 'login', component: Login},
     { path: '/register', name: 'register', component: Register},
-    { path: '/profile/:userId', name: 'profile', component: Profile},
+    { path: '/profile/teacher/:userId', name: 'profile', component: Profile},
     { path: '/profile/edit/:userId', name: 'edit', component: EditProfile},
     { path: '/profile/topic/:teacherTopicId', name: 'teacherTopicProfile', component: Profile},
     

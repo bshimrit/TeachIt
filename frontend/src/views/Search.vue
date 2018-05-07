@@ -1,19 +1,21 @@
 <template>
-    <section class="search container">
-      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" class="fix-filter"/>
-        Sort: by topic | by price<br>
+    <section>
+      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" />
+      <section class="container search">
+        <!-- Sort: by topic | by price<br> -->
         <div class="map-list">
             <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
             <div class="cards">
                 <div class="row">
-                    <div class="col s12 m4" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+                    <div class="flex col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
                         <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
                     </div>
                 </div>
             </div>   
             <teacher-map class="teacher-map relative"></teacher-map>
         </div>
-    </section> 
+      </section> 
+    </section>
 </template>
 
 <script>
@@ -40,17 +42,18 @@ export default {
   },
   methods: {
     filterTeacherTopic(filter){
-      console.log(filter)
       this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
       this.$store.dispatch({type: 'loadTeacherTopics'});
+      var filterUrl = TeacherTopicService.convertFilterToURL(filter);
+      this.$router.push('/search/' + filterUrl)
+      
     },
     setFilter(){
-      var curFilter = TeacherTopicService.emptyTeacherTopic();
+      var curFilter = TeacherTopicService.emptyTeacherTopicFilter();
       var curQuery = this.$router.history.current.query;
       if (curQuery.text) curFilter = {text: curQuery.text};
       if (curQuery.minprice && curQuery.maxprice) curFilter.price = [curQuery.minprice,curQuery.maxprice];
-      if (curQuery.topics) curFilter.topics.push(curQuery.topics);
-      console.log(curFilter)
+      if (curQuery.topics) curFilter.topics = (Array.isArray(curQuery.topics) ? curQuery.topics : [curQuery.topics]) 
       return curFilter;
     }
   },
@@ -67,22 +70,16 @@ export default {
     display: flex
 }
 .cards {
-  display: inline-block;
-  width: 66%;
+  width: 70%;
+  padding-left: 0;
 }
 .teacher-map {
     margin-top: 0.5rem;
     display: inline-block;
     width: 30%;
 }
-.fix-filter {
-    position: fixed;
-    top: 100px;
-    background-color: white;
-    z-index: 2;
-    left: 0;
-}
+
 .search {
-    margin-top: 110px
+    margin-top: 220px
 }
 </style>

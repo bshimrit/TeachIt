@@ -1,28 +1,32 @@
 <template>
-  <div class="container home">
+  <section>
     <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
-      <h3 class="tt-header">Most Popular</h3>
-      <div class="row">
-          <div class="col s12 m3" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
-            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-          </div>
-      </div>
-      <h2 class="tt-header">Categories</h2>
-          <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
-            <h4 class="tt-header">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</h4>
-            <div class="row">
-            <div class="col s12 m3" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
-                <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+    <div class="container home">
+        <h4 class="tt-header">Most Popular</h4>
+        <div class="row">
+            <div class="flex col" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
+              <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
             </div>
-          </div>
-      </div>
-  </div>
+        </div>
+        <h4 class="tt-header">Categories</h4>
+            <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
+              <p class="tt-header font-bold">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</p>
+              <div class="row">
+              <div class="flex col" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
+                  <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+              </div>
+            </div>
+        </div>
+    </div>
+  </section>
 </template>
 
 <script>
 // @ is an alias to /src
 import FilterCmp from '@/components/FilterCmp.vue'
 import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue'
+import TeacherTopicService from '@/services/TeacherTopicService.js'
+
 
 export default {
   name: 'home',
@@ -30,7 +34,7 @@ export default {
     return {}
   },
   created(){
-    this.$store.commit({type:'setTeacherTopicFilter', filter: {text:'',price:[],topics:[]}})
+    this.$store.commit({type:'setTeacherTopicFilter', filter: TeacherTopicService.emptyTeacherTopicFilter()})
     this.$store.dispatch({type: 'loadPopularTeacherTopics'})
     this.$store.dispatch({type: 'loadPopularTopics'})
   },
@@ -55,15 +59,18 @@ export default {
   },
   components: {
     FilterCmp,
-    TeacherTopic
+    TeacherTopic,
+    TeacherTopicService
   },
   
 }
 </script>
 <style scoped>
-.tt-header{
-  text-align:left;
-  display:block;
-  /* margin-left: 20px; */
-}
+  .tt-header{
+    text-align:left;
+    display:block;
+  }
+  .home {
+      margin-top: 150px;
+  }
 </style>
