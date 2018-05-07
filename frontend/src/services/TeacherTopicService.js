@@ -1,7 +1,7 @@
 const TOPIC_TEACHER_URL = "/teacherTopic";
 
 function emptyTeacherTopicFilter() {
-    return {text:'',price:[0,500], topics:[]}
+    return {text:'',price:[0,500], topics:[], sort:''}
 }
 
 function emptyTeacherTopic() {
@@ -17,7 +17,7 @@ function emptyTeacherTopic() {
   };
 }
 
-function getTeacherTopics(filter) {
+function convertFilterToURL(filter){
   var criteria = "?";
   if (filter) {
     if (filter.text) criteria += `text=${filter.text}&`;
@@ -29,10 +29,16 @@ function getTeacherTopics(filter) {
         criteria += `&topics=${filter.topics[i]}`;
       }
     }
-    criteria;
+    if (filter.sort){
+        criteria += `&sort=${filter.sort}`
+    }
   }
+  return criteria;
+}
+
+function getTeacherTopics(filter) {
   return axios
-    .get(TOPIC_TEACHER_URL + criteria)
+    .get(TOPIC_TEACHER_URL + this.convertFilterToURL(filter))
     .then(res => res.data)
     .catch(e => console.log("No Topic for Teacher", e));
 }
@@ -73,5 +79,7 @@ export default {
   emptyTeacherTopicFilter,
   getTeacherTopicById,
   getTopicsByTeacherId,
-  getPopularTopics
+  getPopularTopics,
+  convertFilterToURL,
+  emptyTeacherTopic
 };

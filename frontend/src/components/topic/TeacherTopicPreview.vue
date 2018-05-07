@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         goToTeacherProfile(){
-            if (this.showTeacher)  this.$router.push('/profile/' + this.teacherTopic.teacherId);
+            if (this.showTeacher)  this.$router.push('/profile/teacher/' + this.teacherTopic.teacherId);
            
             
         },
@@ -46,13 +46,14 @@ export default {
 </script>
 
 <style scoped>
+    /* (min-width: 740px) */
     .card {
         width: 300px;
-        height: 300px;
+        /* height: 300px; */
         text-align: left;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-
+    
     .card:hover {
        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }

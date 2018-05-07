@@ -44,6 +44,9 @@ export default {
     filterTeacherTopic(filter){
       this.$store.commit({type:'setTeacherTopicFilter', filter: JSON.parse(JSON.stringify(filter))})
       this.$store.dispatch({type: 'loadTeacherTopics'});
+      var filterUrl = TeacherTopicService.convertFilterToURL(filter);
+      this.$router.push('/search/' + filterUrl)
+      
     },
     setFilter(){
       var curFilter = TeacherTopicService.emptyTeacherTopicFilter();
@@ -77,6 +80,6 @@ export default {
 }
 
 .search {
-    margin-top: 150px
+    margin-top: 220px
 }
 </style>

@@ -2,15 +2,15 @@
   <section>
     <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
     <div class="container home">
-        <h3 class="tt-header">Most Popular</h3>
+        <h4 class="tt-header">Most Popular</h4>
         <div class="row">
             <div class="flex col" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
               <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
             </div>
         </div>
-        <h2 class="tt-header">Categories</h2>
+        <h4 class="tt-header">Categories</h4>
             <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
-              <h4 class="tt-header">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</h4>
+              <p class="tt-header font-bold">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</p>
               <div class="row">
               <div class="flex col" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
                   <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
@@ -64,8 +64,11 @@ export default {
 }
 </script>
 <style scoped>
-.tt-header{
-  text-align:left;
-  display:block;
-}
+  .tt-header{
+    text-align:left;
+    display:block;
+  }
+  .home {
+      margin-top: 150px;
+  }
 </style>

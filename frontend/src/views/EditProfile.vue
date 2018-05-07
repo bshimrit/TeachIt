@@ -14,8 +14,6 @@
       <button class="btn"  @click="editSection = 'TeacherTopicEdit'">Classes</button>
         </div>
 
-
-
         <form class="col s8" @submit.prevent="saveUser">
        
         <component :is="editSection" :userToUpdate="userToUpdate" />

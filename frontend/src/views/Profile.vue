@@ -37,7 +37,7 @@
     </div>
     <h3>What I Teach:</h3>
     <div class="row">
-      <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+      <div class="flex col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
         <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="true" :showTeacher="false"></TeacherTopic>
       </div>
     </div>
