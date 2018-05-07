@@ -19,16 +19,19 @@ function query(criteria = {}) {
         matchQuery.$match.$and.push({'topic.subtitle': {$in : (Array.isArray(criteria.topics) ? criteria.topics : [criteria.topics])}});
     }
 
-    var sortValue = {};
-    if (criteria.sort){
-            sortValue = {
-                $sort : {[criteria.sort] : 1}
-        }
-    } else {
-        sortValue = {
-            $sort : {'rating' : -1}
-        }
+    var sort = {};
+    switch (criteria.sort) {
+        case 'lowPrice':
+        var sort = {'pricePerHour' : 1};
+            break;
+        case 'highPrice':
+            var sort = {'pricePerHour' : -1};
+            break;
+        default:
+            var sort = {'rating' : -1};
+            break;
     }
+    var sortValue = {$sort : sort}
 
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
