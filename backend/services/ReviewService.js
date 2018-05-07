@@ -29,9 +29,7 @@ function add(review) {
 }
 
 function remove(reviewId) {
-    console.log(reviewId); 
     var reviewIdObj = mongo.ObjectID(reviewId);
-    console.log(reviewIdObj);
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
@@ -59,13 +57,12 @@ function update(review) {
     });
 }
 
-function getById(reviewId) {
-    // reviewId = new mongo.ObjectID(reviewId);
+function getByTeacherTopicId(teacherTopicId) {
+    var teacherTopicIdObj = mongo.ObjectID(teacherTopicId);    
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('review').find({teacherTopicId: reviewId}).toArray(function (err, reviews) {
-                // console.log('reviews in DB:', reviews);
+            db.collection('review').find({teacherTopicId: teacherTopicIdObj}).toArray(function (err, reviews) {
                 if (err)    reject(err)
                 else        resolve(reviews);
                 db.close();
@@ -79,5 +76,5 @@ module.exports = {
     add,
     remove,
     update,
-    getById
+    getByTeacherTopicId
 }

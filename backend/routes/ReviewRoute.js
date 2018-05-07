@@ -31,11 +31,9 @@ module.exports = (app) => {
         .catch(err => res.status(500).send('Could not delete review'))
     })
     
-    app.get(`${REVIEW_URL}/:reviewId`, (req, res) => {
-        const reviewId = req.params.reviewId;
-        console.log('Getting review by id in DB:', reviewId);
-
-        ReviewService.getById(reviewId)
+    app.get(`${REVIEW_URL}/:teacherTopicId`, (req, res) => {
+        const teacherTopicId = req.params.teacherTopicId;
+        ReviewService.getByTeacherTopicId(teacherTopicId)
             .then(reviews => {
                 res.json(reviews)
             })

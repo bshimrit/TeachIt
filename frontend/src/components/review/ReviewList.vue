@@ -1,20 +1,26 @@
 <template>
     <section class="review-list">
+        <p class="font-bold">Reviews</p>
         <ul class="collection">
-            <li class="collection-item avatar" v-for="review in reviews" :key="review._id">
-            <img :src="teacherTopic.teacher.img" alt="" class="circle">
-            <span class="title">{{teacherTopic.teacher.fullName}}</span>
-            <p>Rating: {{review.topicRating}}<br>
-                Class: {{teacherTopic.topic.title}}, {{teacherTopic.topic.subtitle}} <br>
-                "it's great!"
-            </p>
-            <a href="#!" class="secondary-content"><i class="fa fa-star"></i></a>
+            <li class="flex align-center collection-item " v-for="review in reviews" :key="review._id">
+                <div class="margin-right20">
+                    <div class="flex flex-column align-center">
+                        <img :src="userImg" class="small-image"> 
+                        name
+                    </div>
+                </div>
+                <div class="review-data">
+                    <StarRating :star-size=20 :increment=1 v-model="review.topicRating" :show-rating="false" :read-only="false"/>
+                    <textarea v-model="review.topicReview" placeholder="Enter your review"/>
+                </div>
+                <hr>
             </li>
         </ul>
     </section>
 </template>
 
 <script>
+import StarRating from 'vue-star-rating'
 
 export default {
     name: 'reviewList',
@@ -28,33 +34,61 @@ export default {
         }
   },
   created() {
+<<<<<<< HEAD
       var teacherTopicId = this.userId || this.$route.params.teacherTopicId
         this.$store.dispatch({type: 'loadReviews', teacherTopicId})
+=======
+    var teacherTopicId = this.$route.params.teacherTopicId
+    this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
+    .then(() => {
+>>>>>>> 68b0ba96d2496f099b0f59880051aa355e1f4404
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {
-            this.teacherTopic = teacherTopic[0];
+                this.teacherTopic = teacherTopic[0];
             })
+    })
   },
   computed: {
       reviews() {
           return this.$store.getters.reviewsForDisplay
-      }
+      },
+      userImg() {
+            return this.$store.getters.onlineUserImg
+        }
+
   },
+  components:{
+      StarRating
+  }
 }
 </script>
 
 
 <style scoped>
-li {
-    border: 1px solid black
-}
-img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%
-}
-/* div {
-  border: 1px black solid;
-} */
+    img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%
+    }
+
+    textarea {
+        width: 100%;
+        resize: none;
+        border:none;
+        height: 100px;
+    }
+
+    textarea:focus{
+        outline: 0;
+    }
+
+    .collection {
+        border: none;
+        font-size: 16px;
+    }
+    .collection-item{
+        padding-left: 0;
+    }
+
 </style>
 

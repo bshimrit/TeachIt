@@ -1,20 +1,20 @@
 <template>
   <section >
         <div class="card">
-                <div class="card-image">
-                    <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
-                    <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
-                </div>
-                    <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} <br> {{teacherTopic.teacher.fullName}} </p>
-                <div class="card-content">
-                    <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
-                    <p>{{teacherTopic.shortDes}}</p>
-                    <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
-                    <div v-if="showLongDesc">
-                        <p class="long-desc">{{teacherTopic.longDes}}</p>
-                    </div> 
-                </div>
+            <div class="card-image">
+                <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
+                <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
             </div>
+                <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} <br> {{teacherTopic.teacher.fullName}} </p>
+            <div class="card-content">
+                <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
+                <p>{{teacherTopic.shortDes}}</p>
+                <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+                <div v-if="showLongDesc">
+                    <p class="long-desc">{{teacherTopic.longDes}}</p>
+                </div> 
+            </div>
+        </div>
     </section>
 </template>
 
@@ -35,8 +35,6 @@ export default {
     methods: {
         goToTeacherProfile(){
             if (this.showTeacher)  this.$router.push('/profile/teacher/' + this.teacherTopic.teacherId);
-           
-            
         },
         goToTeacherTopicProfile(){
             this.$router.push('/profile/topic/' + this.teacherTopic._id)
