@@ -6,24 +6,24 @@
             </form>
             <section class="flex space-between align-center">
                 <div class="left-filter flex justify-start align-center">
-                    <span v-if="!isSearching && showExtraSearch">Price</span>
-                    <div class="margin-right20">
-                        <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+                    <div class="margin-right20 sort-input">
+                        <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
+                            <option value="" disabled selected>Sort by</option>                            
+                            <option value="review">Reviews</option>
+                            <option value="lowPrice">Price - Low to High</option>
+                            <option value="highPrice">Price - High to Low</option>
+                        </select>
                     </div>
-                    <div class="topic-input ">
+                    <div class="margin-right20 topic-input ">
                         <select v-model="filterBy.topics" ref="selectTopics" multiple>
                             <option value="" disabled selected>Choose your topics</option>
                             <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
                         </select>
                     </div>
-                </div>
-                <div class="sort-input">
-                    <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
-                        <option value="" disabled selected>Sort by</option>                            
-                        <option value="review">Reviews</option>
-                        <option value="lowPrice">Price - Low to High</option>
-                        <option value="highPrice">Price - High to Low</option>
-                    </select>
+                    <span v-if="!isSearching && showExtraSearch">Price</span>
+                    <div >
+                        <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+                    </div>
                 </div>
             </section>
         </section>
