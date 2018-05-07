@@ -42,7 +42,7 @@
       </div>
     </div>
 
-     <topic-review :userId="teacherId"></topic-review>
+     <topic-review :reviews="reviews" :userId="teacherId"></topic-review>
      <uploadImg></uploadImg>
   </div>
 </template>
@@ -69,19 +69,15 @@ export default {
     };
   },
   created() {
-    // if (!this.userId) this.userId = "5ae972d2f8cdd2dafed7a1ec";
     this.$store
       .dispatch({ type: "getUserById", userId:this.userId })
-      .then(user => (this.user = user))
+      .then(user => {
+          this.user = user;
+          this.$store.dispatch({type: 'loadReviewsByTeacherId', teacherId: this.user._id})
+        })
       .catch(err => {
         console.log("err:", err);
       });
-    //   this.$store
-    //   .dispatch({ type: "getTopicsByTeacherId", teacherId: this.userId })
-    //   .then(topics => {
-    //     console.log(topics);
-    //     this.teacherTopics = topics;
-    //   });
   },
   components: {
     TopicReview,
@@ -107,13 +103,10 @@ export default {
     },
     teacherId() {
         return this.$route.params.userId
-    }
-    // teacherTopics() {
-    //   console.log('users:');
-    //   return this.$store.getters.teacherTopicsForDisplay.filter(
-    //     topic => topic.teacherId === this.userId
-    //   );
-    // }
+    },
+    reviews() {
+      return this.$store.getters.reviewsForDisplay
+    },
   }
 };
 </script>

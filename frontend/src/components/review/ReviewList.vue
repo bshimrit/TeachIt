@@ -5,8 +5,8 @@
             <li class="flex align-center collection-item " v-for="review in reviews" :key="review._id">
                 <div class="margin-right20">
                     <div class="flex flex-column align-center">
-                        <img :src="userImg" class="small-image"> 
-                        name
+                        <img :src="review.user.img" class="small-image"> 
+                        {{review.user.fullName}}
                     </div>
                 </div>
                 <div class="review-data">
@@ -24,37 +24,22 @@ import StarRating from 'vue-star-rating'
 
 export default {
     name: 'reviewList',
-    props: ['userId'],
-  data () {
-    return {
-            teacherTopic: {
-                teacher: {fullName: null},
-                topic: {title:null, subtitle: null}
-                }
-        }
-  },
-  created() {
-    var teacherTopicId = this.$route.params.teacherTopicId
-    this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
-    .then(() => {
-        this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
-        .then(teacherTopic => {
-                this.teacherTopic = teacherTopic[0];
-            })
-    })
-  },
-  computed: {
-      reviews() {
-          return this.$store.getters.reviewsForDisplay
-      },
-      userImg() {
-            return this.$store.getters.onlineUserImg
-        }
+    props: ['reviews'],
+    data () {
+        return {
+            }
+    },
+    created() {
+    },
+    computed: {
+        userImg() {
+                return this.$store.getters.onlineUserImg
+            }
 
-  },
-  components:{
-      StarRating
-  }
+    },
+    components:{
+        StarRating
+    }
 }
 </script>
 

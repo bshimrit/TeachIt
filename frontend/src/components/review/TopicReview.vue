@@ -3,7 +3,7 @@
     <h5>review-graph</h5>
     <!-- <h5>review-filter</h5> -->
     <review-add></review-add>
-    <review-list></review-list>
+    <review-list :reviews="reviews"></review-list>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import FilterCmp from "@/components/FilterCmp.vue";
 
 export default {
     name: 'TopicReview',
-    props: ['userId'],
+    props: ['reviews'],
   data() {
     return {};
   },

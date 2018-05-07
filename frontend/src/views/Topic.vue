@@ -35,7 +35,7 @@
             <i class="fa fa-telegram" aria-hidden="true"></i>
         </a>
     </div>
-     <topic-review></topic-review>
+     <topic-review :reviews="reviews"></topic-review>
      
   </div>
 </template>
@@ -71,6 +71,7 @@ export default {
         .catch(err => {
           console.log("err:", err);
         });
+      this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
     }
   },
   components: {
@@ -87,7 +88,10 @@ export default {
       return this.$store.getters.teacherTopicsForDisplay.filter(
         topic => topic.teacherId == this.$route.params.userId
       );
-    }
+    },
+    reviews() {
+      return this.$store.getters.reviewsForDisplay
+    },
   },
   methods: {
       goToTeacherProfile(){
