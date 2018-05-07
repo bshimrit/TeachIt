@@ -41,7 +41,8 @@ export default {
   data() {
     return {
        userToUpdate: UserService.emptyUser(),
-       editSection: 'InfoEdit'
+       editSection: 'InfoEdit',
+
     };
   },
   methods: {
@@ -59,18 +60,11 @@ export default {
     }
   },
  created() {
-    
-    var userId = this.$route.params.userId;
-    if (!userId) userId = "5ae972d2f8cdd2dafed7a1ec";
-    console.log("userId", userId);
-    this.$store.dispatch({ type: "getUserById", userId  })
-      .then(user => (this.userToUpdate = {...user}))
-      .catch(err => {
-        console.log("err:", err);
-      });
+    this.userToUpdate ={...this.$store.getters.loggedUser};
+   
   },
    computed: {
-   
+    
   
   },
   components: {

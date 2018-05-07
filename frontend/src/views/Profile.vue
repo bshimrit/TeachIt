@@ -61,7 +61,7 @@ export default {
   name: "profile",
   data() {
     return {
-      user: null,
+      user: UserService.emptyUser(),
       teacherTopic: {
         rating: 0
       },
