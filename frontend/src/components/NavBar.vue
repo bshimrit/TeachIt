@@ -11,7 +11,7 @@
         <template v-else>
         <li></li>
         <li><router-link :to="`/profile/${loggedUser._id}`"></router-link></li>
-        <li @click.stop><a @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
+        <li @click.stop><a class="profile-img" @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
         <ul class="dropdown" v-if="dropdown" @click.stop>
             <li><router-link :to="`/profile/${loggedUser._id}`">My profile</router-link></li>
             <li><a href="#">Become a teacher</a></li>
@@ -105,5 +105,8 @@ img.profile {
 }
 .hide-nav {
     top: -100%
+}
+.profile-img {
+  padding-right: 0;
 }
 </style>

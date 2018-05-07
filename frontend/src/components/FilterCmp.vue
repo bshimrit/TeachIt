@@ -8,24 +8,22 @@
                 <div class="left-filter flex justify-start align-center">
                     <span v-if="!isSearching && showExtraSearch">Price</span>
                     <div class="margin-right20">
-                        <vueSlider v-model="filterBy.price" :max="600" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+                        <vueSlider v-model="filterBy.price" :max="600"  :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
                     </div>
-                    <div class="input-field ">
+                    <div class="topic-input ">
                         <select v-model="filterBy.topics" ref="selectTopics" multiple>
                             <option value="" disabled selected>Choose your topics</option>
                             <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="right-filter">
-                    <div class="input-field">
-                        <select v-model="filterBy.sort" ref="selectSort">
-                            <option value="" disabled selected>Sort by</option>                            
-                            <option value="review">Reviews</option>
-                            <option value="lowPrice">Price - Low to High</option>
-                            <option value="highPrice">Price - High to Low</option>
-                        </select>
-                    </div>
+                <div class="sort-input">
+                    <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
+                        <option value="" disabled selected>Sort by</option>                            
+                        <option value="review">Reviews</option>
+                        <option value="lowPrice">Price - Low to High</option>
+                        <option value="highPrice">Price - High to Low</option>
+                    </select>
                 </div>
             </section>
         </section>
@@ -45,12 +43,16 @@ export default {
         if (this.showExtraSearch) {
             this.$store.dispatch({type: 'loadTopics'}).then(topics => {
                 $('select').material_select()
-                this.$refs.selectTopics.onchange = this.emitFilter;
             })
         }
     },
     mounted() {
-        },
+        if (this.showExtraSearch) {
+            this.$refs.selectTopics.onchange = this.emitFilter;
+            this.$refs.selectSort.onchange = this.emitFilter;
+
+        }
+    },
     data() {
         return {
             filterBy: TeacherTopicService.emptyTeacherTopicFilter(),
@@ -64,7 +66,8 @@ export default {
     },
     methods: {
     emitFilter(){
-        this.filterBy.topics = $('select').val()
+        this.filterBy.topics = $('.topic-input select').val()
+        this.filterBy.sort =$('.sort-input select').val()
         this.$emit('filtered',this.filterBy);
         }
     },

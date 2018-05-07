@@ -14,8 +14,6 @@ export default {
   },
   mutations: {
     setTeacherTopicFilter(state, { filter }) {
-      console.log('storeFilterBefore',state.teacherTopicFilter.price[0],state.teacherTopicFilter.price[1])
-      console.log('storeFilter',filter.price[0],filter.price[1])
       state.teacherTopicFilter = filter;
     },
     deleteTeacherTopic(state, { teacherTopicId }) {
@@ -87,8 +85,6 @@ export default {
       })
     },
     getTeacherTopicById(store, {teacherTopicId}) {
-        console.log('ID in store:', teacherTopicId);
-        
           return TeacherTopicService.getTeacherTopicById(teacherTopicId)
             .then(teacherTopic => {
               return teacherTopic;

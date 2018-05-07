@@ -2,24 +2,21 @@
     <section>
       <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" />
       <section class="container search">
-        <!-- Sort: by topic | by price<br> -->
         <div class="map-list">
-            <!-- <teacher-list :topics="topics" class="teacher-list"></teacher-list> -->
-            <div class="cards">
-                <div class="row">
-                    <div class="flex col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-                        <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-                    </div>
-                </div>
-            </div>   
-            <teacher-map class="teacher-map relative"></teacher-map>
+          <div class="cards">
+              <div class="row">
+                  <div class="flex col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+                      <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+                  </div>
+              </div>
+          </div>   
+          <teacher-map class="teacher-map relative"></teacher-map>
         </div>
       </section> 
     </section>
 </template>
 
 <script>
-// import TeacherList from "@/components/Teacher/TeacherList.vue";
 import FilterCmp from '@/components/FilterCmp.vue'
 import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue'
 import TeacherMap from "@/components/Teacher/TeacherMap.vue";
