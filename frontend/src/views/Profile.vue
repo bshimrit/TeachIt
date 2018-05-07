@@ -93,9 +93,9 @@ export default {
     }
   },
   computed: {
-    topics() {
-      return this.$store.getters.teacherTopicsForDisplay;
-    },
+    // topics() {
+    //   return this.$store.getters.teacherTopicsForDisplay;
+    // },
     isEditAllowed() {
       return (
         this.$store.getters.loggedUser &&

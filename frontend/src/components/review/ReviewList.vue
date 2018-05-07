@@ -34,8 +34,13 @@ export default {
         }
   },
   created() {
+<<<<<<< HEAD
         var teacherTopicId = this.userId || this.$route.params.teacherTopicId
         this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
+=======
+    var teacherTopicId = this.$route.params.teacherTopicId
+    this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
+>>>>>>> 049b11870efabdbdc950a90b7772a6595f92c70f
     .then(() => {
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {

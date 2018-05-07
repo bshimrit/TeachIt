@@ -21,7 +21,7 @@ function convertFilterToURL(filter){
   var criteria = "?";
   if (filter) {
     if (filter.text) criteria += `text=${filter.text}&`;
-    if (filter.price.length) {
+    if (filter.price && filter.price.length) {
       criteria += `minprice=${filter.price[0]}&maxprice=${filter.price[1]}&`;
     }
     if (filter.topics) {

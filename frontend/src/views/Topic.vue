@@ -8,7 +8,7 @@
         <div class="card-stacked">
           <div class="card-content">
             <h4>{{teacherTopic.topic.subtitle}}
-               <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+               <StarRating v-model="teacherTopic.rating" :star-size="20" :read-only="true" :show-rating="false"/>
             </h4>
             <p>{{teacherTopic.pricePerHour}}$/PerHour</p>
             <p class="font-bold">{{teacherTopic.shortDes}}</p>

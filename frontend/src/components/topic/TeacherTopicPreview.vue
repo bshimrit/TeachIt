@@ -23,7 +23,7 @@
 import StarRating from 'vue-star-rating'
 export default {
     name: 'TeacherTopicPreview',
-    props: {teacherTopic:null,showTeacher:{default:true},showLongDesc:{default:true}},
+    props: {teacherTopic:null,showTeacher:{default:true},showLongDesc:{default:true},showEdit:{default:false}},
     data(){
         return {}
     },
