@@ -2,8 +2,8 @@
 <section>
  <h4>My Classes</h4>
      <div class="row">
-          <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+          <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false"></TeacherTopic>
           </div>
       </div>     
      

@@ -66,6 +66,8 @@ export default {
   },
   actions: {
       checkLogin(store, {creds}) {
+          console.log('checking login:', creds);
+          
         return UserService.checkLogin(creds)
             .then(user => {
                 store.commit({type: 'setUser', user})
@@ -98,7 +100,7 @@ export default {
         let retUser = res.data[0];
         console.log('resUser:', retUser);
         if (isEdit) store.commit({type: 'updateUser', retUser})
-        else store.commit({type: 'addUser', retUser})
+        else store.commit({type: 'addUser', user: retUser})
         return retUser;
       })
     },
