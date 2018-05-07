@@ -3,7 +3,7 @@
  <h4>My Classes</h4>
      <div class="row">
           <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false"></TeacherTopic>
+            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
           </div>
       </div>     
      

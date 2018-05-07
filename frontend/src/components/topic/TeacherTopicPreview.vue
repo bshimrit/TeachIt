@@ -10,6 +10,8 @@
                     <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
                     <p>{{teacherTopic.shortDes}}</p>
                     <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+                    <a v-if="showEdit">Delete</a>
+                    <a v-if="showEdit">Edit</a>
                     <div v-if="showLongDesc">
                         <p class="long-desc">{{teacherTopic.longDes}}</p>
                     </div> 
@@ -23,7 +25,7 @@
 import StarRating from 'vue-star-rating'
 export default {
     name: 'TeacherTopicPreview',
-    props: {teacherTopic:null,showTeacher:{default:true},showLongDesc:{default:true}},
+    props: {teacherTopic:null,showTeacher:{default:true},showLongDesc:{default:true},showEdit:{default:false}},
     data(){
         return {}
     },
