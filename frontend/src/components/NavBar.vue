@@ -11,10 +11,10 @@
         <template v-else>
         <li></li>
         <li><router-link :to="`/profile/${loggedUser._id}`"></router-link></li>
+        <li><a href="#">Become a teacher</a></li>
         <li @click.stop><a class="profile-img" @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
         <ul class="dropdown" v-if="dropdown" @click.stop>
             <li><router-link :to="`/profile/teacher/${loggedUser._id}`">My profile</router-link></li>
-            <li><a href="#">Become a teacher</a></li>
             <li v-if="loggedUser.isTeacher"><router-link :to="`/profile/topic/${loggedUser._id}`">My classes</router-link></li>
             <li><a @click="logOut">Log out</a></li>
         </ul>
