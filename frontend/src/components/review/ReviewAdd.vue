@@ -42,8 +42,6 @@ export default {
     methods: {
         getEmptyReview() {
             var idGetter = this.userId || this.$route.params.teacherTopicId;
-            console.log('got id:', idGetter);
-            
             return {
                 fullName: this.$store.getters.onlineUserName,
                 reviewerId: (this.$store.getters.loggedUser)? this.$store.getters.loggedUser._id: 'Please log in',

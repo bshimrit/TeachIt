@@ -34,14 +34,9 @@ export default {
         }
   },
   created() {
-<<<<<<< HEAD
-      var teacherTopicId = this.userId || this.$route.params.teacherTopicId
-        this.$store.dispatch({type: 'loadReviews', teacherTopicId})
-=======
-    var teacherTopicId = this.$route.params.teacherTopicId
-    this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
+        var teacherTopicId = this.userId || this.$route.params.teacherTopicId
+        this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
     .then(() => {
->>>>>>> 68b0ba96d2496f099b0f59880051aa355e1f4404
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {
                 this.teacherTopic = teacherTopic[0];

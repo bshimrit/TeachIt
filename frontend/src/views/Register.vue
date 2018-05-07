@@ -30,6 +30,7 @@
                     <label for="password">Repeat Password</label>
                     </div>
                 </div>
+                <uploadImg @uploadImg="addImg"></uploadImg> <br>
                   <button type="submit" class="waves-effect waves-light btn">Register</button>
             </form>
         </div>
@@ -41,6 +42,7 @@
 
 <script>
 import UserService from "../services/UserService";
+import UploadImg from '@/components/uploadImg/Upload.vue';
 
 export default {
   name: "RegisterPage",
@@ -67,11 +69,18 @@ export default {
           console.log("failed:" + err);
         });
         this.newUser = UserService.emptyUser();
+    },
+    addImg(url) {
+        this.newUser.img = url
+        console.log('newUser:',this.newUser);
+        
     }
   },
   computed: {},
   components: {
-    UserService
+    UserService,
+    UploadImg
+    
   }
 };
 </script>
