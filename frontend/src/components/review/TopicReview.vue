@@ -1,8 +1,7 @@
 <template>
-  <div class="topic-review container">
+  <div class="topic-review">
     <h5>review-graph</h5>
-    <!-- <h5>review-filter</h5> -->
-    <review-add></review-add>
+    <review-add @addedReview="loadReviews" :teacherId="teacherId"></review-add>
     <review-list :reviews="reviews"></review-list>
   </div>
 </template>
@@ -14,9 +13,28 @@ import FilterCmp from "@/components/FilterCmp.vue";
 
 export default {
     name: 'TopicReview',
-    props: ['reviews'],
+    props: ['teacherId','teacherTopicId'],
+  created(){
+      this.loadReviews()
+    },
   data() {
-    return {};
+    return {
+      }
+  },
+  computed:{
+    reviews() {
+      return this.$store.getters.reviewsForDisplay
+    }
+  },
+  methods: {
+    loadReviews(){
+      if (this.teacherTopicId) {
+        this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId: this.teacherTopicId})
+      } else {
+        this.$store.dispatch({type: 'loadReviewsByTeacherId', teacherId: this.teacherId})
+        
+      }
+    }
   },
   components: {
     ReviewList,

@@ -20,10 +20,18 @@ img.profile {
     width: 80%;
 }
 
+.card-container {
+    text-align: left;
+    max-width: 900px;
+  }
+
 .small-image {
     height: 50px;
     width: 50px;
     border-radius: 50%
 }
 
+.user-details {
+    width: 20%;
+}
   

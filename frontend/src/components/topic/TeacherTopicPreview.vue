@@ -81,13 +81,15 @@ export default {
     }
 
     a.teacher-img {
-        /* right: calc(50% - 40px); */
         width: 80px;
         height:80px;
         bottom: 40px;
-        /* top: -10px; */
     }
 
+    a.teacher-img img{
+        height: 100%;
+    }
+    
     .card-header {
         margin: 0;
         padding: 0 5px;

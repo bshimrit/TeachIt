@@ -1,5 +1,5 @@
 <template>
-  <div v-if="teacherTopic.topic" class="container">
+  <div v-if="teacherTopic.topic" class="container card-container">
     <div class="row">
       <div class="card horizontal">
         <div class="card-image" style="padding: 10px; display: flex;">
@@ -35,7 +35,7 @@
             <i class="fa fa-telegram" aria-hidden="true"></i>
         </a>
     </div>
-     <topic-review :reviews="reviews"></topic-review>
+     <topic-review :teacherId="teacher._id" :teacherTopicId="$route.params.teacherTopicId"></topic-review>
      
   </div>
 </template>
@@ -71,7 +71,6 @@ export default {
         .catch(err => {
           console.log("err:", err);
         });
-      this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
     }
   },
   components: {
@@ -81,17 +80,6 @@ export default {
     StarRating
   },
   computed: {
-    topics() {
-      return this.$store.getters.teacherTopicsForDisplay;
-    },
-    teacherTopics() {
-      return this.$store.getters.teacherTopicsForDisplay.filter(
-        topic => topic.teacherId == this.$route.params.userId
-      );
-    },
-    reviews() {
-      return this.$store.getters.reviewsForDisplay
-    },
   },
   methods: {
       goToTeacherProfile(){
@@ -103,10 +91,6 @@ export default {
 
 
 <style scoped>
-.container {
-  text-align: left;
-  max-width: 900px;
-}
 ul {
   display: flex;
   flex-wrap: wrap;
