@@ -1,6 +1,6 @@
 <template>
    <div class="field-body">
-     <h1> lolo</h1>
+     <h4>Upload profile image:</h4>
    <div class="field">
      <div class="control">
        <input class="input is-danger"  type="text" placeholder="Add your product title">
@@ -49,10 +49,10 @@ export default {
    }
  },
  methods: {
-   addThumb: function() {
+   addThumb () {
      this.thumbs.unshift(this.thumb);
    },
-   upload: function(file) {
+   upload (file) {
      const formData = new FormData();
      formData.append("file", file[0]);
      formData.append("upload_preset", this.cloudinary.uploadPreset);

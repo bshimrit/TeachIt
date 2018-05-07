@@ -35,7 +35,6 @@ export default {
         userImg() {
                 return this.$store.getters.onlineUserImg
             }
-
     },
     components:{
         StarRating

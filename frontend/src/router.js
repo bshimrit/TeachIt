@@ -6,8 +6,8 @@ import Search from './views/Search.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Profile from './views/Profile.vue'
-import EditProfile from './views/EditProfile.vue'
 import Topic from './views/Topic.vue'
+import EditProfile from './views/EditProfile.vue'
 
 Vue.use(Router)
 

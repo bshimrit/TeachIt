@@ -43,7 +43,6 @@
     </div>
 
      <topic-review :reviews="reviews" :userId="teacherId"></topic-review>
-     <uploadImg></uploadImg>
   </div>
 </template>
 
@@ -54,7 +53,6 @@ import UserService from "@/services/UserService.js";
 import TeacherTopicService from "@/services/TeacherTopicService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
 import StarRating from "vue-star-rating";
-import UploadImg from '@/components/uploadImg/Upload.vue';
 
 export default {
   name: "profile",
@@ -84,7 +82,6 @@ export default {
     UserService,
     TeacherTopic,
     StarRating,
-    UploadImg
   },
   methods: {
     goToEditProfile() {
@@ -92,9 +89,9 @@ export default {
     }
   },
   computed: {
-    topics() {
-      return this.$store.getters.teacherTopicsForDisplay;
-    },
+    // topics() {
+    //   return this.$store.getters.teacherTopicsForDisplay;
+    // },
     isEditAllowed() {
       return (
         this.$store.getters.loggedUser &&
