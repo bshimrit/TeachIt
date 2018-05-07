@@ -8,7 +8,7 @@
                 <div class="left-filter flex justify-start align-center">
                     <span v-if="!isSearching && showExtraSearch">Price</span>
                     <div class="margin-right20">
-                        <vueSlider v-model="filterBy.price" :max="600"  :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+                        <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
                     </div>
                     <div class="topic-input ">
                         <select v-model="filterBy.topics" ref="selectTopics" multiple>
@@ -38,7 +38,6 @@ export default {
     name:'search',
     props:{showExtraSearch:{default: false}},
     created(){
-        console.log(this.filterBy)
         this.filterBy = JSON.parse(JSON.stringify(this.$store.getters.teacherTopicFilter));
         if (this.showExtraSearch) {
             this.$store.dispatch({type: 'loadTopics'}).then(topics => {

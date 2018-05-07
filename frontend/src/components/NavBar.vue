@@ -83,11 +83,6 @@ nav {
 .lower {
   padding-top: 12px;
 }
-img.profile {
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;
-}
 .dropdown {
   display: flex;
   flex-direction: column;

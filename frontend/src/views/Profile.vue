@@ -42,10 +42,8 @@
       </div>
     </div>
 
-
-     <h3>Reviews:</h3>
-     <topic-review></topic-review>
-     
+     <topic-review :userId="teacherId"></topic-review>
+     <uploadImg></uploadImg>
   </div>
 </template>
 
@@ -56,6 +54,7 @@ import UserService from "@/services/UserService.js";
 import TeacherTopicService from "@/services/TeacherTopicService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
 import StarRating from "vue-star-rating";
+import UploadImg from '@/components/uploadImg/Upload.vue';
 
 export default {
   name: "profile",
@@ -70,25 +69,26 @@ export default {
     };
   },
   created() {
-    if (!this.userId) this.userId = "5ae972d2f8cdd2dafed7a1ec";
+    // if (!this.userId) this.userId = "5ae972d2f8cdd2dafed7a1ec";
     this.$store
       .dispatch({ type: "getUserById", userId:this.userId })
       .then(user => (this.user = user))
       .catch(err => {
         console.log("err:", err);
       });
-      this.$store
-      .dispatch({ type: "getTopicsByTeacherId", teacherId: this.userId })
-      .then(topics => {
-        console.log(topics);
-        this.teacherTopics = topics;
-      });
+    //   this.$store
+    //   .dispatch({ type: "getTopicsByTeacherId", teacherId: this.userId })
+    //   .then(topics => {
+    //     console.log(topics);
+    //     this.teacherTopics = topics;
+    //   });
   },
   components: {
     TopicReview,
     UserService,
     TeacherTopic,
-    StarRating
+    StarRating,
+    UploadImg
   },
   methods: {
     goToEditProfile() {
@@ -105,6 +105,9 @@ export default {
         this.$store.getters.loggedUser._id === this.userId
       );
     },
+    teacherId() {
+        return this.$route.params.userId
+    }
     // teacherTopics() {
     //   console.log('users:');
     //   return this.$store.getters.teacherTopicsForDisplay.filter(
