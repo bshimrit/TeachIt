@@ -25,39 +25,6 @@ import StarRating from 'vue-star-rating'
 
 export default {
     name: 'reviewList',
-<<<<<<< HEAD
-    props: ['userId'],
-  data () {
-    return {
-            teacherTopic: {
-                teacher: {fullName: null},
-                topic: {title:null, subtitle: null}
-                }
-        }
-  },
-  created() {
-        var teacherTopicId = this.userId || this.$route.params.teacherTopicId
-        this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
-    .then(() => {
-        this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
-        .then(teacherTopic => {
-                this.teacherTopic = teacherTopic[0];
-            })
-    })
-  },
-  computed: {
-      reviews() {
-          return this.$store.getters.reviewsForDisplay
-      },
-      userImg() {
-            return this.$store.getters.onlineUserImg
-        }
-
-  },
-  components:{
-      StarRating
-  }
-=======
     props: ['reviews'],
     data () {
         return {
@@ -73,7 +40,6 @@ export default {
     components:{
         StarRating
     }
->>>>>>> b1ad6ee959eec59fa95bd88bd20439e6ec34642b
 }
 </script>
 

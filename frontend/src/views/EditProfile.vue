@@ -8,8 +8,8 @@
       <div class="collection">
         <a  class="collection-item"  @click="editSection = 'AccountEdit'">Account</a>
         <a class="collection-item"  @click="editSection = 'InfoEdit'">Public Profile</a>
-        <a class="collection-item" @click="editSection = 'ImgEdit'">Photo</a>
-         <a class="collection-item" @click="editSection = 'TeacherTopicEdit'">Classes</a>
+        <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
+        <a class="collection-item" @click="editSection = 'TeacherTopicEdit'">Classes</a>
       </div>
 
       <!-- <button class="btn"  @click="editSection = 'TeacherTopicEdit'">Classes</button> -->

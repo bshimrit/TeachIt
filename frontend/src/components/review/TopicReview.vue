@@ -1,15 +1,9 @@
 <template>
   <div class="topic-review container">
     <h5>review-graph</h5>
-<<<<<<< HEAD
-    <h5>review-filter</h5>
-    <review-add :userId="userId"></review-add>
-    <review-list :userId="userId"></review-list>
-=======
     <!-- <h5>review-filter</h5> -->
     <review-add></review-add>
     <review-list :reviews="reviews"></review-list>
->>>>>>> b1ad6ee959eec59fa95bd88bd20439e6ec34642b
   </div>
 </template>
 

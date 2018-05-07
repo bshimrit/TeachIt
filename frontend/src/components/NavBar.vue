@@ -94,7 +94,7 @@ nav {
   z-index: 10;
 }
 .navbar-fixed {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 .hide-nav {
     top: -100%
