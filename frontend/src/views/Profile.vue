@@ -84,7 +84,7 @@ import TopicReview from "@/components/review/TopicReview.vue";
 import UserService from "@/services/UserService.js";
 import TeacherTopicService from "@/services/TeacherTopicService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import StarRating from 'vue-star-rating'
+import StarRating from "vue-star-rating";
 
 export default {
   name: "profile",
@@ -100,22 +100,38 @@ export default {
         socialMedia: { facebook: "http://f.com/user", twitter: "t.com/user" }
       },
       teacherTopic: {
-          rating:1
+        rating: 1
       }
     };
   },
   created() {
     this.$store.dispatch({ type: "loadTeacherTopics" });
-    var teacherTopicId = this.$route.params.teacherTopicId;
-    // if (!userId) userId = "5ae973a5f8cdd2dafed7a1f0";
-    TeacherTopicService.getTeacherTopicById(teacherTopicId)
-      .then(teacherTopic => {
-          this.user = teacherTopic[0].teacher
-          this.teacherTopic = teacherTopic[0]
-          })
-      .catch(err => {
-        console.log("err:", err);
-      });
+    if (this.$route.params.teacherTopicId) {
+      var teacherTopicId = this.$route.params.teacherTopicId;
+      console.log("params:", this.$route.params.teacherTopicId);
+
+      TeacherTopicService.getTeacherTopicById(teacherTopicId)
+        .then(teacherTopic => {
+          this.user = teacherTopic[0].teacher;
+          this.teacherTopic = teacherTopic[0];
+        })
+        .catch(err => {
+          console.log("err:", err);
+        });
+    } else if (this.$route.params.userId) {
+      var userId = this.$route.params.userId;
+      console.log("params:", this.$route.params.userId);
+
+      UserService.getUserById(userId)
+        .then(user => {
+          this.user = user;
+          console.log('user:', user);
+          
+        })
+        .catch(err => {
+          console.log("err:", err);
+        });
+    }
   },
   components: {
     TopicReview,
@@ -128,8 +144,9 @@ export default {
       return this.$store.getters.teacherTopicsForDisplay;
     },
     teacherTopics() {
-      console.log('teacherTopicsForDisplay', this.$store.getters.teacherTopicsForDisplay);
-      return this.$store.getters.teacherTopicsForDisplay.filter((topic)=>topic.teacherId == this.$route.params.userId);
+      return this.$store.getters.teacherTopicsForDisplay.filter(
+        topic => topic.teacherId == this.$route.params.userId
+      );
     }
   }
 };
