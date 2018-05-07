@@ -14,7 +14,7 @@ import FilterCmp from "@/components/FilterCmp.vue";
 
 export default {
     name: 'TopicReview',
-    props: ['userId'],
+    props: ['reviews'],
   data() {
     return {};
   },

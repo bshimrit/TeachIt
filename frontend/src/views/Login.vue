@@ -34,8 +34,8 @@ export default {
     data() {
         return {
             credentials: {
-                userName: 'Oz',
-                password: '1234'
+                userName: '',
+                password: ''
             }
         }
     },

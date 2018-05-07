@@ -40,6 +40,15 @@ module.exports = (app) => {
             .catch(err => res.status(500).send(err.message))
     })
 
+    app.get(`${REVIEW_URL}/teacher/:teacherId`, (req, res) => {
+        const teacherId = req.params.teacherId;
+        ReviewService.getByTeacherId(teacherId)
+            .then(reviews => {
+                res.json(reviews)
+            })
+            .catch(err => res.status(500).send(err.message))
+    })
+
     app.put(REVIEW_URL, (req, res) => {
         const review = req.body;
         ReviewService

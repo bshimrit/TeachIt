@@ -22,6 +22,5 @@ export default new Router({
     { path: '/profile/teacher/:userId', name: 'profile', component: Profile},
     { path: '/profile/edit/:userId', name: 'edit', component: EditProfile},
     { path: '/profile/topic/:teacherTopicId', name: 'topic', component: Topic},
-    
   ]
 })

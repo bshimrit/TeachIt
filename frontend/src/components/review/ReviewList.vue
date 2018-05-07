@@ -2,11 +2,12 @@
     <section class="review-list">
         <p class="font-bold">Reviews</p>
         <ul class="collection">
-            <li class="flex align-center collection-item " v-for="review in reviews" :key="review._id">
+            <li class="flex align-center collection-item " v-for="(review, idx) in reviews" :key="review._id">
+                {{idx}}
                 <div class="margin-right20">
                     <div class="flex flex-column align-center">
-                        <img :src="userImg" class="small-image"> 
-                        name
+                        <img :src="review.user.img" class="small-image"> 
+                        {{review.user.fullName}}
                     </div>
                 </div>
                 <div class="review-data">
