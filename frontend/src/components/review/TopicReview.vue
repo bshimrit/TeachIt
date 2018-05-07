@@ -2,8 +2,8 @@
   <div class="topic-review container">
     <h5>review-graph</h5>
   
-    <review-add :userId="userId"></review-add>
-    <review-list :userId="userId"></review-list>
+     <review-add></review-add>
+     <review-list :reviews="reviews"></review-list>
   </div>
 </template>
 

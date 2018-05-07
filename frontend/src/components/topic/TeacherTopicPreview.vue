@@ -49,7 +49,7 @@ export default {
         
         deleteClass() {
             
-           this.$store.dispatch({ type: "deleteTeacherTopic", teacherTopicId: this.teacherTopic._id })
+           this.$store.dispatch({ type: "deleteTeacherTopic", teacherTopicId: this.teacherTopic._id , teacherId: this.teacherTopic.teacherId })
             .then(deleted => {
                 window.alert("deleted");
             console.log("deleted");
