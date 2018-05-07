@@ -8,7 +8,7 @@
       <div class="collection">
         <a  class="collection-item"  @click="editSection = 'AccountEdit'">Account</a>
         <a class="collection-item"  @click="editSection = 'InfoEdit'">Public Profile</a>
-        <a class="collection-item" @click="editSection = 'ImgEdit'">Photo</a>
+        <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
          <a class="collection-item" @click="editSection = 'TeacherTopicEdit'">Classes</a>
       </div>
 
@@ -36,12 +36,11 @@ import TopicEdit from "@/components/profile/TopicEdit.vue";
 import TeacherTopicEdit from "@/components/profile/TeacherTopicEdit";
 import AccountEdit from "@/components/profile/AccountEdit";
 import InfoEdit from "@/components/profile/InfoEdit";
-import ImgEdit from "@/components/profile/ImgEdit";
+import Upload from "@/components/uploadImg/Upload";
 
 export default {
   data() {
     return {
-       userToUpdate: UserService.emptyUser(),
        editSection: 'InfoEdit',
 
     };
@@ -61,11 +60,13 @@ export default {
     }
   },
  created() {
-    this.userToUpdate ={...this.$store.getters.loggedUser};
    
   },
    computed: {
-    
+    userToUpdate() {
+      let loggedUser = this.$store.getters.loggedUser;
+      return loggedUser? {...loggedUser} : UserService.emptyUser();
+    }
   
   },
   components: {
@@ -75,7 +76,7 @@ export default {
     TeacherTopicEdit,
     AccountEdit,
     InfoEdit,
-    ImgEdit
+    Upload
   }
 };
 </script>

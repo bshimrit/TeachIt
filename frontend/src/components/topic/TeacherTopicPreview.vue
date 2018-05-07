@@ -10,6 +10,13 @@
                 <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
                 <p>{{teacherTopic.shortDes}}</p>
                 <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+                <div v-if="showEdit">
+                    <a class="waves-effect waves-light" @click="$emit('toEdit', teacherTopic)">Edit</a>
+                    <button class="waves-effect waves-light" @click="deleteClass">Delete</button>
+                    <button v-on:click="$emit('enlarge-text', 0.1)">
+                    Enlarge text
+                    </button>
+                </div>
                 <div v-if="showLongDesc">
                     <p class="long-desc">{{teacherTopic.longDes}}</p>
                 </div> 
@@ -38,7 +45,21 @@ export default {
         },
         goToTeacherTopicProfile(){
             this.$router.push('/profile/topic/' + this.teacherTopic._id)
-        }
+        },
+        
+        deleteClass() {
+            
+           this.$store.dispatch({ type: "deleteTeacherTopic", teacherTopicId: this.teacherTopic._id })
+            .then(deleted => {
+                window.alert("deleted");
+            console.log("deleted");
+            })
+            .catch(err => {
+            window.alert("Failed");
+            console.log("failed:" + err);
+            });
+    }
+       
     }
 }
 </script>

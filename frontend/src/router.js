@@ -8,7 +8,6 @@ import Register from './views/Register.vue'
 import Profile from './views/Profile.vue'
 import Topic from './views/Topic.vue'
 import EditProfile from './views/EditProfile.vue'
-import Topic from './views/Topic.vue'
 
 Vue.use(Router)
 

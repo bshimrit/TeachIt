@@ -93,8 +93,7 @@ export default {
     //   })
     // },
     saveUser(store, {user}) {
-      
-      const isEdit = !!user.id;
+      const isEdit = !!user._id;
       return UserService.saveUser(user)
       .then(res => {
         let retUser = res.data[0];

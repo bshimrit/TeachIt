@@ -4,7 +4,7 @@
                 <div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input v-model="lessonToUpdate.topicId" type="text" class="validate">
+                      <input v-model="teacherClassToEdit.topicId" type="text" class="validate">
                       <label class="left active">TopicId</label>
                     </div>
                     </div>
@@ -22,31 +22,31 @@
                   </div> -->
                    <div class="row">
                     <div class="input-field col s12">
-                      <textarea  v-model="lessonToUpdate.shortDes" class="materialize-textarea"></textarea>
+                      <textarea  v-model="teacherClassToEdit.shortDes" class="materialize-textarea"></textarea>
                         <label class="left active">Summary</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <textarea  v-model="lessonToUpdate.longDes" class="materialize-textarea"></textarea>
+                      <textarea  v-model="teacherClassToEdit.longDes" class="materialize-textarea"></textarea>
                         <label class="left active">Description</label>
                     </div>
                   </div>
                    <div class="row">
                     <div class="input-field col s12">
-                       <input type="text"  v-model="lessonToUpdate.level" class="validate">
+                       <input type="text"  v-model="teacherClassToEdit.level" class="validate">
                         <label class="left active">Level</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input type="number" class="validate" v-model="lessonToUpdate.pricePerHour">
+                      <input type="number" class="validate" v-model="teacherClassToEdit.pricePerHour">
                         <label class="left active">Price/Hour</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input type="text" class="validate" v-model="lessonToUpdate.topicImage">
+                      <input type="text" class="validate" v-model="teacherClassToEdit.topicImage">
                         <label class="left active">Image url</label>
                     </div>
                   </div>
@@ -57,7 +57,7 @@
                     </div>
                   </div>
 
-                  <a @click="saveLesson" class="btn green accent-3">Add Class</a>
+                  <a @click="saveClass" class="btn green accent-3">Add Class</a>
                 </div> 
 
 </section>
@@ -69,30 +69,35 @@ import teacherTopicService from "@/services/TeacherTopicService.js";
 export default {
   data() {
     return {
-      lessonToUpdate: teacherTopicService.emptyTeacherTopic()
+      teacherClassToEdit: teacherTopicService.emptyTeacherTopic()
     };
   },
   props: {
-    lesson: {
+     teacherClass: {
       type: Object
     }
   },
-  watch: {},
+  created () {
+    if (this.teacherClass) {
+      teacherClassToEdit ={...this. teacherClass}
+    }
+  },
+ 
   computed: {},
   methods: {
-    saveLesson() {
-       if(!this.lessonToUpdate.topicId) this.lessonToUpdate.topicId= "5ae97336b8ed24ed05f66112";
-       this.lessonToUpdate.teacherId= this.$route.params.userId;
+    saveClass() {
+       if(!this.teacherClassToEdit.topicId) this.teacherClassToEdit.topicId= "5ae97336b8ed24ed05f66112";
+       this.teacherClassToEdit.teacherId= this.$route.params.userId;
        
-      console.log('lesson', this.lessonToUpdate);
+      console.log('class', this.teacherClassToEdit);
       this.$store
-        .dispatch({ type: "saveTeacherTopic", teacherTopic: this.lessonToUpdate })
+        .dispatch({ type: "saveTeacherTopic", teacherTopic: this.teacherClassToEdit })
         .then(added => {
-            window.alert("Updated lesson");
+            window.alert("Updated class");
           console.log("added");
         })
         .catch(err => {
-           window.alert("Failed lesson");
+           window.alert("Failed class");
           console.log("failed:" + err);
         });
     }

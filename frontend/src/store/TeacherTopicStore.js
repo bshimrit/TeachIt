@@ -69,6 +69,7 @@ export default {
         })
     }, 
      deleteTeacherTopic(store, {teacherTopicId}) {
+      console.log('2');
       return TeacherTopicService.deleteTeacherTopic(teacherTopicId)
       .then(()=>{
         store.commit({type: 'deleteTeacherTopic', teacherTopicId});

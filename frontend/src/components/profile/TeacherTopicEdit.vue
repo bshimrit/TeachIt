@@ -3,11 +3,11 @@
  <h4>My Classes</h4>
      <div class="row">
           <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
+            <TeacherTopic @toEdit="toEdit"  v-on:enlarge-text="onEnlargeText" :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
           </div>
       </div>     
-     
-     <topic-edit></topic-edit>
+       <a class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-plus"></i></a>
+     <topic-edit :teacherClass="teacherClass"></topic-edit>
 
 </section>
 </template>
@@ -19,7 +19,8 @@ import TopicEdit from "@/components/profile/TopicEdit.vue";
 export default {
   data() {
     return {
-      teacherTopics:[]
+      teacherTopics:[],
+      teacherClass: null
     };
   },
   props: {},
@@ -27,7 +28,15 @@ export default {
   computed: {
    
   },
-  methods: {},
+  methods: {
+    toEdit(teacherTopic) {
+      debugger;
+      this.teacherClass = teacherTopic;
+    },
+     onEnlargeText: function (enlargeAmount) {
+   console.log('hi');
+  }
+  },
   created() {
     var userId = this.$route.params.userId;
 
