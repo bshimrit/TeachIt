@@ -1,31 +1,14 @@
 <template>
     <section class="review-list">
-        <ul>
-            <li v-for="review in reviews" :key="review._id">
-                <p>By: {{teacherTopic.teacher.fullName}} <img :src="teacherTopic.teacher.img"></p>
-                <p>Contnet: {{review.topicReview}}</p>
-                <p>Rating: {{review.topicRating}} </p>
-            </li>
-        </ul>
-
         <ul class="collection">
-            <li class="collection-item avatar">
-            <img src="images/yuna.jpg" alt="" class="circle">
-            <span class="title">Dani Cohen</span>
-            <p>Rating: 5<br>
-                Class: Math<br>
+            <li class="collection-item avatar" v-for="review in reviews" :key="review._id">
+            <img :src="teacherTopic.teacher.img" alt="" class="circle">
+            <span class="title">{{teacherTopic.teacher.fullName}}</span>
+            <p>Rating: {{review.topicRating}}<br>
+                Class: {{teacherTopic.topic.title}}, {{teacherTopic.topic.subtitle}} <br>
                 "it's great!"
             </p>
-            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-            <li class="collection-item avatar">
-            <i class="material-icons circle">folder</i>
-            <span class="title">Miki Mor</span>
-            <p>Rating: 4 <br>
-                Class: History<br>
-                "Very good"
-            </p>
-            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            <a href="#!" class="secondary-content"><i class="fa fa-star"></i></a>
             </li>
         </ul>
     </section>
@@ -36,7 +19,10 @@
 export default {
   data () {
     return {
-            teacherTopic: null
+            teacherTopic: {
+                teacher: {fullName: null},
+                topic: {title:null, subtitle: null}
+                }
         }
   },
   created() {
@@ -45,19 +31,12 @@ export default {
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {
             this.teacherTopic = teacherTopic[0];
-            console.log('teacherTopic in reviewList',this.teacherTopic);
             })
   },
   computed: {
       reviews() {
           return this.$store.getters.reviewsForDisplay
-      },
-    //   reviewerName(userId) {
-    //       console.log('userId:', userId);
-          
-    //       this.$store.dispatch({type: 'getUserById', userId})
-    //       .then(user => user.userName)
-    //   }
+      }
   },
 }
 </script>

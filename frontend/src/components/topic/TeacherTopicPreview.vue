@@ -5,7 +5,7 @@
                     <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
                     <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
                 </div>
-                    <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
+                    <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} <br> {{teacherTopic.teacher.fullName}} </p>
                 <div class="card-content">
                     <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
                     <p>{{teacherTopic.shortDes}}</p>

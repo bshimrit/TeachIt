@@ -36,6 +36,8 @@ export default {
   },
   computed: {
     popularTeacherTopics() {     
+        console.log(this.$store.getters.popularTeacherTopicsForDisplay);
+        
       return this.$store.getters.popularTeacherTopicsForDisplay;
     },
     teacherTopics(){

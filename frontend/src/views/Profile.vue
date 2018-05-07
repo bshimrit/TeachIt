@@ -7,10 +7,8 @@
         </div>
         <div class="card-stacked">
           <div class="card-content">
-            <h4>{{user.name}}
-              <span style="font-size: 28px;">4
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-              </span>
+            <h4>{{user.fullName}}
+               <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
             </h4>
             <div style="color: rgba(0,0,0,0.5)">
               <i>"{{user.quote}}"</i>
@@ -38,11 +36,12 @@
     <h3>What I Teach:</h3>
     <div class="row">
       <div class="col s12 m3" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-        <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="true" :showTeacher="false"></TeacherTopic>
+          {{5}}
+        <TeacherTopic :teacherTopic="teacherTopic.rating" :showLongDesc="true" :showTeacher="false"></TeacherTopic>
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <ul class="collection">
         <li>
           <div class="card">
@@ -72,7 +71,7 @@
           </div>
         </li>
       </ul>
-    </div>
+    </div> -->
 
      <h3>Reviews:</h3>
      <topic-review></topic-review>
@@ -84,7 +83,9 @@
 // @ is an alias to /src
 import TopicReview from "@/components/review/TopicReview.vue";
 import UserService from "@/services/UserService.js";
+import TeacherTopicService from "@/services/TeacherTopicService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
+import StarRating from 'vue-star-rating'
 
 export default {
   name: "profile",
@@ -92,21 +93,27 @@ export default {
     return {
       user: {
         name: "Dani Bern",
-        img: "https://randomuser.me/api/portraits/men/43.jpg",
+        img: "https://randomuser.me/api/portraits/men/27.jpg",
         quote: "Anyone Can Learn",
         description:
           "Hi! I'm Colt. I'm a developer with a serious love for teaching. I've spent the last few years teaching people to program at 2 different immersive bootcamps where I've helped hundreds of people become web developers and change their lives. My graduates work at companies like Google, Salesforce, and Square.",
         education: "A Degree",
         socialMedia: { facebook: "http://f.com/user", twitter: "t.com/user" }
+      },
+      teacherTopic: {
+          rating:1
       }
     };
   },
   created() {
     this.$store.dispatch({ type: "loadTeacherTopics" });
-    var userId = this.$route.params.userId;
-    if (!userId) userId = "5ae973a5f8cdd2dafed7a1f0";
-    UserService.getUserById(userId)
-      .then(user => (this.user = user))
+    var teacherTopicId = this.$route.params.teacherTopicId;
+    // if (!userId) userId = "5ae973a5f8cdd2dafed7a1f0";
+    TeacherTopicService.getTeacherTopicById(teacherTopicId)
+      .then(teacherTopic => {
+          this.user = teacherTopic[0].teacher
+          this.teacherTopic = teacherTopic[0]
+          })
       .catch(err => {
         console.log("err:", err);
       });
@@ -114,14 +121,15 @@ export default {
   components: {
     TopicReview,
     UserService,
-    TeacherTopic
+    TeacherTopic,
+    StarRating
   },
   computed: {
     topics() {
       return this.$store.getters.teacherTopicsForDisplay;
     },
     teacherTopics() {
-    //   console.log(this.$store.getters.teacherTopicsForDisplay);
+      console.log('teacherTopicsForDisplay', this.$store.getters.teacherTopicsForDisplay);
       return this.$store.getters.teacherTopicsForDisplay.filter((topic)=>topic.teacherId == this.$route.params.userId);
     }
   }
