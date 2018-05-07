@@ -2,7 +2,8 @@
     <section class="review-list">
         <p class="font-bold">Reviews</p>
         <ul class="collection">
-            <li class="flex align-center collection-item " v-for="review in reviews" :key="review._id">
+            <li class="flex align-center collection-item " v-for="(review, idx) in reviews" :key="review._id">
+                {{idx}}
                 <div class="margin-right20">
                     <div class="flex flex-column align-center">
                         <img :src="userImg" class="small-image"> 
@@ -34,13 +35,8 @@ export default {
         }
   },
   created() {
-<<<<<<< HEAD
         var teacherTopicId = this.userId || this.$route.params.teacherTopicId
         this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
-=======
-    var teacherTopicId = this.$route.params.teacherTopicId
-    this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
->>>>>>> 049b11870efabdbdc950a90b7772a6595f92c70f
     .then(() => {
         this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
         .then(teacherTopic => {
