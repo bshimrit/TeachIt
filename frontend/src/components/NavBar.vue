@@ -15,6 +15,7 @@
         <ul class="dropdown" v-if="dropdown" @click.stop>
             <li><router-link :to="`/profile/teacher/${loggedUser._id}`">My profile</router-link></li>
             <li><a href="#">Become a teacher</a></li>
+            <li v-if="loggedUser.isTeacher"><router-link :to="`/profile/topic/${loggedUser._id}`">My classes</router-link></li>
             <li><a @click="logOut">Log out</a></li>
         </ul>
         </template>
@@ -71,9 +72,6 @@ nav {
   padding: 10px 0;
   background-color: #2b303b;
   text-align: left;
-}
-.nav-wrapper {
-  /* padding: 0 30px; */
 }
 .logo-img {
   width: 150px;

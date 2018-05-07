@@ -108,7 +108,7 @@ export default {
     this.$store.dispatch({ type: "loadTeacherTopics" });
     if (this.$route.params.teacherTopicId) {
       var teacherTopicId = this.$route.params.teacherTopicId;
-      console.log("params:", this.$route.params.teacherTopicId);
+      console.log("params:", this.$route.params);
 
       TeacherTopicService.getTeacherTopicById(teacherTopicId)
         .then(teacherTopic => {
@@ -120,18 +120,18 @@ export default {
         });
     } else if (this.$route.params.userId) {
       var userId = this.$route.params.userId;
-      console.log("params:", this.$route.params.userId);
+      console.log("params:", this.$route.params);
 
       UserService.getUserById(userId)
         .then(user => {
           this.user = user;
-          console.log('user:', user);
+          console.log('user:', this.user);
           
         })
         .catch(err => {
           console.log("err:", err);
         });
-    }
+    } 
   },
   components: {
     TopicReview,

@@ -36,7 +36,6 @@
       </div>
     Already a member?
       <router-link class="waves-effect waves-light btn" to="/login">Login</router-link> <br>
-    
   </section>
 </template>
 
@@ -50,14 +49,18 @@ export default {
       newUser: UserService.emptyUser()
     };
   },
+  created() {
+      this.newUser.img = './img/icons/TeachItIcon.png'
+      
+  },
   methods: {
     saveUser() {
-      console.log(this.newUser);
+      console.log('newUser:',this.newUser);
+      var userToAdd = this.newUser
       this.$store
         .dispatch({ type: "saveUser", user: this.newUser })
         .then(addedUser => {
-          window.alert("Success! go to your profile if you want to add classes.");
-          console.log("added");
+          this.$store.dispatch({type: 'checkLogin', creds: {userName: userToAdd.userName, password: userToAdd.password}})
         })
         .catch(err => {
            window.alert("Failed");
