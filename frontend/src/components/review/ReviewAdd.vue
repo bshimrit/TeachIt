@@ -1,30 +1,22 @@
 <template>
   <div class="topic-review">
-    <div class="row">
-        <div class="col s12 m10">
-            <div class="card-panel">
-                    <form class="flex flex-column justify-start" @submit.prevent="addReview">
-                    <h5>Add Review</h5>
-                    <label>
-                        <img :src="userImg" class="small-image"> Name 
-                        <input type="text" :value="review.fullName" disabled/>
-                    </label>
-                    <label>
-                        Rate Class
-                        <StarRating :star-size=30 :increment=1 v-model="review.topicRating" :read-only="false" :show-rating="true"/>
-                        <!-- <input type="number" v-model.number="review.rate"  /> -->
-                    </label>
-                
-                    <label>
-                        Review
-                        <textarea v-model="review.topicReview" placeholder="Enter your review"/>
-                    </label>
-                    <button class="btn" type="submit" :disabled="!isValid">Add review</button>
-                </form>
+        <p class="font-bold">Add Review</p>
+        <form class="flex align-center" @submit.prevent="addReview">
+            <div class="margin-right20">
+                <div class="flex flex-column align-center">
+                    <img :src="userImg" class="small-image"> 
+                    {{review.fullName}}
+                </div>
             </div>
-        </div>
+            <div class="review-data">
+                <StarRating :star-size=20 :increment=1 v-model="review.topicRating" :show-rating="false" :read-only="false"/>
+                <textarea v-model="review.topicReview" placeholder="Enter your review"/>
+                <div class="flex justify-end">
+                    <button class="btn" type="submit" :disabled="!isValid">Submit</button>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
 </template>
 
 <script>
@@ -39,7 +31,7 @@ export default {
     },
     computed: {
         isValid() {
-            return this.review.topicRating > 0 && this.review.topicReview;
+            return this.review.topicRating > 0 ; //&& this.review.topicReview;
         },
         userImg() {
             return this.$store.getters.onlineUserImg
@@ -82,10 +74,11 @@ export default {
     width: 100%;
     margin: 0 auto
 }
-.small-image {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%
+
+textarea {
+    width: 100%;
+    resize: none;
 }
+
 </style>
 

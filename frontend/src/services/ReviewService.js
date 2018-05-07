@@ -11,9 +11,6 @@ function emptyReview() {
 }
 
 function getReviews(teacherTopicId) {
-    // var criteria = {teacherTopicId};
-    console.log('sending request for reviews to DB:', teacherTopicId);
-    
     return axios
         .get(REVIEW_URL, teacherTopicId)
         .then(res => res.data)
@@ -29,8 +26,8 @@ function deleteReview(reviewId) {
   return axios.delete(_getReviewUrl(reviewId));
 }
 
-function getReviewsById(reviewId) {
-  return axios.get(_getReviewUrl(reviewId)).then(res => {
+function getReviewsByTeacherTopicId(teacherTopicId) {
+  return axios.get(_getReviewUrl(teacherTopicId)).then(res => {
     return res.data
 });
 }
@@ -44,5 +41,5 @@ export default {
   saveReview,
   deleteReview,
   emptyReview,
-  getReviewsById
+  getReviewsByTeacherTopicId
 };

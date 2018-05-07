@@ -1,7 +1,7 @@
 <template>
   <div class="topic-review container">
     <h5>review-graph</h5>
-    <h5>review-filter</h5>
+    <!-- <h5>review-filter</h5> -->
   
     <review-add></review-add>
     <review-list></review-list>
