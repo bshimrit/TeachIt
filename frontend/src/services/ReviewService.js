@@ -31,6 +31,11 @@ function getReviewsByTeacherTopicId(teacherTopicId) {
     return res.data
 });
 }
+function getReviewsByTeacherId(teacherId) {
+  return axios.get(`${REVIEW_URL}/teacher/${teacherId}`).then(res => {
+    return res.data
+});
+}
 
 function _getReviewUrl(reviewId) {
   return `${REVIEW_URL}/${reviewId}`;
@@ -41,5 +46,6 @@ export default {
   saveReview,
   deleteReview,
   emptyReview,
-  getReviewsByTeacherTopicId
+  getReviewsByTeacherTopicId,
+  getReviewsByTeacherId
 };

@@ -38,6 +38,12 @@ export default {
       .then(reviews => {
           store.commit({ type: 'setReviews', reviews });
       })
+    },
+    loadReviewsByTeacherId(store, {teacherId}) {
+      return reviewService.getReviewsByTeacherId(teacherId)
+      .then(reviews => {
+          store.commit({ type: 'setReviews', reviews });
+      })
     }
   }
 }

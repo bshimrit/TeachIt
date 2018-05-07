@@ -6,8 +6,8 @@
                 {{idx}}
                 <div class="margin-right20">
                     <div class="flex flex-column align-center">
-                        <img :src="userImg" class="small-image"> 
-                        name
+                        <img :src="review.user.img" class="small-image"> 
+                        {{review.user.fullName}}
                     </div>
                 </div>
                 <div class="review-data">
@@ -25,6 +25,7 @@ import StarRating from 'vue-star-rating'
 
 export default {
     name: 'reviewList',
+<<<<<<< HEAD
     props: ['userId'],
   data () {
     return {
@@ -56,6 +57,23 @@ export default {
   components:{
       StarRating
   }
+=======
+    props: ['reviews'],
+    data () {
+        return {
+            }
+    },
+    created() {
+    },
+    computed: {
+        userImg() {
+                return this.$store.getters.onlineUserImg
+            }
+    },
+    components:{
+        StarRating
+    }
+>>>>>>> b1ad6ee959eec59fa95bd88bd20439e6ec34642b
 }
 </script>
 

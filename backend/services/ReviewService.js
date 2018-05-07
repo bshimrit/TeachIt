@@ -58,15 +58,83 @@ function update(review) {
 }
 
 function getByTeacherTopicId(teacherTopicId) {
-    var teacherTopicIdObj = mongo.ObjectID(teacherTopicId);    
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('review').find({teacherTopicId: teacherTopicIdObj}).toArray(function (err, reviews) {
-                if (err)    reject(err)
-                else        resolve(reviews);
-                db.close();
-            });
+            db.collection('review').aggregate([
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'userId',
+                            foreignField: '_id',
+                            as: 'user'
+                        }
+                },
+                {
+                    $unwind: '$user'
+                },
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'teacherId',
+                            foreignField: '_id',
+                            as: 'teacher'
+                        }
+                },
+                {
+                    $unwind: '$teacher'
+                },
+                {
+                    $match: {'teacherTopicId': new mongo.ObjectID(teacherTopicId)}
+                }
+                ]).toArray(function (err, reviews) {
+                    if (err)    reject(err)
+                    else        resolve(reviews);
+                    db.close();
+                });
+        })
+    });
+}
+
+function getByTeacherId(teacherId) {
+    return new Promise((resolve, reject)=>{
+        DBService.dbConnect()
+        .then(db=>{
+            db.collection('review').aggregate([
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'userId',
+                            foreignField: '_id',
+                            as: 'user'
+                        }
+                },
+                {
+                    $unwind: '$user'
+                },
+                {
+                    $lookup:
+                        {
+                            from: 'user',
+                            localField: 'teacherId',
+                            foreignField: '_id',
+                            as: 'teacher'
+                        }
+                },
+                {
+                    $unwind: '$teacher'
+                },
+                {
+                    $match: {'teacherId': new mongo.ObjectID(teacherId)}
+                }
+                ]).toArray(function (err, reviews) {
+                    if (err)    reject(err)
+                    else        resolve(reviews);
+                    db.close();
+                });
         })
     });
 }
@@ -76,5 +144,6 @@ module.exports = {
     add,
     remove,
     update,
-    getByTeacherTopicId
+    getByTeacherTopicId,
+    getByTeacherId
 }
