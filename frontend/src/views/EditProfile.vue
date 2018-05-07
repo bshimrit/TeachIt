@@ -1,7 +1,7 @@
 <template>
   <section class="EditProfilePage">
     <div class="container">
-      <h4>Profile</h4>
+      <h4>Profile - {{ userToUpdate.fullName}}</h4>
       <div class="row">
         <div class="col s4">
           
@@ -9,9 +9,10 @@
         <a  class="collection-item"  @click="editSection = 'AccountEdit'">Account</a>
         <a class="collection-item"  @click="editSection = 'InfoEdit'">Public Profile</a>
         <a class="collection-item" @click="editSection = 'ImgEdit'">Photo</a>
+         <a class="collection-item" @click="editSection = 'TeacherTopicEdit'">Classes</a>
       </div>
 
-      <button class="btn"  @click="editSection = 'TeacherTopicEdit'">Classes</button>
+      <!-- <button class="btn"  @click="editSection = 'TeacherTopicEdit'">Classes</button> -->
         </div>
 
         <form class="col s8" @submit.prevent="saveUser">
