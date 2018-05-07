@@ -3,11 +3,11 @@
  <h4>My Classes</h4>
      <div class="row">
           <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
+            <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
           </div>
       </div>     
-     
-     <topic-edit></topic-edit>
+       <a class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-plus"></i></a>
+     <topic-edit :teacherClass="teacherClass"></topic-edit>
 
 </section>
 </template>
@@ -19,24 +19,34 @@ import TopicEdit from "@/components/profile/TopicEdit.vue";
 export default {
   data() {
     return {
-      teacherTopics:[]
+      // teacherTopics:[],
+      teacherClass: null
     };
   },
   props: {},
   watch: {},
   computed: {
-   
+   teacherTopics() {
+     return this.$store.state.TeacherTopicStore.teacherTopicsByTeacherId;
+   }
   },
-  methods: {},
+  methods: {
+    toEdit(teacherTopic) {
+      console.log(teacherTopic);
+      
+      this.teacherClass = teacherTopic;
+    },
+    
+  },
   created() {
     var userId = this.$route.params.userId;
 
     this.$store
       .dispatch({ type: "getTopicsByTeacherId", teacherId: userId })
-      .then(topics => {
-        console.log(topics);
-        this.teacherTopics = topics;
-      });
+      // .then(topics => {
+      //   console.log(topics);
+      //   this.teacherTopics = topics;
+      // });
   },
   components: {
     TeacherTopic,

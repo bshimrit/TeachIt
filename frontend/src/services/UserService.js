@@ -42,7 +42,6 @@ function register(user) {
 }
 
 function saveUser(user) {
-
   if (user._id) {
     return axios.put(_getUserUrl(user._id), user)
   } else {

@@ -24,21 +24,37 @@ import StarRating from 'vue-star-rating'
 
 export default {
     name: 'reviewList',
-    props: ['reviews'],
-    data () {
-        return {
-            }
-    },
-    created() {
-    },
-    computed: {
-        userImg() {
-                return this.$store.getters.onlineUserImg
-            }
-    },
-    components:{
-        StarRating
-    }
+    props: ['userId'],
+  data () {
+    return {
+            teacherTopic: {
+                teacher: {fullName: null},
+                topic: {title:null, subtitle: null}
+                }
+        }
+  },
+  created() {
+        var teacherTopicId = this.userId || this.$route.params.teacherTopicId
+        this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
+    .then(() => {
+        this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
+        .then(teacherTopic => {
+                this.teacherTopic = teacherTopic[0];
+            })
+    })
+  },
+  computed: {
+      reviews() {
+          return this.$store.getters.reviewsForDisplay
+      },
+      userImg() {
+            return this.$store.getters.onlineUserImg
+        }
+
+  },
+  components:{
+      StarRating
+  }
 }
 </script>
 

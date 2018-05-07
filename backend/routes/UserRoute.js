@@ -50,6 +50,8 @@ module.exports = (app) => {
     })
 
     app.put(USER_URL, (req, res) => {
+        console.log('GETTING USERl:', req);
+        
         const user = req.body;
         UserService
             .update(user)

@@ -77,6 +77,6 @@ export default {
 }
 
 .search {
-    margin-top: 220px
+    margin-top: 200px
 }
 </style>

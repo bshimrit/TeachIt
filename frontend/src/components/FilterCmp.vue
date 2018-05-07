@@ -1,7 +1,7 @@
 <template>
     <section class="filter-cmp">
         <section class="container">
-            <form class="flex space-between align-center" @submit.prevent="emitFilter">
+            <form class="flex space-between align-center search-bar" @submit.prevent="emitFilter">
                 <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search teacher\topic\location..">
             </form>
             <section class="flex space-between align-center">
@@ -116,6 +116,9 @@ export default {
     }
     .left-filter{
         width: 60%;
+    }
+    .search-bar {
+        height: 80px;
     }
 
 

@@ -10,6 +10,13 @@
                 <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
                 <p>{{teacherTopic.shortDes}}</p>
                 <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+                <div v-if="showEdit">
+                    <a class="waves-effect waves-light" @click="$emit('toEdit', teacherTopic)">Edit</a>
+                    <button class="waves-effect waves-light" @click="deleteClass">Delete</button>
+                    <button v-on:click="$emit('enlarge-text', 0.1)">
+                    Enlarge text
+                    </button>
+                </div>
                 <div v-if="showLongDesc">
                     <p class="long-desc">{{teacherTopic.longDes}}</p>
                 </div> 
@@ -38,7 +45,21 @@ export default {
         },
         goToTeacherTopicProfile(){
             this.$router.push('/profile/topic/' + this.teacherTopic._id)
-        }
+        },
+        
+        deleteClass() {
+            
+           this.$store.dispatch({ type: "deleteTeacherTopic", teacherTopicId: this.teacherTopic._id , teacherId: this.teacherTopic.teacherId })
+            .then(deleted => {
+                window.alert("deleted");
+            console.log("deleted");
+            })
+            .catch(err => {
+            window.alert("Failed");
+            console.log("failed:" + err);
+            });
+    }
+       
     }
 }
 </script>
@@ -46,7 +67,7 @@ export default {
 <style scoped>
     /* (min-width: 740px) */
     .card {
-        width: 300px;
+        width: 250px;
         /* height: 300px; */
         text-align: left;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
