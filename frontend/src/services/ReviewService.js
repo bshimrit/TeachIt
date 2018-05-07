@@ -10,7 +10,7 @@ function emptyReview() {
   };
 }
 
-function getReviews(teacherTopicId) {
+function getReviews() {
     return axios
         .get(REVIEW_URL, teacherTopicId)
         .then(res => res.data)

@@ -48,7 +48,7 @@ export default {
     setFilter(){
       var curFilter = TeacherTopicService.emptyTeacherTopicFilter();
       var curQuery = this.$router.history.current.query;
-      if (curQuery.text) curFilter = {text: curQuery.text};
+      if (curQuery.text) curFilter.text = curQuery.text;
       if (curQuery.minprice && curQuery.maxprice) curFilter.price = [curQuery.minprice,curQuery.maxprice];
       if (curQuery.topics) curFilter.topics = (Array.isArray(curQuery.topics) ? curQuery.topics : [curQuery.topics]) 
       return curFilter;

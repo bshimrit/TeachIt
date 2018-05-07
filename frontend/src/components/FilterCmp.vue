@@ -38,7 +38,6 @@ export default {
     name:'search',
     props:{showExtraSearch:{default: false}},
     created(){
-        console.log(this.filterBy)
         this.filterBy = JSON.parse(JSON.stringify(this.$store.getters.teacherTopicFilter));
         if (this.showExtraSearch) {
             this.$store.dispatch({type: 'loadTopics'}).then(topics => {
