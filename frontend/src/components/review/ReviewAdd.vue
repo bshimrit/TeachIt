@@ -24,6 +24,8 @@ import ReviewService from '@/services/ReviewService.js'
 import StarRating from 'vue-star-rating'
 
 export default {
+    name: 'ReviewAdd',
+    props: ['userId'],
   data() {
         return {
             review: this.getEmptyReview(),
@@ -39,13 +41,16 @@ export default {
     },
     methods: {
         getEmptyReview() {
+            var idGetter = this.userId || this.$route.params.teacherTopicId;
+            console.log('got id:', idGetter);
+            
             return {
                 fullName: this.$store.getters.onlineUserName,
                 reviewerId: (this.$store.getters.loggedUser)? this.$store.getters.loggedUser._id: 'Please log in',
                 topicRating: 0,
                 readAt: (new Date()),
                 topicReview: '',
-                teacherTopicId: this.$route.params.teacherTopicId
+                teacherTopicId: idGetter
             };
         },
         addReview(){
