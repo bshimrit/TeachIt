@@ -34,4 +34,31 @@ img.profile {
 .user-details {
     width: 20%;
 }
+
+input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker {
+    text-decoration: none;
+    border:2px solid #26a69a;
+    text-align: center;
+    letter-spacing: .5px;
+    cursor: pointer;
+    color: Black;
+    font-family: 'MontBold', sans-serif;
+    box-sizing: border-box;
+}
+
+ 
+input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::placeholder {
+    color: Black;
+    font-family: 'MontBold', sans-serif;
+} 
+
+.cov-datepicker {
+    animation: blinker 1s linear infinite;
+    margin: 0;
+  }
   
+  @keyframes blinker {
+    50% {
+        box-shadow: 0 0 5px #26a69a;
+    }
+  }

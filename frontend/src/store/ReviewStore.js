@@ -4,7 +4,7 @@ export default {
   strict: true,
   state: {
     reviews: [],
-    reviewFilter: '',
+    reviewsCnt: []
   },
   mutations: {
     setReviewFilter(state, { filter }) {
@@ -25,24 +25,37 @@ export default {
     },
     setReviews(state, {reviews}) {
       state.reviews = reviews;
+    },
+    setReviewsCnt(state, {reviews}) {
+      var reviewsCnt = [0,0,0,0,0,0]
+      for (var i = 0; i < reviews.length; i++){
+        var rateIdx = reviews[i].topicRating;
+        reviewsCnt[rateIdx]++;
+      }
+      state.reviewsCnt = reviewsCnt; 
     }
   },
   getters: {
     reviewsForDisplay(state) {
       return state.reviews;
     },
+    reviewsCntDisplay(state) {
+      return state.reviewsCnt;
+    }
   },
   actions: {
     loadReviewsByTeacherTopicId(store, {teacherTopicId}) {
       return reviewService.getReviewsByTeacherTopicId(teacherTopicId)
       .then(reviews => {
           store.commit({ type: 'setReviews', reviews });
+          store.commit({ type: 'setReviewsCnt', reviews });
       })
     },
     loadReviewsByTeacherId(store, {teacherId}) {
       return reviewService.getReviewsByTeacherId(teacherId)
       .then(reviews => {
           store.commit({ type: 'setReviews', reviews });
+          store.commit({ type: 'setReviewsCnt', reviews });
       })
     }
   }
