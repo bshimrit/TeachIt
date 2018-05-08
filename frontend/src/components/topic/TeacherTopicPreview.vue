@@ -1,28 +1,27 @@
 <template>
-  <section >
-        <div class="card">
-            <div class="card-image">
-                <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
-                <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
-            </div>
-                <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
-            <div class="card-content">
-                <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
-                <p>{{teacherTopic.shortDes}}</p>
-                <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
-                <div v-if="showEdit">
-                    <a class="waves-effect waves-light" @click="$emit('toEdit', teacherTopic)">Edit</a>
-                    <button class="waves-effect waves-light" @click="deleteClass">Delete</button>
-                    <button v-on:click="$emit('enlarge-text', 0.1)">
-                    Enlarge text
-                    </button>
-                </div>
-                <div v-if="showLongDesc">
-                    <p class="long-desc">{{teacherTopic.longDes}}</p>
-                </div> 
-            </div>
+    <div class="card">
+        <div class="card-image">
+            <div @click="goToTeacherTopicProfile" class="pointer topic-img" :style="{ backgroundImage: 'url(' + teacherTopic.topicImage + ')'}"></div>
+            <!-- <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" /> -->
+            <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
         </div>
-    </section>
+            <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
+        <div class="card-content">
+            <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
+            <p>{{teacherTopic.shortDes}}</p>
+            <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+            <div v-if="showEdit">
+                <a class="waves-effect waves-light" @click="$emit('toEdit', teacherTopic)">Edit</a>
+                <button class="waves-effect waves-light" @click="deleteClass">Delete</button>
+                <button v-on:click="$emit('enlarge-text', 0.1)">
+                Enlarge text
+                </button>
+            </div>
+            <div v-if="showLongDesc">
+                <p class="long-desc">{{teacherTopic.longDes}}</p>
+            </div> 
+        </div>
+    </div>
 </template>
 
 <script>
@@ -65,12 +64,11 @@ export default {
 </script>
 
 <style scoped>
-    /* (min-width: 740px) */
     .card {
-        width: 250px;
-        /* height: 300px; */
+        width: 90vw;
         text-align: left;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 10px auto;
     }
     
     .card:hover {
@@ -78,8 +76,10 @@ export default {
     }
 
     .topic-img {
-        width: 100%;
-        height: 150px;
+        height: 275px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
 
     .vue-star-rating {
@@ -97,7 +97,7 @@ export default {
     }
 
     .card .card-image {
-        height: 200px;
+        height: 300px;
         text-align:center;
     }
 
@@ -119,6 +119,19 @@ export default {
     .card-content {
         padding: 0 5px;
         font-size: 14px;
+    }
+    @media (min-width: 750px){
+        .card {
+            width: 250px;        
+        } 
+
+        .topic-img {
+             height: 150px;
+        }
+
+        .card .card-image {
+            height: 200px;
+        }
     }
 
 </style>
