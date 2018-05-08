@@ -8,6 +8,7 @@ import Register from './views/Register.vue'
 import Profile from './views/Profile.vue'
 import Topic from './views/Topic.vue'
 import EditProfile from './views/EditProfile.vue'
+import Chat from './views/Chat.vue'
 
 Vue.use(Router)
 
@@ -22,5 +23,6 @@ export default new Router({
     { path: '/profile/teacher/:userId', name: 'profile', component: Profile},
     { path: '/profile/edit/:userId', name: 'edit', component: EditProfile},
     { path: '/profile/topic/:teacherTopicId', name: 'topic', component: Topic},
+    { path: '/chat/:recipientId', name: 'chat', component: Chat}
   ]
 })

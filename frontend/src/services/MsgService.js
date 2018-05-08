@@ -1,3 +1,4 @@
+// import io from '../../../backend/node_modules/socket.io-client/dist/socket.io.js'
 const BASE_URL = "http://127.0.0.1:3000";
 
 
@@ -9,9 +10,10 @@ const status = {
 
 function init() {
     console.log('Creating Socket');
-    
     socket = io.connect(BASE_URL);
     socket.on('chat message', function(msg){
+        console.log('got msg:', msg);
+        
         msgs.push(msg)
     });
     socket.on('chat setStatusTxt', function(statusTxt){
@@ -19,20 +21,22 @@ function init() {
     });
 }
 function destroy() {
-    socket = null;
-    console.log('Destroyed Socket');
+    // socket = null;
+    // console.log('Destroyed Socket');
 }
 
 function sendMsg(msg) {
-    socket.emit('chat newMessage', msg);
-    console.log('Sending: ', msg.txt);
+    // console.log('socket:', socket);
+    
+    // socket.emit('chat newMessage', msg);
+    // console.log('Sending: ', msg.txt);
 }
 
 function setTopic(topic) {
-    socket.emit('chat setTopic', topic);
+    // socket.emit('chat setTopic', topic);
 }
 function sendStatus(statusTxt) {
-    socket.emit('chat sendStatus', statusTxt);
+    // socket.emit('chat sendStatus', statusTxt);
 }
 
 export default {

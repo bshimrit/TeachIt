@@ -12,7 +12,10 @@ import 'font-awesome/css/font-awesome.css';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import _ from 'lodash'
 import './css/main.css'
+// import socketio from 'socket.io-client'
+import VueSocketio from 'vue-socket.io';
 
+Vue.use(VueSocketio, '//localhost:3000', store);
 Vue.config.productionTip = false
 
 
@@ -50,5 +53,10 @@ Vue.use(VueGoogleMaps, {
 new Vue({
   router,
   store,
+  sockets: {
+      connect() {
+          console.log('Connected to socket!');
+      }
+  },
   render: h => h(App)
 }).$mount('#app')

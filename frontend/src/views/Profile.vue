@@ -29,8 +29,8 @@
             </div>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-light btn">
-              Contact Me!</a>
+            <router-link class="waves-effect waves-light btn" :to="`/chat/${teacherId}`">
+              Contact Me!</router-link>
           </div>
         </div>
       </div>
