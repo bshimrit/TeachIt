@@ -6,8 +6,10 @@ import Search from './views/Search.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Profile from './views/Profile.vue'
+import EditClasses from './views/EditClasses.vue'
 import Topic from './views/Topic.vue'
 import EditProfile from './views/EditProfile.vue'
+import Chat from './views/Chat.vue'
 
 Vue.use(Router)
 
@@ -19,8 +21,10 @@ export default new Router({
     { path: '/search/:filter', name: 'searchFilter', component: Search},
     { path: '/login', name: 'login', component: Login},
     { path: '/register', name: 'register', component: Register},
-    { path: '/profile/teacher/:userId', name: 'profile', component: Profile},
+    { path: '/profile/user/:userId', name: 'profile', component: Profile},
     { path: '/profile/edit/:userId', name: 'edit', component: EditProfile},
+    { path: '/profile/classes/edit/:userId', name: 'editClasses', component: EditClasses},
     { path: '/profile/topic/:teacherTopicId', name: 'topic', component: Topic},
+    { path: '/chat/:recipientId', name: 'chat', component: Chat}
   ]
 })

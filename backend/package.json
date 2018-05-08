@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "client-sessions": "^0.8.0",
     "express": "^4.16.2",
     "express-cors": "0.0.3",
     "mongodb": "2.2.5",
     "npm-run-all": "^4.1.2",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "socket.io": "^2.1.0"
   }
 }
