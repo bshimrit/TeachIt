@@ -1,14 +1,21 @@
 <template>
   <div class="topic-review">
-    <h5>review-graph</h5>
-    <review-add @addedReview="loadReviews" :teacherId="teacherId"></review-add>
-    <review-list :reviews="reviews"></review-list>
+    <section class="flex flex-column align-start">
+      <div class="font-bold">
+        <div v-if="teacherTopicId">Class review</div>
+        <div v-else>Teacher review</div>
+      </div>
+      <reviewChart :reviews="reviews" :width="100" :height="150"></reviewChart>
+    </section>
+    <reviewAdd @addedReview="loadReviews" :teacherId="teacherId"></reviewAdd>
+    <reviewList :reviews="reviews"></reviewList>
   </div>
 </template>
 
 <script>
 import ReviewList from "./ReviewList.vue";
 import ReviewAdd from "./ReviewAdd.vue";
+import ReviewChart from "./ReviewChart.vue";
 import FilterCmp from "@/components/FilterCmp.vue";
 
 export default {
@@ -39,6 +46,7 @@ export default {
   components: {
     ReviewList,
     ReviewAdd,
+    ReviewChart,
     FilterCmp
   }
 };

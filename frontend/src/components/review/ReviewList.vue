@@ -83,6 +83,7 @@ export default {
     }
     .collection-item{
         padding-left: 0;
+        width: 100%
     }
 
 </style>
