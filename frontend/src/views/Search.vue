@@ -9,8 +9,8 @@
                       <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
                   </div>
               </div>
-          </div>   
-          <teacher-map class="teacher-map relative"></teacher-map>
+          </div>
+          <teacher-map v-if="$mq ==='lg'" class="teacher-map relative"></teacher-map>
         </div>
       </section> 
     </section>
@@ -63,20 +63,41 @@ export default {
 </script>
 
 <style scoped>
+
+
 .map-list {
-    display: flex
+  display: flex
 }
+
+
+.col {
+  width: 100%;
+  /* height: 50vh; */
+}
+
 .cards {
-  width: 70%;
+  width: 100%;
   padding-left: 0;
 }
 .teacher-map {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
     display: inline-block;
     width: 30%;
 }
 
 .search {
-    margin-top: 200px
+  margin-top: 200px
+}
+@media(min-width: 1024px){
+    .cards {
+      width: 70%;        
+    }
+
+}
+
+@media(min-width: 750px){
+  .col{
+    width: initial;
+  }
 }
 </style>

@@ -19,8 +19,14 @@
                     <p class="long-desc">{{teacherTopic.longDes}}</p>
                 </div> 
             </div>
+            <div v-if="showLongDesc">
+                <p class="long-desc">{{teacherTopic.longDes}}</p>
+            </div> 
         </div>
-    </section>
+        <div v-if="showLongDesc">
+            <p class="long-desc">{{teacherTopic.longDes}}</p>
+        </div> 
+    </div>
 </template>
 
 <script>
@@ -70,59 +76,80 @@ export default {
 </script>
 
 <style scoped>
-/* (min-width: 740px) */
-.card {
-  width: 250px;
-  /* height: 300px; */
-  text-align: left;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+    .card {
+        width: 90vw;
+        text-align: left;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 10px auto;
+    }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
 
-.topic-img {
-  width: 100%;
-  height: 150px;
-}
+    .topic-img {
+        height: 275px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
 
-.vue-star-rating {
-  width: 100%;
-  justify-content: start;
-}
+    .topic-img {
+        width: 100%;
+        /* height: 150px; */
+    }
 
-.long-desc {
-  max-height: 60px;
-  overflow: hidden;
-}
+    .vue-star-rating {
+        width: 100%;
+        justify-content: start;
+    }
 
-a {
-  color: black;
-}
+    .long-desc {
+        max-height: 60px;
+        overflow: hidden;
+    }
 
-.card .card-image {
-  height: 200px;
-  text-align: center;
-}
+    .card .card-image {
+        height: 300px;
+        text-align:center;
+    }
 
-a.teacher-img {
-  width: 80px;
-  height: 80px;
-  bottom: 40px;
-}
+    a.teacher-img {
+        top: -33px;
+        width: 66px;
+        height: 66px;
+    }
+    a.teacher-img img{
+        height: 100%;
+    }
 
-a.teacher-img img {
-  height: 100%;
-}
+    .card-content {
+        padding: 0 5px;
+        font-size: 14px;
+    }
 
-.card-header {
-  margin: 0;
-  padding: 0 5px;
-  font-size: 14px;
-}
-.card-content {
-  padding: 0 5px;
-  font-size: 14px;
-}
+    .card-header {
+        margin: 20px 0 0;
+        padding: 0 5px;
+        font-size: 14px;
+    }
+    
+    @media (min-width: 750px){
+        .card {
+            width: 250px;   
+            /* height: 300px;      */
+        } 
+
+        .topic-img {
+                height: 150px;
+        }
+
+        .card .card-image {
+            height: 200px;
+        }
+
+        .card-header {
+        margin-top: 0;
+        }
+    }
 </style>

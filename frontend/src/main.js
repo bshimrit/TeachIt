@@ -8,12 +8,18 @@ import 'materialize-css'
 import '../node_modules/materialize-css/dist/css/materialize.min.css'
 import '../node_modules/materialize-css/dist/js/materialize.min.js'
 import 'font-awesome/css/font-awesome.css';
+import VueMq from 'vue-mq'
+ 
+
 
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 import _ from 'lodash'
 import './css/main.css'
+// import socketio from 'socket.io-client'
+import VueSocketio from 'vue-socket.io';
 
+Vue.use(VueSocketio, '//localhost:3000', store);
 Vue.config.productionTip = false
 
 
@@ -22,6 +28,14 @@ window.axios = axios.create({
   baseURL: 'http://127.0.0.1:3000',
   withCredentials: true
 });
+
+Vue.use(VueMq, {
+  breakpoints: { // default breakpoints - customize this
+    sm: 750,
+    md: 1025,
+    lg: Infinity,
+  }
+})
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -51,5 +65,10 @@ Vue.use(VueGoogleMaps, {
 new Vue({
   router,
   store,
+  sockets: {
+      connect() {
+          console.log('Connected to socket!');
+      }
+  },
   render: h => h(App)
 }).$mount('#app')

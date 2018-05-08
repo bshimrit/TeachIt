@@ -1,11 +1,11 @@
 <template>
   <div class="topic-review">
     <section class="flex flex-column align-start">
-      <div class="font-bold">
+      <div v-if="$mq !== 'sm'" class="font-bold">
         <div v-if="teacherTopicId">Class review</div>
         <div v-else>Teacher review</div>
       </div>
-      <reviewChart :reviews="reviews" :width="100" :height="150"></reviewChart>
+      <reviewChart v-if="$mq !== 'sm'" :reviews="reviews" :width="100" :height="150"></reviewChart>
     </section>
     <reviewAdd @addedReview="loadReviews" :teacherId="teacherId"></reviewAdd>
     <reviewList :reviews="reviews"></reviewList>
