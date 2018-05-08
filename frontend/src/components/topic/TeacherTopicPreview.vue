@@ -1,7 +1,8 @@
 <template>
     <div class="card">
         <div class="card-image">
-            <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
+            <div @click="goToTeacherTopicProfile"  class="pointer topic-img" :style="{backgroundImage: 'url(' + teacherTopic.topicImage + ')'}"></div>
+            <!-- <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" /> -->
             <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
         </div>
             <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
@@ -77,9 +78,9 @@ export default {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         margin: 10px auto;
     }
-    
+
     .card:hover {
-       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
 
     .topic-img {
@@ -89,69 +90,62 @@ export default {
         background-position: center;
     }
 
-.topic-img {
-  width: 100%;
-  height: 150px;
-}
+    .topic-img {
+        width: 100%;
+        /* height: 150px; */
+    }
 
-.vue-star-rating {
-  width: 100%;
-  justify-content: start;
-}
+    .vue-star-rating {
+        width: 100%;
+        justify-content: start;
+    }
 
-.long-desc {
-  max-height: 60px;
-  overflow: hidden;
-}
+    .long-desc {
+        max-height: 60px;
+        overflow: hidden;
+    }
 
     .card .card-image {
         height: 300px;
         text-align:center;
     }
 
-.card .card-image {
-  height: 200px;
-  text-align: center;
-}
-
+    a.teacher-img {
+        top: -33px;
+        width: 66px;
+        height: 66px;
+    }
     a.teacher-img img{
         height: 100%;
     }
-    
-    .card-header {
-        margin: 0;
-        padding: 0 5px;
-        font-size: 14px;
-    }
+
     .card-content {
         padding: 0 5px;
         font-size: 14px;
     }
+
+    .card-header {
+        margin: 20px 0 0;
+        padding: 0 5px;
+        font-size: 14px;
+    }
+    
     @media (min-width: 750px){
         .card {
-            width: 250px;        
+            width: 250px;   
+            /* height: 300px;      */
         } 
 
         .topic-img {
-             height: 150px;
+                height: 150px;
         }
 
         .card .card-image {
             height: 200px;
         }
+
+        .card-header {
+        margin-top: 0;
+        }
     }
-
-a.teacher-img img {
-  height: 100%;
-}
-
-.card-header {
-  margin: 0;
-  padding: 0 5px;
-  font-size: 14px;
-}
-.card-content {
-  padding: 0 5px;
-  font-size: 14px;
-}
 </style>
