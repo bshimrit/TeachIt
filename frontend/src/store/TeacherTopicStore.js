@@ -86,8 +86,8 @@ export default {
       .then(teacherTopic => {
         if (isEdit) store.commit({type: 'updateTeacherTopic', teacherTopic})
         else store.commit({type: 'addTeacherTopic', teacherTopic})
-        console.log('teacherTopic.data[0].teacherId',teacherTopic.data[0].teacherId);
-        store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.data[0].teacherId});
+        // console.log('teacherTopic.data[0].teacherId',teacherTopic.data[0].teacherId);
+        // store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.data[0].teacherId});
         return teacherTopic;
       })
     },
@@ -102,9 +102,7 @@ export default {
       console.log('store teacherId',teacherId);
       return TeacherTopicService.getTopicsByTeacherId(teacherId)
             .then(teacherTopics => {
-              
-              store.commit({type: 'setTeacherTopicById', teacherTopics})
-              console.log('store returned teacherTopics',teacherTopics );
+              store.commit({type: 'setTeacherTopics', teacherTopics})
               
               return teacherTopics;
         })

@@ -13,7 +13,7 @@
                 <div v-if="showEdit">
                     <a class="waves-effect waves-teal btn-flat" @click="$emit('toEdit', teacherTopic)"><i class="fa fa-pencil-square-o"></i></a>
                     <a class="waves-effect waves-teal btn-flat" @click="deleteClass"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                   <v-dialog/>
+                  
                 </div>
                 <div v-if="showLongDesc">
                     <p class="long-desc">{{teacherTopic.longDes}}</p>
