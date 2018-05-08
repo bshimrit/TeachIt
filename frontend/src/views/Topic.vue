@@ -83,7 +83,7 @@ export default {
   },
   methods: {
       goToTeacherProfile(){
-            this.$router.push('/profile/teacher/' + this.teacherTopic.teacherId);
+            this.$router.push('/profile/user/' + this.teacherTopic.teacherId);
         },
   }
 };

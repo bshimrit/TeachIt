@@ -8,7 +8,7 @@
             <a class="collection-item" @click="editSection = 'AccountEdit'">Account</a>
             <a class="collection-item" @click="editSection = 'InfoEdit'">Public Profile</a>
             <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
-            <a class="collection-item" @click="editSection = 'Classes'">Classes</a>
+            <a class="collection-item" @click="goToClasses">Classes</a>
           </div>
         </div>
 
@@ -18,7 +18,7 @@
             <button type="submit" class="waves-effect waves-light btn">Save</button>
           </form>
 
-          <TeacherTopicEdit v-else></TeacherTopicEdit>
+         
         </div>
 
       </div>
@@ -31,8 +31,8 @@
 <script>
 import UserService from "@/services/UserService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import TopicEdit from "@/components/profile/TopicEdit.vue";
-import TeacherTopicEdit from "@/components/profile/TeacherTopicEdit";
+import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
+import TeacherTopicList from "@/components/topic/TeacherTopicList";
 import AccountEdit from "@/components/profile/AccountEdit";
 import InfoEdit from "@/components/profile/InfoEdit";
 import Upload from "@/components/uploadImg/Upload";
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       editSection: "InfoEdit",
-    
+      userId:this.$route.params.userId 
     };
   },
   methods: {
@@ -56,7 +56,10 @@ export default {
           window.alert("Failed");
           console.log("failed:" + err);
         });
-    }
+    },
+    goToClasses() {
+      this.$router.push("/profile/classes/edit/" + this.userId);
+    },
   },
   created() {},
   computed: {
@@ -68,7 +71,7 @@ export default {
   components: {
     UserService,
     TeacherTopic,
-    TopicEdit,
+    TeacherTopicList,
     TeacherTopicEdit,
     AccountEdit,
     InfoEdit,

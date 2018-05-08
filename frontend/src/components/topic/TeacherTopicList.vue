@@ -1,26 +1,30 @@
 <template>
 <section>
- <h4>My Classes</h4>
+ <h5>My Classes</h5>
      <div class="row">
+       <topicEditModal :teacherClass="teacherClass"></topicEditModal>
+
           <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
             <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
           </div>
       </div>     
-       <a class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-plus"></i></a>
-     <topic-edit :teacherClass="teacherClass"></topic-edit>
+       <a @click="toAdd"  v-if="!editClass" class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-plus"></i></a>
+       <div class="col s6"> <topic-edit v-if="editClass" :teacherClass="teacherClass"></topic-edit></div>
+    
 
 </section>
 </template>
 
 <script>
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import TopicEdit from "@/components/profile/TopicEdit.vue";
+import TopicEdit from "@/components/topic/TeacherTopicEdit.vue";
+import TopicEditModal from "@/components/topic/TopicEditModal.vue";
 
 export default {
   data() {
     return {
-      // teacherTopics:[],
-      teacherClass: null
+      teacherClass: null,
+      editClass: false
     };
   },
   props: {},
@@ -32,11 +36,13 @@ export default {
   },
   methods: {
     toEdit(teacherTopic) {
-      console.log(teacherTopic);
-      
       this.teacherClass = teacherTopic;
+      this.editClass=true;
     },
+     toAdd() {
     
+      this.editClass=true;
+    },
   },
   created() {
     var userId = this.$route.params.userId;
@@ -50,7 +56,8 @@ export default {
   },
   components: {
     TeacherTopic,
-    TopicEdit
+    TopicEdit,
+    TopicEditModal
   }
 };
 </script>

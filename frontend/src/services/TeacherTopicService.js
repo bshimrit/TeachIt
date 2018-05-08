@@ -44,7 +44,9 @@ function getTeacherTopics(filter) {
 }
 
 function saveTeacherTopic(teacherTopic) {
-
+if (!teacherTopic.topicImage) {
+  teacherTopic.topicImage  ='./img/topics/topic1.jpg'
+}
   if (teacherTopic._id) return axios.put(TOPIC_TEACHER_URL, teacherTopic);
   else return axios.post(TOPIC_TEACHER_URL, teacherTopic);
 }
