@@ -1,5 +1,5 @@
 <template>
-  <section >
+  <section>
         <div class="card">
             <div class="card-image">
                 <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
@@ -26,7 +26,8 @@
         <div v-if="showLongDesc">
             <p class="long-desc">{{teacherTopic.longDes}}</p>
         </div> 
-    </div>
+  
+    </section>
 </template>
 
 <script>

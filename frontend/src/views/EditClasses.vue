@@ -9,7 +9,9 @@
             <a class="collection-item" @click="goToEditProfile">Manage Profile</a>
           </div>
         </div>
+         <div class="col s9">
           <TeacherTopicList></TeacherTopicList>
+         </div>
       </div>
 
     </div>

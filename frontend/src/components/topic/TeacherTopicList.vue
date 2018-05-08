@@ -2,9 +2,8 @@
 <section>
  <h5>My Classes</h5>
      <div class="row">
-      <button class="btn" id="show-modal" @click="showModal = true">Add Class</button>
-       <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal"
-       @modalClosed="showModal= false"
+      <button class="btn  waves-effect waves-light" id="show-modal" @click="showModal = true">Add Class</button>
+       <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="showModal= false"
        ></topicEditModal>
           <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
             <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
@@ -29,7 +28,7 @@ export default {
   data() {
     return {
       teacherClass: null,
-      isEditClass: false,
+    
       showModal: false
     };
   },
@@ -44,11 +43,9 @@ export default {
   methods: {
     toEdit(teacherTopic) {
       this.teacherClass = teacherTopic;
-      this.isEditClass=true;
+      this.showModal = true;
     },
-     toAdd() {
-      this.isEditClass=true;
-    },
+
      saveClass(teacherClassToEdit) {
        console.log('S',teacherClassToEdit);
       if (!teacherClassToEdit.topicId) teacherClassToEdit.topicId = "5ae97573b8ed24ed05f66166";
