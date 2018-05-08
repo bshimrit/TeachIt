@@ -8,6 +8,7 @@ export default {
   state: {
     teacherTopics: [],
     popularTeacherTopics:[],
+    teacherTopicsByTeacherId: [],
     teacherTopicFilter: TeacherTopicService.emptyTeacherTopicFilter(),
     popularByTopics: [],
     MAX_VIEW: 4
@@ -37,6 +38,9 @@ export default {
     },
     setPopularByTopics(state, {popularByTopics}) {
       state.popularByTopics = popularByTopics;
+    },
+    setTeacherTopicById(state, {teacherTopics}) {
+      state.teacherTopicsByTeacherId = teacherTopics;
     }
   },
   getters: {
@@ -68,9 +72,10 @@ export default {
           store.commit({ type: 'setPopularTeacherTopics', popularTeacherTopics });
         })
     }, 
-     deleteTeacherTopic(store, {teacherTopicId}) {
+     deleteTeacherTopic(store, {teacherTopicId, teacherId}) {
       return TeacherTopicService.deleteTeacherTopic(teacherTopicId)
       .then(()=>{
+        store.dispatch({type: 'getTopicsByTeacherId', teacherId});
         store.commit({type: 'deleteTeacherTopic', teacherTopicId});
       })
     },
@@ -81,18 +86,26 @@ export default {
       .then(teacherTopic => {
         if (isEdit) store.commit({type: 'updateTeacherTopic', teacherTopic})
         else store.commit({type: 'addTeacherTopic', teacherTopic})
+        console.log('teacherTopic.data[0].teacherId',teacherTopic.data[0].teacherId);
+        store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.data[0].teacherId});
         return teacherTopic;
       })
     },
     getTeacherTopicById(store, {teacherTopicId}) {
           return TeacherTopicService.getTeacherTopicById(teacherTopicId)
-            .then(teacherTopic => {
-              return teacherTopic;
+            .then(teacherTopics => {
+             
+              return teacherTopics;
         })   
     },
     getTopicsByTeacherId(store, {teacherId}) {
+      console.log('store teacherId',teacherId);
       return TeacherTopicService.getTopicsByTeacherId(teacherId)
             .then(teacherTopics => {
+              
+              store.commit({type: 'setTeacherTopicById', teacherTopics})
+              console.log('store returned teacherTopics',teacherTopics );
+              
               return teacherTopics;
         })
     },

@@ -4,46 +4,44 @@
       <h4>Profile - {{ userToUpdate.fullName}}</h4>
       <div class="row">
         <div class="col s4">
-          
-      <div class="collection">
-        <a  class="collection-item"  @click="editSection = 'AccountEdit'">Account</a>
-        <a class="collection-item"  @click="editSection = 'InfoEdit'">Public Profile</a>
-        <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
-        <a class="collection-item" @click="editSection = 'TeacherTopicEdit'">Classes</a>
-      </div>
-
-      <!-- <button class="btn"  @click="editSection = 'TeacherTopicEdit'">Classes</button> -->
+          <div class="collection">
+            <a class="collection-item" @click="editSection = 'AccountEdit'">Account</a>
+            <a class="collection-item" @click="editSection = 'InfoEdit'">Public Profile</a>
+            <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
+            <a class="collection-item" @click="goToClasses">Classes</a>
+          </div>
         </div>
 
-        <form class="col s8" @submit.prevent="saveUser">
-       
-        <component :is="editSection" :userToUpdate="userToUpdate" />
-        
-        <button class="waves-effect waves-light btn">Save</button>
+        <div class="col s8">
+          <form v-if="editSection !== 'Classes'" @submit.prevent="saveUser">
+            <component :is="editSection" :userToUpdate="userToUpdate" />
+            <button type="submit" class="waves-effect waves-light btn">Save</button>
+          </form>
 
-        </form>
+         
+        </div>
+
       </div>
+
     </div>
 
-<!-- <TeacherTopicEdit></TeacherTopicEdit> -->
   </section>
 </template>
 
 <script>
 import UserService from "@/services/UserService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import TopicEdit from "@/components/profile/TopicEdit.vue";
-import TeacherTopicEdit from "@/components/profile/TeacherTopicEdit";
+import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
+import TeacherTopicList from "@/components/topic/TeacherTopicList";
 import AccountEdit from "@/components/profile/AccountEdit";
 import InfoEdit from "@/components/profile/InfoEdit";
-import ImgEdit from "@/components/profile/ImgEdit";
+import Upload from "@/components/uploadImg/Upload";
 
 export default {
   data() {
     return {
-       userToUpdate: UserService.emptyUser(),
-       editSection: 'InfoEdit',
-
+      editSection: "InfoEdit",
+      userId:this.$route.params.userId 
     };
   },
   methods: {
@@ -51,31 +49,33 @@ export default {
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
-            window.alert("Updated");
+          window.alert("Updated");
           console.log("added");
         })
         .catch(err => {
-           window.alert("Failed");
+          window.alert("Failed");
           console.log("failed:" + err);
         });
+    },
+    goToClasses() {
+      this.$router.push("/profile/classes/edit/" + this.userId);
+    },
+  },
+  created() {},
+  computed: {
+    userToUpdate() {
+      let loggedUser = this.$store.getters.loggedUser;
+      return loggedUser ? { ...loggedUser } : UserService.emptyUser();
     }
-  },
- created() {
-    this.userToUpdate ={...this.$store.getters.loggedUser};
-   
-  },
-   computed: {
-    
-  
   },
   components: {
     UserService,
     TeacherTopic,
-    TopicEdit,
+    TeacherTopicList,
     TeacherTopicEdit,
     AccountEdit,
     InfoEdit,
-    ImgEdit
+    Upload
   }
 };
 </script>

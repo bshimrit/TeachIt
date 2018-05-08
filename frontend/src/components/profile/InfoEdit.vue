@@ -30,9 +30,10 @@
             </div>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <h5 class="left-align">Links</h5>
               <div class="input-field col s12">
+               
                 <input v-model="userToUpdate.socialLinks.facebook" type="text" class="validate">
                 <label  class="left active">Facebook</label>
               </div>
@@ -40,7 +41,7 @@
                 <input v-model="userToUpdate.socialLinks.twitter" type="text" class="validate">
                 <label class="left active">Twitter</label>
               </div>
-          </div>
+          </div> -->
 
     </section>
 </template>

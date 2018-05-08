@@ -1,9 +1,9 @@
 <template>
    <div class="field-body">
-     <h4>Upload profile image:</h4>
+     <h5>Upload profile image:</h5>
    <div class="field">
      <div class="control">
-       <input class="input is-danger"  type="text" placeholder="Add your product title">
+       <!-- <input class="input is-danger"  type="text" placeholder="Add your product title"> -->
          <div class="file">
           <label class="file-label">
                     <input   type="file" accept="image/*"  class="form-control" v-on:change="upload($event.target.files)" multiple/>
@@ -27,6 +27,7 @@
 <script>
 import axios from 'axios'
 export default {
+  name: 'Upload',
    data: function() {
    return {
      

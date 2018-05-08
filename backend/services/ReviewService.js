@@ -16,6 +16,10 @@ function query(criteria = {}) {
 }
 
 function add(review) {
+    review.teacherId = mongo.ObjectID(review.teacherId);
+    review.userId = mongo.ObjectID(review.userId);
+    if (review.teacherTopicId) review.teacherTopicId = mongo.ObjectID(review.teacherTopicId);
+
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
@@ -88,6 +92,9 @@ function getByTeacherTopicId(teacherTopicId) {
                 },
                 {
                     $match: {'teacherTopicId': new mongo.ObjectID(teacherTopicId)}
+                },
+                {
+                    $sort: {'_id':-1}
                 }
                 ]).toArray(function (err, reviews) {
                     if (err)    reject(err)
@@ -129,6 +136,9 @@ function getByTeacherId(teacherId) {
                 },
                 {
                     $match: {'teacherId': new mongo.ObjectID(teacherId)}
+                },
+                { 
+                    $sort: {'_id':-1}
                 }
                 ]).toArray(function (err, reviews) {
                     if (err)    reject(err)

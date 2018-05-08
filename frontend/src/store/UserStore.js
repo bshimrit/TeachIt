@@ -6,7 +6,6 @@ export default {
     loggedinUser: null,
     users:[],
     dropdown: false
-    // userFilter: '',
   },
   mutations: {
     setUser(state, {user}) {
@@ -23,28 +22,13 @@ export default {
     closeDropdown(state) {
         state.dropdown = false
     },
-    
-    // setUserFilter(state, { filter }) {
-    //   state.userFilter = filter;
-    // },
-    // deleteUser(state, { userId }) {
-    //   state.users = state.users.filter(user => user.id !== userId)
-    // },
-    // setSelecteduser(state, { user }) {
-    //   state.selecteduser = user;
-    // },
-    addUser(state, { user }) {
-      console.log('Mut',user);
-      
+    addUser(state, { user }) {   
       state.users = [user, ...state.users];
     },
     updateUser(state, { user }) {
       const userIdx = state.users.findIndex(curruser => curruser.id === user.id)
       state.users.splice(userIdx, 1, user)
     },
-    // setusers(state, {users}) {
-    //   state.users = users;
-    // }
   },
   getters: {
       loggedUser(state) {
@@ -59,10 +43,6 @@ export default {
       onlineUserImg(state) {
         if (state.loggedinUser) return state.loggedinUser.img
       }
-    // usersForDisplay(state) {
-    //   return state.users;
-    // },
-
   },
   actions: {
       checkLogin(store, {creds}) {
@@ -93,8 +73,7 @@ export default {
     //   })
     // },
     saveUser(store, {user}) {
-      
-      const isEdit = !!user.id;
+      const isEdit = !!user._id;
       return UserService.saveUser(user)
       .then(res => {
         let retUser = res.data[0];
