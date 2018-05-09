@@ -1,19 +1,19 @@
 <template>
   <section class="EditClassesPage">
     <div class="container">
-      <h5>Classes </h5>
       <div class="row">
-        <div class="col s3">
+        <!-- <div class="col s3">
           <div class="collection">
             <a class="collection-item" @click="goToPublicProfile">View Public Profile</a>
             <a class="collection-item" @click="goToEditProfile">Manage Profile</a>
           </div>
-        </div>
+        </div> -->
          <div class="col s9">
           <TeacherTopicList></TeacherTopicList>
          </div>
       </div>
-
+     
+           
     </div>
   </section>
 </template>
@@ -30,8 +30,8 @@ import Upload from "@/components/uploadImg/Upload";
 export default {
   data() {
     return {
-      
-      userId: this.$route.params.userId
+      userId: this.$route.params.userId,
+     
     };
   },
   methods: {
@@ -43,7 +43,10 @@ export default {
       this.$router.push("/profile/edit/" + this.userId);
     }
   },
-  created() {},
+  created(){
+           
+        
+    },
   computed: {
    
   },

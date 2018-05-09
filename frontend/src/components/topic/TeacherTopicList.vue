@@ -73,5 +73,12 @@ export default {
 </script>
 
 <style scoped>
-
+.classes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2b303b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
 </style>

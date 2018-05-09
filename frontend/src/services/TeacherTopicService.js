@@ -1,4 +1,9 @@
-const TOPIC_TEACHER_URL = "/teacherTopic";
+let TOPIC_TEACHER_URL = "/teacherTopic";
+
+if (process.env.NODE_ENV !== 'development') {
+  TOPIC_TEACHER_URL = '/teacherTopic'
+}
+
 
 function emptyTeacherTopicFilter() {
     return {text:'',price:[0,500], topics:[], sort:''}

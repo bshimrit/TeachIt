@@ -7,7 +7,7 @@
     "dir": "dir",
     "ping": "ping localhost",
     "lint": "eslint index.js",
-    "start": "nodemon --experimental-modules index.mjs",
+    "start": "node index.js",
     "debug": "node --experimental-modules index.mjs"
   },
   "author": "",

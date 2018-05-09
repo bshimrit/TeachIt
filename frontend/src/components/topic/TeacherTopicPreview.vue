@@ -50,73 +50,94 @@ export default {
     },
 
     deleteClass() {
-      this.$store.dispatch({
-                type: "deleteTeacherTopic",
-                teacherTopicId: this.teacherTopic._id,
-                teacherId: this.teacherTopic.teacherId
-                })
-                .then(deleted => {
-                window.alert("deleted");
-                console.log("deleted");
-                })
-                .catch(err => {
-                window.alert("Failed");
-                console.log("failed:" + err);
-                });
-      
+      this.$dialog
+        .confirm("Are you sure?", {
+          loader: true // default: false - when set to true, the proceed button shows a loader when clicked.
+          // And a dialog object will be passed to the then() callback
+        })
+        .then(dialog => {
+          // Triggered when proceed button is clicked
+
+          // dialog.loading(false) // stops the proceed button's loader
+          // dialog.loading(true) // starts the proceed button's loader again
+          // dialog.close() // stops the loader and close the dialog
+
+          // do some stuff like ajax request.
+          this.$store
+            .dispatch({
+              type: "deleteTeacherTopic",
+              teacherTopicId: this.teacherTopic._id,
+              teacherId: this.teacherTopic.teacherId
+            })
+            .then(deleted => {
+              console.log("Delete action completed ");
+            dialog.close();
+            })
+            .catch(err => {
+              console.log("Delete action FAILED ");
+            dialog.close();
+              console.log("failed:" + err);
+            });
+         
+        })
+        .catch(() => {
+          // Triggered when cancel button is clicked
+
+          console.log("Delete aborted");
+        });
     }
   }
 };
 </script>
 
 <style scoped>
-    .card {
-        width: 90vw;
-        text-align: left;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin: 10px auto;
-    }
+.card {
+  width: 90vw;
+  text-align: left;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 10px auto;
+}
 
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
 
-    .topic-img {
-        height: 275px;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        width: 100%;
-    }
+.topic-img {
+  height: 275px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
 
-    .vue-star-rating {
-        width: 100%;
-        justify-content: start;
-    }
+.vue-star-rating {
+  width: 100%;
+  justify-content: start;
+}
 
-    .long-desc {
-        max-height: 60px;
-        overflow: hidden;
-    }
+.long-desc {
+  max-height: 60px;
+  overflow: hidden;
+}
 
-    .card .card-image {
-        height: 300px;
-        text-align:center;
-    }
+.card .card-image {
+  height: 300px;
+  text-align: center;
+}
 
-    a.teacher-img {
-        top: -33px;
-        width: 66px;
-        height: 66px;
-    }
-    a.teacher-img img{
-        height: 100%;
-    }
+a.teacher-img {
+  top: -33px;
+  width: 66px;
+  height: 66px;
+}
+a.teacher-img img {
+  height: 100%;
+}
 
-    .card-content {
-        padding: 0 5px;
-        font-size: 14px;
-    }
+.card-content {
+  padding: 0 5px;
+  font-size: 14px;
+}
 
     .card-header {
         margin: 20px 0 0;
