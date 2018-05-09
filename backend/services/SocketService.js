@@ -12,15 +12,9 @@ function init(http) {
     allSockets.push(socket);
 
     socket.on('chatRequest', data => {
-      //TODO - check if room exists
-      console.log('joining room:', data)
       socket.join(data.roomId)
       io.to(data.roomId).emit('chat message',{txt: 'new user connetec to room'});    
-    //   socket.join(data.roomId, () => {
-    //     io.to(data.roomId).emit('chat message',{txt: 'new user connetec to room'});    
-    //   });
-      
-      //   io.emit('chat message', data)
+      console.log('sending alert:', data);
     });
 
     socket.on('disconnect', () => {
@@ -39,6 +33,7 @@ function init(http) {
         console.log('socketRooms' )
         pcl(socket.adapter.rooms)
         io.in(data.roomId).emit('chat message', data);  
+        io.emit('alert user', data)
         // io.emit('chat message', data)
     });
 

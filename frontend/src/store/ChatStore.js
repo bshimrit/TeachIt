@@ -16,6 +16,11 @@ export default ({
             
             state.newMsgsCounter = {...state.newMsgsCounter}
             state.totMsgs++
+        },
+        removeNewMsgs(state, {recipient}) {
+            state.totMsgs -= state.newMsgsCounter[recipient].new
+            delete state.newMsgsCounter[recipient]
+            state.newMsgsCounter = {...state.newMsgsCounter}
         }
     },
     getters: {

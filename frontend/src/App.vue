@@ -3,7 +3,9 @@
     <div id="nav">
       <NavBar/>
     </div>
-    <router-view/>
+    <div id="router">
+        <router-view/>
+    </div>
     <Footer id="footer"/>
   </div>
 </template>
@@ -25,8 +27,16 @@
   methods: {
     closeDropdown() {
         this.$store.commit({type: 'closeDropdown'})
+    },
+  },
+    sockets: {
+        ['alert user'](data) {
+            // console.log('allerting all users!', data);
+            if (data.recipientId === this.$store.getters.loggedUser._id) {
+                this.$store.commit({type: 'recievedMsg', msg: data})
+            }
+        }
     }
-  }
   }
 </script>
 <style lang="scss">
@@ -52,16 +62,20 @@
 
 }
 #nav {
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    height: 10vh;
+}
+#router {
+    height: 90vh;
 }
 #footer {
     width: 100%;
-    height: 60px;
+    height: 10vh;
     background-color: #2b303b;
     color: #ffe75a;
     border: 1px solid #ffe75a;
     position: fixed;
-    bottom: 60px;
+    bottom: 0;
     z-index: 5;
 }
 </style>
