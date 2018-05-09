@@ -4,14 +4,17 @@
       <NavBar/>
     </div>
     <router-view/>
+    <Footer id="footer"/>
   </div>
 </template>
 
 <script>
   import NavBar from './components/NavBar.vue'
+  import Footer from './components/Footer.vue'
   export default{
     components: {
-      NavBar
+      NavBar,
+      Footer
     },
     created() {
     if (sessionStorage.user) {
@@ -50,5 +53,15 @@
 }
 #nav {
     margin-bottom: 20px
+}
+#footer {
+    width: 100%;
+    height: 60px;
+    background-color: #2b303b;
+    color: #ffe75a;
+    border: 1px solid #ffe75a;
+    position: fixed;
+    bottom: 60px;
+    z-index: 5;
 }
 </style>

@@ -3,25 +3,35 @@
 export default ({
     strict: true,
     state: {
-      count: 1,
+      newMsgsCounter: {},
+      totMsgs: 0
     },
     mutations: {
-      updateCount(state, payload) {
-        state.count += payload.diff;
-      }
+        recievedMsg(state, {msg}){
+            // var newMsg = state.newMsgsCounter
+            (state.newMsgsCounter[msg.senderId])? state.newMsgsCounter[msg.senderId].new++ :
+            state.newMsgsCounter[msg.senderId] = {new: 1};
+            
+            state.newMsgsCounter[msg.senderId].userName = msg.senderName
+            
+            state.newMsgsCounter = {...state.newMsgsCounter}
+            state.totMsgs++
+        }
     },
     getters: {
-      carsForDisplay(state) {
-        return state.cars;
-      }
+        alerts(state) {
+            return state.newMsgsCounter
+        },
+        alertsNum(state) {
+            return state.totMsgs
+        }
     },
     actions: {
-      // removeSomething(store, {id}) {
-      //   return someService.remove(id)
-      //   .then(()=>{
-      //     store.commit({type: 'removeSomething', id});
-      //   })
-      // },
+        recievedMsg(store, {msg}){
+            if (msg.senderId && msg.senderId !== store.getters.loggedUser._id) {
+                store.commit({type: 'recievedMsg', msg})
+            }
+        }
     }
   })
   

@@ -72,7 +72,8 @@ export default {
       })
     },
     getUserById(store, {userId}) {
-    
+        console.log('got ID:', userId);
+        
           return UserService.getUserById(userId)
             .then(user => {
               return user;

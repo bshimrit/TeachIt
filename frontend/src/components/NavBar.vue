@@ -11,6 +11,9 @@
         <template v-else>
         <li></li>
         <li><router-link :to="`/profile/${loggedUser._id}`"></router-link></li>
+        <li >
+            {{alerts}}
+        </li>
         <!-- <li><a href="#">Become a teacher</a></li> -->
         <li @click.stop><a class="profile-img" @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
         <ul class="dropdown" v-if="dropdown" @click.stop>
@@ -49,6 +52,9 @@ export default {
     },
     dropdown() {
       return this.$store.getters.dropdown;
+    },
+    alerts() {
+      return this.$store.getters.alertsNum;
     }
   },
 };
@@ -87,7 +93,7 @@ nav {
   margin-bottom: 10px;
 }
 .hide-nav {
-    top: -100%
+  top: -100%;
 }
 .profile-img {
   padding-right: 0;
