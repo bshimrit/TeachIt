@@ -36,13 +36,13 @@ img.profile {
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) {
-    border-bottom: 5px solid #e1d256;
-    box-shadow: 0 5px 0 0 #e1d256;
+    border-bottom: 2px solid #f9e759;
+    box-shadow: 0 5px 0 0 #f9e759;
 }
 
 input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker {
     text-decoration: none;
-    border:2px solid #e1d256;
+    border:2px solid #f9e759;
     text-align: center;
     letter-spacing: .5px;
     cursor: pointer;
@@ -82,7 +82,7 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
 
 .btn:hover {
     background-color: #2b303b;  
-    color: #e1d256;
+    color: #f9e759;
 }
 
 .profile-card {
@@ -114,7 +114,7 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
 
   @keyframes blinker {
     50% {
-        box-shadow: 0 0 5px #e1d256;
+        box-shadow: 0 0 5px #f9e759;
     }
 }
 

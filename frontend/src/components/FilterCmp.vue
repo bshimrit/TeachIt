@@ -22,7 +22,8 @@
                     </div>
                     <span v-if="showExtraSearch">Price</span>
                     <div >
-                        <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="showExtraSearch"></vueSlider>
+                        <vueSlider v-model="filterBy.price" :max="500" :tooltipStyle="priceTooltipStyle" :processStyle="processStyle"
+                             @mouseup.native.prevent="emitFilter" :width="300" :show="showExtraSearch"></vueSlider>
                     </div>
                 </div>
             </section>
@@ -56,6 +57,8 @@ export default {
         return {
             filterBy: TeacherTopicService.emptyTeacherTopicFilter(),
             isSearching: false,
+            priceTooltipStyle: {"backgroundColor": "#f9e759","borderColor": "#f9e759"},
+            processStyle: {"backgroundColor": "#f9e759"}
         }
     },
     computed:{
