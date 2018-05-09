@@ -29,7 +29,7 @@ addTeacherTopicRoutes(app);
 
 // app.listen(3000, () => console.log("Example app listening on port 3000!"));
 
-app.use(express.static("frontend"));
+app.use(express.static("dist"));
 app.use(
   clientSessions({
     cookieName: "session",
