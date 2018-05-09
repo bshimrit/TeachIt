@@ -30,26 +30,11 @@
 
 <script>
 export default {
-    data() {
-        return {
-            scrolled: true,
-            YOffset: 0
-        }
-    },
-  methods: {
-    logOut() {
-      console.log('logging out');
-      this.$store.commit({ type: 'logOut' });
-      this.$router.push('/');
-    },
-    toggleDropdown() {
-      this.$store.commit({ type: 'toggleDropdown' });
-    },
-//     handleScroll () {
-//         this.scrolled = (window.scrollY <= this.YOffset) 
-//         console.log('window.scrollY:', window.scrollY, 'this.scrollY:', this.YOffset);
-//         this.YOffset = window.scrollY;
-//   }
+  data() {
+    return {
+      scrolled: true,
+      YOffset: 0
+    };
   },
   computed: {
     loggedUser() {
@@ -59,15 +44,30 @@ export default {
       return this.$store.getters.dropdown;
     },
     alerts() {
-        return this.$store.getters.alerts
+      return this.$store.getters.alerts;
     }
   },
-//   created() {
-//     window.addEventListener('scroll', this.handleScroll);
-//   },
-//   destroyed() {
-//     window.removeEventListener('scroll', this.handleScroll);
-//   }
+  methods: {
+    logOut() {
+      console.log("logging out");
+      this.$store.commit({ type: "logOut" });
+      this.$router.push("/");
+    },
+    toggleDropdown() {
+      this.$store.commit({ type: "toggleDropdown" });
+    }
+  }
+  //     handleScroll () {
+  //         this.scrolled = (window.scrollY <= this.YOffset)
+  //         console.log('window.scrollY:', window.scrollY, 'this.scrollY:', this.YOffset);
+  //         this.YOffset = window.scrollY;
+  //   }
+  //   created() {
+  //     window.addEventListener('scroll', this.handleScroll);
+  //   },
+  //   destroyed() {
+  //     window.removeEventListener('scroll', this.handleScroll);
+  //   }
 };
 </script>
 
@@ -103,7 +103,7 @@ nav {
   margin-bottom: 10px;
 }
 .hide-nav {
-    top: -100%
+  top: -100%;
 }
 .profile-img {
   padding-right: 0;
