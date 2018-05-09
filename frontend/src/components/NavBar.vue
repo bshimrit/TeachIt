@@ -44,7 +44,7 @@ export default {
       return this.$store.getters.dropdown;
     },
     alerts() {
-      return this.$store.getters.alerts;
+      return this.$store.getters.alertsNum;
     }
   },
   methods: {

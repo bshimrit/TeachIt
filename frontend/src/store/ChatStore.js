@@ -3,23 +3,33 @@
 export default ({
     strict: true,
     state: {
-      newMsgsCounter: 0,
+      newMsgsCounter: {},
+      totMsgs: 0
     },
     mutations: {
         recievedMsg(state, {msg}){
-            state.newMsgsCounter++
+            // var newMsg = state.newMsgsCounter
+            (state.newMsgsCounter[msg.senderId])? state.newMsgsCounter[msg.senderId].new++ :
+            state.newMsgsCounter[msg.senderId] = {new: 1};
+            
+            state.newMsgsCounter[msg.senderId].userName = msg.senderName
+            
+            state.newMsgsCounter = {...state.newMsgsCounter}
+            state.totMsgs++
         }
     },
     getters: {
         alerts(state) {
-            console.log('alerts:',state.newMsgsCounter);
             return state.newMsgsCounter
+        },
+        alertsNum(state) {
+            return state.totMsgs
         }
     },
     actions: {
         recievedMsg(store, {msg}){
             if (msg.senderId && msg.senderId !== store.getters.loggedUser._id) {
-                store.commit({type: 'recievedMsg'})
+                store.commit({type: 'recievedMsg', msg})
             }
         }
     }
