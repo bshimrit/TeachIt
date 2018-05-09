@@ -16,19 +16,15 @@
         </div>
       </div>
     </div>
-    <div class="flex justift-start align-center">
-        <a class="pointer" @click="goToTeacherProfile"><img class="profile margin-right20" :src="teacherTopic.teacher.img" /></a>
-        <div class="font-bold margin-right20">{{teacher.fullName}}</div>
-        <div class="margin-right20">"{{teacher.quote}}"</div>
-        <a class="margin-right20" href="#">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-        </a>
-        <a class="margin-right20">
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-        </a>
-        <a>
-            <i class="fa fa-telegram" aria-hidden="true"></i>
-        </a>
+    <div class="teacher-details flex">
+        <div class="flex justift-start align-center">
+          <a class="pointer" @click="goToTeacherProfile"><img class="profile margin-right20" :src="teacherTopic.teacher.img" /></a>
+          <div class="font-bold margin-right20">{{teacher.fullName}}</div>
+          <div class="margin-right20">"{{teacher.quote}}"</div>
+        </div>
+        <div>
+          <SocialInfo :socialInfo="teacher.socialLinks"></SocialInfo>
+        </div>
     </div>
     <div class="flex align-start">
       <DatePicker :date="startTime" :option="option" :limit="limit"></DatePicker>
@@ -43,6 +39,7 @@
 <script>
 // @ is an alias to /src
 import TopicReview from "@/components/review/TopicReview.vue";
+import SocialInfo from "@/components/SocialInfo.vue";
 import UserService from "@/services/UserService.js";
 import TeacherTopicService from "@/services/TeacherTopicService.js";
 import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
@@ -68,8 +65,8 @@ export default {
         inputStyle: {
         },
         color: {
-          header: '#26a69a',
-          headerText: '#fff'
+          header: '#2b303b',
+          headerText: '#e1d256'
         },
         buttons: {
           ok: 'Ok',
@@ -124,7 +121,8 @@ export default {
     UserService,
     TeacherTopic,
     StarRating,
-    DatePicker
+    DatePicker,
+    SocialInfo
   }
 };
 </script>
@@ -152,7 +150,19 @@ li {
   height: 58px;
 }
 
+.teacher-details {
+  flex-direction: column;
+  align-items:start;
+  justify-content: start;
+}
 
+@media (min-width: 750px){
+  .teacher-details {
+    flex-direction: row;
+    align-items: center;
+}
+  
+}
 
 </style>
 

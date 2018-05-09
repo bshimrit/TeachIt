@@ -18,9 +18,6 @@
                 <p class="long-desc">{{teacherTopic.longDes}}</p>
             </div> 
         </div>
-        <div v-if="showLongDesc">
-            <p class="long-desc">{{teacherTopic.longDes}}</p>
-        </div> 
     </div>
 </template>
 
@@ -128,6 +125,7 @@ export default {
     @media (min-width: 750px){
         .card {
             width: 250px;   
+            margin:0;
             /* height: 300px;      */
         } 
 

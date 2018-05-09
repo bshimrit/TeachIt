@@ -35,20 +35,25 @@ img.profile {
     width: 20%;
 }
 
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #e1d256;
+    box-shadow: 0 1px 0 0 #e1d256;
+}
+
 input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker {
     text-decoration: none;
-    border:2px solid #26a69a;
+    border:2px solid #e1d256;
     text-align: center;
     letter-spacing: .5px;
     cursor: pointer;
-    color: Black;
+    color: #9fb6ce;
     font-family: 'MontBold', sans-serif;
     box-sizing: border-box;
 }
 
  
 input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::placeholder {
-    color: Black;
+    color: #9fb6ce;
     font-family: 'MontBold', sans-serif;
 } 
 
@@ -65,14 +70,43 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
     background-position: center;
 }
 
+.btn {
+    font-family: 'MontBold', sans-serif;
+    background-color: #2b303b;
+    color: #9fb6ce;
+}
+
+.btn:focus {
+    background-color: #2b303b;
+}
+
+.btn:hover {
+    background-color: #2b303b;  
+    color: #e1d256;
+}
+
 .profile-card {
     flex-direction: column;
   }
 
+  .header-margin {
+      margin-top: 130px;
+  }
+
+  .card-item {
+    margin-top: 20px;
+  }
+  .card-item:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .cards-container {
+    margin: 0;
+  }
   
   @keyframes blinker {
     50% {
-        box-shadow: 0 0 5px #26a69a;
+        box-shadow: 0 0 5px #e1d256;
     }
 }
 
