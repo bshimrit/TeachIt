@@ -16,8 +16,16 @@
                
               <div class="modal-body">
                 <slot name="body">
-              
                   <TeacherTopicEdit @emitToModal="emitToList" :teacherClass="teacherClass"></TeacherTopicEdit>
+                </slot>
+              </div>
+
+            <div class="modal-footer">
+                <slot name="footer">
+                  
+                  <button class="modal-default-button" @click="$emit('modalClosed')">
+                    Cancel
+                  </button>
                 </slot>
               </div>
 

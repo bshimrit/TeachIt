@@ -9,9 +9,16 @@ import '../node_modules/materialize-css/dist/css/materialize.min.css'
 import '../node_modules/materialize-css/dist/js/materialize.min.js'
 import 'font-awesome/css/font-awesome.css';
 import VueMq from 'vue-mq'
- 
+import VuejsDialog from "vuejs-dialog"
 
-
+// Tell Vue to install the plugin.
+Vue.use(VuejsDialog, {
+  html: true, 
+  loader: true,
+  okText: 'Proceed',
+  cancelText: 'Cancel',
+  animation: 'bounce', 
+})
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 import _ from 'lodash'
