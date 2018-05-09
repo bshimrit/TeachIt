@@ -11,11 +11,11 @@ const status = {
 function init() {
     console.log('Creating Socket');
     socket = io.connect(BASE_URL);
-    socket.on('chat message', function(msg){
-        console.log('got msg:', msg);
+    // socket.on('chat message', function(msg){
+    //     console.log('got msg:', msg);
         
-        msgs.push(msg)
-    });
+    //     msgs.push(msg)
+    // });
     socket.on('chat setStatusTxt', function(statusTxt){
         status.txt = statusTxt;
     });

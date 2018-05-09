@@ -1,26 +1,26 @@
 <template>
-        <div class="card" v-if="teacherTopic.teacher">
-            <div class="card-image">
-                <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
-                <a @click="goToTeacherProfile"  class="teacher-img btn-floating  waves-effect waves-light btn-large"><img
-                :src="teacherTopic.teacher.img" /></a>
-            </div>
-                <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
-            <div class="card-content">
-                <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
-                <p>{{teacherTopic.shortDes}}</p>
-                <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
-                <div v-if="showEdit">
-                    <a class="waves-effect waves-teal btn-flat" @click="$emit('toEdit', teacherTopic)"><i class="fa fa-pencil-square-o"></i></a>
-                    <a class="waves-effect waves-teal btn-flat" @click="deleteClass"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                  
-                </div>
-                <div v-if="showLongDesc">
-                    <p class="long-desc">{{teacherTopic.longDes}}</p>
-                </div> 
-            </div>
-           
+    <div class="card" v-if="teacherTopic.teacher">
+        <div class="card-image">
+            <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
+            <a @click="goToTeacherProfile"  class="teacher-img btn-floating  waves-effect waves-light btn-large"><img
+            :src="teacherTopic.teacher.img" /></a>
         </div>
+            <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
+        <div class="card-content">
+            <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
+            <p>{{teacherTopic.shortDes}}</p>
+            <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
+            <div v-if="showEdit">
+                <a class="waves-effect waves-teal btn-flat" @click="$emit('toEdit', teacherTopic)"><i class="fa fa-pencil-square-o"></i></a>
+                <a class="waves-effect waves-teal btn-flat" @click="deleteClass"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                
+            </div>
+            <div v-if="showLongDesc">
+                <p class="long-desc">{{teacherTopic.longDes}}</p>
+            </div> 
+        </div>
+        
+    </div>
 </template>
 
 <script>
@@ -139,28 +139,29 @@ a.teacher-img img {
   font-size: 14px;
 }
 
-.card-header {
-  margin: 20px 0 0;
-  padding: 0 5px;
-  font-size: 14px;
-}
+    .card-header {
+        margin: 20px 0 0;
+        padding: 0 5px;
+        font-size: 14px;
+    }
+    
+    @media (min-width: 750px){
+        .card {
+            width: 250px;   
+            margin:0;
+            /* height: 300px;      */
+        } 
 
-@media (min-width: 750px) {
-  .card {
-    width: 250px;
-    /* height: 300px;      */
-  }
+        .topic-img {
+                height: 150px;
+        }
 
-  .topic-img {
-    height: 150px;
-  }
+        .card .card-image {
+            height: 200px;
+        }
 
-  .card .card-image {
-    height: 200px;
-  }
-
-  .card-header {
-    margin-top: 0;
-  }
-}
+        .card-header {
+        margin-top: 0;
+        }
+    }
 </style>

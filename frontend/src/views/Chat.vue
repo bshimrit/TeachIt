@@ -25,59 +25,64 @@
 </template>
 
 <script>
-import MsgService from "../services/MsgService.js";
+import MsgService from '../services/MsgService.js';
 
 export default {
-  name: "Chat",
+  name: 'Chat',
   data() {
     return {
       msg: {
-        txt: "",
-        senderId: "",
-        recipientId: this.$route.params.recipientId,
-        roomId: ""
+        txt: '',
+        senderId: '',
+        senderName:'',
+        recipientId: '',
+        roomId: ''
       },
-      user: this.$store.getters.loggedUser,
-      recipient: '',
+      roomId: '',
+      user: {_id: null},
+      recipient: {_id: null},
       msgs: MsgService.msgs,
       status: MsgService.status
       // topic: 'food'
     };
   },
   created() {
-    this.$socket.emit("chatRequest", this.msg);
-    console.log("loggedUserId:", this.$store.getters.loggedUser._id);
+    // set recipient ID
+    this.msg.recipientId = this.$route.params.recipientId
+    // create ChatRoom ID
     var sortedIds = [this.$store.getters.loggedUser._id, this.msg.recipientId].sort();
     this.msg.roomId = sortedIds[0] + sortedIds[1];
-    this.msg.senderId = this.$store.getters.loggedUser._id;
-
-    var recipientId = this.msg.recipientId
-    this.$store.dispatch({type: 'getUserById', userId: recipientId})
+    this.roomId = this.msg.roomId
+    // set sender data
+    this.user = this.$store.getters.loggedUser
+    this.msg.senderName = this.user.userName
+    this.msg.senderId = this.user._id;
+    // activate socket
+    this.$socket.emit('chatRequest', this.msg);
+    // get recipient data for display on page
+    this.$store.dispatch({type: 'getUserById', userId: this.msg.recipientId})
     .then(recipient => this.recipient = recipient)
-
-    // MsgService.init();
-    // EventBusService.$emit(SHOW_MSG, { txt: 'Chat Loaded!' });
   },
   destroyed() {
     MsgService.destroy();
   },
   methods: {
     send() {
-      console.log("msg:", this.msg);
+      console.log('msg:', this.msg);
 
       // this.$socket.emit('chatRequest', this.msg)
       // MsgService.sendMsg(this.msg.txt);
-      this.$socket.emit("chat newMessage", this.msg);
-      this.msg.txt = "";
+      this.$socket.emit('chat newMessage', this.msg);
+      this.msg.txt = '';
     },
     whenInput() {
       // MsgService.sendStatus('Someone is typing...')
     }
   },
   sockets: {
-    ["chat message"](data) {
-      console.log("received a chat message:", data, "msgs:", this.msgs);
+    ['chat message'](data) {
       this.msgs.push(data);
+      this.$store.dispatch({type: 'recievedMsg', msg: data})
     }
   },
   computed: {

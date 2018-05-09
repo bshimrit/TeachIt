@@ -40,10 +40,9 @@ export default {
   height: 100%;
 }
 .map-container {
-    /* width: 300px; */
     margin: 10px 10px 10px 20px;
     position: fixed;
-    right: 15px;
-    height: 52%; 
+    right: calc(100vw - 1500px);
+    height: 100%; 
 }
 </style>

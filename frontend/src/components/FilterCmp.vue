@@ -6,7 +6,7 @@
             </form>
             <section class="flex space-between align-center">
                 <div class="left-filter flex justify-start align-center">
-                    <div class="margin-right20 sort-input">
+                    <div class="margin-right40 sort-input">
                         <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
                             <option value="" disabled selected>Sort by</option>                            
                             <option value="review">Reviews</option>
@@ -14,15 +14,15 @@
                             <option value="highPrice">Price - High to Low</option>
                         </select>
                     </div>
-                    <div class="margin-right20 topic-input ">
+                    <div class="margin-right40 topic-input ">
                         <select v-model="filterBy.topics" ref="selectTopics" multiple>
                             <option value="" disabled selected>Choose your topics</option>
                             <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
                         </select>
                     </div>
-                    <span v-if="!isSearching && showExtraSearch">Price</span>
+                    <span v-if="showExtraSearch">Price</span>
                     <div >
-                        <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="!isSearching && showExtraSearch"></vueSlider>
+                        <vueSlider v-model="filterBy.price" :max="500" @mouseup.native.prevent="emitFilter" :width="300" :show="showExtraSearch"></vueSlider>
                     </div>
                 </div>
             </section>
@@ -70,14 +70,14 @@ export default {
         this.$emit('filtered',this.filterBy);
         }
     },
-    watch:{
-        isSearching: function(newVal) {
-            if (this.showExtraSearch){
-                if (newVal) $('select').material_select('destroy')
-                    else $('select').material_select();
-            }
-        }
-    },
+    // watch:{
+    //     isSearching: function(newVal) {
+    //         if (this.showExtraSearch){
+    //             if (newVal) $('select').material_select('destroy')
+    //                 else $('select').material_select();
+    //         }
+    //     }
+    // },
     components: {
         vueSlider,
         TeacherTopicService
@@ -115,11 +115,10 @@ export default {
         z-index: 2;
     }
     .left-filter{
-        width: 60%;
+        width: 100%;
     }
     .search-bar {
         height: 80px;
     }
-
 
 </style>

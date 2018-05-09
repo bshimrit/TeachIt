@@ -5,16 +5,8 @@
         <div class="card-image flex flex-column justify-start" style="padding: 10px; display: flex;">
           <a class="edit-profile-btn pointer" v-if="isEditAllowed" @click="goToEditProfile">Edit profile</a>
           <div class="user-img" :style="{backgroundImage: 'url(' + user.img + ')'}"></div>          
-          <div style="margin-top20">
-            <a class="margin-right20" href="#">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a class="margin-right20">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a class="margin-right20">
-              <i class="fa fa-telegram" aria-hidden="true"></i>
-            </a>
+          <div>
+            <SocialInfo :socialInfo="user.socialLinks"></SocialInfo>
           </div>
         </div>
         <div class="card-stacked">
@@ -44,14 +36,15 @@
 
 <script>
 // @ is an alias to /src
-import TopicReview from "@/components/review/TopicReview.vue";
-import UserService from "@/services/UserService.js";
-import TeacherTopicService from "@/services/TeacherTopicService.js";
-import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import StarRating from "vue-star-rating";
+import TopicReview from '@/components/review/TopicReview.vue';
+import SocialInfo from '@/components/SocialInfo.vue';
+import UserService from '@/services/UserService.js';
+import TeacherTopicService from '@/services/TeacherTopicService.js';
+import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue';
+import StarRating from 'vue-star-rating';
 
 export default {
-  name: "profile",
+  name: 'profile',
   data() {
     return {
       user: UserService.emptyUser(),
@@ -62,18 +55,18 @@ export default {
   created() {
     
     this.$store
-      .dispatch({ type: "getUserById", userId:this.userId })
+      .dispatch({ type: 'getUserById', userId:this.userId })
       .then(user => {
           this.user = user;
           if (user.isTeacher){
-            this.$store.dispatch({ type: "getTopicsByTeacherId", teacherId: this.userId})
+            this.$store.dispatch({ type: 'getTopicsByTeacherId', teacherId: this.userId})
               .then((teacherTopics) => {
                 this.teacherTopics = teacherTopics;
             })
           }
         })
       .catch(err => {
-        console.log("err:", err);
+        console.log('err:', err);
       });
   },
   components: {
@@ -81,10 +74,11 @@ export default {
     UserService,
     TeacherTopic,
     StarRating,
+    SocialInfo
   },
   methods: {
     goToEditProfile() {
-      this.$router.push("/profile/edit/" + this.userId);
+      this.$router.push('/profile/edit/' + this.userId);
     }
   },
   computed: {

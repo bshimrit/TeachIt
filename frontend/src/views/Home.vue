@@ -1,23 +1,23 @@
 <template>
   <section>
     <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
-    <div class="container ">
+    <div class="container header-margin">
         <h4 class="tt-header">Most Popular</h4>
-        <div class="row">
-            <div class="flex col" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
-              <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-            </div>
-        </div>
+        <ul class="cards-container flex flex-wrap">
+          <li class="card-item" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
+            <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+          </li>
+        </ul>
         <h4 class="tt-header">Categories</h4>
             <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
               <p class="tt-header font-bold">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</p>
-              <div class="row">
-              <div class="flex col" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
+              <ul class="cards-container flex flex-wrap">
+                <li class="card-item" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
                   <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-              </div>
+                </li>
+              </ul>
             </div>
-        </div>
-    </div>
+      </div>
   </section>
 </template>
 
@@ -67,6 +67,7 @@ export default {
   .tt-header{
     text-align:left;
     display:block;
+    margin-bottom: 0px;
   }
   .home {
       margin-top: 150px;

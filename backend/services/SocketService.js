@@ -13,9 +13,12 @@ function init(http) {
 
     socket.on('chatRequest', data => {
       //TODO - check if room exists
-      socket.join(data.roomId, () => {
-        io.to(data.roomId).emit('chat message',{txt: 'new user connetec to room'});    
-      });
+      console.log('joining room:', data)
+      socket.join(data.roomId)
+      io.to(data.roomId).emit('chat message',{txt: 'new user connetec to room'});    
+    //   socket.join(data.roomId, () => {
+    //     io.to(data.roomId).emit('chat message',{txt: 'new user connetec to room'});    
+    //   });
       
       //   io.emit('chat message', data)
     });
@@ -27,13 +30,15 @@ function init(http) {
     });
     
     socket.on('chat newMessage', data => {
-        console.log('insided the new meesge:', data)
-        console.log('rooms:',socket.rooms);
         // Try fix without join
-        socket.join(data.roomId, () => {
-            io.to(data.roomId).emit('chat message',data);    
-          });
-        // io.to(data.roomId).emit('chat message',data);  
+        // socket.join(data.roomId, () => {
+        //     io.to(data.roomId).emit('chat message',data);    
+        //   });
+        console.log('socketId')
+        pcl(socket.id)
+        console.log('socketRooms' )
+        pcl(socket.adapter.rooms)
+        io.in(data.roomId).emit('chat message', data);  
         // io.emit('chat message', data)
     });
 
@@ -57,6 +62,7 @@ module.exports = {
   init
 };
 
+var pcl = x => console.log(JSON.stringify(x,null,2))
 // io.on('connection', socket => {
 //     console.log('a user connected');
 //     connectedCount++;
