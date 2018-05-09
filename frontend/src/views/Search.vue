@@ -1,17 +1,13 @@
 <template>
     <section>
       <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" />
-      <section class="container search">
-        <div class="map-list">
-          <div class="cards">
-              <div class="row">
-                  <div class="flex col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-                      <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-                  </div>
-              </div>
-          </div>
-          <teacher-map v-if="$mq ==='lg'" class="teacher-map relative"></teacher-map>
-        </div>
+      <section class="container search flex">
+        <ul class="cards-container flex flex-wrap">
+          <li class="card-item" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+              <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+          </li>
+        </ul>
+        <teacher-map v-if="$mq ==='lg'" class="teacher-map relative"></teacher-map>
       </section> 
     </section>
 </template>
@@ -64,33 +60,27 @@ export default {
 
 <style scoped>
 
-
-.map-list {
-  display: flex
-}
-
-
 .col {
   width: 100%;
   /* height: 50vh; */
 }
 
-.cards {
+.cards-container {
   width: 100%;
   padding-left: 0;
 }
 .teacher-map {
-  margin-top: 0.5rem;
+    margin-top: 0.5rem;
     display: inline-block;
-    width: 30%;
+    width: 550px;
 }
 
 .search {
   margin-top: 200px
 }
 @media(min-width: 1024px){
-    .cards {
-      width: 70%;        
+    .cards-container {
+      width: 850px;        
     }
 
 }

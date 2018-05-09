@@ -15,11 +15,6 @@
                         <p>{{teacher.desc}}</p>
                     </div>
                 </div>
-                <!-- <img :src="teacher.img" class="circle">
-                <span class="title">{{teacher.name}}</span> 
-                <p>Teahing: {{teacher.topic}} <br>
-                   Price: {{teacher.price}}₪ </p>
-                <button @click.stop class="secondary-content"><i class="fa fa-star"></i></button> -->
             </li>
         </ul>
   </section>

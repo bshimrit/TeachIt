@@ -1,8 +1,9 @@
 <template>
-    <div class="card">
+    <div class="card" v-if="teacherTopic.teacher">
         <div class="card-image">
-            <div @click="goToTeacherTopicProfile"  class="pointer topic-img" :style="{backgroundImage: 'url(' + teacherTopic.topicImage + ')'}"></div>
-            <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
+            <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
+            <a @click="goToTeacherProfile"  class="teacher-img btn-floating  waves-effect waves-light btn-large"><img
+            :src="teacherTopic.teacher.img" /></a>
         </div>
             <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
         <div class="card-content">
@@ -12,15 +13,13 @@
             <div v-if="showEdit">
                 <a class="waves-effect waves-teal btn-flat" @click="$emit('toEdit', teacherTopic)"><i class="fa fa-pencil-square-o"></i></a>
                 <a class="waves-effect waves-teal btn-flat" @click="deleteClass"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                <v-dialog/>
+                
             </div>
             <div v-if="showLongDesc">
                 <p class="long-desc">{{teacherTopic.longDes}}</p>
             </div> 
         </div>
-        <div v-if="showLongDesc">
-            <p class="long-desc">{{teacherTopic.longDes}}</p>
-        </div> 
+        
     </div>
 </template>
 
@@ -128,6 +127,7 @@ export default {
     @media (min-width: 750px){
         .card {
             width: 250px;   
+            margin:0;
             /* height: 300px;      */
         } 
 

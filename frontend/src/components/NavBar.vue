@@ -5,16 +5,16 @@
       <a href="/" class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
       <ul id="nav-mobile" class="right hide-on-small-and-down lower">
         <li><router-link to="/">Home</router-link></li> 
-        <li><router-link to="/about">About</router-link></li> 
         <li><router-link to="/search">Search</router-link></li> 
+        <li><router-link to="/about">About</router-link></li> 
         <li v-if="!loggedUser"><router-link to="/login">Log in</router-link></li>
         <template v-else>
         <li></li>
         <li><router-link :to="`/profile/${loggedUser._id}`"></router-link></li>
-        <li v-if="!loggedUser.isTeacher"><a href="#">Become a teacher</a></li>
         <li >
             {{alerts}}
         </li>
+        <!-- <li><a href="#">Become a teacher</a></li> -->
         <li @click.stop><a class="profile-img" @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
         <ul class="dropdown" v-if="dropdown" @click.stop>
             <li><router-link :to="`/profile/user/${loggedUser._id}`">My profile</router-link></li>
@@ -30,11 +30,21 @@
 
 <script>
 export default {
-  data() {
-    return {
-      scrolled: true,
-      YOffset: 0
-    };
+    data() {
+        return {
+            scrolled: true,
+            YOffset: 0
+        }
+    },
+  methods: {
+    logOut() {
+      console.log('logging out');
+      this.$store.commit({ type: 'logOut' });
+      this.$router.push('/');
+    },
+    toggleDropdown() {
+      this.$store.commit({ type: 'toggleDropdown' });
+    },
   },
   computed: {
     loggedUser() {
@@ -47,27 +57,6 @@ export default {
       return this.$store.getters.alertsNum;
     }
   },
-  methods: {
-    logOut() {
-      console.log("logging out");
-      this.$store.commit({ type: "logOut" });
-      this.$router.push("/");
-    },
-    toggleDropdown() {
-      this.$store.commit({ type: "toggleDropdown" });
-    }
-  }
-  //     handleScroll () {
-  //         this.scrolled = (window.scrollY <= this.YOffset)
-  //         console.log('window.scrollY:', window.scrollY, 'this.scrollY:', this.YOffset);
-  //         this.YOffset = window.scrollY;
-  //   }
-  //   created() {
-  //     window.addEventListener('scroll', this.handleScroll);
-  //   },
-  //   destroyed() {
-  //     window.removeEventListener('scroll', this.handleScroll);
-  //   }
 };
 </script>
 
@@ -78,6 +67,7 @@ nav {
   padding: 10px 0;
   background-color: #2b303b;
   text-align: left;
+  font-family: 'MontBold', sans-serif;
 }
 .logo-img {
   width: 150px;
@@ -107,5 +97,9 @@ nav {
 }
 .profile-img {
   padding-right: 0;
+}
+
+.brand-logo {
+  height: 100%;
 }
 </style>

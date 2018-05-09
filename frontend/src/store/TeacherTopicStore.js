@@ -45,6 +45,7 @@ export default {
   },
   getters: {
     teacherTopicsForDisplay(state) {
+      console.log('getter activated')
       return state.teacherTopics;
     },
     popularTeacherTopicsForDisplay(state) {
@@ -84,9 +85,11 @@ export default {
       const isEdit = !!teacherTopic.id;
       return TeacherTopicService.saveTeacherTopic(teacherTopic)
       .then(teacherTopic => {
+        store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.teacherId});
         if (isEdit) store.commit({type: 'updateTeacherTopic', teacherTopic})
         else store.commit({type: 'addTeacherTopic', teacherTopic})
-        store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.data[0].teacherId});
+        // console.log('teacherTopic.data[0].teacherId',teacherTopic.data[0].teacherId);
+        // store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.data[0].teacherId});
         return teacherTopic;
       })
     },
@@ -100,7 +103,8 @@ export default {
     getTopicsByTeacherId(store, {teacherId}) {
       return TeacherTopicService.getTopicsByTeacherId(teacherId)
             .then(teacherTopics => {
-              store.commit({type: 'setTeacherTopicById', teacherTopics})
+              store.commit({type: 'setTeacherTopics', teacherTopics})
+              
               return teacherTopics;
         })
     },
