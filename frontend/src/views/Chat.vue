@@ -57,11 +57,14 @@ export default {
     this.user = this.$store.getters.loggedUser
     this.msg.senderName = this.user.userName
     this.msg.senderId = this.user._id;
-    // activate socket
-    this.$socket.emit('chatRequest', this.msg);
+    // activate socket in this room
+    this.$socket.emit('chatRequest', this.msg); 
     // get recipient data for display on page
     this.$store.dispatch({type: 'getUserById', userId: this.msg.recipientId})
     .then(recipient => this.recipient = recipient)
+    // remove 'new message' alerts
+    var recipient = this.msg.recipientId
+    this.$store.commit({type: 'removeNewMsgs', recipient})
   },
   destroyed() {
     MsgService.destroy();
@@ -117,7 +120,7 @@ form {
   background: #2b303b;
   padding: 3px;
   position: fixed;
-  bottom: 0;
+  bottom: 10vh;
   width: 100%;
 }
 form input {
