@@ -10,7 +10,7 @@
         </ul>
         <h4 class="tt-header">Categories</h4>
             <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
-              <p class="tt-header font-bold">{{popularTopic.topic.title}} - {{popularTopic.topic.subtitle}}</p>
+              <p class="tt-header font-bold">{{popularTopic.topic.title}}</p>
               <ul class="cards-container flex flex-wrap">
                 <li class="card-item" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
                   <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>

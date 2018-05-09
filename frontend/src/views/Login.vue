@@ -42,19 +42,13 @@ export default {
     methods: {
         checkLogin() {
             var creds = this.credentials
-            console.log('Sending credentials');
             this.$store.dispatch({type: 'checkLogin', creds})
-            // setTimeout(()=>{
-            //     if (this.$store.getters.loggedUser) this.$router.push('/')
-            // },0)
-        // if (this.$store.getters.loggedUser) this.$router.push('/')
         }
     },
     computed: {
         loggedInUser() {
             if (this.$store.getters.loggedUser) {
                 this.$router.push('/')
-                // return this.$store.getters.loggedUser || {name:''}
             }
         }
     }
@@ -62,11 +56,10 @@ export default {
 </script>
 
 <style scoped>
-/* .container {
-  width: 50%;
-  border: 2px solid #577594;
+.container {
+  max-width: 900px;
   padding: 20px;
-} */
+}
 a {
     margin: 10px
 }

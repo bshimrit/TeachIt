@@ -87,8 +87,6 @@ export default {
         store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.teacherId});
         if (isEdit) store.commit({type: 'updateTeacherTopic', teacherTopic})
         else store.commit({type: 'addTeacherTopic', teacherTopic})
-        // console.log('teacherTopic.data[0].teacherId',teacherTopic.data[0].teacherId);
-        // store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.data[0].teacherId});
         return teacherTopic;
       })
     },
@@ -103,14 +101,13 @@ export default {
       return TeacherTopicService.getTopicsByTeacherId(teacherId)
             .then(teacherTopics => {
               store.commit({type: 'setTeacherTopics', teacherTopics})
-              
               return teacherTopics;
         })
     },
     loadPopularTopics(store) {
       return TeacherTopicService.getPopularTopics()
           .then(popularTopics => {
-            if (popularByTopics) popularByTopics = popularByTopics.slice(0,store.state.MAX_VIEW);
+            if (popularTopics) popularTopics = popularTopics.slice(0,store.state.MAX_VIEW);
             var popularByTopics = popularTopics.map(popularTopic => {
               return {topic: popularTopic[0].topic,teacherTopics:popularTopic}
             })

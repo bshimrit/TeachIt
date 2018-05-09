@@ -260,6 +260,47 @@ function getTopicsByTopicId(topicId) {
   });
 }
 
+// gets a  all topics for a specific title
+function getTopicsByTitle(title) {
+  return new Promise((resolve, reject) => {
+    DBService.dbConnect().then(db => {
+      db
+        .collection("teacherTopic")
+        .aggregate([
+          {
+            $lookup: {
+              from: "user",
+              localField: "teacherId",
+              foreignField: "_id",
+              as: "teacher"
+            }
+          },
+          {
+            $unwind: "$teacher"
+          },
+          {
+            $lookup: {
+              from: "topic",
+              localField: "topicId",
+              foreignField: "_id",
+              as: "topic"
+            }
+          },
+          {
+            $unwind: "$topic"
+          },
+          {
+            $match: { "topic.title": title }
+          }
+        ])
+        .toArray((err, teacherTopics) => {
+          if (err) return reject(err);
+          resolve(teacherTopics);
+        });
+    });
+  });
+}
+
 function getPopularTopics() {
   var allPopularTopics = [];
   return new Promise((resolve, reject) => {
@@ -268,14 +309,25 @@ function getPopularTopics() {
       db
         .collection("teacherTopic")
         .aggregate([
-          { $group: { _id: "$topicId", count: { $sum: 1 } } },
+          {
+            $lookup: {
+              from: "topic",
+              localField: "topicId",
+              foreignField: "_id",
+              as: "topic"
+            }
+          },
+          {
+            $unwind: "$topic"
+          },
+          { $group: {_id : "$topic.title" , count: { $sum: 1 }}},
           { $limit: 3 },
           { $sort: { count: -1 } }
         ])
         .toArray((err, popularTopics) => {
           if (err) return reject(err);
           const promises = popularTopics.map(topic =>
-            getTopicsByTopicId(topic._id)
+            getTopicsByTitle(topic._id)
           );
           Promise.all(promises).then(arrayOfTopics => {
             console.log({arrayOfTopics})

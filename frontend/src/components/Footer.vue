@@ -1,5 +1,5 @@
 <template>
-  <section class="footer">
+  <section v-if="false" class="footer">
       <ul>
           <li v-for="(chat, id) in chats" :key="chat">
               <router-link :to="`/chat/${id}`">

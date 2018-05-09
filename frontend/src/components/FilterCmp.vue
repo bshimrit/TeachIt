@@ -57,7 +57,7 @@ export default {
         return {
             filterBy: TeacherTopicService.emptyTeacherTopicFilter(),
             isSearching: false,
-            priceTooltipStyle: {"backgroundColor": "#f9e759","borderColor": "#f9e759"},
+            priceTooltipStyle: {"backgroundColor": "#2b303b","borderColor": "#2b303b"},
             processStyle: {"backgroundColor": "#f9e759"}
         }
     },
