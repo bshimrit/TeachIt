@@ -1,5 +1,5 @@
 <template>
-  <section class="footer">
+  <section v-if="false" class="footer">
       <ul>
           <p v-if="show">Don't worry shimrit, this is only temporary!</p>
           <li v-for="(chat, id) in chats" :key="id">

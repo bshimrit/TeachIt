@@ -88,7 +88,6 @@ export default {
 <style scoped>
 .container {
   max-width: 900px;
-  border: 2px solid #577594;
   padding: 20px;
 }
 .form-container {
