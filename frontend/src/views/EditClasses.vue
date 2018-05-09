@@ -2,12 +2,12 @@
   <section class="EditClassesPage">
     <div class="container">
       <div class="row">
-        <div class="col s3">
+        <!-- <div class="col s3">
           <div class="collection">
             <a class="collection-item" @click="goToPublicProfile">View Public Profile</a>
             <a class="collection-item" @click="goToEditProfile">Manage Profile</a>
           </div>
-        </div>
+        </div> -->
          <div class="col s9">
           <TeacherTopicList></TeacherTopicList>
          </div>

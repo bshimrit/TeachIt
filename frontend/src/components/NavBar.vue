@@ -18,7 +18,7 @@
         <li @click.stop><a class="profile-img" @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
         <ul class="dropdown" v-if="dropdown" @click.stop>
             <li><router-link :to="`/profile/user/${loggedUser._id}`">My profile</router-link></li>
-            <li v-if="loggedUser.isTeacher"><router-link :to="`/profile/classes/edit/${loggedUser._id}`">My Classes</router-link></li>
+            <li v-if="loggedUser.isTeacher"><router-link :to="`/profile/edit/classes/${loggedUser._id}`">My Classes</router-link></li>
             <li><a @click="logOut">Log out</a></li>
         </ul>
         </template>
