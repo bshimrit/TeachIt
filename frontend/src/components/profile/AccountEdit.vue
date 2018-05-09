@@ -28,9 +28,7 @@
               <label class="left active" for="password">Repeat Password</label>
             </div>
           </div>
-
-
-    </section>
+  </section>
 </template>
 
 <script>
