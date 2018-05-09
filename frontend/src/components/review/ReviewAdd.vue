@@ -1,7 +1,7 @@
 <template>
   <div v-if="loggedInUser">
         <p class="font-bold">Add Review</p>
-        <form class="flex align-start" @submit.prevent="addReview">
+        <section class="flex align-start">
             <div class="user-details margin-right20">
                 <div class="flex flex-column align-center">
                     <img :src="loggedInUser.img" class="small-image"> 
@@ -12,10 +12,10 @@
                 <StarRating :star-size=20 :increment=1 v-model="review.topicRating" :show-rating="false" :read-only="false"/>
                 <textarea v-model="review.topicReview" placeholder="Enter your review"/>
                 <div class="flex justify-end">
-                    <button class="btn" type="submit" :disabled="!isValid">Submit</button>
+                    <button @click.prevent="addReview" class="btn" type="submit" :disabled="!isValid">Submit</button>
                 </div>
             </div>
-        </form>
+        </section>
     </div>
 </template>
 
@@ -29,11 +29,12 @@ export default {
   data() {
         return {
             review: this.getEmptyReview(),
+            loggedUser: this.$store.getters.loggedUser 
         }
     },
     computed: {
         isValid() {
-            return this.review.topicRating > 0 ; //&& this.review.topicReview;
+            return this.review.topicRating > 0 || this.review.topicReview;
         },
         loggedInUser(){
             return this.$store.getters.loggedUser;
@@ -41,9 +42,8 @@ export default {
     },
     methods: {
         getEmptyReview() {
-            var curUser = this.$store.getters.loggedUser;
             return {
-                userId:  curUser ? curUser._id: 'Please log in',
+                userId:  '',
                 topicRating: 0,
                 topicReview: '',
                 teacherTopicId: this.$route.params.teacherTopicId,
@@ -51,7 +51,8 @@ export default {
             };
         },
         addReview(){
-            ReviewService.saveReview(this.review)
+            this.review.userId = this.$store.getters.loggedUser._id;
+            this.$store.dispatch({type: 'saveReview', review:this.review})
             .then(saveReview => {
                 this.review = this.getEmptyReview()
                 this.$emit('addedReview')

@@ -1,21 +1,21 @@
 <template>
   <section>
   <div v-if="teacherTopic.topic" class="container card-container">
-      <div class="card horizontal">
-        <div class="card-image" style="padding: 10px; display: flex;">
-          <img :src="teacherTopic.topicImage" style="align-self: baseline; margin-top: 15%;">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h4>{{teacherTopic.topic.subtitle}}
-               <StarRating v-model="teacherTopic.rating" :star-size="20" :read-only="true" :show-rating="false"/>
-            </h4>
-            <p>{{teacherTopic.pricePerHour}}$/PerHour</p>
-            <p class="font-bold">{{teacherTopic.shortDes}}</p>
-            <p>{{teacherTopic.longDes}}</p>
-          </div>
+    <div class="profile-card card flex">
+      <div class="card-image" style="padding: 10px; display: flex;">
+        <div class="user-img" :style="{backgroundImage: 'url(' + teacherTopic.topicImage + ')'}"></div>     
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <h4>{{teacherTopic.topic.subtitle}}
+              <StarRating v-model="reviewsAvg" :star-size="20" :read-only="true" :show-rating="false"/>
+          </h4>
+          <p>{{teacherTopic.pricePerHour}}$/PerHour</p>
+          <p class="font-bold">{{teacherTopic.shortDes}}</p>
+          <p>{{teacherTopic.longDes}}</p>
         </div>
       </div>
+    </div>
     <div class="flex justift-start align-center">
         <a class="pointer" @click="goToTeacherProfile"><img class="profile margin-right20" :src="teacherTopic.teacher.img" /></a>
         <div class="font-bold margin-right20">{{teacher.fullName}}</div>
@@ -102,25 +102,21 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch({ type: "loadTeacherTopics" });
-    if (this.$route.params.teacherTopicId) {
-      var teacherTopicId = this.$route.params.teacherTopicId;
-
-      TeacherTopicService.getTeacherTopicById(teacherTopicId)
-        .then(teacherTopic => {
-            this.teacher = teacherTopic[0].teacher;
-            this.teacherTopic = teacherTopic[0];
-        })
-        .catch(err => {
-          console.log("err:", err);
-        });
-    }
+    var teacherTopicId = this.$route.params.teacherTopicId;
+    this.$store.dispatch({ type: "getTeacherTopicById", teacherTopicId})
+    .then((teacherTopic) => {
+      this.teacher = teacherTopic[0].teacher;
+      this.teacherTopic = teacherTopic[0];
+    })
   },
   computed: {
+      reviewsAvg(){
+        return this.$store.getters.reviewsAvgDispaly;
+      }
     },
   methods: {
     goToTeacherProfile(){
-      this.$router.push('/profile/teacher/' + this.teacherTopic.teacherId);
+      this.$router.push('/profile/user/' + this.teacherTopic.teacherId);
         },
   },
   components: {

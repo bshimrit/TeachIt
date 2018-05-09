@@ -1,7 +1,7 @@
 <template>
   <section>
     <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
-    <div class="container home">
+    <div class="container ">
         <h4 class="tt-header">Most Popular</h4>
         <div class="row">
             <div class="flex col" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
@@ -40,8 +40,6 @@ export default {
   },
   computed: {
     popularTeacherTopics() {     
-        console.log(this.$store.getters.popularTeacherTopicsForDisplay);
-        
       return this.$store.getters.popularTeacherTopicsForDisplay;
     },
     teacherTopics(){

@@ -2,7 +2,6 @@
     <div class="card">
         <div class="card-image">
             <div @click="goToTeacherTopicProfile"  class="pointer topic-img" :style="{backgroundImage: 'url(' + teacherTopic.topicImage + ')'}"></div>
-            <!-- <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" /> -->
             <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
         </div>
             <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
@@ -88,11 +87,7 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-    }
-
-    .topic-img {
         width: 100%;
-        /* height: 150px; */
     }
 
     .vue-star-rating {
