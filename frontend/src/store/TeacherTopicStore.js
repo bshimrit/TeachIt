@@ -45,7 +45,6 @@ export default {
   },
   getters: {
     teacherTopicsForDisplay(state) {
-      console.log('getter activated')
       return state.teacherTopics;
     },
     popularTeacherTopicsForDisplay(state) {

@@ -46,10 +46,10 @@ export default {
   },
   methods: {
     saveUser() {
+     
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
-          window.alert("Updated");
           console.log("added");
         })
         .catch(err => {
