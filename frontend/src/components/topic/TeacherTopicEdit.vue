@@ -1,11 +1,23 @@
 <template>
 <section>
 
-        <form  @submit.prevent="saveClass">   
+        <form  @submit.prevent="emitSave">   
+
+         <div class=" col s12">
+           <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+
             <div class="input-field col s12">
               <input v-model="teacherClassToEdit.topicId" type="text" class="validate">
               <label class="left active">TopicId</label>
             </div>
+
+          
            
           <!-- <div class="row">
             <div class="input-field col s12">
@@ -54,7 +66,7 @@
                 <label class="left active">Address</label>
              </div>
        
-          <button class="btn accent-3">Cancel</button>
+          <!-- <button class="btn accent-3">Cancel</button> -->
           <button type="submit" class="btn accent-3">Save Class</button>
         </form> 
        
@@ -67,13 +79,15 @@ import teacherTopicService from "@/services/TeacherTopicService.js";
 export default {
   data() {
     return {
-      teacherClassToEdit: teacherTopicService.emptyTeacherTopic()
+      teacherClassToEdit: teacherTopicService.emptyTeacherTopic(),
+      selected:''
     };
   },
   props: {
     teacherClass: {
-      type: Object
-    }
+      type: Object,
+    },
+    showModal:{ type: Boolean}
   },
   created() {
     if (this.teacherClass) {
@@ -83,22 +97,12 @@ export default {
 
   computed: {},
   methods: {
-    saveClass() {
-      if (!this.teacherClassToEdit.topicId) this.teacherClassToEdit.topicId = "5ae97336b8ed24ed05f66112";
-      this.teacherClassToEdit.teacherId = this.$route.params.userId;
+    emitSave(){
+      console.log('emit in edit:',this.teacherClassToEdit);
+      console.log('showModal:',this.showModal);
 
-      console.log("class", this.teacherClassToEdit);
-      this.$store.dispatch({type: "saveTeacherTopic",teacherTopic: this.teacherClassToEdit})
-        .then(added => {
-          window.alert("Saved Class");
-          console.log("Saved Class");
-          this.teacherClassToEdit =teacherTopicService.emptyTeacherTopic();
-        })
-        .catch(err => {
-          window.alert("Failed save class");
-          console.log("failed:" + err);
-          this.teacherClassToEdit = teacherTopicService.emptyTeacherTopic();
-        });
+      this.$emit('emitToModal', this.teacherClassToEdit);
+
     }
   },
   components: { teacherTopicService }

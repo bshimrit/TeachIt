@@ -1,12 +1,12 @@
 <template>
 <section>
- <button class="btn" id="show-modal" @click="showModal = true">Add Class(modal)</button>
-        <transition name="modal" v-if="showModal" @close="showModal = false">
+ 
+        <transition name="modal" v-if="showModal" @click="$emit('modalClosed')">
           <div class="modal-mask">
             <div class="modal-wrapper">
               <div class="modal-container">
                  <div class="modal-header">
-                    <div style="float:right; font-size: 30px; cursor: pointer;" @click="showModal = false">
+                    <div style="float:right; font-size: 30px; cursor: pointer;" @click="$emit('modalClosed')">
                   &times;
                 </div>
                   <slot name="header">
@@ -16,7 +16,8 @@
                
               <div class="modal-body">
                 <slot name="body">
-                  <TeacherTopicEdit></TeacherTopicEdit>
+              
+                  <TeacherTopicEdit @emitToModal="emitToList" :teacherClass="teacherClass"></TeacherTopicEdit>
                 </slot>
               </div>
 
@@ -32,23 +33,27 @@
 <script>
 import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
 
-  export default {
-      data () {
-          return {
-             showModal: false
-          }
-      },
-      props: {
-      },
-      watch: {
-      },
-      computed: {
-      },
-      methods: {
-      },
-      components: {TeacherTopicEdit
-      }
+export default {
+  data() {
+    return {
+      //  showModal: false
+    };
+  },
+
+  props: ["showModal",'teacherClass'],
+  watch: {},
+  computed: {},
+ 
+  methods: {
+    emitToList(teacherClassToEdit) {
+      console.log('emit in modal:', teacherClassToEdit);
+      this.$emit("toSave", teacherClassToEdit);
+    }
+  },
+  components: {
+    TeacherTopicEdit
   }
+};
 </script>
 
 <style scoped>
@@ -67,12 +72,12 @@ import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
- 
 }
 
 .modal-container {
   max-width: 500px;
   height: 100vh;
+  overflow: scroll;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -117,5 +122,4 @@ import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
 </style>
