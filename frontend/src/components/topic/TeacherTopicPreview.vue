@@ -128,7 +128,6 @@ export default {
         .card {
             width: 250px;   
             margin:0;
-            /* height: 300px;      */
         } 
 
         .topic-img {
