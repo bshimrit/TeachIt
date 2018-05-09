@@ -4,7 +4,8 @@ export default {
   strict: true,
   state: {
     reviews: [],
-    reviewsCnt: []
+    reviewsCnt: [],
+    reviewsAvg: 0
   },
   mutations: {
     setReviewFilter(state, { filter }) {
@@ -28,11 +29,14 @@ export default {
     },
     setReviewsCnt(state, {reviews}) {
       var reviewsCnt = [0,0,0,0,0,0]
+      var reviewsSum = 0;
       for (var i = 0; i < reviews.length; i++){
         var rateIdx = reviews[i].topicRating;
         reviewsCnt[rateIdx]++;
+        reviewsSum += rateIdx;
       }
       state.reviewsCnt = reviewsCnt; 
+      state.reviewsAvg = Math.floor(reviewsSum / (reviews.length ? reviews.length : 1))
     }
   },
   getters: {
@@ -41,10 +45,14 @@ export default {
     },
     reviewsCntDisplay(state) {
       return state.reviewsCnt;
+    },
+    reviewsAvgDispaly(state) {
+      return state.reviewsAvg;
     }
   },
   actions: {
     loadReviewsByTeacherTopicId(store, {teacherTopicId}) {
+      console.log('review by topic', teacherTopicId)
       return reviewService.getReviewsByTeacherTopicId(teacherTopicId)
       .then(reviews => {
           store.commit({ type: 'setReviews', reviews });
@@ -57,6 +65,15 @@ export default {
           store.commit({ type: 'setReviews', reviews });
           store.commit({ type: 'setReviewsCnt', reviews });
       })
-    }
+    },
+    saveReview(store, {review}) {
+      const isEdit = !!review.id;
+      return reviewService.saveReview(review)
+      .then(review => {
+        if (isEdit) store.commit({type: 'updateReview', review})
+        else store.commit({type: 'addReview', review})
+        return review;
+      })
+    },
   }
 }

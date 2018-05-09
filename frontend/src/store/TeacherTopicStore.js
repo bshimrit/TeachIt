@@ -11,7 +11,7 @@ export default {
     teacherTopicsByTeacherId: [],
     teacherTopicFilter: TeacherTopicService.emptyTeacherTopicFilter(),
     popularByTopics: [],
-    MAX_VIEW: 4
+    MAX_VIEW: 5
   },
   mutations: {
     setTeacherTopicFilter(state, { filter }) {
@@ -101,7 +101,6 @@ export default {
         })   
     },
     getTopicsByTeacherId(store, {teacherId}) {
-      console.log('store teacherId',teacherId);
       return TeacherTopicService.getTopicsByTeacherId(teacherId)
             .then(teacherTopics => {
               store.commit({type: 'setTeacherTopics', teacherTopics})

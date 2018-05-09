@@ -1,11 +1,13 @@
 <template>
   <div class="topic-review">
     <section class="flex flex-column align-start">
-      <div v-if="$mq !== 'sm'" class="font-bold">
+      <div v-if="reviews.length && $mq !== 'sm'" class="font-bold">
         <div v-if="teacherTopicId">Class review</div>
         <div v-else>Teacher review</div>
       </div>
-      <reviewChart v-if="$mq !== 'sm'" :reviews="reviews" :width="100" :height="150"></reviewChart>
+      <template v-if="$mq !== 'sm'">
+        <reviewChart :reviewsCnt="reviewsCnt" :width="(reviews.length ? 100 : 0)" :height="(reviews.length ? 150 : 0)"></reviewChart>
+      </template>
     </section>
     <reviewAdd @addedReview="loadReviews" :teacherId="teacherId"></reviewAdd>
     <reviewList :reviews="reviews"></reviewList>
@@ -31,13 +33,16 @@ export default {
   computed:{
     reviews() {
       return this.$store.getters.reviewsForDisplay
+    },
+    reviewsCnt() {
+      return this.$store.getters.reviewsCntDisplay
     }
   },
   methods: {
     loadReviews(){
       if (this.teacherTopicId) {
         this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId: this.teacherTopicId})
-      } else {
+      } else if (this.teacherId){
         this.$store.dispatch({type: 'loadReviewsByTeacherId', teacherId: this.teacherId})
         
       }
@@ -54,8 +59,5 @@ export default {
 
 
 <style scoped>
-/* div {
-  border: 1px black solid;
-} */
 </style>
 

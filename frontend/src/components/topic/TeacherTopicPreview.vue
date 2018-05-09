@@ -86,11 +86,7 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-    }
-
-    .topic-img {
         width: 100%;
-        /* height: 150px; */
     }
 
     .vue-star-rating {

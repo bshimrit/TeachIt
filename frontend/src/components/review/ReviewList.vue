@@ -2,7 +2,7 @@
     <section class="review-list">
         <p class="font-bold">Reviews</p>
         <ul class="collection">
-            <li class="flex align-start collection-item " v-for="review in reviews" :key="review._id">
+            <li v-if="review.user" class="flex align-start collection-item " v-for="review in reviews" :key="review._id">
                 <div class="user-details margin-right20">
                     <div class="flex flex-column align-center">
                         <img :src="review.user.img" class="small-image"> 
@@ -10,8 +10,8 @@
                     </div>
                 </div>
                 <div class="review-data">
-                    <StarRating :star-size=20 :increment=1 v-model="review.topicRating" :show-rating="false" :read-only="false"/>
-                    <textarea v-if="review.topicReview" v-model="review.topicReview"/>
+                    <StarRating :star-size=20 :increment=1 v-model="review.topicRating" :show-rating="false" :read-only="true"/>
+                    <textarea readonly v-if="review.topicReview" v-model="review.topicReview"/>
                 </div>
                 <hr>
             </li>
@@ -25,39 +25,21 @@ import StarRating from 'vue-star-rating'
 export default {
     name: 'reviewList',
     props: ['userId'],
-  data () {
-    return {
-            teacherTopic: {
-                teacher: {fullName: null},
-                topic: {title:null, subtitle: null}
-                }
-        }
-  },
-  created() {
-        var teacherTopicId = this.userId || this.$route.params.teacherTopicId
-        this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
-    .then(() => {
-        this.$store.dispatch({type: 'getTeacherTopicById', teacherTopicId})
-        .then(teacherTopic => {
-                this.teacherTopic = teacherTopic[0];
-            })
-    })
-  },
-  computed: {
-      reviews() {
-          return this.$store.getters.reviewsForDisplay
-      },
-      userImg() {
-            return this.$store.getters.onlineUserImg
-        }
+    created() {
+            var teacherTopicId = this.userId || this.$route.params.teacherTopicId
+            this.$store.dispatch({type: 'loadReviewsByTeacherTopicId', teacherTopicId})
+    },
+    computed: {
+        reviews() {
+            return this.$store.getters.reviewsForDisplay
+        },
 
-  },
-  components:{
-      StarRating
-  }
+    },
+    components:{
+        StarRating
+    }
 }
 </script>
-
 
 <style scoped>
     img {

@@ -53,12 +53,6 @@ export default {
                 store.commit({type: 'setUser', user})
             })
       },
-    // loadusers(store) {
-    //   return userService.getusers(store.state.userFilter)
-    //   .then(users => {
-    //       store.commit({ type: 'setusers', users });
-    //   })
-    // },
     loadUser(store, {userId}) {
       return UserService.getUserById(userId)
       .then(user => {
@@ -66,12 +60,6 @@ export default {
         return user;
       })
     },
-    // deleteuser(store, {userId}) {
-    //   return userService.deleteuser(userId)
-    //   .then(()=>{
-    //     store.commit({type: 'deleteuser', userId});
-    //   })
-    // },
     saveUser(store, {user}) {
       const isEdit = !!user._id;
       return UserService.saveUser(user)
