@@ -1,12 +1,12 @@
 <template>
   <div class="container card-container">
     <div class="row">
+      <a class="edit-profile-btn pointer" v-if="isEditAllowed" @click="goToEditProfile">Edit profile</a>
       <div class="profile-card card flex">
         <div class="card-image flex flex-column justify-start" style="padding: 10px; display: flex;">
-          <a class="edit-profile-btn pointer" v-if="isEditAllowed" @click="goToEditProfile">Edit profile</a>
           <div class="user-img" :style="{backgroundImage: 'url(' + user.img + ')'}"></div>          
           <div>
-            <SocialInfo :socialInfo="user.socialLinks"></SocialInfo>
+            <SocialInfo class="margin-top20" :socialInfo="user.socialLinks"></SocialInfo>
           </div>
         </div>
         <div class="card-stacked">
@@ -115,6 +115,10 @@ export default {
 
   .card-container {
     margin: 60px auto 0;
+  }
+
+  .card-action {
+    padding: 10px;
   }
 
 </style>

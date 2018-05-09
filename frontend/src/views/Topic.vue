@@ -26,7 +26,7 @@
           <SocialInfo :socialInfo="teacher.socialLinks"></SocialInfo>
         </div>
     </div>
-    <div class="flex align-start">
+    <div class="margin-top20 flex align-start">
       <DatePicker :date="startTime" :option="option" :limit="limit"></DatePicker>
       <button v-if="startTime.time" class="waves-effect waves-light send-btn btn margin-left20">Send</button>
     </div>
@@ -155,6 +155,11 @@ li {
   align-items:start;
   justify-content: start;
 }
+
+
+ .card .card-content {
+    padding:10px;
+  }
 
 @media (min-width: 750px){
   .teacher-details {

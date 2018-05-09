@@ -36,8 +36,8 @@ img.profile {
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) {
-    border-bottom: 1px solid #e1d256;
-    box-shadow: 0 1px 0 0 #e1d256;
+    border-bottom: 5px solid #e1d256;
+    box-shadow: 0 5px 0 0 #e1d256;
 }
 
 input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker {
@@ -63,7 +63,7 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
   }
 
   .user-img {
-    width: 400px;
+    width: 100%;
     height: 275px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -103,7 +103,15 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
   .cards-container {
     margin: 0;
   }
-  
+
+  .card-content h4 {
+    margin-top: 0;
+  }
+
+  .card-content {
+    padding:10px;
+  }
+
   @keyframes blinker {
     50% {
         box-shadow: 0 0 5px #e1d256;
