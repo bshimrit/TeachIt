@@ -46,14 +46,14 @@
 
 <script>
 // @ is an alias to /src
-import TopicReview from "@/components/review/TopicReview.vue";
-import UserService from "@/services/UserService.js";
-import TeacherTopicService from "@/services/TeacherTopicService.js";
-import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import StarRating from "vue-star-rating";
+import TopicReview from '@/components/review/TopicReview.vue';
+import UserService from '@/services/UserService.js';
+import TeacherTopicService from '@/services/TeacherTopicService.js';
+import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue';
+import StarRating from 'vue-star-rating';
 
 export default {
-  name: "profile",
+  name: 'profile',
   data() {
     return {
       user: UserService.emptyUser(),
@@ -66,12 +66,12 @@ export default {
   },
   created() {
     this.$store
-      .dispatch({ type: "getUserById", userId:this.userId })
+      .dispatch({ type: 'getUserById', userId:this.userId })
       .then(user => {
           this.user = user;
         })
       .catch(err => {
-        console.log("err:", err);
+        console.log('err:', err);
       });
   },
   components: {
@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     goToEditProfile() {
-      this.$router.push("/profile/edit/" + this.userId);
+      this.$router.push('/profile/edit/' + this.userId);
     }
   },
   computed: {

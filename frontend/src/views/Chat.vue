@@ -34,10 +34,11 @@ export default {
       msg: {
         txt: "",
         senderId: "",
-        recipientId: this.$route.params.recipientId,
+        recipientId: '',
         roomId: ""
       },
-      user: this.$store.getters.loggedUser,
+      roomId: '',
+      user: '',
       recipient: '',
       msgs: MsgService.msgs,
       status: MsgService.status
@@ -45,14 +46,18 @@ export default {
     };
   },
   created() {
-    this.$socket.emit("chatRequest", this.msg);
-    console.log("loggedUserId:", this.$store.getters.loggedUser._id);
+      this.msg.recipientId = this.$route.params.recipientId
+      console.log('this.msg.recipientId', this.msg.recipientId);
+
     var sortedIds = [this.$store.getters.loggedUser._id, this.msg.recipientId].sort();
     this.msg.roomId = sortedIds[0] + sortedIds[1];
+    this.roomId = this.msg.roomId
     this.msg.senderId = this.$store.getters.loggedUser._id;
+    this.user = this.$store.getters.loggedUser
 
-    var recipientId = this.msg.recipientId
-    this.$store.dispatch({type: 'getUserById', userId: recipientId})
+    
+      this.$socket.emit("chatRequest", this.msg);
+    this.$store.dispatch({type: 'getUserById', userId: this.msg.recipientId})
     .then(recipient => this.recipient = recipient)
 
     // MsgService.init();
@@ -76,8 +81,8 @@ export default {
   },
   sockets: {
     ["chat message"](data) {
-      console.log("received a chat message:", data, "msgs:", this.msgs);
       this.msgs.push(data);
+      this.$store.dispatch({type: 'recievedMsg', msg: data})
     }
   },
   computed: {

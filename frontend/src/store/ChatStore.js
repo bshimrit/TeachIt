@@ -3,25 +3,29 @@
 export default ({
     strict: true,
     state: {
-      count: 1,
+      newMsgsCounter: {},
     },
     mutations: {
-      updateCount(state, payload) {
-        state.count += payload.diff;
-      }
     },
     getters: {
-      carsForDisplay(state) {
-        return state.cars;
-      }
+        alerts(state) {
+            return state.newMsgsCounter
+        }
     },
     actions: {
-      // removeSomething(store, {id}) {
-      //   return someService.remove(id)
-      //   .then(()=>{
-      //     store.commit({type: 'removeSomething', id});
-      //   })
-      // },
+        recievedMsg(store, {msg}){
+            // var sender = store.dispatch({type: 'getUserById', userId: msg.senderId})
+            // .then(sender => {
+                if (msg.senderId && msg.senderId !== store.getters.loggedUser._id) {
+                    var newMsg = store.state.newMsgsCounter
+                    console.log('msgs before change',newMsg);
+                    
+                    (newMsg[msg.senderId])? newMsg[msg.senderId]++ : newMsg[msg.senderId] = 1;
+                    console.log('msgs after change',newMsg);
+
+                }
+            // })
+        }
     }
   })
   
