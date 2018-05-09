@@ -35,9 +35,25 @@ img.profile {
     width: 20%;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]) {
+input[type=text]:not(.browser-default):focus:not([readonly]) ,
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]) {
     border-bottom: 2px solid #f9e759;
     box-shadow: 0 5px 0 0 #f9e759;
+}
+
+input[type=text].valid:not(.browser-default), 
+input[type=email].valid:not(.browser-default), 
+input[type=password].valid:not(.browser-default) {
+    border-bottom: 1px solid #f9e759;
+    box-shadow: 0 1px 0 0 #f9e759;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label {
+    color: #2b303b;
+
 }
 
 input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker {

@@ -22,8 +22,9 @@ export default new Router({
     { path: '/login', name: 'login', component: Login},
     { path: '/register', name: 'register', component: Register},
     { path: '/profile/user/:userId', name: 'profile', component: Profile},
+    { path: '/profile/edit/classes/:userId', name: 'editClasses', component: EditProfile},
     { path: '/profile/edit/:userId', name: 'edit', component: EditProfile},
-    { path: '/profile/classes/edit/:userId', name: 'editClasses', component: EditClasses},
+    // { path: '/profile/classes/edit/:userId', name: 'editClasses', component: EditClasses},
     { path: '/profile/topic/:teacherTopicId', name: 'topic', component: Topic},
     { path: '/chat/:recipientId', name: 'chat', component: Chat}
   ]

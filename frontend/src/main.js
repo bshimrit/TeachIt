@@ -9,9 +9,16 @@ import '../node_modules/materialize-css/dist/css/materialize.min.css'
 import '../node_modules/materialize-css/dist/js/materialize.min.js'
 import 'font-awesome/css/font-awesome.css';
 import VueMq from 'vue-mq'
- 
+import VuejsDialog from "vuejs-dialog"
 
-
+// Tell Vue to install the plugin.
+Vue.use(VuejsDialog, {
+  html: true, 
+  loader: true,
+  okText: 'Proceed',
+  cancelText: 'Cancel',
+  animation: 'bounce', 
+})
 
 import * as VueGoogleMaps from 'vue2-google-maps'
 import _ from 'lodash'
@@ -25,7 +32,7 @@ Vue.config.productionTip = false
 
 // This is needed for getting the session cookie via CORS
 window.axios = axios.create({
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL: (process.env.NODE_ENV !== 'development')? '' : 'http://127.0.0.1:3000',
   withCredentials: true
 });
 

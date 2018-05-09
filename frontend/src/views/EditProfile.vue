@@ -8,14 +8,14 @@
             <a class="collection-item" @click="editSection = 'AccountEdit'">Account</a>
             <a class="collection-item" @click="editSection = 'InfoEdit'">Public Profile</a>
             <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
-            <a class="collection-item" @click="goToClasses">Classes</a>
+            <a class="collection-item" @click="editSection = 'EditClasses'">Classes</a>
           </div>
         </div>
 
         <div class="col s8">
           <form v-if="editSection !== 'Classes'" @submit.prevent="saveUser">
             <component :is="editSection" :userToUpdate="userToUpdate" />
-            <button type="submit" class="waves-effect waves-light btn">Save</button>
+            <button v-if="editSection !== 'EditClasses'" type="submit" class="waves-effect waves-light btn">Save</button>
           </form>
 
          
@@ -35,6 +35,7 @@ import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
 import TeacherTopicList from "@/components/topic/TeacherTopicList";
 import AccountEdit from "@/components/profile/AccountEdit";
 import InfoEdit from "@/components/profile/InfoEdit";
+import EditClasses from "@/views/EditClasses";
 import Upload from "@/components/uploadImg/Upload";
 
 export default {
@@ -46,10 +47,10 @@ export default {
   },
   methods: {
     saveUser() {
+     
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
-          window.alert("Updated");
           console.log("added");
         })
         .catch(err => {
@@ -57,11 +58,13 @@ export default {
           console.log("failed:" + err);
         });
     },
-    goToClasses() {
-      this.$router.push("/profile/classes/edit/" + this.userId);
-    },
+    // goToClasses() {
+    //   this.$router.push("/profile/classes/edit/" + this.userId);
+    // },
   },
-  created() {},
+  created() {
+    if (this.$route.name === 'editClasses') this.editSection = 'EditClasses';
+  },
   computed: {
     userToUpdate() {
       let loggedUser = this.$store.getters.loggedUser;
@@ -75,7 +78,7 @@ export default {
     TeacherTopicEdit,
     AccountEdit,
     InfoEdit,
-    Upload
+    Upload,EditClasses
   }
 };
 </script>

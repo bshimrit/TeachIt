@@ -1,7 +1,12 @@
 import axios from "axios";
 
-const USER_URL = "http://localhost:3000/user";
+let USER_URL = "http://localhost:3000/user";
 const BASE_URL = "";
+
+if (process.env.NODE_ENV !== 'development') {
+  USER_URL = '/user'
+}
+
 
 function login(user) {
   return axios
@@ -42,8 +47,9 @@ function register(user) {
 }
 
 function saveUser(user) {
+ 
   if (user._id) {
-    return axios.put(_getUserUrl(user._id), user)
+    return axios.put(USER_URL, user)
   } else {
     return axios.post(USER_URL, user);
   }

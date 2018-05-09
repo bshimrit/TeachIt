@@ -1,18 +1,13 @@
 <template>
-<section>
- <h5>My Classes</h5>
-     <div class="row">
-      <button class="btn-floating btn-large waves-effect waves-light red" id="show-modal" @click="showModal = true"><i class="fa fa-plus"></i></button>
-       <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="showModal= false"
-       ></topicEditModal>
-          <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
-            <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
-          </div>
-      </div>     
-     
-    
-
-</section>
+  <section>
+    <div class="row">
+      <button class="btn-floating btn-large waves-effect waves-light yellow" id="show-modal" @click="showModal = true"><i class="fa fa-plus"></i></button>
+      <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="showModal= false"></topicEditModal>
+      <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+        <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
+      </div>
+    </div>     
+  </section>
 </template>
 
 <script>
@@ -78,5 +73,12 @@ export default {
 </script>
 
 <style scoped>
-
+.classes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2b303b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
 </style>
