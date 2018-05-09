@@ -1,6 +1,8 @@
 <template>
   <section class="chat">
-        <h5>Chatting with {{recipient.userName}} <button class="clear-btn"><i class="fa fa-times-circle"></i></button></h5>
+        <h5>Chatting with {{recipient.userName}} 
+            <button class="clear-btn" @click="removeUser"><i class="fa fa-times-circle"></i></button>
+        </h5>
         <ul class="msgs">
             <li v-for="msg in msgs" :key="msg.id">
                 <span v-if="msg.senderId === user._id" class="me">{{msg.txt}}</span>
@@ -25,6 +27,7 @@ import MsgService from '../../services/MsgService.js';
 
 export default {
   name: 'Chat',
+  props: ['userId'],
   data() {
     return {
       msg: {
@@ -44,7 +47,7 @@ export default {
   },
   created() {
     // set recipient ID
-    this.msg.recipientId = this.$route.params.recipientId
+    this.msg.recipientId = this.userId
     // create ChatRoom ID
     var sortedIds = [this.$store.getters.loggedUser._id, this.msg.recipientId].sort();
     this.msg.roomId = sortedIds[0] + sortedIds[1];
@@ -76,6 +79,11 @@ export default {
     },
     whenInput() {
       // MsgService.sendStatus('Someone is typing...')
+    },
+    removeUser() {
+        console.log('removing user');
+        
+        this.$store.commit({type: 'removeUser'})
     }
   },
   sockets: {
@@ -158,6 +166,7 @@ form button {
     background-color: currentColor;
     top: -400px;
     right: 0px;
+    overflow: scroll;
 }
 h5 {
     /* margin: 5px; */

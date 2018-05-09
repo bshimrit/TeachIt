@@ -120,7 +120,7 @@ form {
   background: #2b303b;
   padding: 3px;
   position: fixed;
-  bottom: 0;
+  bottom: 10vh;
   width: 100%;
 }
 form input {

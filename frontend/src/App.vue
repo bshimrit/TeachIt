@@ -6,7 +6,7 @@
     <div id="router">
         <router-view/>
     </div>
-    <alert-bar id="alert-bar" v-if="alertsCount"/>
+    <alert-bar id="alert-bar" v-if="alertsCount || chatting"/>
   </div>
 </template>
 
@@ -27,19 +27,23 @@ export default {
   methods: {
     closeDropdown() {
       this.$store.commit({ type: "closeDropdown" });
-    }
+    },
   },
   sockets: {
     ["alert user"](data) {
       // console.log('allerting all users!', data);
       if (data.recipientId === this.$store.getters.loggedUser._id) {
         this.$store.commit({ type: "recievedMsg", msg: data });
+        // this.$socket.emit('chatRequest', this.msg);
       }
     }
   },
   computed: {
       alertsCount() {
           return this.$store.getters.alertsNum
+      },
+      chatting() {
+          return this.$store.getters.chatWith
       }
   }
 };

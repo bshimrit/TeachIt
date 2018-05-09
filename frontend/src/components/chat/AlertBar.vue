@@ -1,13 +1,13 @@
 <template>
   <section class="footer">
       <div class="chat-screen">
-          <ChatCmp></ChatCmp>
+          <ChatCmp v-if="selectedChat.userId" :userId="selectedChat.userId"></ChatCmp>
       </div>
       <ul class="flex">
-          <li v-for="(chat, id) in chats" :key="id">
-              <router-link :to="`/chat/${id}`">
+          <li v-for="(chat, id) in chats" :key="id" @click="getUserId(id)">
+              <!-- <router-link :to="`/chat/${id}`"> -->
               <span class="badge">{{chat.new}}</span> {{chat.userName}}
-              </router-link>
+              <!-- </router-link> -->
           </li>
       </ul>
   </section>
@@ -18,10 +18,23 @@ import ChatCmp from '../../components/chat/ChatCmp.vue'
 
 export default {
 name: 'AlertBar',
-
+data() {
+    return {
+        selectedChat: {
+            userId: '',
+        }
+    }
+},
 computed: {
     chats() {
         return this.$store.getters.alerts
+    }
+},
+methods: {
+    getUserId(userId) {
+        this.selectedChat.userId = null
+        this.selectedChat.userId = userId
+        this.$store.commit({type: 'chatWith', userId})
     }
 },
 components: {
