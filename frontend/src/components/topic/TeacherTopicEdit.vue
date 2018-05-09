@@ -1,13 +1,12 @@
 <template>
 <section>
-
  
-        <form  @submit.prevent="emitSave">   
+        <form  @submit.prevent="emitSave">
 
            <div class="input-field col s12">
-               <select v-model="teacherClassToEdit.topicId">
-                  <option value="" disabled selected>I Teach</option>
-                  <option v-for="topic in topics" :key="topic._id" :value="topic._id">{{topic.title}}-{{topic.subtitle}}</option>
+               <select v-model="teacherClassToEdit.topicId" ref="selectedTopic">
+                  <option value="" disabled selected>Class Subject</option>
+                  <option v-for="topic in topics" :key="topic._id" :value="topic">{{topic.title}}-{{topic.subtitle}}</option>
               </select>
             </div>
             
@@ -52,38 +51,44 @@ import teacherTopicService from "@/services/TeacherTopicService.js";
 export default {
   data() {
     return {
-      teacherClassToEdit: teacherTopicService.emptyTeacherTopic(),
-      selectedTopic: 'Asi'
-     
+      teacherClassToEdit: teacherTopicService.emptyTeacherTopic()
     };
   },
   props: {
     teacherClass: {
-      type: Object,
+      type: Object
     },
-    showModal:{ type: Boolean}
+    showModal: { type: Boolean }
+  },
+  mounted() {
+    if (this.$mq === "lg") {
+      this.$refs.selectedTopic.onchange = this.setSelectedTopic;
+    }
   },
   created() {
     if (this.teacherClass) {
       this.teacherClassToEdit = { ...this.teacherClass };
     }
-     this.$store.dispatch({type: 'loadTopics'}).then(topics => {
-                $('select').material_select()
-            })
+    this.$store.dispatch({ type: "loadTopics" }).then(topics => {
+      $("select").material_select();
+    });
   },
 
   computed: {
-     topics(){
-            return this.$store.getters.topicsForDisplay;
-        }
+    topics() {
+      return this.$store.getters.topicsForDisplay;
+    }
   },
   methods: {
-    emitSave(){
-      console.log('emit in edit:',this.teacherClassToEdit);
-      console.log('showModal:',this.showModal);
-
-      this.$emit('emitToModal', this.teacherClassToEdit);
-
+    emitSave() {
+      console.log("emit in edit:", this.teacherClassToEdit);
+      console.log("showModal:", this.showModal);
+      console.log("send:", this.teacherClassToEdit);
+      this.$emit("emitToModal", this.teacherClassToEdit);
+    },
+    setSelectedTopic() {
+      console.log("this:", $("select").val()._id);
+      // this.teacherClassToEdit.topicId = $('select').val()._id;
     }
   },
   components: { teacherTopicService }

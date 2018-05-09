@@ -1,7 +1,8 @@
 <template>
   <section>
+  
     <div class="row">
-      <button class="btn-floating btn-large waves-effect waves-light yellow" id="show-modal" @click="showModal = true"><i class="fa fa-plus"></i></button>
+      <button type="button" class="btn-floating btn-large waves-effect waves-light yellow" id="show-modal" @click="showModal = true"><i class="fa fa-plus"></i></button>
       <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="showModal= false"></topicEditModal>
       <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
         <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
@@ -81,4 +82,7 @@ export default {
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
+/* button:focus {
+  background-color: white;
+} */
 </style>
