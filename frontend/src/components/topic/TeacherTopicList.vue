@@ -2,17 +2,14 @@
 <section>
  <h5>My Classes</h5>
      <div class="row">
-      <button class="btn  waves-effect waves-light" id="show-modal" @click="showModal = true">Add Class</button>
+      <button class="btn-floating btn-large waves-effect waves-light red" id="show-modal" @click="showModal = true"><i class="fa fa-plus"></i></button>
        <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="showModal= false"
        ></topicEditModal>
           <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
             <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
           </div>
       </div>     
-       <!-- <a @click="toAdd"  v-if="!isEditClass" class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-plus"></i></a>
-       <div class="col s6">
-          <topic-edit @toSave="saveClass" v-if="isEditClass" :teacherClass="teacherClass"></topic-edit>
-          </div> -->
+     
     
 
 </section>
@@ -47,23 +44,20 @@ export default {
     },
 
      saveClass(teacherClassToEdit) {
-       console.log('S',teacherClassToEdit);
       if (!teacherClassToEdit.topicId) teacherClassToEdit.topicId = "5ae97573b8ed24ed05f66166";
       teacherClassToEdit.teacherId = this.$route.params.userId;
 
       this.$store.dispatch({type: "saveTeacherTopic",teacherTopic: teacherClassToEdit})
         .then(added => {
-          window.alert("Saved Class");
           console.log("Saved Class");
           this.teacherClass =null;
          
         })
         .catch(err => {
-          window.alert("Failed save class");
           console.log("failed:" + err);
           this.teacherClass = null;
         });
-         showModal = false;
+         this.showModal = false;
     },
   },
   created() {

@@ -1,9 +1,9 @@
 <template>
-  <section>
-        <div class="card">
+        <div class="card" v-if="teacherTopic.teacher">
             <div class="card-image">
                 <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
-                <a @click="goToTeacherProfile" v-if="showTeacher" class="teacher-img btn-floating  waves-effect waves-light btn-large"><img :src="teacherTopic.teacher.img" /></a>
+                <a @click="goToTeacherProfile"  class="teacher-img btn-floating  waves-effect waves-light btn-large"><img
+                :src="teacherTopic.teacher.img" /></a>
             </div>
                 <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
             <div class="card-content">
@@ -19,15 +19,8 @@
                     <p class="long-desc">{{teacherTopic.longDes}}</p>
                 </div> 
             </div>
-            <div v-if="showLongDesc">
-                <p class="long-desc">{{teacherTopic.longDes}}</p>
-            </div> 
+           
         </div>
-        <div v-if="showLongDesc">
-            <p class="long-desc">{{teacherTopic.longDes}}</p>
-        </div> 
-  
-    </section>
 </template>
 
 <script>

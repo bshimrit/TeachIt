@@ -45,6 +45,7 @@ export default {
   },
   getters: {
     teacherTopicsForDisplay(state) {
+      console.log('getter activated')
       return state.teacherTopics;
     },
     popularTeacherTopicsForDisplay(state) {
@@ -84,6 +85,7 @@ export default {
       const isEdit = !!teacherTopic.id;
       return TeacherTopicService.saveTeacherTopic(teacherTopic)
       .then(teacherTopic => {
+        store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.teacherId});
         if (isEdit) store.commit({type: 'updateTeacherTopic', teacherTopic})
         else store.commit({type: 'addTeacherTopic', teacherTopic})
         // console.log('teacherTopic.data[0].teacherId',teacherTopic.data[0].teacherId);

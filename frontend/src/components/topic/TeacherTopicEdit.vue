@@ -2,10 +2,22 @@
 <section>
 
         <form  @submit.prevent="emitSave">   
+
+         <div class=" col s12">
+           <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+
             <div class="input-field col s12">
               <input v-model="teacherClassToEdit.topicId" type="text" class="validate">
               <label class="left active">TopicId</label>
             </div>
+
+          
            
           <!-- <div class="row">
             <div class="input-field col s12">
@@ -67,13 +79,15 @@ import teacherTopicService from "@/services/TeacherTopicService.js";
 export default {
   data() {
     return {
-      teacherClassToEdit: teacherTopicService.emptyTeacherTopic()
+      teacherClassToEdit: teacherTopicService.emptyTeacherTopic(),
+      selected:''
     };
   },
   props: {
     teacherClass: {
       type: Object,
-    }
+    },
+    showModal:{ type: Boolean}
   },
   created() {
     if (this.teacherClass) {
@@ -85,6 +99,8 @@ export default {
   methods: {
     emitSave(){
       console.log('emit in edit:',this.teacherClassToEdit);
+      console.log('showModal:',this.showModal);
+
       this.$emit('emitToModal', this.teacherClassToEdit);
 
     }

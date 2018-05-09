@@ -1,7 +1,7 @@
 <template>
 <section>
  
-        <transition name="modal" v-if="showModal" @close="$emit('modalClosed')">
+        <transition name="modal" v-if="showModal" @click="$emit('modalClosed')">
           <div class="modal-mask">
             <div class="modal-wrapper">
               <div class="modal-container">
@@ -17,7 +17,7 @@
               <div class="modal-body">
                 <slot name="body">
               
-                  <TeacherTopicEdit @emitToModal="emitSaveTwo" :teacherClass="teacherClass"></TeacherTopicEdit>
+                  <TeacherTopicEdit @emitToModal="emitToList" :teacherClass="teacherClass"></TeacherTopicEdit>
                 </slot>
               </div>
 
@@ -43,8 +43,9 @@ export default {
   props: ["showModal",'teacherClass'],
   watch: {},
   computed: {},
+ 
   methods: {
-    emitSaveTwo(teacherClassToEdit) {
+    emitToList(teacherClassToEdit) {
       console.log('emit in modal:', teacherClassToEdit);
       this.$emit("toSave", teacherClassToEdit);
     }
