@@ -56,9 +56,33 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
     animation: blinker 1s linear infinite;
     margin: 0;
   }
+
+  .user-img {
+    width: 400px;
+    height: 275px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.profile-card {
+    flex-direction: column;
+  }
+
   
   @keyframes blinker {
     50% {
         box-shadow: 0 0 5px #26a69a;
     }
+}
+
+@media (min-width: 750px){
+    .user-img {
+        width: 275px;
+        height: 275px;
+    }
+
+    .profile-card {
+        flex-direction: row;
   }
+}
