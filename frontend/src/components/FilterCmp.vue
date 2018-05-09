@@ -4,7 +4,7 @@
             <form class="flex space-between align-center search-bar" @submit.prevent="emitFilter">
                 <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search teacher\topic\location..">
             </form>
-            <section class="flex space-between align-center">
+            <section v-if="$mq ==='lg'" class="flex space-between align-center">
                 <div class="left-filter flex justify-start align-center">
                     <div class="margin-right40 sort-input">
                         <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
@@ -47,7 +47,7 @@ export default {
         }
     },
     mounted() {
-        if (this.showExtraSearch) {
+        if (this.$mq === 'lg' && this.showExtraSearch) {
             this.$refs.selectTopics.onchange = this.emitFilter;
             this.$refs.selectSort.onchange = this.emitFilter;
 
@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
     input[type=text] {
-        width: 30%;
+        width: 100%;
         box-sizing: border-box;
         border: 2px solid #ccc;
         border-radius: 4px;
@@ -122,6 +122,12 @@ export default {
     }
     .search-bar {
         height: 80px;
+    }
+
+    @media (min-width: 750px){
+        input[type=text] {
+            width: 30%;
+        }
     }
 
 </style>

@@ -7,7 +7,7 @@
         </div>
             <p class="card-header font-bold">{{teacherTopic.topic.subtitle}} - {{teacherTopic.teacher.fullName}} </p>
         <div class="card-content">
-            <p>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
+            <p><span class="font-bold">Level: </span>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
             <p>{{teacherTopic.shortDes}}</p>
             <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
             <div v-if="showEdit">

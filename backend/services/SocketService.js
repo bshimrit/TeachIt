@@ -24,17 +24,12 @@ function init(http) {
     });
     
     socket.on('chat newMessage', data => {
-        // Try fix without join
-        // socket.join(data.roomId, () => {
-        //     io.to(data.roomId).emit('chat message',data);    
-        //   });
         console.log('socketId')
         pcl(socket.id)
         console.log('socketRooms' )
         pcl(socket.adapter.rooms)
         io.in(data.roomId).emit('chat message', data);  
         io.emit('alert user', data)
-        // io.emit('chat message', data)
     });
 
     // socket.on('chat setTopic', topic => {
