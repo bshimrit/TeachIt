@@ -1,31 +1,27 @@
 <template>
   <section class="chat">
-            <!-- <div>
-                <label> <input type="radio" value="food" v-model="topic" />Food</label>
-                <label><input type="radio" value="dogs" v-model="topic" />Dogs</label>
-            </div> -->
-            <h4>Chatting with {{recipient.userName}} </h4>
-            <ul class="msgs">
-                <li v-for="msg in msgs" :key="msg.id">
-                    <span v-if="msg.senderId === user._id" class="me">{{msg.txt}}</span>
-                    <span v-else-if="msg.senderId === recipient._id" class="him">{{msg.txt}}</span>
-                    <span v-else class="general">{{msg.txt}}</span>
-                </li>
-            </ul>
-            <form @submit.prevent="send">
-                <div class="inputs flex">
-                <input @input="whenInput" v-model="msg.txt" autocomplete="off" />
-                <button>Send</button>
-                </div>
-            </form>
-            <div style="background-color:yellow">
-                {{status.txt}}
+        <h5>Chatting with {{recipient.userName}} <button class="clear-btn"><i class="fa fa-times-circle"></i></button></h5>
+        <ul class="msgs">
+            <li v-for="msg in msgs" :key="msg.id">
+                <span v-if="msg.senderId === user._id" class="me">{{msg.txt}}</span>
+                <span v-else-if="msg.senderId === recipient._id" class="him">{{msg.txt}}</span>
+                <span v-else class="general">{{msg.txt}}</span>
+            </li>
+        </ul>
+        <form @submit.prevent="send">
+            <div class="inputs flex">
+            <input @input="whenInput" v-model="msg.txt" autocomplete="off" />
+            <button>Send</button>
             </div>
-        </section>
+        </form>
+        <div style="background-color:yellow">
+            {{status.txt}}
+        </div>
+    </section>
 </template>
 
 <script>
-import MsgService from '../services/MsgService.js';
+import MsgService from '../../services/MsgService.js';
 
 export default {
   name: 'Chat',
@@ -126,7 +122,7 @@ form {
 form input {
   border: 0;
   padding: 5px 10px;
-  width: 90%;
+  width: 100%;
   margin: 0;
   color: #ffe75a;
   font-family: 'Courier New', Courier, monospace
@@ -152,11 +148,21 @@ form button {
   background: #dfe5f1;
 }
 .chat {
-  margin-top: 50px;
-  width: 80%;
+    position: absolute;
+    height: 400px;
+    bottom: 0px;
+    width: 400px;
+    left: 466px;
+    z-index: -1;
+    margin-bottom: 0px;
+    background-color: currentColor;
+    top: -400px;
+    right: 0px;
 }
-h4 {
-    margin: 5px
+h5 {
+    /* margin: 5px; */
+    padding: 5px;
+    background-color: #2b303b
 }
 .me {
     font-weight: 600;
