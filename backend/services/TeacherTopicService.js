@@ -278,6 +278,7 @@ function getPopularTopics() {
             getTopicsByTopicId(topic._id)
           );
           Promise.all(promises).then(arrayOfTopics => {
+            console.log({arrayOfTopics})
             resolve(arrayOfTopics);
           });
         });

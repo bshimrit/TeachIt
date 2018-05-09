@@ -1,7 +1,12 @@
 import axios from "axios";
 
-const USER_URL = "http://localhost:3000/user";
+let USER_URL = "http://localhost:3000/user";
 const BASE_URL = "";
+
+if (process.env.NODE_ENV !== 'development') {
+  USER_URL = '/user'
+}
+
 
 function login(user) {
   return axios

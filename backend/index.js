@@ -45,10 +45,11 @@ app.get("/baba", (req, res) => {
 var connectedCount = 0;
 var allSockets = [];
 
-http.listen(3000, () => {
-  console.log('listening on *:3000');
-});
+const port = process.env.PORT||3000
 
+http.listen(port, 
+  () => console.log(`Listening on port ${port}!`));
+  
 // io.on("connection", socket => {
 //   console.log("a user connected");
 //   connectedCount++;

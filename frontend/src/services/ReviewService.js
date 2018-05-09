@@ -1,4 +1,8 @@
-const REVIEW_URL = "http://localhost:3000/review";
+let REVIEW_URL = "http://localhost:3000/review";
+
+if (process.env.NODE_ENV !== 'development') {
+  REVIEW_URL = '/review'
+}
 
 function emptyReview() {
   return {
