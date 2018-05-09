@@ -37,6 +37,7 @@
 <script>
 // @ is an alias to /src
 import TopicReview from '@/components/review/TopicReview.vue';
+import SocialInfo from '@/components/SocialInfo.vue';
 import UserService from '@/services/UserService.js';
 import TeacherTopicService from '@/services/TeacherTopicService.js';
 import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue';
