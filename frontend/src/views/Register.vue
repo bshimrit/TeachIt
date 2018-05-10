@@ -48,7 +48,7 @@
                 <div> <uploadImg @uploadImg="addImg"></uploadImg></div><br>
                
                 <div>
-                <button type="submit" class="waves-effect waves-light btn">Register</button>
+                <button type="submit" class="waves-effect waves-light btn" :disabled="!isValid">Register</button>
                 </div>
                 
             </form>
@@ -62,7 +62,7 @@
 
 <script>
 import UserService from "../services/UserService";
-import UploadImg from '@/components/uploadImg/Upload.vue';
+import UploadImg from "@/components/uploadImg/Upload.vue";
 
 export default {
   name: "RegisterPage",
@@ -72,36 +72,53 @@ export default {
     };
   },
   created() {
-      this.newUser.img = './img/icons/default_user_icon.png'
-      
+    this.newUser.img = "./img/icons/default_user_icon.png";
   },
   methods: {
     saveUser() {
-      var userToAdd = this.newUser
+      var userToAdd = this.newUser;
       this.$store
         .dispatch({ type: "saveUser", user: this.newUser })
         .then(addedUser => {
-          this.$store.dispatch({type: 'checkLogin', creds: {userName: userToAdd.userName, password: userToAdd.password}})
-          window.alert("Success");
+          this.$store.dispatch({
+            type: "checkLogin",
+            creds: {
+              userName: userToAdd.userName,
+              password: userToAdd.password
+            }
+          });
+          
           this.$router.push("/");
+          this.$swal({
+            position: "top-end",
+            type: "success",
+            title: "You're in!",
+            showConfirmButton: false,
+            timer: 2000
+          });
         })
         .catch(err => {
-           window.alert("Failed");
+          this.$swal({
+            type: "error",
+            title: "Registration Failed"
+          });
           console.log("failed:" + err);
         });
-        this.newUser = UserService.emptyUser();
+      this.newUser = UserService.emptyUser();
     },
     addImg(url) {
-        this.newUser.img = url
-        console.log('newUser:',this.newUser);
-        
+      this.newUser.img = url;
+      console.log("newUser:", this.newUser);
     }
   },
-  computed: {},
+  computed: {
+    isValid() {
+      return this.newUser.userName !== "";
+    }
+  },
   components: {
     UserService,
     UploadImg
-    
   }
 };
 </script>

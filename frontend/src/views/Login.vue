@@ -14,7 +14,7 @@
                     <div class="input-field col s12">
                     <input v-model="credentials.password" type="password" class="validate" placeholder="Password">
                     </div>
-                    <button class="waves-effect waves-light btn">Submit</button>
+                    <button class="waves-effect waves-light btn" :disabled="!isValid">Submit</button>
                 </div>
             </form>
         </div>
@@ -27,31 +27,42 @@
 </template>
 
 <script>
-import UserService from '../services/UserService'
+import UserService from "../services/UserService";
 
 export default {
-    name: 'loginPage',
-    data() {
-        return {
-            credentials: {
-                userName: '',
-                password: ''
-            }
-        }
-    },
-    methods: {
-        checkLogin() {
-            var creds = this.credentials
-            this.$store.dispatch({type: 'checkLogin', creds})
-        }
-    },
-    computed: {
-        loggedInUser() {
-            if (this.$store.getters.loggedUser) {
-                this.$router.push('/')
-            }
-        }
+  name: "loginPage",
+  data() {
+    return {
+      credentials: {
+        userName: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    checkLogin() {
+      var creds = this.credentials;
+      this.$store.dispatch({ type: "checkLogin", creds }).catch(err => {
+        this.$swal({
+          type: "error",
+          title: "Wrong Credentials"
+        });
+        console.log("failed:" + err);
+      });
     }
+  },
+  computed: {
+    loggedInUser() {
+      if (this.$store.getters.loggedUser) {
+        this.$router.push("/");
+      }
+    },
+    isValid() {
+      return (
+        this.credentials.userName !== "" && this.credentials.password !== ""
+      );
+    }
+  }
 };
 </script>
 
@@ -61,6 +72,6 @@ export default {
   padding: 20px;
 }
 a {
-    margin: 10px
+  margin: 10px;
 }
 </style>

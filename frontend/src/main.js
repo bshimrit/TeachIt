@@ -10,6 +10,9 @@ import '../node_modules/materialize-css/dist/js/materialize.min.js'
 import 'font-awesome/css/font-awesome.css';
 import VueMq from 'vue-mq'
 import VuejsDialog from "vuejs-dialog"
+import VueSweetalert2 from 'vue-sweetalert2';
+ 
+Vue.use(VueSweetalert2);
 
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog, {
