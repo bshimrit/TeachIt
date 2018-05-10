@@ -61,13 +61,18 @@ export default {
     this.$socket.emit('chatRequest', this.msg); 
     // get recipient data for display on page
     this.$store.dispatch({type: 'getUserById', userId: this.msg.recipientId})
-    .then(recipient => this.recipient = recipient)
-    // remove 'new message' alerts
-    var recipient = this.msg.recipientId
-    this.$store.commit({type: 'removeNewMsgs', recipient})
+    .then(recipient => {
+        this.recipient = recipient
+        // remove 'new message' alerts
+        var recipient = this.msg.recipientId
+        this.$store.commit({type: 'removeNewMsgs', recipient})
+        })
+    // prevent alertBar
+    this.$store.commit({type: 'onChatPage', onPage: true})
   },
   destroyed() {
     MsgService.destroy();
+    this.$store.commit({type: 'onChatPage', onPage: false})
   },
   methods: {
     send() {

@@ -1,6 +1,6 @@
 <template>
   <section class="chat">
-        <h5>Chatting with {{recipient.userName}} 
+        <h5><span @click="showId">Chatting with</span>  {{recipient.userName}} 
             <button class="clear-btn" @click="removeUser"><i class="fa fa-times-circle"></i></button>
         </h5>
         <ul class="msgs">
@@ -23,21 +23,21 @@
 </template>
 
 <script>
-import MsgService from "../../services/MsgService.js";
+import MsgService from '../../services/MsgService.js';
 
 export default {
-  name: "Chat",
-  props: ["userId"],
+  name: 'Chat',
+  props: ['userId'],
   data() {
     return {
       msg: {
-        txt: "",
-        senderId: "",
-        senderName: "",
-        recipientId: "",
-        roomId: ""
+        txt: '',
+        senderId: '',
+        senderName: '',
+        recipientId: '',
+        roomId: ''
       },
-      roomId: "",
+      roomId: '',
       user: { _id: null },
       recipient: { _id: null },
       msgs: MsgService.msgs,
@@ -47,66 +47,9 @@ export default {
   },
   created() {
     // set recipient ID
-    // this.msg.recipientId = recipientId
-    // console.log('recipient:', this.msg.recipientId);
-
-    // // create ChatRoom ID
-    // var sortedIds = [
-    //   this.$store.getters.loggedUser._id,
-    //   this.msg.recipientId
-    // ].sort();
-    // this.msg.roomId = sortedIds[0] + sortedIds[1];
-    // this.roomId = this.msg.roomId;
-    // // set sender data
-    // this.user = this.$store.getters.loggedUser;
-    // this.msg.senderName = this.user.userName;
-    // this.msg.senderId = this.user._id;
-    // // activate socket in this room
-    // this.$socket.emit("chatRequest", this.msg);
-    // // get recipient data for display on page
-    // this.$store
-    //   .dispatch({ type: "getUserById", userId: this.msg.recipientId })
-    //   .then(recipient => (this.recipient = recipient));
-    // // remove 'new message' alerts
-    // var recipient = this.msg.recipientId;
-    // this.$store.commit({type: 'removeNewMsgs', recipient})
-  },
-  destroyed() {
-    MsgService.destroy();
-  },
-  methods: {
-    send() {
-      console.log("msg:", this.msg, "roomId:", this.msg.roomId);
-      this.$socket.emit("chat newMessage", this.msg);
-      this.msg.txt = "";
-    },
-    whenInput() {
-      // MsgService.sendStatus('Someone is typing...')
-    },
-    removeUser() {
-      console.log("removing user");
-      this.$store.commit({ type: "removeUser" });
-    }
-  },
-  sockets: {
-    ["chat message"](data) {
-      console.log(data, "***********");
-      this.msgs.push(data);
-      this.$store.dispatch({ type: "recievedMsg", msg: data });
-    }
-  },
-  computed: {
-    // recipientId() {
-    //   console.log("recipientId", this.userId);
-    //   this.msg.recipientId = this.userId;
-    //   return this.userId;
-    // }
-  },
-  watch: {
-      userId(newVal) {
-          this.msg.recipientId = newVal
-          console.log(newVal)
-          // create ChatRoom ID
+    this.msg.recipientId = this.userId
+    console.log('recipient:', this.msg.recipientId);
+    // create ChatRoom ID
     var sortedIds = [
       this.$store.getters.loggedUser._id,
       this.msg.recipientId
@@ -118,15 +61,73 @@ export default {
     this.msg.senderName = this.user.userName;
     this.msg.senderId = this.user._id;
     // activate socket in this room
-    this.$socket.emit("chatRequest", this.msg);
+    this.$socket.emit('chatRequest', this.msg);
     // get recipient data for display on page
     this.$store
-      .dispatch({ type: "getUserById", userId: this.msg.recipientId })
+      .dispatch({ type: 'getUserById', userId: this.msg.recipientId })
       .then(recipient => (this.recipient = recipient));
     // remove 'new message' alerts
     var recipient = this.msg.recipientId;
-      },
-  }
+    this.$store.commit({type: 'removeNewMsgs', recipient})
+
+  },
+  destroyed() {
+    MsgService.destroy();
+  },
+  methods: {
+    send() {
+      this.$socket.emit('chat newMessage', this.msg);
+      this.msg.txt = '';
+    },
+    whenInput() {
+      // MsgService.sendStatus('Someone is typing...')
+    },
+    removeUser() {
+        this.$store.commit({ type: 'removeUser'});
+        this.$emit('removeChat')
+    },
+    showId() {
+        console.log('roomId', this.roomId, '!');
+        
+    }
+  },
+  sockets: {
+    ['chat message'](data) {
+      this.msgs.push(data);
+      this.$store.dispatch({ type: 'recievedMsg', msg: data });
+    }
+  },
+  computed: {
+    // recipientId() {
+    //   console.log('recipientId', this.userId);
+    //   this.msg.recipientId = this.userId;
+    //   return this.userId;
+    // }
+  },
+//   watch: {
+//     userId(newVal) {
+//       this.msg.recipientId = newVal;
+//       console.log('changed user',newVal);
+//       // create ChatRoom ID
+//       var sortedIds = [this.$store.getters.loggedUser._id,this.msg.recipientId].sort();
+//       this.msg.roomId = sortedIds[0] + sortedIds[1];
+//       this.roomId = this.msg.roomId;
+//       console.log('ROOM ID:',this.msg.roomId );
+      
+//       // set sender data
+//       this.user = this.$store.getters.loggedUser;
+//       this.msg.senderName = this.user.userName;
+//       this.msg.senderId = this.user._id;
+//       // activate socket in this room
+//       this.$socket.emit('chatRequest', this.msg);
+//       // get recipient data for display on page
+//       this.$store
+//         .dispatch({ type: 'getUserById', userId: this.msg.recipientId })
+//         .then(recipient => (this.recipient = recipient));
+//       // remove 'new message' alerts
+//       var recipient = this.msg.recipientId;
+//     }
+//   }
   //     'status.txt'() {
   //         setTimeout(()=>{
   //             this.status.txt = '';

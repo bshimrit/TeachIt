@@ -6,7 +6,7 @@
     <div id="router">
         <router-view/>
     </div>
-    <alert-bar id="alert-bar" v-if="alertsCount || chatting"/>
+    <alert-bar id="alert-bar" v-if="(alertsCount || chatting) && !onChatPage"/>
   </div>
 </template>
 
@@ -43,6 +43,11 @@ export default {
       },
       chatting() {
           return this.$store.getters.chatWith
+      },
+      onChatPage() {
+          console.log('on caht page?', this.$store.getters.isChatPage);
+          
+          return this.$store.getters.isChatPage
       }
   }
 };

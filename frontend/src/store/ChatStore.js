@@ -5,7 +5,8 @@ export default ({
     state: {
       newMsgsCounter: {},
       totMsgs: 0,
-      chatWith: null
+      chatWith: null,
+      onChatPage: false
     },
     mutations: {
         recievedMsg(state, {msg}){
@@ -18,20 +19,27 @@ export default ({
                 state.newMsgsCounter[msg.senderId] = {new: 1};
                 
                 state.newMsgsCounter[msg.senderId].userName = msg.senderName
+                state.totMsgs++
             }
             state.newMsgsCounter = {...state.newMsgsCounter}
-            state.totMsgs++
         },
         removeNewMsgs(state, {recipient}) {
-            // state.totMsgs -= state.newMsgsCounter[recipient].new
+            if (state.totMsgs) state.totMsgs -= state.newMsgsCounter[recipient].new
+            console.log('removing data from', recipient);
+            
             delete state.newMsgsCounter[recipient]
             state.newMsgsCounter = {...state.newMsgsCounter}
         },
         chatWith(state, {userId}) {
-            state.chatWith = userId
+            state.chatWith = userId;
+            // delete state.newMsgsCounter[userId]
         },
         removeUser(state) {
             state.chatWith = null;
+        },
+        onChatPage(state, {onPage}) {
+            state.onChatPage = onPage
+            
         }
     },
     getters: {
@@ -43,13 +51,15 @@ export default ({
         },
         chatWith(state) {
             return state.chatWith
+        },
+        isChatPage(state) {
+            return state.onChatPage
         }
     },
     actions: {
         recievedMsg(store, {msg}){
             console.log('senderId',msg.senderId, 'loggedUser', store.getters.loggedUser._id);
             if (msg.senderId && msg.senderId !== store.getters.loggedUser._id) {
-                
                 store.commit({type: 'recievedMsg', msg})
             }
         }

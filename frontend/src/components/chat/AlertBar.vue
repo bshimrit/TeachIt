@@ -1,7 +1,7 @@
 <template>
   <section class="footer">
       <div class="chat-screen">
-          <ChatCmp v-show="selectedChat.userId" :userId="selectedChat.userId"></ChatCmp>
+          <ChatCmp v-if="selectedChat.userId" :userId="selectedChat.userId" @removeChat="removeChat"></ChatCmp>
       </div>
       <ul class="flex">
           <li v-for="(chat, id) in chats" :key="id" @click="getUserId(id)">
@@ -36,7 +36,12 @@ methods: {
         this.selectedChat.userId = userId
         console.log('msg with:', this.selectedChat.userId);
         
+        this.$store.commit({type: 'removeNewMsgs', recipient: userId})
+
         this.$store.commit({type: 'chatWith', userId})
+    },
+    removeChat() {
+        this.selectedChat.userId = null
     }
 },
 components: {
