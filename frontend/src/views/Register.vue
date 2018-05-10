@@ -77,7 +77,6 @@ export default {
   },
   methods: {
     saveUser() {
-      console.log('newUser:',this.newUser);
       var userToAdd = this.newUser
       this.$store
         .dispatch({ type: "saveUser", user: this.newUser })

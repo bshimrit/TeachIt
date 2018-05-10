@@ -29,15 +29,13 @@ export default {
       this.$store.commit({ type: "closeDropdown" });
     },
   },
-  sockets: {
-    ["alert user"](data) {
-      // console.log('allerting all users!', data);
-      if (data.recipientId === this.$store.getters.loggedUser._id) {
-        this.$store.commit({ type: "recievedMsg", msg: data });
-        // this.$socket.emit('chatRequest', this.msg);
-      }
-    }
-  },
+    sockets: {
+        ['alert user'](data) {
+            if (data.recipientId === this.$store.getters.loggedUser._id) {
+                this.$store.commit({type: 'recievedMsg', msg: data})
+            }
+        }
+    },
   computed: {
       alertsCount() {
           return this.$store.getters.alertsNum

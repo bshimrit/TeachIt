@@ -72,7 +72,6 @@ export default {
   methods: {
     send() {
       console.log('msg:', this.msg);
-
       // this.$socket.emit('chatRequest', this.msg)
       // MsgService.sendMsg(this.msg.txt);
       this.$socket.emit('chat newMessage', this.msg);
