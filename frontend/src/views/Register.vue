@@ -30,8 +30,8 @@
                     <label for="password">Repeat Password</label>
                     </div>
                 </div>
-                <uploadImg @uploadImg="addImg"></uploadImg> <br>
-                  <button type="submit" class="waves-effect waves-light btn">Register</button>
+                <uploadImg :imgPath="imgPath" :prefill="newUser.topicImage" @uploadImg="addImg"></uploadImg>
+                <button type="submit" class="waves-effect waves-light btn">Register</button>
             </form>
         </div>
       </div>
@@ -48,7 +48,8 @@ export default {
   name: "RegisterPage",
   data() {
     return {
-      newUser: UserService.emptyUser()
+      newUser: UserService.emptyUser(),
+      imgPath: '/img/users/'
     };
   },
   created() {
@@ -70,9 +71,7 @@ export default {
         this.newUser = UserService.emptyUser();
     },
     addImg(url) {
-        this.newUser.img = url
-        console.log('newUser:',this.newUser);
-        
+      this.newUser.topicImage = url
     }
   },
   computed: {},

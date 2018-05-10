@@ -13,7 +13,8 @@
         </div>
         <div class="content">
           <form v-if="editSection !== 'Classes'" @submit.prevent="saveUser">
-            <component :is="editSection" :userToUpdate="userToUpdate" />
+            <!-- <uploadImg :imgPath="imgPath" :prefill="teacherClassToEdit.topicImage" @uploadImg="addImg"></uploadImg> -->
+            <component :is="editSection" :userToUpdate="userToUpdate" :imgPath="imgPath" :prefill="userToUpdate.img" @uploadImg="addImg" />
             <button v-if="editSection !== 'EditClasses'" type="submit" class="waves-effect waves-light btn">Save</button>
           </form>
         </div>
@@ -34,12 +35,12 @@ export default {
   data() {
     return {
       editSection: "InfoEdit",
-      userId:this.$route.params.userId 
+      userId:this.$route.params.userId ,
+      imgPath: '/img/users/'
     };
   },
   methods: {
     saveUser() {
-     
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
@@ -48,6 +49,9 @@ export default {
           console.log("failed:" + err);
         });
     },
+    addImg(url) {
+      this.userToUpdate.topicImage = url
+    }
   },
   created() {
     if (this.$route.name === 'editClasses') this.editSection = 'EditClasses';

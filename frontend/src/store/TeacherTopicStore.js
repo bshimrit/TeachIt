@@ -106,6 +106,7 @@ export default {
     loadPopularTopics(store) {
       return TeacherTopicService.getPopularTopics()
           .then(popularTopics => {
+            console.log(popularTopics)
             if (popularTopics) popularTopics = popularTopics.slice(0,store.state.MAX_VIEW);
             var popularByTopics = popularTopics.map(popularTopic => {
               return {topic: popularTopic[0].topic,teacherTopics:popularTopic}

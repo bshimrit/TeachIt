@@ -24,9 +24,8 @@
             <label class="left active">Price/Hour</label>
         </div>
         <div class="input-field col s12">
-          <input type="text" class="validate" v-model="teacherClassToEdit.topicImage">
-            <label class="left active">Image url</label>
-      </div>
+          <uploadImg :imgPath="imgPath" :prefill="teacherClassToEdit.topicImage" @uploadImg="addImg"></uploadImg>
+        </div>
       <button type="submit" class="btn accent-3">Save Class</button>
     </form>        
   </section>
@@ -34,11 +33,13 @@
 
 <script>
 import teacherTopicService from "@/services/TeacherTopicService.js";
+import UploadImg from '@/components/uploadImg/Upload.vue';
 
 export default {
   data() {
     return {
-      teacherClassToEdit: teacherTopicService.emptyTeacherTopic()
+      teacherClassToEdit: teacherTopicService.emptyTeacherTopic(),
+      imgPath: '/img/Topics/'
     };
   },
   props: {
@@ -71,12 +72,28 @@ export default {
   },
   methods: {
     emitSave(){
-      this.teacherClassToEdit.topicId =  $('select').val();
-      this.$emit('emitToModal', this.teacherClassToEdit);
+      this.teacherClassToEdit.topicId = $('select').val();
+      var newTeacherTopic = {
+        _id:  this.teacherClassToEdit._id,
+        topicId: this.teacherClassToEdit.topicId,
+        teacherId:  this.teacherClassToEdit.teacherId,
+        level:  this.teacherClassToEdit.level,
+        pricePerHour:  this.teacherClassToEdit.pricePerHour,
+        shortDes:  this.teacherClassToEdit.shortDes,
+        longDes:  this.teacherClassToEdit.longDes,
+        topicImage:  this.teacherClassToEdit.topicImage
+      }
+      this.$emit('emitToModal', newTeacherTopic);
 
+    },
+    addImg(url) {
+      this.teacherClassToEdit.topicImage = url
     }
   },
-  components: { teacherTopicService }
+  components: { 
+      teacherTopicService,
+      UploadImg
+    }
 };
 </script>
 
