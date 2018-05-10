@@ -26,13 +26,15 @@ import './css/main.css'
 // import socketio from 'socket.io-client'
 import VueSocketio from 'vue-socket.io';
 
-Vue.use(VueSocketio, '//localhost:3000', store);
+const baseURL = (process.env.NODE_ENV !== 'development')? '' : '//127.0.0.1:3000'
+
+Vue.use(VueSocketio, baseURL, store);
 Vue.config.productionTip = false
 
 
 // This is needed for getting the session cookie via CORS
 window.axios = axios.create({
-  baseURL: (process.env.NODE_ENV !== 'development')? '' : 'http://127.0.0.1:3000',
+  baseURL,
   withCredentials: true
 });
 

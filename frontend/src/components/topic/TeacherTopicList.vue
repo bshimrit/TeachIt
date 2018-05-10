@@ -81,4 +81,7 @@ export default {
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
+/* button:focus {
+  background-color: white;
+} */
 </style>

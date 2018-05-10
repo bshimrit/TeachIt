@@ -38,14 +38,19 @@ import teacherTopicService from "@/services/TeacherTopicService.js";
 export default {
   data() {
     return {
-      teacherClassToEdit: teacherTopicService.emptyTeacherTopic(),
+      teacherClassToEdit: teacherTopicService.emptyTeacherTopic()
     };
   },
   props: {
     teacherClass: {
-      type: Object,
+      type: Object
     },
-    showModal:{ type: Boolean}
+    showModal: { type: Boolean }
+  },
+  mounted() {
+    if (this.$mq === "lg") {
+      this.$refs.selectedTopic.onchange = this.setSelectedTopic;
+    }
   },
   created() {
     if (this.teacherClass) {
@@ -60,9 +65,9 @@ export default {
           })
   },
   computed: {
-     topics(){
-            return this.$store.getters.topicsForDisplay;
-        }
+    topics() {
+      return this.$store.getters.topicsForDisplay;
+    }
   },
   methods: {
     emitSave(){
