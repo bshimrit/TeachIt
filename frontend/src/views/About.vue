@@ -31,6 +31,20 @@
             </p>    
         </div>
       </div>
+       <div class="flex">
+        <div class="team-member">
+            <img class="team-img" src="img/team/shimrit.jpg" alt="">
+        </div>
+        <div class="flex justify-start align-start">
+            <div class="font-bold">
+                <h4>Chen Mualem</h4>
+                <p class="text-muted">Frontend Developer</p>
+            </div>
+            <p> I'm an Information Systems Management B.Sc. graduate with IT background. Interested in web developmet roles.
+                
+            </p>    
+        </div>
+      </div>
     </section>
   </template>
 <script>

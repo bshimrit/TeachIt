@@ -66,7 +66,7 @@ export default {
   // padding: 0 30px;
   a {
     font-weight: bold;
-    color: #9fb6ce;
+    color: #ababab;
     &.router-link-exact-active {
       color: #ffe75a;
     }
@@ -82,7 +82,7 @@ export default {
 #alert-bar {
   width: 100%;
   height: 80px;
-  background-color: #2b303b;
+  background-color: #0e0f10;
   color: #ffe75a;
   border: 1px solid #ffe75a;
   position: fixed;

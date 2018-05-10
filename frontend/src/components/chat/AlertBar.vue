@@ -56,7 +56,7 @@ ul {
     padding: 0 10px;
 }
 li {
-    background-color: #2b303b;
+    background-color: #0e0f10;
     border: 1px solid #ffe75a;
     padding: 5px;
     font-size: 0.9rem;
@@ -67,7 +67,7 @@ a {
 }
 .badge {
     background-color: #ffe75a;
-    color: #2b303b;
+    color: #0e0f10;
     flex-flow: row-reverse;
     border-radius: 50%;
     width: 20px;
@@ -82,6 +82,6 @@ a {
     width: 400p;
     /* padding: 10px; */
     background-color: #ffffff;
-    border: 1px solid #2b303b
+    border: 1px solid #0e0f10
 }
 </style>

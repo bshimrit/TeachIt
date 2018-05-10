@@ -77,7 +77,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #2b303b;
+    border-bottom: 1px solid #0e0f10;
     padding-bottom: 10px;
     margin-bottom: 20px;
 }

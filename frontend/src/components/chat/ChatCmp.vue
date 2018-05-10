@@ -147,7 +147,7 @@ body {
   font: 13px Helvetica, Arial;
 }
 form {
-  background: #2b303b;
+  background: #0e0f10;
   padding: 3px;
   position: fixed;
   bottom: 0;
@@ -197,7 +197,7 @@ form button {
 h5 {
   /* margin: 5px; */
   padding: 5px;
-  background-color: #2b303b;
+  background-color: #0e0f10;
 }
 .me {
   font-weight: 600;
