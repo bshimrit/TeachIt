@@ -1,7 +1,8 @@
 <template>
   <section>
     <div class="hero flex justify-center align-center flex-column">
-        <h1>Find the best teachers</h1>
+        <h1>TeachIt</h1>
+        <h5>Shared skills in tech, business, and personal schooling</h5>
       <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
     </div>
     <div class="container header-margin">
@@ -85,6 +86,15 @@ export default {
   }
   h1 {
     -webkit-text-stroke: 2px #5f3517;
+    text-shadow: 
+        -1px -1px 0 #5f3517, 
+        1px -1px 0 #5f3517, 
+        -1px 1px 0 #5f3517, 
+        1px 1px 0 #5f3517;
+    color: #fff7ca;
+    font-family: 'MontBold'
+  }
+  h5 {
     text-shadow: 
         -1px -1px 0 #5f3517, 
         1px -1px 0 #5f3517, 

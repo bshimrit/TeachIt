@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                 <div>
+                 <div class="flex justify-start">
                   <input type="checkbox" v-model="newUser.isTeacher" id="isTeacher" />
                   <label for="isTeacher">I'm a teacher</label>
                 </div>

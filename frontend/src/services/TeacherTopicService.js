@@ -14,7 +14,7 @@ function emptyTeacherTopic() {
     topicId: null,
     teacherId: null,
     level: "",
-    pricePerHour: null,
+    pricePerHour: 0,
     rating: null,
     shortDes: "",
     longDes:"",
