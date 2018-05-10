@@ -1,12 +1,12 @@
 <template>
   <section>
-    <div class="row">
-      <button class="btn-floating btn-large waves-effect waves-light yellow" id="show-modal" @click="showModal = true"><i class="fa fa-plus"></i></button>
-      <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="showModal= false"></topicEditModal>
-      <div class="col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
+    <button class="btn-floating halfway-fab btn-large  yellow"  @click.stop="showModal = true"><i class="fa fa-plus"></i></button>
+    <topicEditModal @toSave="saveClass" :teacherClass="teacherClass" :showModal="showModal" @modalClosed="clearModal"></topicEditModal>
+    <ul class="cards-container flex flex-wrap">
+      <li class="card-item" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
         <TeacherTopic @toEdit="toEdit"  :teacherTopic="teacherTopic" :showLongDesc="false" :showTeacher="false" :showEdit="true"></TeacherTopic>
-      </div>
-    </div>     
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -38,31 +38,27 @@ export default {
       this.showModal = true;
     },
 
-     saveClass(teacherClassToEdit) {
-      if (!teacherClassToEdit.topicId) teacherClassToEdit.topicId = "5ae97573b8ed24ed05f66166";
-      teacherClassToEdit.teacherId = this.$route.params.userId;
+    saveClass(teacherClassToEdit) {
+        teacherClassToEdit.teacherId = this.$route.params.userId;
 
       this.$store.dispatch({type: "saveTeacherTopic",teacherTopic: teacherClassToEdit})
         .then(added => {
-          console.log("Saved Class");
-          this.teacherClass =null;
-         
+            this.$store.dispatch({ type: "getTopicsByTeacherId", teacherId: this.$route.params.userId })
         })
         .catch(err => {
-          console.log("failed:" + err);
           this.teacherClass = null;
         });
-         this.showModal = false;
+        this.clearModal();
+    },
+    clearModal() {
+      this.showModal = false;
+      this.teacherClass = null;
     },
   },
   created() {
     var userId = this.$route.params.userId;
     this.$store
       .dispatch({ type: "getTopicsByTeacherId", teacherId: userId })
-      // .then(topics => {
-      //   console.log(topics);
-      //   this.teacherTopics = topics;
-      // });
   },
   components: {
     TeacherTopic,
@@ -73,12 +69,16 @@ export default {
 </script>
 
 <style scoped>
-.classes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #2b303b;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  .btn-floating.btn-large.halfway-fab {
+    bottom: 10px;
+  }
+
+  .classes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2b303b;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 </style>

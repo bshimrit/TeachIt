@@ -31,7 +31,6 @@
   },
     sockets: {
         ['alert user'](data) {
-            // console.log('allerting all users!', data);
             if (data.recipientId === this.$store.getters.loggedUser._id) {
                 this.$store.commit({type: 'recievedMsg', msg: data})
             }

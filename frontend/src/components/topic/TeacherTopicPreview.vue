@@ -10,9 +10,10 @@
             <p><span class="font-bold">Level: </span>{{teacherTopic.level}} - {{teacherTopic.pricePerHour}}$/perHour</p>
             <p>{{teacherTopic.shortDes}}</p>
             <StarRating v-model="teacherTopic.rating" :star-size="15" :read-only="true" :show-rating="false"/>
-            <div v-if="showEdit">
-                <a class="waves-effect waves-teal btn-flat" @click="$emit('toEdit', teacherTopic)"><i class="fa fa-pencil-square-o"></i></a>
-                <a class="waves-effect waves-teal btn-flat" @click="deleteClass"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            <div class="flex justify-start align-center" v-if="showEdit">
+              <!-- class="waves-effect waves-teal btn-flat" -->
+                <a class="btn-flat" @click="$emit('toEdit', teacherTopic)"><i class="fa fa-pencil-square-o"></i></a>
+                <a class="btn-flat" @click="deleteClass"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 
             </div>
             <div v-if="showLongDesc">
@@ -70,20 +71,14 @@ export default {
               teacherId: this.teacherTopic.teacherId
             })
             .then(deleted => {
-              console.log("Delete action completed ");
-            dialog.close();
+              dialog.close();
             })
             .catch(err => {
-              console.log("Delete action FAILED ");
             dialog.close();
-              console.log("failed:" + err);
             });
          
         })
         .catch(() => {
-          // Triggered when cancel button is clicked
-
-          console.log("Delete aborted");
         });
     }
   }
@@ -139,28 +134,36 @@ a.teacher-img img {
   font-size: 14px;
 }
 
+.card-header {
+    margin: 20px 0 0;
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+@media (min-width: 750px){
+    .card {
+        width: 250px;   
+        margin:0;
+    } 
+
+    .topic-img {
+            height: 150px;
+    }
+
+    .card .card-image {
+        height: 200px;
+    }
+
     .card-header {
-        margin: 20px 0 0;
-        padding: 0 5px;
-        font-size: 14px;
+    margin-top: 0;
     }
-    
-    @media (min-width: 750px){
-        .card {
-            width: 250px;   
-            margin:0;
-        } 
 
-        .topic-img {
-                height: 150px;
-        }
-
-        .card .card-image {
-            height: 200px;
-        }
-
-        .card-header {
-        margin-top: 0;
-        }
+    .btn-flat {
+      padding: 0 5px;
     }
+
+    .btn-flat:hover {
+        color: #9fb6ce;
+    }
+}
 </style>

@@ -2,8 +2,8 @@
   <section class="EditProfilePage">
     <div class="container">
       <h4>Profile - {{ userToUpdate.fullName}}</h4>
-      <div class="row">
-        <div class="col s4">
+      <section class="edit-container flex">
+        <div class="menu">
           <div class="collection">
             <a class="collection-item" @click="editSection = 'AccountEdit'">Account</a>
             <a class="collection-item" @click="editSection = 'InfoEdit'">Public Profile</a>
@@ -11,28 +11,20 @@
             <a class="collection-item" @click="editSection = 'EditClasses'">Classes</a>
           </div>
         </div>
-
-        <div class="col s8">
+        <div class="content">
           <form v-if="editSection !== 'Classes'" @submit.prevent="saveUser">
             <component :is="editSection" :userToUpdate="userToUpdate" />
             <button v-if="editSection !== 'EditClasses'" type="submit" class="waves-effect waves-light btn">Save</button>
           </form>
-
-         
         </div>
-
-      </div>
-
+      </section>
     </div>
-
   </section>
 </template>
 
 <script>
+
 import UserService from "@/services/UserService.js";
-import TeacherTopic from "@/components/topic/TeacherTopicPreview.vue";
-import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
-import TeacherTopicList from "@/components/topic/TeacherTopicList";
 import AccountEdit from "@/components/profile/AccountEdit";
 import InfoEdit from "@/components/profile/InfoEdit";
 import EditClasses from "@/views/EditClasses";
@@ -51,16 +43,11 @@ export default {
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
-          console.log("added");
         })
         .catch(err => {
-          window.alert("Failed");
           console.log("failed:" + err);
         });
     },
-    // goToClasses() {
-    //   this.$router.push("/profile/classes/edit/" + this.userId);
-    // },
   },
   created() {
     if (this.$route.name === 'editClasses') this.editSection = 'EditClasses';
@@ -73,27 +60,75 @@ export default {
   },
   components: {
     UserService,
-    TeacherTopic,
-    TeacherTopicList,
-    TeacherTopicEdit,
-    AccountEdit,
     InfoEdit,
-    Upload,EditClasses
+    AccountEdit,
+    EditClasses,
+    Upload
   }
 };
 </script>
 
 
 <style scoped>
-.container {
-  /* max-width: 900px; */
-  /* border: 2px solid #577594; */
-  padding: 20px;
-}
-a {
-  margin: 10px;
-  cursor: pointer;
-}
+  .menu {
+    width: 100%;
+  }
+
+  .content {
+    width: 70%;
+  }
+  .container {
+    padding: 20px;
+  }
+
+  a {
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  .collection a.collection-item {
+    color: #9fb6ce;
+    font-family: 'MontBold', sans-serif;
+  }
+
+  .edit-container {
+      flex-direction: column;
+      align-items: center;
+  }
+    
+  .menu .collection {
+    display: flex;
+    overflow: initial;
+    /* justify-content: center;   */
+  }
+
+  .collection .collection-item {
+    border: 1px solid #e0e0e0;
+  }
+
+  .collection {
+    border: 1px solid transparent;
+  }
+
+  @media (min-width: 750px){
+    .edit-container {
+      flex-direction: row;
+      align-items: start;
+    }
+
+    .collection {
+      border: 1px solid #e0e0e0;
+    }
+    
+    .menu .collection {
+      display: block;
+      overflow: hidden;  
+    }
+    .menu {
+      width: 20%;
+      margin-right: 20px;
+    }
+  }
 </style>
 
 

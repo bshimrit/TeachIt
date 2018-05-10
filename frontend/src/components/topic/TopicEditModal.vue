@@ -1,40 +1,28 @@
 <template>
 <section>
- 
-        <transition name="modal" v-if="showModal" @click="$emit('modalClosed')">
-          <div class="modal-mask">
-            <div class="modal-wrapper">
-              <div class="modal-container">
-                 <div class="modal-header">
-                    <div style="float:right; font-size: 30px; cursor: pointer;" @click="$emit('modalClosed')">
-                  &times;
-                </div>
-                  <slot name="header">
-                    Class Details
-                  </slot>
-                </div>
-               
-              <div class="modal-body">
-                <slot name="body">
-                  <TeacherTopicEdit @emitToModal="emitToList" :teacherClass="teacherClass"></TeacherTopicEdit>
-                </slot>
-              </div>
-
-            <div class="modal-footer">
-                <slot name="footer">
-                  
-                  <button class="modal-default-button" @click="$emit('modalClosed')">
-                    Cancel
-                  </button>
-                </slot>
-              </div>
-
-              </div>
-            </div>
+  <transition name="modal" v-if="showModal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+            <div class="modal-header">
+            <div style="float:right; font-size: 30px; cursor: pointer;" @click="$emit('modalClosed')">&times;</div>
+            <slot name="header">
+              Edit Class Details
+            </slot>
           </div>
-        </transition>
-
-
+        <div class="modal-body">
+          <slot name="body">
+            <TeacherTopicEdit @emitToModal="emitToList" :teacherClass="teacherClass"></TeacherTopicEdit>
+          </slot>
+        </div>
+      <div class="modal-footer">
+          <slot name="footer">
+          </slot>
+        </div>
+        </div>
+      </div>
+    </div>
+  </transition>
 </section>
 </template>
 
@@ -44,7 +32,6 @@ import TeacherTopicEdit from "@/components/topic/TeacherTopicEdit.vue";
 export default {
   data() {
     return {
-      //  showModal: false
     };
   },
 
@@ -54,7 +41,6 @@ export default {
  
   methods: {
     emitToList(teacherClassToEdit) {
-      console.log('emit in modal:', teacherClassToEdit);
       this.$emit("toSave", teacherClassToEdit);
     }
   },

@@ -46,8 +46,6 @@ export default {
   },
   actions: {
       checkLogin(store, {creds}) {
-          console.log('checking login:', creds);
-          
         return UserService.checkLogin(creds)
             .then(user => {
                 store.commit({type: 'setUser', user})
@@ -72,8 +70,6 @@ export default {
       })
     },
     getUserById(store, {userId}) {
-        console.log('got ID:', userId);
-        
           return UserService.getUserById(userId)
             .then(user => {
               return user;
