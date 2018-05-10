@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import NavBar from "./components/NavBar.vue";
-import AlertBar from "./components/chat/AlertBar.vue";
+import NavBar from './components/NavBar.vue';
+import AlertBar from './components/chat/AlertBar.vue';
 export default {
   components: {
     NavBar,
@@ -21,19 +21,18 @@ export default {
   created() {
     if (sessionStorage.user) {
       var user = JSON.parse(sessionStorage.user);
-      this.$store.dispatch({ type: "loadUser", userId: user._id });
+      this.$store.dispatch({ type: 'loadUser', userId: user._id });
     }
   },
   methods: {
     closeDropdown() {
-      this.$store.commit({ type: "closeDropdown" });
+      this.$store.commit({ type: 'closeDropdown' });
     },
   },
   sockets: {
-    ["alert user"](data) {
-      // console.log('allerting all users!', data);
+    ['alert user'](data) {
       if (data.recipientId === this.$store.getters.loggedUser._id) {
-        this.$store.commit({ type: "recievedMsg", msg: data });
+        this.$store.commit({ type: 'recievedMsg', msg: data });
         // this.$socket.emit('chatRequest', this.msg);
       }
     }
@@ -48,14 +47,14 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang='scss'>
 #app {
   // font-family: 'Avenir', Helvetica, Arial, sans-serif;
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
   text-align: center;
   // color: #577594;
-  font-family: "MontRegular", sans-serif;
+  font-family: 'MontRegular', sans-serif;
   font-size: 20px;
   text-transform: initial;
 }

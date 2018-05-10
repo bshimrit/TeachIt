@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     send() {
-      console.log('msg:', this.msg);
+    //   console.log('msg!!!!!!!!:', this.msg);
 
       // this.$socket.emit('chatRequest', this.msg)
       // MsgService.sendMsg(this.msg.txt);
@@ -120,7 +120,7 @@ form {
   background: #2b303b;
   padding: 3px;
   position: fixed;
-  bottom: 10vh;
+  bottom: 0;
   width: 100%;
 }
 form input {

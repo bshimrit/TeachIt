@@ -1,7 +1,7 @@
 <template>
   <section class="footer">
       <div class="chat-screen">
-          <ChatCmp v-if="selectedChat.userId" :userId="selectedChat.userId"></ChatCmp>
+          <ChatCmp v-show="selectedChat.userId" :userId="selectedChat.userId"></ChatCmp>
       </div>
       <ul class="flex">
           <li v-for="(chat, id) in chats" :key="id" @click="getUserId(id)">
@@ -34,6 +34,8 @@ methods: {
     getUserId(userId) {
         this.selectedChat.userId = null
         this.selectedChat.userId = userId
+        console.log('msg with:', this.selectedChat.userId);
+        
         this.$store.commit({type: 'chatWith', userId})
     }
 },
