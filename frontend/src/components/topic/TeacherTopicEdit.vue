@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form v-if="topics" @submit.prevent="emitSave">   
+    <form v-if="topics" @submit.prevent>   
         <div v-if="topics.length" class="input-field col s12">
             <select>
               <option value="" disabled selected>I Teach</option>
@@ -26,7 +26,7 @@
         <div class="input-field col s12">
           <uploadImg :imgPath="imgPath" :prefill="teacherClassToEdit.topicImage" @uploadImg="addImg"></uploadImg>
         </div>
-      <button type="submit" class="btn accent-3">Save Class</button>
+      <button type="button" @click="emitSave"  class="btn accent-3">Save Class</button>
     </form>        
   </section>
 </template>
