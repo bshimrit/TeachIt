@@ -12,8 +12,8 @@
         <div class="card-stacked">
           <div class="card-content">
             <h4>{{user.fullName}}</h4>
-            <StarRating v-model="reviewsAvg" :star-size="20" :read-only="true" :show-rating="false"/>
-            <div style="color: rgba(0,0,0,0.5)">
+            <StarRating v-if="user.isTeacher" v-model="reviewsAvg" :star-size="20" :read-only="true" :show-rating="false"/>
+            <div v-if="user.quote" style="color: rgba(0,0,0,0.5)">
               <i>"{{user.quote}}"</i>
             </div>
             <p>{{user.desc}}</p>
@@ -24,13 +24,13 @@
         </div>
       </div>
     </div>
-    <p class="font-bold">Classes</p>
-    <div class="row">
+    <p v-if="user.isTeacher" class="font-bold">Classes</p>
+    <div v-if="user.isTeacher" class="row">
       <div class="flex col" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
           <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
       </div>
     </div>
-     <topic-review :teacherId="userId"></topic-review>
+     <topic-review v-if="user.isTeacher" :teacherId="userId"></topic-review>
   </div>
 </template>
 

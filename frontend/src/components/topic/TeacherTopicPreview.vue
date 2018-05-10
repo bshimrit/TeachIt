@@ -53,17 +53,9 @@ export default {
     deleteClass() {
       this.$dialog
         .confirm("Are you sure?", {
-          loader: true // default: false - when set to true, the proceed button shows a loader when clicked.
-          // And a dialog object will be passed to the then() callback
+          loader: true 
         })
         .then(dialog => {
-          // Triggered when proceed button is clicked
-
-          // dialog.loading(false) // stops the proceed button's loader
-          // dialog.loading(true) // starts the proceed button's loader again
-          // dialog.close() // stops the loader and close the dialog
-
-          // do some stuff like ajax request.
           this.$store
             .dispatch({
               type: "deleteTeacherTopic",
@@ -79,6 +71,7 @@ export default {
          
         })
         .catch(() => {
+          console.log("Delete aborted");
         });
     }
   }
