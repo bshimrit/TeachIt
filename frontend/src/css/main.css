@@ -52,7 +52,7 @@ input[type=password].valid:not(.browser-default) {
 input[type=text]:not(.browser-default):focus:not([readonly])+label,
 input[type=email]:not(.browser-default):focus:not([readonly])+label,
 input[type=password]:not(.browser-default):focus:not([readonly])+label {
-    color: #2b303b;
+    color: #0e0f10;
 
 }
 
@@ -62,14 +62,14 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker {
     text-align: center;
     letter-spacing: .5px;
     cursor: pointer;
-    color: #9fb6ce;
+    color: #ababab;
     font-family: 'MontBold', sans-serif;
     box-sizing: border-box;
 }
 
  
 input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::placeholder {
-    color: #9fb6ce;
+    color: #ababab;
     font-family: 'MontBold', sans-serif;
 } 
 
@@ -88,16 +88,16 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
 
 .btn {
     font-family: 'MontBold', sans-serif;
-    background-color: #2b303b;
-    color: #9fb6ce;
+    background-color: #0e0f10;
+    color: #ababab;
 }
 
 .btn:focus {
-    background-color: #2b303b;
+    background-color: #0e0f10;
 }
 
 .btn:hover {
-    background-color: #2b303b;  
+    background-color: #0e0f10;  
     color: #f9e759;
 }
 

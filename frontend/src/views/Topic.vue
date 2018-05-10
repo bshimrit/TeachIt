@@ -28,7 +28,7 @@
     </div>
     <div class="margin-top20 flex align-start">
       <DatePicker :date="startTime" :option="option" :limit="limit"></DatePicker>
-      <button v-if="startTime.time" class="send-btn btn margin-left20">Send</button>
+      <button v-if="startTime.time" class="send-btn btn margin-left20" @click="openChat">Send</button>
     </div>
     <topic-review :teacherId="teacher._id" :teacherTopicId="$route.params.teacherTopicId"></topic-review>
      
@@ -54,6 +54,7 @@ export default {
       },
       teacherTopic: {
       },
+      loggedUser: {},
       startTime: { time: ''},
       endtime: {time: ''},
       option: {
@@ -65,7 +66,7 @@ export default {
         inputStyle: {
         },
         color: {
-          header: '#2b303b',
+          header: '#0e0f10',
           headerText: '#e1d256'
         },
         buttons: {
@@ -104,7 +105,8 @@ export default {
     .then((teacherTopic) => {
       this.teacher = teacherTopic[0].teacher;
       this.teacherTopic = teacherTopic[0];
-    })
+    });
+    this.loggedUser = this.$store.getters.loggedUser
   },
   computed: {
       reviewsAvg(){
@@ -115,6 +117,20 @@ export default {
     goToTeacherProfile(){
       this.$router.push('/profile/user/' + this.teacherTopic.teacherId);
         },
+    openChat() {
+        console.log('sending chat to:', this.teacher._id);
+        var msg = this.$store.getters.newMsg;
+        msg.txt = `Hello ${this.teacher.fullName}. 
+        You got a class request for ${this.startTime.time} from ${this.loggedUser.fullName}.`
+        msg.senderId = this.loggedUser._id;
+        msg.senderName = this.loggedUser.fullName;
+        msg.recipientId = this.teacher._id;
+        var sortedIds = [this.loggedUser._id, msg.recipientId].sort();
+        msg.roomId = sortedIds[0] + sortedIds[1];        
+        console.log(msg);       
+        this.$socket.emit('chat newMessage', msg);
+        
+    }
   },
   components: {
     TopicReview,

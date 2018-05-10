@@ -13,7 +13,7 @@
         </div>
         <div class="content">
           <form v-if="editSection !== isTeacherClasses" @submit.prevent="saveUser">
-            <component :is="editSection" :userToUpdate="userToUpdate" />
+             <component :is="editSection" :userToUpdate="userToUpdate" :imgPath="imgPath" :prefill="userToUpdate.img" @uploadImg="addImg" />
             <button v-if="editSection !== 'EditClasses'" type="submit" class="waves-effect waves-light btn">Save</button>
           </form>
         </div>
@@ -34,13 +34,13 @@ export default {
   data() {
     return {
       editSection: "InfoEdit",
-      userId:this.$route.params.userId 
+      userId:this.$route.params.userId ,
+      imgPath: '/img/users/'
     };
   },
   methods: {
     saveUser() {
-      // this.userToUpdate.socialLinks.whatsapp = 'https://api.whatsapp.com/send?phone=' + this.userToUpdate.socialLinks.whatsapp;
-      // console.log(this.userToUpdate.socialLinks.whatsapp);
+      
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
@@ -57,6 +57,9 @@ export default {
           console.log("failed:" + err);
         });
     },
+    addImg(url) {
+      this.userToUpdate.topicImage = url
+    }
   },
   created() {
     if (this.$route.name === 'editClasses') this.editSection = 'EditClasses';
@@ -101,7 +104,7 @@ export default {
   }
 
   .collection a.collection-item {
-    color: #9fb6ce;
+    color: #ababab;
     font-family: 'MontBold', sans-serif;
   }
 

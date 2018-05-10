@@ -156,7 +156,7 @@ a.teacher-img img {
     }
 
     .btn-flat:hover {
-        color: #9fb6ce;
+        color: #ababab;
     }
 }
 </style>

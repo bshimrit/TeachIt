@@ -45,7 +45,9 @@
                 </div>
 
 
-                <div> <uploadImg @uploadImg="addImg"></uploadImg></div><br>
+                <div> 
+                  <uploadImg :imgPath="imgPath" :prefill="newUser.topicImage" @uploadImg="addImg"></uploadImg>
+                </div>
                
                 <div>
                 <button type="submit" class="waves-effect waves-light btn" :disabled="!isValid">Register</button>
@@ -68,7 +70,8 @@ export default {
   name: "RegisterPage",
   data() {
     return {
-      newUser: UserService.emptyUser()
+      newUser: UserService.emptyUser(),
+      imgPath: '/img/users/'
     };
   },
   created() {
@@ -108,7 +111,6 @@ export default {
     },
     addImg(url) {
       this.newUser.img = url;
-      console.log("newUser:", this.newUser);
     }
   },
   computed: {
