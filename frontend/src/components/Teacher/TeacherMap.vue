@@ -42,7 +42,7 @@ export default {
 .map-container {
     margin: 10px 10px 10px 20px;
     position: fixed;
-    right: calc(100vw - 1500px);
+    right: 0;
     height: 100%; 
 }
 </style>

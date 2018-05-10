@@ -5,7 +5,7 @@
                 <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="What would you like to learn?">
             </form>
             <section v-if="$mq ==='lg'" class="flex space-between align-center">
-                <div class="left-filter flex justify-start align-center">
+                <div class="left-filter flex justify-center align-center">
                     <div class="margin-right40 sort-input">
                         <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
                             <option value="" disabled selected>Sort by</option>                            
@@ -113,19 +113,21 @@ export default {
     }
 
     .filter-cmp {
-        padding-top: 10px;
-        width: 60%;
-        max-width: 500px;
+        padding-top: 40px;
+        width: 100%;
         /* position: fixed; */
         /* top: 100px; */
         /* background-color: white; */
         z-index: 2;
+        /* text-align: center */
     }
     .left-filter{
         width: 100%;
     }
     .search-bar {
+        margin: 0 auto;
         height: 80px;
+        max-width: 700px;
     }
 
     /* @media (min-width: 750px){

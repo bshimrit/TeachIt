@@ -1,6 +1,11 @@
 <template>
     <section>
-      <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" />
+        <div class="filter">
+          <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" />
+        </div>
+        <div class="blank">
+          <FilterCmp @filtered="filterTeacherTopic" :showExtraSearch="true" />
+        </div>
       <section class="container search flex">
         <ul class="cards-container flex flex-wrap">
           <li class="card-item" v-for="teacherTopic in teacherTopics" :key="teacherTopic._id">
@@ -70,19 +75,24 @@ export default {
   padding-left: 0;
 }
 .teacher-map {
+    display: none;
     margin-top: 0.5rem;
-    display: inline-block;
-    width: 550px;
+    height: calc(90vh - 250px);
 }
-
+.blank {
+    visibility: hidden
+}
 .search {
-  margin-top: 200px
+  /* margin-top: 200px */
 }
-@media(min-width: 1024px){
-    .cards-container {
-      width: 850px;        
-    }
-
+.filter {
+    position: fixed;
+    z-index: 5;
+    background-color: white;
+    width: 100vw
+}
+.filter-cmp {
+    margin: 0 auto;
 }
 
 @media(min-width: 750px){
@@ -90,4 +100,19 @@ export default {
     width: initial;
   }
 }
+@media(min-width: 1024px){
+    .cards-container {
+      width: 850px;        
+    }
+    .teacher-map {
+        display: inline-block;
+        width: calc(100vw - 850px);
+}
+}
+@media(min-width: 1400px){
+    .teacher-map {
+        width: calc(1400px - 850px);
+}
+}
+
 </style>

@@ -83,6 +83,8 @@ export default {
       width: 100%;
       height: 80vh;
       background-image: url('https://www.tes.com/tesv2/files/styles/news_article_ml_x2/public/news-images/class_3_6.jpg?itok=8FXsn46X');
+      background-repeat: no-repeat;
+      /* background-position-y: 80% */
   }
   h1 {
     -webkit-text-stroke: 2px #5f3517;
