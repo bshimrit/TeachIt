@@ -78,7 +78,7 @@ export default {
         topicId: this.teacherClassToEdit.topicId,
         teacherId:  this.teacherClassToEdit.teacherId,
         level:  this.teacherClassToEdit.level,
-        pricePerHour:  this.teacherClassToEdit.pricePerHour,
+        pricePerHour:  +this.teacherClassToEdit.pricePerHour,
         shortDes:  this.teacherClassToEdit.shortDes,
         longDes:  this.teacherClassToEdit.longDes,
         topicImage:  this.teacherClassToEdit.topicImage
