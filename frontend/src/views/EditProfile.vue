@@ -5,10 +5,10 @@
       <section class="edit-container flex">
         <div class="menu">
           <div class="collection">
-            <a class="collection-item" @click="editSection = 'AccountEdit'">Account</a>
-            <a class="collection-item" @click="editSection = 'InfoEdit'">Public Profile</a>
-            <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
-            <a class="collection-item" @click="editSection = 'EditClasses'">{{isTeacherClasses}}</a>
+            <a class="collection-item" :class="{ active: editSection === 'AccountEdit' }" @click="editSection = 'AccountEdit'">Account</a>
+            <a class="collection-item" :class="{ active: editSection === 'InfoEdit' }" @click="editSection = 'InfoEdit'">Public Profile</a>
+            <a class="collection-item" :class="{ active: editSection === 'Upload' }" @click="editSection = 'Upload'">Photo</a>
+            <a class="collection-item" :class="{ active: editSection === 'EditClasses' }" @click="editSection = 'EditClasses'">{{isTeacherClasses}}</a>
           </div>
         </div>
         <div class="content">
@@ -108,6 +108,10 @@ export default {
     font-family: 'MontBold', sans-serif;
   }
 
+.collection a.collection-item.active {
+    background-color: #2b303b;
+    font-family: 'MontBold', sans-serif;
+  }
   .edit-container {
       flex-direction: column;
       align-items: center;
