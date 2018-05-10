@@ -79,7 +79,7 @@ function emptyUser() {
     quote: "",
     education: "",
     img: "",
-    socialLinks: {facebook:'',twitter:''},
+    socialLinks: {facebook:'',twitter:'',whatsapp:''},
     
   };
 }
