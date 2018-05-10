@@ -8,13 +8,15 @@
             <a class="collection-item" :class="{ active: editSection === 'AccountEdit' }" @click="editSection = 'AccountEdit'">Account</a>
             <a class="collection-item" :class="{ active: editSection === 'InfoEdit' }" @click="editSection = 'InfoEdit'">Public Profile</a>
             <a class="collection-item" :class="{ active: editSection === 'Upload' }" @click="editSection = 'Upload'">Photo</a>
-            <a class="collection-item" :class="{ active: editSection === 'EditClasses' }" @click="editSection = 'EditClasses'">{{isTeacherClasses}}</a>
+            <a class="collection-item" :class="{ active: editSection === 'EditClasses' }" @click="editSection = 'EditClasses'">
+              {{isTeacherClasses}}</a>
           </div>
         </div>
         <div class="content">
-          <form v-if="editSection !== isTeacherClasses" @submit.prevent="saveUser">
+          <form v-if="editSection !== isTeacherClasses" @submit.prevent>
              <component :is="editSection" :userToUpdate="userToUpdate" :imgPath="imgPath" :prefill="userToUpdate.img" @uploadImg="addImg" />
-            <button v-if="editSection !== 'EditClasses'" type="submit" class="waves-effect waves-light btn">Save</button>
+            <button v-if="editSection !== 'EditClasses'" type="button" class="waves-effect waves-light btn"  @click="saveUser">Save</button>
+           
           </form>
         </div>
       </section>
@@ -23,7 +25,6 @@
 </template>
 
 <script>
-
 import UserService from "@/services/UserService.js";
 import AccountEdit from "@/components/profile/AccountEdit";
 import InfoEdit from "@/components/profile/InfoEdit";
@@ -34,17 +35,32 @@ export default {
   data() {
     return {
       editSection: "InfoEdit",
-      userId:this.$route.params.userId ,
-      imgPath: '/img/users/'
+      userId: this.$route.params.userId,
+      imgPath: "/img/users/",
+      hack: 0
     };
+  },
+  watch: {
+    teacherTopics() {
+      console.log('teacherTopics watch entered')
+     if (this.teacherTopics.length !== 0) {
+        this.userToUpdate.isTeacher = true;
+        this.$store
+          .dispatch({ type: "saveUser", user: this.userToUpdate })
+          .then(() => {
+            console.log('saved updated user')
+          })
+          this.hack++;
+      }
+    },
+    
   },
   methods: {
     saveUser() {
-      
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
-           this.$swal({
+          this.$swal({
             type: "success",
             title: "Updated!"
           });
@@ -57,22 +73,31 @@ export default {
           console.log("failed:" + err);
         });
     },
+   
     addImg(url) {
-      this.userToUpdate.topicImage = url
+      this.userToUpdate.topicImage = url;
     }
   },
   created() {
-    if (this.$route.name === 'editClasses') this.editSection = 'EditClasses';
+    if (this.$route.name === "editClasses") this.editSection = "EditClasses";
   },
   computed: {
     userToUpdate() {
       let loggedUser = this.$store.getters.loggedUser;
-      console.log('user:', loggedUser);
-      return loggedUser ? JSON.parse(JSON.stringify(loggedUser)) : UserService.emptyUser();
+      console.log("user:", loggedUser);
+      return loggedUser
+        ? JSON.parse(JSON.stringify(loggedUser))
+        : UserService.emptyUser();
+    },
+    teacherTopics() {
+      return this.$store.getters.teacherTopicsForDisplay;
     },
     isTeacherClasses() {
-      if (this.userToUpdate.isTeacher) return 'Classes'
-      else return 'Become A teacher'
+      console.log('entered isTeacherClasses computation');
+      console.log(this.userToUpdate.isTeacher)
+      if (this.hack === -1) return;
+      if (this.userToUpdate.isTeacher) return "Classes";
+      else return "Become A teacher";
     }
   },
   components: {
@@ -87,69 +112,68 @@ export default {
 
 
 <style scoped>
-  .menu {
-    width: 100%;
-  }
+.menu {
+  width: 100%;
+}
 
-  .content {
-    width: 70%;
-  }
-  .container {
-    padding: 20px;
-  }
+.content {
+  width: 70%;
+}
+.container {
+  padding: 20px;
+}
 
-  a {
-    margin: 10px;
-    cursor: pointer;
-  }
+a {
+  margin: 10px;
+  cursor: pointer;
+}
 
-  .collection a.collection-item {
-    color: #ababab;
-    font-family: 'MontBold', sans-serif;
-  }
+.collection a.collection-item {
+  color: #ababab;
+}
 
 .collection a.collection-item.active {
-    background-color: #2b303b;
-    font-family: 'MontBold', sans-serif;
-  }
-  .edit-container {
-      flex-direction: column;
-      align-items: center;
-  }
-    
-  .menu .collection {
-    display: flex;
-    overflow: initial;
-    /* justify-content: center;   */
-  }
+  background-color: #2b303b;
+  font-family: "MontBold", sans-serif;
+}
+.edit-container {
+  flex-direction: column;
+  align-items: center;
+}
 
-  .collection .collection-item {
-    border: 1px solid #e0e0e0;
+.menu .collection {
+  display: flex;
+  overflow: initial;
+  /* justify-content: center;   */
+}
+
+.collection .collection-item {
+  border: 1px solid #e0e0e0;
+}
+
+.collection {
+  border: 1px solid transparent;
+}
+
+@media (min-width: 750px) {
+  .edit-container {
+    flex-direction: row;
+    align-items: start;
   }
 
   .collection {
-    border: 1px solid transparent;
+    border: 1px solid #e0e0e0;
   }
 
-  @media (min-width: 750px){
-    .edit-container {
-      flex-direction: row;
-      align-items: start;
-    }
-
-    .collection {
-      border: 1px solid #e0e0e0;
-    }
-    
-    .menu .collection {
-      display: block;
-      overflow: hidden;  
-    }
-    .menu {
-      width: 20%;
-      margin-right: 20px;
-    }
+  .menu .collection {
+    display: block;
+    overflow: hidden;
   }
+  .menu {
+    width: 20%;
+    margin-right: 20px;
+  }
+}
 </style>
 
 

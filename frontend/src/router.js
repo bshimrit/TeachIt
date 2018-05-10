@@ -29,6 +29,10 @@ export default new Router({
     { path: '/chat/:recipientId', name: 'chat', component: Chat}
   ],
   scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
   }
 })
