@@ -128,6 +128,17 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
     padding:10px;
   }
 
+  .dg-btn, .dg-btn:focus {
+        color: black ;
+        border: 1px solid black;
+        background-color: #fff;
+    }
+
+    .dg-btn--cancel, .dg-btn--cancel:focus {
+        background-color: #fff;
+        border: 1px solid black;
+    }
+
   @keyframes blinker {
     50% {
         box-shadow: 0 0 5px #f9e759;

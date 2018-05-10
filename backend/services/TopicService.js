@@ -6,7 +6,7 @@ function query(criteria = {}) {
     return new Promise((resolve, reject) => {
         return DBService.dbConnect()
             .then(db => {
-                db.collection('topic').find().toArray((err, topics) => {
+                db.collection('topic').find().sort({title: 1, subtitle: 1}).toArray((err, topics) => {
                     if (err) return reject(err);
                     resolve(topics);
                 })
