@@ -10,6 +10,14 @@
                         <input id="userName" v-model="newUser.userName" type="text" class="validate">
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="fullName">full Name</label>
+                        <input id="fullName" v-model="newUser.fullName" type="text" class="validate">
+                    </div>
+                </div>
+
                   <div class="row">
                     <div class="input-field col s12">
                       <input v-model="newUser.email" type="email" class="validate">
@@ -30,12 +38,24 @@
                     <label for="password">Repeat Password</label>
                     </div>
                 </div>
-                <uploadImg @uploadImg="addImg"></uploadImg> <br>
-                  <button type="submit" class="waves-effect waves-light btn">Register</button>
+
+                 <div>
+                  <input type="checkbox" v-model="newUser.isTeacher" id="isTeacher" />
+                  <label for="isTeacher">I'm a teacher</label>
+                </div>
+
+
+                <div> <uploadImg @uploadImg="addImg"></uploadImg></div><br>
+               
+                <div>
+                <button type="submit" class="waves-effect waves-light btn">Register</button>
+                </div>
+                
             </form>
         </div>
+       
       </div>
-    Already a member?
+      <h4> Already a member?</h4>
       <router-link class="waves-effect waves-light btn" to="/login">Login</router-link> <br>
   </section>
 </template>
@@ -52,7 +72,7 @@ export default {
     };
   },
   created() {
-      this.newUser.img = './img/icons/TeachItIcon.png'
+      this.newUser.img = './img/icons/default_user_icon.png'
       
   },
   methods: {
@@ -63,6 +83,8 @@ export default {
         .dispatch({ type: "saveUser", user: this.newUser })
         .then(addedUser => {
           this.$store.dispatch({type: 'checkLogin', creds: {userName: userToAdd.userName, password: userToAdd.password}})
+          window.alert("Success");
+          this.$router.push("/");
         })
         .catch(err => {
            window.alert("Failed");

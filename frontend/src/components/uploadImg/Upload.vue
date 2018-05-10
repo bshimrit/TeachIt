@@ -1,18 +1,17 @@
 <template>
   <section class="upload">
     <div class="field-body">
-      <h5>Upload profile image:</h5>
+     <p>Profile Image:</p>
       <div class="field">
         <div class="control">
           <div class="file">
             <label class="file-label">
               <input   type="file" accept="image/*"  class="form-control" v-on:change="upload($event.target.files)" multiple/>
-                <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-                </span>
-                <span class="file-label">Upload an image </span>
-              </span>
+                <!-- <span class="file-cta  btn">
+                 <span class="file-icon">
+                  <i class="fa fa-upload"></i>
+                </span> 
+              </span> -->
             </label>
           </div>
         </div>
