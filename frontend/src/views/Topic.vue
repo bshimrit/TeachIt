@@ -118,8 +118,8 @@ export default {
       this.$router.push('/profile/user/' + this.teacherTopic.teacherId);
         },
     openChat() {
-        console.log('sending chat to:', this.teacher._id);
         var msg = this.$store.getters.newMsg;
+        console.log('sending chat to:', msg);
         msg.txt = `Hello ${this.teacher.fullName}. 
         You got a class request for ${this.startTime.time} from ${this.loggedUser.fullName}.`
         msg.senderId = this.loggedUser._id;

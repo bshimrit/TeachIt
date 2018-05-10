@@ -2,7 +2,7 @@
     <section class="filter-cmp">
         <section class="container">
             <form class="flex space-between align-center search-bar" @submit.prevent="emitFilter">
-                <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search">
+                <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="What would you like to learn?">
             </form>
             <section v-if="$mq ==='lg'" class="flex space-between align-center">
                 <div class="left-filter flex justify-start align-center">
@@ -105,7 +105,7 @@ export default {
         transition: width 0.4s ease-in-out;
     }
     ::placeholder {
-        color: #d6d7d8
+        color: #949494
     }
 
     input[type=text]:focus {
