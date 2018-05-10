@@ -52,7 +52,6 @@ export default {
   },
   actions: {
     loadReviewsByTeacherTopicId(store, {teacherTopicId}) {
-      console.log('review by topic', teacherTopicId)
       return reviewService.getReviewsByTeacherTopicId(teacherTopicId)
       .then(reviews => {
           store.commit({ type: 'setReviews', reviews });

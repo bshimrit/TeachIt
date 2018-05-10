@@ -52,7 +52,6 @@ function saveTeacherTopic(teacherTopic) {
 if (!teacherTopic.topicImage) {
   teacherTopic.topicImage  ='./img/topics/topic1.jpg'
 }
-console.log('Service');
   if (teacherTopic._id) return axios.put(TOPIC_TEACHER_URL, teacherTopic).then(res => res.data[0]);
   else return axios.post(TOPIC_TEACHER_URL, teacherTopic).then(res => res.data[0]);
 }

@@ -4,10 +4,8 @@ const ReviewService = require('../services/ReviewService')
 module.exports = (app) => {
     app.get(REVIEW_URL, (req, res)=>{
 
-        // console.log(req.query);
 
         ReviewService.query(req.query).then(reviews => {
-            console.log('ROUTE REVIEWS: ', reviews);
             res.json(reviews);
         })
     })

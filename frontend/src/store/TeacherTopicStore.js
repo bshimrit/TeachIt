@@ -84,7 +84,6 @@ export default {
       const isEdit = !!teacherTopic.id;
       return TeacherTopicService.saveTeacherTopic(teacherTopic)
       .then(teacherTopic => {
-        store.dispatch({type: 'getTopicsByTeacherId', teacherId:teacherTopic.teacherId});
         if (isEdit) store.commit({type: 'updateTeacherTopic', teacherTopic})
         else store.commit({type: 'addTeacherTopic', teacherTopic})
         return teacherTopic;

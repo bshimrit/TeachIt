@@ -29,6 +29,7 @@ export default {
       this.$store.commit({ type: 'closeDropdown' });
     },
   },
+<<<<<<< HEAD
   sockets: {
     ['alert user'](data) {
       if (data.recipientId === this.$store.getters.loggedUser._id) {
@@ -37,6 +38,15 @@ export default {
       }
     }
   },
+=======
+    sockets: {
+        ['alert user'](data) {
+            if (data.recipientId === this.$store.getters.loggedUser._id) {
+                this.$store.commit({type: 'recievedMsg', msg: data})
+            }
+        }
+    },
+>>>>>>> 299e315f4a216f1a9769eb567bab5ae464ab7e29
   computed: {
       alertsCount() {
           return this.$store.getters.alertsNum

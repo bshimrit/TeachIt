@@ -38,7 +38,6 @@ export default {
     },
   methods: {
     logOut() {
-      console.log('logging out');
       this.$store.commit({ type: 'logOut' });
       this.$router.push('/');
     },

@@ -3,23 +3,10 @@ const UserService = require('../services/UserService')
 
 module.exports = (app) => {
     app.get(USER_URL, (req, res)=>{
-
-        // console.log('req.query:', req.query);
-
         UserService.query(req.query).then(users => {
-            // console.log('ROUTE USERS: ', users);
             res.json(users);
         })
     })
-    // app.get(`${USER_URL}/checkLogin`, (req, res)=>{
-
-    //     console.log('checking login:', req.query);
-
-    //     UserService.checkLogin(req.query).then(users => {
-    //         console.log('ROUTE USERS: ', users);
-    //         res.json(users);
-    //     })
-    // })
 
     app.post(USER_URL, (req, res)=>{
         const user = req.body;
@@ -50,8 +37,6 @@ module.exports = (app) => {
     })
 
     app.put(USER_URL, (req, res) => {
-        console.log('GETTING USERl:', req);
-        
         const user = req.body;
         UserService
             .update(user)

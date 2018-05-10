@@ -29,9 +29,7 @@ function add(topic) {
 }
 
 function remove(topicId) {
-    console.log(topicId); 
     var topicIdObj = mongo.ObjectID(topicId);
-    console.log(topicIdObj);
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{

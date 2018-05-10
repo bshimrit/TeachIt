@@ -46,7 +46,6 @@ module.exports = (app) => {
 
     app.get(`/popularTopics`, (req, res) => {
         TeacherTopicService.getPopularTopics().then(teacherTopics => {
-            // console.log(teacherTopics)
             res.json(teacherTopics);
         })
     })

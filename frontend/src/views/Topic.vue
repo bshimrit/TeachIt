@@ -28,7 +28,7 @@
     </div>
     <div class="margin-top20 flex align-start">
       <DatePicker :date="startTime" :option="option" :limit="limit"></DatePicker>
-      <button v-if="startTime.time" class="waves-effect waves-light send-btn btn margin-left20">Send</button>
+      <button v-if="startTime.time" class="send-btn btn margin-left20">Send</button>
     </div>
     <topic-review :teacherId="teacher._id" :teacherTopicId="$route.params.teacherTopicId"></topic-review>
      

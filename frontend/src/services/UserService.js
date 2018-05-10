@@ -37,7 +37,6 @@ function checkLogin(creds) {
 }
 
 function register(user) {
-  console.log(user);
   return axios
     .post(USER_URL, user)
     .then(res => console.log(res.data))
