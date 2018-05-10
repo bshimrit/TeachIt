@@ -6,7 +6,7 @@ export default ({
       newMsgsCounter: {},
       totMsgs: 0,
       chatWith: null,
-      onChatPage: false
+      onChatPage: false,
     },
     mutations: {
         recievedMsg(state, {msg}){
@@ -54,6 +54,15 @@ export default ({
         },
         isChatPage(state) {
             return state.onChatPage
+        },
+        newMsg(state) {
+            return {
+                txt: '',
+                senderId: '',
+                senderName:'',
+                recipientId: '',
+                roomId: ''
+            }
         }
     },
     actions: {

@@ -87,7 +87,7 @@ export default {
   }
 
   .collection a.collection-item {
-    color: #9fb6ce;
+    color: #ababab;
     font-family: 'MontBold', sans-serif;
   }
 

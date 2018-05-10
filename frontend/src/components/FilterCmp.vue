@@ -2,7 +2,7 @@
     <section class="filter-cmp">
         <section class="container">
             <form class="flex space-between align-center search-bar" @submit.prevent="emitFilter">
-                <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search teacher\topic\location..">
+                <input v-model="filterBy.text" @focus="isSearching = true" @blur="isSearching = false" type="text" name="search" placeholder="Search">
             </form>
             <section v-if="$mq ==='lg'" class="flex space-between align-center">
                 <div class="left-filter flex justify-start align-center">
@@ -57,7 +57,7 @@ export default {
         return {
             filterBy: TeacherTopicService.emptyTeacherTopicFilter(),
             isSearching: false,
-            priceTooltipStyle: {"backgroundColor": "#2b303b","borderColor": "#2b303b"},
+            priceTooltipStyle: {"backgroundColor": "#0e0f10","borderColor": "#0e0f10"},
             processStyle: {"backgroundColor": "#f9e759"}
         }
     },
@@ -92,7 +92,7 @@ export default {
     input[type=text] {
         width: 100%;
         box-sizing: border-box;
-        border: 2px solid #ccc;
+        border: 2px solid #5f3517;
         border-radius: 4px;
         font-size: 16px;
         background-color: white;
@@ -104,6 +104,9 @@ export default {
         -webkit-transition: width 0.4s ease-in-out;
         transition: width 0.4s ease-in-out;
     }
+    ::placeholder {
+        color: #d6d7d8
+    }
 
     input[type=text]:focus {
         width: 100%;
@@ -111,10 +114,11 @@ export default {
 
     .filter-cmp {
         padding-top: 10px;
-        width: 100%;
-        position: fixed;
-        top: 100px;
-        background-color: white;
+        width: 60%;
+        max-width: 500px;
+        /* position: fixed; */
+        /* top: 100px; */
+        /* background-color: white; */
         z-index: 2;
     }
     .left-filter{
@@ -124,10 +128,10 @@ export default {
         height: 80px;
     }
 
-    @media (min-width: 750px){
+    /* @media (min-width: 750px){
         input[type=text] {
             width: 30%;
         }
-    }
+    } */
 
 </style>

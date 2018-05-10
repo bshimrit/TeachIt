@@ -64,7 +64,7 @@ nav {
   width: 100vw;
   height: 100px;
   padding: 10px 0;
-  background-color: #2b303b;
+  background-color: #0e0f10;
   text-align: left;
   font-family: 'MontBold', sans-serif;
 }
@@ -85,7 +85,7 @@ nav {
   right: 0;
   top: 100%;
   padding: 20px;
-  background-color: #2b303b;
+  background-color: #0e0f10;
   z-index: 10;
 }
 .navbar-fixed {
