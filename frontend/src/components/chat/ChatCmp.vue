@@ -183,7 +183,7 @@ form button {
   background: #dfe5f1;
 }
 .chat {
-  /* position: absolute; */
+  position: absolute;
   height: 450px;
   bottom: 0px;
   width: 500px;
