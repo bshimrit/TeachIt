@@ -8,13 +8,12 @@
             <a class="collection-item" @click="editSection = 'AccountEdit'">Account</a>
             <a class="collection-item" @click="editSection = 'InfoEdit'">Public Profile</a>
             <a class="collection-item" @click="editSection = 'Upload'">Photo</a>
-            <a class="collection-item" @click="editSection = 'EditClasses'">Classes</a>
+            <a class="collection-item" @click="editSection = 'EditClasses'">{{isTeacherClasses}}</a>
           </div>
         </div>
         <div class="content">
-          <form v-if="editSection !== 'Classes'" @submit.prevent="saveUser">
-            <!-- <uploadImg :imgPath="imgPath" :prefill="teacherClassToEdit.topicImage" @uploadImg="addImg"></uploadImg> -->
-            <component :is="editSection" :userToUpdate="userToUpdate" :imgPath="imgPath" :prefill="userToUpdate.img" @uploadImg="addImg" />
+          <form v-if="editSection !== isTeacherClasses" @submit.prevent="saveUser">
+             <component :is="editSection" :userToUpdate="userToUpdate" :imgPath="imgPath" :prefill="userToUpdate.img" @uploadImg="addImg" />
             <button v-if="editSection !== 'EditClasses'" type="submit" class="waves-effect waves-light btn">Save</button>
           </form>
         </div>
@@ -41,11 +40,20 @@ export default {
   },
   methods: {
     saveUser() {
+      
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
         .then(addedUser => {
+           this.$swal({
+            type: "success",
+            title: "Updated!"
+          });
         })
         .catch(err => {
+          this.$swal({
+            type: "error",
+            title: "Update Failed"
+          });
           console.log("failed:" + err);
         });
     },
@@ -59,7 +67,12 @@ export default {
   computed: {
     userToUpdate() {
       let loggedUser = this.$store.getters.loggedUser;
-      return loggedUser ? { ...loggedUser } : UserService.emptyUser();
+      console.log('user:', loggedUser);
+      return loggedUser ? JSON.parse(JSON.stringify(loggedUser)) : UserService.emptyUser();
+    },
+    isTeacherClasses() {
+      if (this.userToUpdate.isTeacher) return 'Classes'
+      else return 'Become A teacher'
     }
   },
   components: {

@@ -25,10 +25,10 @@ function init(http) {
     
     socket.on('chat newMessage', data => {
         console.log('socketId')
-        pcl(socket.id)
+        pcl(data)
         console.log('socketRooms' )
         pcl(socket.adapter.rooms)
-        io.in(data.roomId).emit('chat message', data);  
+        io.to(data.roomId).emit('chat message', data);  
         io.emit('alert user', data)
     });
 

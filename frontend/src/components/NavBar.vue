@@ -12,7 +12,7 @@
         <li></li>
         <li><router-link :to="`/profile/${loggedUser._id}`"></router-link></li>
         <li >
-            {{alerts}}
+            {{alerts}} <i class="fa fa-envelope-o" aria-hidden="true"></i>
         </li>
         <!-- <li><a href="#">Become a teacher</a></li> -->
         <li @click.stop><a class="profile-img" @click="toggleDropdown"><img class="profile" :src="loggedUser.img"></a></li>
