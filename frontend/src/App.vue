@@ -6,13 +6,13 @@
     <div id="router">
         <router-view/>
     </div>
-    <alert-bar id="alert-bar" v-if="alertsCount || chatting"/>
+    <alert-bar id="alert-bar" v-if="(alertsCount || chatting) && !onChatPage"/>
   </div>
 </template>
 
 <script>
-import NavBar from "./components/NavBar.vue";
-import AlertBar from "./components/chat/AlertBar.vue";
+import NavBar from './components/NavBar.vue';
+import AlertBar from './components/chat/AlertBar.vue';
 export default {
   components: {
     NavBar,
@@ -21,12 +21,12 @@ export default {
   created() {
     if (sessionStorage.user) {
       var user = JSON.parse(sessionStorage.user);
-      this.$store.dispatch({ type: "loadUser", userId: user._id });
+      this.$store.dispatch({ type: 'loadUser', userId: user._id });
     }
   },
   methods: {
     closeDropdown() {
-      this.$store.commit({ type: "closeDropdown" });
+      this.$store.commit({ type: 'closeDropdown' });
     },
   },
     sockets: {
@@ -42,18 +42,23 @@ export default {
       },
       chatting() {
           return this.$store.getters.chatWith
+      },
+      onChatPage() {
+          console.log('on caht page?', this.$store.getters.isChatPage);
+          
+          return this.$store.getters.isChatPage
       }
   }
 };
 </script>
-<style lang="scss">
+<style lang='scss'>
 #app {
   // font-family: 'Avenir', Helvetica, Arial, sans-serif;
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
   text-align: center;
   // color: #577594;
-  font-family: "MontRegular", sans-serif;
+  font-family: 'MontRegular', sans-serif;
   font-size: 20px;
   text-transform: initial;
 }
