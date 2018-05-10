@@ -6,13 +6,10 @@
             </form>
             <section v-if="$mq ==='lg'" class="flex space-between align-center">
                 <div class="left-filter flex justify-center align-center">
-                    <div class="margin-right40 sort-input">
-                        <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
-                            <option value="" disabled selected>Sort by</option>                            
-                            <option value="review">Reviews</option>
-                            <option value="lowPrice">Price - Low to High</option>
-                            <option value="highPrice">Price - High to Low</option>
-                        </select>
+                    <span v-if="showExtraSearch">Price</span>
+                    <div class="margin-right40">
+                        <vueSlider v-model="filterBy.price" :max="500" :tooltipStyle="priceTooltipStyle" :processStyle="processStyle"
+                                @mouseup.native.prevent="emitFilter" :width="300" :show="showExtraSearch"></vueSlider>
                     </div>
                     <div class="margin-right40 topic-input ">
                         <select v-model="filterBy.topics" ref="selectTopics" multiple>
@@ -20,10 +17,13 @@
                             <option v-for="topic in topics" :key="topic._id" :value="topic.subtitle">{{topic.subtitle}}</option>
                         </select>
                     </div>
-                    <span v-if="showExtraSearch">Price</span>
-                    <div >
-                        <vueSlider v-model="filterBy.price" :max="500" :tooltipStyle="priceTooltipStyle" :processStyle="processStyle"
-                             @mouseup.native.prevent="emitFilter" :width="300" :show="showExtraSearch"></vueSlider>
+                    <div class="sort-input">
+                        <select onchange="emitFilter()" v-model="filterBy.sort" ref="selectSort">
+                            <option value="" disabled selected>Sort by</option>                            
+                            <option value="review">Reviews</option>
+                            <option value="lowPrice">Price - Low to High</option>
+                            <option value="highPrice">Price - High to Low</option>
+                        </select>
                     </div>
                 </div>
             </section>

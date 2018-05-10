@@ -12,6 +12,15 @@
     font-style: bold;
 }
 
+@font-face {
+    font-family: 'ArialBold';
+    src: url('../assets/fonts/ARLRDBD.TTF');
+    font-weight: bold;
+    font-style: bold;
+}
+
+
+
 .mont-regular {
     font-family: 'MontRegular', sans-serif;
 }

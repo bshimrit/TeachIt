@@ -1,8 +1,10 @@
 <template>
   <section>
     <div class="hero flex justify-center align-center flex-column">
+      <div class="comp-name">
         <h1>TeachIt</h1>
-        <h5>Shared skills in tech, business, and personal schooling</h5>
+      </div>
+        <h5>Find the right teacher for you</h5>
       <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
     </div>
     <div class="container header-margin">
@@ -84,25 +86,37 @@ export default {
       height: 80vh;
       background-image: url('https://www.tes.com/tesv2/files/styles/news_article_ml_x2/public/news-images/class_3_6.jpg?itok=8FXsn46X');
       background-repeat: no-repeat;
+      background-size: cover;
+      /* font-family: 'MontBold', sans-serif; */
       /* background-position-y: 80% */
+      font-family: 'ArialBold'
   }
   h1 {
-    -webkit-text-stroke: 2px #5f3517;
+    -webkit-text-stroke: 2px black;
     text-shadow: 
-        -1px -1px 0 #5f3517, 
-        1px -1px 0 #5f3517, 
-        -1px 1px 0 #5f3517, 
-        1px 1px 0 #5f3517;
+        -1px -1px 0 black, 
+        1px -1px 0 black, 
+        -1px 1px 0 black, 
+        1px 1px 0 black;
     color: #fff7ca;
-    font-family: 'MontBold'
   }
   h5 {
     text-shadow: 
-        -1px -1px 0 #5f3517, 
-        1px -1px 0 #5f3517, 
-        -1px 1px 0 #5f3517, 
-        1px 1px 0 #5f3517;
+        -1px -1px 0 black, 
+        1px -1px 0 black, 
+        -1px 1px 0 black, 
+        1px 1px 0 black;
     color: #fff7ca;
     font-family: 'MontBold'
+  }
+
+  .comp-name {
+    text-align: left;
+    margin: 0;
+  }
+
+  .comp-name h1{
+    text-align: left;
+    margin: 0;
   }
 </style>
