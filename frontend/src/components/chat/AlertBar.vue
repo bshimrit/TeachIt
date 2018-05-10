@@ -78,10 +78,10 @@ a {
 }
 .chat-screen {
     position: absolute;
-    height: 500px;
-    width: 400p;
+    height: 450px;
+    width: 450px;
     /* padding: 10px; */
-    background-color: #ffffff;
+    background-color: #ffffff00;
     border: 1px solid #0e0f10
 }
 </style>

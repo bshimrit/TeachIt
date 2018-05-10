@@ -121,7 +121,7 @@ export default {
         var msg = this.$store.getters.newMsg;
         console.log('sending chat to:', msg);
         msg.txt = `Hello ${this.teacher.fullName}. 
-        You got a class request for ${this.startTime.time} from ${this.loggedUser.fullName}.`
+        You got a class request for the date ${this.startTime.time}, from ${this.loggedUser.fullName}.`
         msg.senderId = this.loggedUser._id;
         msg.senderName = this.loggedUser.fullName;
         msg.recipientId = this.teacher._id;

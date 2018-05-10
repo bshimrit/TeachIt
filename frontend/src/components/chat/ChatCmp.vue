@@ -12,7 +12,7 @@
         </ul>
         <form @submit.prevent="send">
             <div class="inputs flex">
-            <input @input="whenInput" v-model="msg.txt" autocomplete="off" />
+            <input @input="whenInput" v-model="msg.txt" placeholder="Type message" />
             <button>Send</button>
             </div>
         </form>
@@ -147,11 +147,11 @@ body {
   font: 13px Helvetica, Arial;
 }
 form {
-  background: #0e0f10;
+  background: #1e2022;
   padding: 3px;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 500px;
 }
 form input {
   border: 0;
@@ -162,11 +162,12 @@ form input {
   font-family: "Courier New", Courier, monospace;
 }
 form button {
-  width: 9%;
-  background: #ffe75a;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
+    width: 25%;
+    background: #ffe75a;
+    border: none;
+    color: black;
+    padding: 10px;
+    border-radius: 4px;
 }
 .msgs {
   list-style-type: none;
@@ -182,17 +183,16 @@ form button {
   background: #dfe5f1;
 }
 .chat {
-  position: absolute;
-  height: 400px;
+  /* position: absolute; */
+  height: 450px;
   bottom: 0px;
-  width: 400px;
-  left: 466px;
+  width: 500px;
   z-index: -1;
   margin-bottom: 0px;
   background-color: currentColor;
-  top: -400px;
-  right: 0px;
+  top: -450px;
   overflow: scroll;
+  right: 0;
 }
 h5 {
   /* margin: 5px; */
