@@ -84,7 +84,7 @@ export default {
   .hero {
       width: 100%;
       height: 80vh;
-      background-image: url('https://www.tes.com/tesv2/files/styles/news_article_ml_x2/public/news-images/class_3_6.jpg?itok=8FXsn46X');
+      background-image: url('https://images.pexels.com/photos/355988/pexels-photo-355988.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
       background-repeat: no-repeat;
       background-size: cover;
       /* font-family: 'MontBold', sans-serif; */
@@ -98,7 +98,7 @@ export default {
         1px -1px 0 black, 
         -1px 1px 0 black, 
         1px 1px 0 black;
-    color: #fff7ca;
+    color: #f9e759;
   }
   h5 {
     text-shadow: 
@@ -106,7 +106,7 @@ export default {
         1px -1px 0 black, 
         -1px 1px 0 black, 
         1px 1px 0 black;
-    color: #fff7ca;
+    color: #f9e759;
     font-family: 'MontBold'
   }
 
