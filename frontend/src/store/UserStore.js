@@ -26,7 +26,8 @@ export default {
       state.users = [user, ...state.users];
     },
     updateUser(state, { user }) {
-      const userIdx = state.users.findIndex(curruser => curruser.id === user.id)
+      console.log('user in updateUser mutation:', user);
+      const userIdx = state.users.findIndex(curruser => curruser._id === user._id)
       state.users.splice(userIdx, 1, user)
     },
   },
@@ -59,12 +60,13 @@ export default {
       })
     },
     saveUser(store, {user}) {
-     
       const isEdit = !!user._id;
       return UserService.saveUser(user)
       .then(res => {
-        let retUser = res.data[0];
-        if (isEdit) store.commit({type: 'updateUser', retUser})
+        console.log({res})
+        let retUser = res.data.value;
+        console.log({retUser})
+        if (isEdit) store.commit({type: 'updateUser', user: retUser})
         else store.commit({type: 'addUser', user: retUser})
         return retUser;
       })

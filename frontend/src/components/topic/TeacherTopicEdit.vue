@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form v-if="topics" @submit.prevent="emitSave">   
+    <form v-if="topics" @submit.prevent>   
         <div v-if="topics.length" class="input-field col s12">
             <select>
               <option value="" disabled selected>I Teach</option>
@@ -26,7 +26,7 @@
         <div class="input-field col s12">
           <uploadImg :imgPath="imgPath" :prefill="teacherClassToEdit.topicImage" @uploadImg="addImg"></uploadImg>
         </div>
-      <button type="submit" class="btn accent-3">Save Class</button>
+      <button type="button" @click="emitSave"  class="btn accent-3">Save Class</button>
     </form>        
   </section>
 </template>
@@ -78,7 +78,7 @@ export default {
         topicId: this.teacherClassToEdit.topicId,
         teacherId:  this.teacherClassToEdit.teacherId,
         level:  this.teacherClassToEdit.level,
-        pricePerHour:  this.teacherClassToEdit.pricePerHour,
+        pricePerHour:  +this.teacherClassToEdit.pricePerHour,
         shortDes:  this.teacherClassToEdit.shortDes,
         longDes:  this.teacherClassToEdit.longDes,
         topicImage:  this.teacherClassToEdit.topicImage

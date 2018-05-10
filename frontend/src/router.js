@@ -27,5 +27,12 @@ export default new Router({
     // { path: '/profile/classes/edit/:userId', name: 'editClasses', component: EditClasses},
     { path: '/profile/topic/:teacherTopicId', name: 'topic', component: Topic},
     { path: '/chat/:recipientId', name: 'chat', component: Chat}
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })

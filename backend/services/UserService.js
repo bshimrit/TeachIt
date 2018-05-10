@@ -53,7 +53,10 @@ function update(user) {
     return new Promise((resolve, reject)=>{
         DBService.dbConnect()
         .then(db=>{
-            db.collection('user').updateOne({_id : user._id}, user, function (err, updatedUser) {
+            // db.collection('user').updateOne({_id : user._id}, user, function (err, updatedUser) {
+            db.collection('user').findOneAndUpdate({_id : user._id}, user, {
+                returnOriginal: false
+            },  function (err, updatedUser) {
                 if (err)    reject(err)
                 else        resolve(updatedUser);
                 db.close();
