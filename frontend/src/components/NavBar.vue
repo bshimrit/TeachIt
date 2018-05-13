@@ -2,7 +2,7 @@
 <div class=" navbar-fixed" v-show="scrolled">
   <nav>
     <div class="container nav-wrapper">
-      <a href="/" class="brand-logo left"><img src="../assets/logo.png" class="logo-img"></a>
+      <a href="/" class="brand-logo left"><img src="../assets/Logo.png" class="logo-img"></a>
       <ul id="nav-mobile" class="right hide-on-small-and-down lower">
         <li><router-link to="/">Home</router-link></li> 
         <li><router-link to="/search">Search</router-link></li> 
@@ -86,7 +86,7 @@ nav {
 }
 .logo-img {
   width: 150px;
-  margin: 10px auto;
+  /* margin: 10px auto; */
 }
 #nav-mobile {
   margin: auto 0;

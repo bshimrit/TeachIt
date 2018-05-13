@@ -13,9 +13,7 @@
           <div class="card-content">
             <h4>{{user.fullName}}</h4>
             <StarRating v-if="user.isTeacher" v-model="reviewsAvg" :star-size="20" :read-only="true" :show-rating="false"/>
-            <div v-if="user.quote" style="color: rgba(0,0,0,0.5)">
-              <i>"{{user.quote}}"</i>
-            </div>
+            <div v-if="user.quote">"{{user.quote}}"</div>
             <p>{{user.desc}}</p>
           </div>
           <div class="card-action">

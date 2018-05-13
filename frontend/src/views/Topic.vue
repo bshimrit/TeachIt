@@ -20,7 +20,7 @@
         <div class="flex justift-start align-center">
           <a class="pointer" @click="goToTeacherProfile"><img class="profile margin-right20" :src="teacherTopic.teacher.img" /></a>
           <div class="font-bold margin-right20">{{teacher.fullName}}</div>
-          <div class="margin-right20">"{{teacher.quote}}"</div>
+          <div v-if="teacher.quote" class="margin-right20">"{{teacher.quote}}"</div>
         </div>
         <div>
           <SocialInfo :socialInfo="teacher.socialLinks"></SocialInfo>

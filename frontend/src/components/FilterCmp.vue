@@ -105,11 +105,13 @@ export default {
         transition: width 0.4s ease-in-out;
     }
     ::placeholder {
-        color: #949494
+        color: #949494;
+        font-family: 'MontRegular';
     }
 
     input[type=text]:focus {
         width: 100%;
+       
     }
 
     .filter-cmp {

@@ -13,6 +13,14 @@
 }
 
 @font-face {
+    font-family: 'MontBlack';
+    src: url('../assets/fonts/Montserrat/Montserrat-Black.ttf');
+    font-weight: bold;
+    font-style: bold;
+}
+
+
+@font-face {
     font-family: 'ArialBold';
     src: url('../assets/fonts/ARLRDBD.TTF');
     font-weight: bold;

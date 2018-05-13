@@ -89,7 +89,7 @@ export default {
       background-size: cover;
       /* font-family: 'MontBold', sans-serif; */
       /* background-position-y: 80% */
-      font-family: 'ArialBold'
+      font-family: 'MontBlack'
   }
   h1 {
     -webkit-text-stroke: 2px black;
