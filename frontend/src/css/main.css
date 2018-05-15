@@ -143,6 +143,11 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
  .slick-prev {
      left: -40px;
  }
+
+ 
+ .card-item:not(:last-child) {
+    margin-right: 20px;
+  }
     
 
   @keyframes blinker {

@@ -83,9 +83,6 @@ export default {
     visibility: hidden
 }
 
-  .card-item:not(:last-child) {
-    margin-right: 20px;
-  }
 
 .filter {
     position: fixed;
