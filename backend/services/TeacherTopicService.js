@@ -15,9 +15,8 @@ function query(criteria = {}) {
   };
   if (criteria.maxprice || criteria.topics) matchQuery.$match.$and = [];
   if (criteria.maxprice && criteria.minprice) {
-    var maxPrice = Number(criteria.maxprice)
     matchQuery.$match.$and.push({
-      pricePerHour: { $gt: +criteria.minprice, $lt: +criteria.maxprice }
+      pricePerHour: { $gt: +criteria.minprice, $lt: +criteria.maxprice}
     })
   }
   if (criteria.topics) {
