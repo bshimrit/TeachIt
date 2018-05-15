@@ -184,15 +184,14 @@ form button {
 }
 .chat {
   position: absolute;
-  height: 450px;
+  height: 70vh;
   bottom: 0px;
   width: 500px;
   z-index: -1;
   margin-bottom: 0px;
   background-color: currentColor;
-  top: -450px;
-  overflow: scroll;
-  right: 0;
+  top: -70vh;
+  overflow-y: scroll;
 }
 h5 {
   /* margin: 5px; */

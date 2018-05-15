@@ -11,8 +11,7 @@ export default ({
     mutations: {
         recievedMsg(state, {msg}){
             // var newMsg = state.newMsgsCounter
-            
-            if (!state.chatWith) {
+                if (!state.chatWith) {
                 (state.newMsgsCounter[msg.senderId])? state.newMsgsCounter[msg.senderId].new++ :
                 state.newMsgsCounter[msg.senderId] = {new: 1};
                 
