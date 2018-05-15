@@ -9,11 +9,11 @@
         >
         <GmapMarker
             :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
+            v-for="(m, index) in teacherTopics"
+            :position="{lat: m.topicLocation.coordinates[0], lng: m.topicLocation.coordinates[1]}"
             :clickable="true"
             :draggable="true"
-            @click="center=m.position"
+            @click="center={lat: m[0].topicLocation.coordinates[0], lng: m[0].topicLocation.coordinates[1]}"
         />
         </GmapMap>
       </div>
@@ -23,6 +23,7 @@
 <script>
 export default {
   name: "TeacherMap",
+  props: ['teacherTopics'],
   data() {
       return {
           markers: [{position: {lat:32.08, lng:34.8}},{position: {lat:32.085, lng:34.781}},{position: {lat:32.075, lng:34.78}}]
