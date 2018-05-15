@@ -22,7 +22,7 @@ export default {
         uploadPreset: "wwdvysrn",
         apiKey: "327325116217457",
         cloudName: "dmz6eggte",
-        CL_URL: "https://api.cloudinary.com/v1_1/dmz6eggte/image/upload"
+        clUrl: "https://api.cloudinary.com/v1_1/dmz6eggte/image/upload"
       },
       thumb: {
         url: ""
@@ -50,26 +50,11 @@ export default {
       formData.append("file", file);
       formData.append("upload_preset", this.cloudinary.uploadPreset);
       formData.append("tags", "gs-vue,gs-vue-uploaded");
-      // For debug purpose only
-      // Inspects the content of formData
-      console.log("formData content:");
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
 
-      axios({
-        method: "POST",
-        url: "https://api.cloudinary.com/v1_1/dmz6eggte/image/upload",
-        headers: {
-          "content-type": "application/x-www-form-urlencoded"
-        },
-        data: {
-          formData
-        }
-      })
+      axios.post(this.cloudinary.clUrl, formData)
         .then(res => {
-          if (res.status === 200) {
-            console.log("upload sucsess", res);
+            if (res.status === 200) {
+            console.log("upload success", res);
             this.$emit("uploadImg", res.data.secure_url);
             this.thumbs.unshift({url: res.data.secure_url});
           } else {
@@ -77,24 +62,12 @@ export default {
           }
         })
         .catch(err => {
-          console.log("err: ", err);
-          this.$emit("uploadImg",this.imgPath + this.$refs.pictureInput.file.name);
+            console.log("err: ", err);
+          this.$emit(
+            "uploadImg",
+            this.imgPath + this.$refs.pictureInput.file.name
+          );
         });
-
-      // axios
-      //   .post(this.cloudinary.clUrl, formData)
-      //   .then(res => {
-      //     this.$emit("uploadImg", res.data.secure_url);
-      //     this.thumbs.unshift({
-      //       url: res.data.secure_url
-      //     });
-      //   })
-      //   .catch(err => {
-      //     this.$emit(
-      //       "uploadImg",
-      //       this.imgPath + this.$refs.pictureInput.file.name
-      //     );
-      //   });
     }
   }
 };

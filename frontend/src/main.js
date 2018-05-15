@@ -30,8 +30,9 @@ Vue.use(VuejsDialog, {
 
 
 const baseURL = (process.env.NODE_ENV !== 'development')? '' : '//127.0.0.1:3000'
+const socketURL = (process.env.NODE_ENV !== 'development')? '/' : '//127.0.0.1:3000'
 
-Vue.use(VueSocketio, baseURL, store);
+Vue.use(VueSocketio, socketURL, store);
 Vue.config.productionTip = false
 
 
