@@ -1,5 +1,5 @@
 <template>
-    <div class="card" v-if="teacherTopic.teacher">
+    <div class="card" >
         <div class="card-image">
             <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
             <a @click="goToTeacherProfile"  class="teacher-img btn-floating  waves-effect waves-light btn-large"><img

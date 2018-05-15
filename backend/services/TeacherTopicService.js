@@ -15,7 +15,6 @@ function query(criteria = {}) {
   };
   if (criteria.maxprice || criteria.topics) matchQuery.$match.$and = [];
   if (criteria.maxprice && criteria.minprice) {
-    console.log(criteria.maxprice,criteria.minprice)
     var maxPrice = Number(criteria.maxprice)
     matchQuery.$match.$and.push({
       pricePerHour: { $gt: +criteria.minprice, $lt: +criteria.maxprice }
@@ -31,7 +30,6 @@ function query(criteria = {}) {
     });
   }
 
-  console.log(matchQuery)
 
   var sort = {};
   switch (criteria.sort) {
@@ -46,7 +44,6 @@ function query(criteria = {}) {
       break;
   }
   var sortValue = { $sort: sort };
-  console.log(sortValue)
 
   return new Promise((resolve, reject) => {
     return DBService.dbConnect().then(db => {
@@ -80,7 +77,6 @@ function query(criteria = {}) {
         ])
         .toArray((err, teacherTopics) => {
           if (err) return reject(err);
-          // console.log(teacherTopics)
           resolve(teacherTopics);
         });
     });

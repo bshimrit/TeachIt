@@ -82,9 +82,8 @@ export default {
 .blank {
     visibility: hidden
 }
-.search {
-  /* margin-top: 200px */
-}
+
+
 .filter {
     position: fixed;
     z-index: 5;
