@@ -59,7 +59,7 @@ export default {
     saveUser() {
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
-        .then(addedUser => {
+        .then(savedUser => {
           this.$swal({
             type: "success",
             title: "Updated!"
@@ -75,7 +75,7 @@ export default {
     },
    
     addImg(url) {
-      this.userToUpdate.topicImage = url;
+      this.userToUpdate.img = url;
     }
   },
   created() {

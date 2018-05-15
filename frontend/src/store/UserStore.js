@@ -60,13 +60,18 @@ export default {
       })
     },
     saveUser(store, {user}) {
+      debugger;
       const isEdit = !!user._id;
       return UserService.saveUser(user)
       .then(res => {
         console.log({res})
-        let retUser = res.data.value;
-        console.log({retUser})
-        if (isEdit) store.commit({type: 'updateUser', user: retUser})
+        let retUser =  isEdit?  res.data.value:res.data[0];
+        console.log(retUser)
+        if (isEdit) {
+          store.commit({type: 'updateUser', user: retUser})
+          store.commit({type: 'setUser', user: retUser})
+
+        }
         else store.commit({type: 'addUser', user: retUser})
         return retUser;
       })
