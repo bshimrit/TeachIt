@@ -33,15 +33,15 @@
       </div>
        <div class="flex">
         <div class="team-member">
-            <img class="team-img" src="img/team/shimrit.jpg" alt="">
+            <img class="team-img" src="img/team/chen.jpg" alt="">
         </div>
         <div class="flex justify-start align-start">
             <div class="font-bold">
                 <h4>Chen Mualem</h4>
                 <p class="text-muted">Frontend Developer</p>
+                 <p><a href="https://www.linkedin.com/in/chen-mualem-234a657a/"> <i class="fa fa-linkedin-square" aria-hidden="true"></i>Linkedin</a></p>
             </div>
             <p> I'm an Information Systems Management B.Sc. graduate with IT background. Interested in web developmet roles.
-                
             </p>    
         </div>
       </div>

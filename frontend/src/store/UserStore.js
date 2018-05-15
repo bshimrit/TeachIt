@@ -60,7 +60,6 @@ export default {
       })
     },
     saveUser(store, {user}) {
-      debugger;
       const isEdit = !!user._id;
       return UserService.saveUser(user)
       .then(res => {
