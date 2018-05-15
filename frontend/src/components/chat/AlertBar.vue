@@ -1,7 +1,7 @@
 <template>
   <section class="footer">
       <div class="chat-screen">
-          <ChatCmp v-show="selectedChat.userId" :userId="selectedChat.userId" @removeChat="removeChat"></ChatCmp>
+          <ChatCmp v-show="selectedChat.userId || newChat" :userId="selectedChat.userId" @removeChat="removeChat"></ChatCmp>
       </div>
       <ul class="flex">
           <li v-for="(chat, id) in chats" :key="id" @click="getUserId(id)">
@@ -30,6 +30,12 @@ computed: {
         var chats = {new: null, userName: null}
         chats = this.$store.getters.alerts
         return chats
+    }, 
+    newChat() {
+        console.log('setting userId:', this.$store.getters.startNewChat.recipientId);
+        
+        this.selectedChat.userId = this.$store.getters.startNewChat.recipientId
+        return this.$store.getters.startNewChat.isNewChat
     }
 },
 methods: {

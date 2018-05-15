@@ -7,6 +7,7 @@ export default ({
       totMsgs: 0,
       chatWith: null,
       onChatPage: false,
+      isNewChat: false
     },
     mutations: {
         recievedMsg(state, {msg}){
@@ -35,7 +36,10 @@ export default ({
         },
         onChatPage(state, {onPage}) {
             state.onChatPage = onPage
-            
+        },
+        startNewChat(state, {details}) {
+            state.isNewChat = true;
+            state.chatWith = details.recipientId
         }
     },
     getters: {
@@ -59,6 +63,9 @@ export default ({
                 recipientId: '',
                 roomId: ''
             }
+        },
+        startNewChat(state) {
+            return {isNewChat: state.isNewChat, recipientId: state.chatWith}
         }
     },
     actions: {

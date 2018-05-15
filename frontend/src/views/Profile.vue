@@ -17,7 +17,7 @@
             <p>{{user.desc}}</p>
           </div>
           <div class="card-action">
-            <router-link class="waves-effect waves-light btn" :to="`/chat/${teacherId}`">Contact Me!</router-link>
+            <button class="waves-effect waves-light btn" @click="openChat">Contact Me!</button>
           </div>
         </div>
       </div>
@@ -51,7 +51,6 @@ export default {
     };
   },
   created() {
-    
     this.$store
       .dispatch({ type: 'getUserById', userId:this.userId })
       .then(user => {
@@ -77,6 +76,27 @@ export default {
   methods: {
     goToEditProfile() {
       this.$router.push('/profile/edit/' + this.userId);
+    },
+    openChat() {
+        console.log('Sending chat request for:', this.userId);
+        
+        this.$store.commit({type: 'chatWith', userId: this.userId})
+        var msg = this.$store.getters.newMsg;
+        msg.recipientId = this.userId;
+        msg.senderId = this.loggedUser._id;
+        msg.senderName = this.loggedUser.fullName;
+        var sortedIds = [this.loggedUser._id, msg.recipientId].sort();
+        msg.roomId = sortedIds[0] + sortedIds[1];        
+        this.$store.commit({type: 'startNewChat', details: msg})
+        // var msg = this.$store.getters.newMsg;
+        // console.log('sending chat to:', msg);
+        // msg.txt = `Hello ${this.teacher.fullName}. 
+        // You got a class request for the date ${this.startTime.time}, from ${this.loggedUser.fullName}.`
+        // msg.senderId = this.loggedUser._id;
+        // msg.senderName = this.loggedUser.fullName;
+        // msg.recipientId = this.user._id;
+        // console.log(msg);       
+        // this.$socket.emit('chat newMessage', msg);
     }
   },
   computed: {
@@ -91,6 +111,9 @@ export default {
     },
     reviewsAvg(){
       return this.$store.getters.reviewsAvgDispaly;
+    },
+    loggedUser() {
+        return this.$store.getters.loggedUser
     }
   }
 };

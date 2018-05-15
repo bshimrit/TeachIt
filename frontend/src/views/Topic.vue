@@ -129,7 +129,6 @@ export default {
         msg.roomId = sortedIds[0] + sortedIds[1];        
         console.log(msg);       
         this.$socket.emit('chat newMessage', msg);
-        
     }
   },
   components: {
