@@ -1,6 +1,8 @@
 @import './base.css';
 @import './helpers.css';
 @import './fonts.css';
+@import '../../node_modules/slick-carousel/slick/slick.css';
+@import '../../node_modules/slick-carousel/slick/slick-theme.css';
 
 .container {
     max-width: 1400px;
@@ -112,9 +114,6 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
   .card-item {
     margin-top: 20px;
   }
-  .card-item:not(:last-child) {
-    margin-right: 20px;
-  }
 
   .cards-container {
     margin: 0;
@@ -124,9 +123,6 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
     margin-top: 0;
   }
 
-  .card-content {
-    padding:10px;
-  }
 
   .dg-btn, .dg-btn:focus {
         color: black ;
@@ -138,6 +134,16 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
         background-color: #fff;
         border: 1px solid black;
     }
+
+ button.slick-prev:before, button.slick-next:before  {
+     color: black;
+     font-size: 40px;
+ }
+
+ .slick-prev {
+     left: -40px;
+ }
+    
 
   @keyframes blinker {
     50% {

@@ -82,9 +82,11 @@ export default {
 .blank {
     visibility: hidden
 }
-.search {
-  /* margin-top: 200px */
-}
+
+  .card-item:not(:last-child) {
+    margin-right: 20px;
+  }
+
 .filter {
     position: fixed;
     z-index: 5;
