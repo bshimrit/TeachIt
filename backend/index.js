@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    allowedOrigins: ["localhost:8080", "127.0.0.1:8080"],
+    allowedOrigins: ["localhost:8080", "127.0.0.1:8080","https://teachit-project.herokuapp.com"],
     credentials: true
   })
 );
