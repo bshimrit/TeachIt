@@ -8,13 +8,13 @@
                     <p class="user-name" >{{loggedInUser.fullName}}</p>
                 </div>
             </div>
-            <div class="review-data">
+            <form class="review-data" @submit.prevent="addReview">
                 <StarRating :star-size=20 :increment=1 v-model="review.topicRating" :show-rating="false" :read-only="false"/>
-                <textarea v-model="review.topicReview" placeholder="Enter your review"/>
+                <textarea @keydown="handleEnter" v-model="review.topicReview" placeholder="Enter your review"/>
                 <div class="flex justify-end">
-                    <button @click.prevent="addReview" class="btn" type="submit" :disabled="!isValid">Submit</button>
+                    <input class="btn" type="submit" :disabled="!isValid" />
                 </div>
-            </div>
+            </form>
         </section>
     </div>
 </template>
@@ -61,8 +61,32 @@ export default {
                 console.error('Review Was NOT Saved', err);
             })
         },
-        
-        
+        handleEnter(e)
+        {
+            var characterCode;
+            if(e && e.which)
+            {
+                e = e;
+                characterCode = e.which;
+            }
+            else
+            {
+                e = event;
+                characterCode = e.keyCode;
+            }
+           
+
+            if(characterCode == 13)
+            {
+                e.preventDefault();
+                this.addReview();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     },
     components: {
         StarRating

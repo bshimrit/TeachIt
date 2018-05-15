@@ -105,52 +105,52 @@ input[type=text]:not(.browser-default)[readonly="readonly"].cov-datepicker::plac
 
 .profile-card {
     flex-direction: column;
-  }
+}
 
-  .header-margin {
-      margin-top: 130px;
-  }
+.header-margin {
+    margin-top: 130px;
+}
 
-  .card-item {
+.card-item {
     margin-top: 20px;
-  }
+}
 
-  .cards-container {
+.cards-container {
     margin: 0;
-  }
+}
 
-  .card-content h4 {
+.card-content h4 {
     margin-top: 0;
-  }
+}
 
 
-  .dg-btn, .dg-btn:focus {
-        color: black ;
-        border: 1px solid black;
-        background-color: #fff;
-    }
+.dg-btn, .dg-btn:focus {
+    color: black ;
+    border: 1px solid black;
+    background-color: #fff;
+}
 
-    .dg-btn--cancel, .dg-btn--cancel:focus {
-        background-color: #fff;
-        border: 1px solid black;
-    }
+.dg-btn--cancel, .dg-btn--cancel:focus {
+    background-color: #fff;
+    border: 1px solid black;
+}
 
- button.slick-prev:before, button.slick-next:before  {
-     color: black;
-     font-size: 40px;
- }
+button.slick-prev:before, button.slick-next:before  {
+    color: black;
+    font-size: 40px;
+}
 
- .slick-prev {
-     left: -40px;
- }
+.slick-prev {
+    left: -40px;
+}
 
  
- .card-item:not(:last-child) {
+.card-item:not(:last-child) {
     margin-right: 20px;
-  }
+}
     
 
-  @keyframes blinker {
+@keyframes blinker {
     50% {
         box-shadow: 0 0 5px #f9e759;
     }

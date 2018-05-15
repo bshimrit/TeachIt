@@ -15,7 +15,7 @@ export default {
                 data: val
                 }
             ]},
-            {position: 'left',legend: {display: false},responsive: true, maintainAspectRatio: false})
+            {position: 'left',legend: {display: true, position:'left', labels: {boxWidth:20, fontfamily: 'MontBold'}},responsive: true, maintainAspectRatio: false})
         },
     }
 }
