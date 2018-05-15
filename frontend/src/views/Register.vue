@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       newUser: UserService.emptyUser(),
-      imgPath: '/img/users/'
+      imgPath: './img/users/'
     };
   },
   created() {
