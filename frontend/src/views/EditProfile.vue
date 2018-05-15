@@ -36,7 +36,7 @@ export default {
     return {
       editSection: "InfoEdit",
       userId: this.$route.params.userId,
-      imgPath: "/img/users/",
+      imgPath: "./img/users/",
       hack: 0
     };
   },
