@@ -121,14 +121,16 @@ export default {
         var msg = this.$store.getters.newMsg;
         console.log('sending chat to:', msg);
         msg.txt = `Hello ${this.teacher.fullName}. 
-        You got a class request for the date ${this.startTime.time}, from ${this.loggedUser.fullName}.`
+        You got a class request from ${this.loggedUser.fullName}, for the date ${this.startTime.time}.`
         msg.senderId = this.loggedUser._id;
         msg.senderName = this.loggedUser.fullName;
         msg.recipientId = this.teacher._id;
         var sortedIds = [this.loggedUser._id, msg.recipientId].sort();
         msg.roomId = sortedIds[0] + sortedIds[1];        
         console.log(msg);       
+        this.$store.commit({type: 'startNewChat', details: msg})
         this.$socket.emit('chat newMessage', msg);
+        setTimeout(()=> this.$socket.emit('chat newMessage', msg), 400)
         
     }
   },
