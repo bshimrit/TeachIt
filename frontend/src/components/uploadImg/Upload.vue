@@ -47,7 +47,7 @@ export default {
     upload() {
       let file = this.$refs.pictureInput.file;
       let formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", file.name);
       formData.append("upload_preset", this.cloudinary.uploadPreset);
       formData.append("tags", "gs-vue,gs-vue-uploaded");
 
