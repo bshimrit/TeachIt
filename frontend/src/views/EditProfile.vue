@@ -42,7 +42,7 @@ export default {
   },
   watch: {
     teacherTopics() {
-      console.log('teacherTopics watch entered')
+      // console.log('teacherTopics watch entered')
      if (this.teacherTopics.length !== 0) {
         this.userToUpdate.isTeacher = true;
         this.$store.dispatch({ type: "saveUser", user: this.userToUpdate })

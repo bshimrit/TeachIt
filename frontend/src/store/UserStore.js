@@ -26,7 +26,7 @@ export default {
       state.users = [user, ...state.users];
     },
     updateUser(state, { user }) {
-      console.log('user in updateUser mutation:', user);
+      // console.log('user in updateUser mutation:', user);
       const userIdx = state.users.findIndex(curruser => curruser._id === user._id)
       state.users.splice(userIdx, 1, user)
     },
@@ -63,9 +63,9 @@ export default {
       const isEdit = !!user._id;
       return UserService.saveUser(user)
       .then(res => {
-        console.log({res})
+        // console.log({res})
         let retUser =  isEdit?  res.data.value:res.data[0];
-        console.log(retUser)
+        // console.log(retUser)
         if (isEdit) {
           store.commit({type: 'updateUser', user: retUser})
           store.commit({type: 'setUser', user: retUser})

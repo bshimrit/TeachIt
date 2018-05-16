@@ -41,13 +41,13 @@ export default {
         this.image = image;
       } else {
         console.log("No Image");
-        // console.log('FileReader API not supported: use the <form>, Luke!')
       }
     },
     upload() {
-      let file = this.$refs.pictureInput.file;
+      let file = this.$refs.pictureInput.image;
+      console.log(this.$refs.pictureInput);
       let formData = new FormData();
-      formData.append("file", file.name);
+      formData.append("file", file);
       formData.append("upload_preset", this.cloudinary.uploadPreset);
       formData.append("tags", "gs-vue,gs-vue-uploaded");
 

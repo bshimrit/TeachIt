@@ -9,7 +9,6 @@ function query(criteria = {}) {
                 db.collection('user').find(criteria).toArray((err, users) => {
                     if (err) return reject(err);
                     delete users.password
-                    console.log(users);
                     resolve(users);
                 })
             })
@@ -23,7 +22,6 @@ function add(user) {
             .then(db => {
                 db.collection('user').insert(user, (err, res) => {
                     if (err) return reject(err);
-                    console.log('the:'+res.ops);
                     resolve(res.ops);
                     db.close();
                 })
