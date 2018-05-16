@@ -16,6 +16,8 @@ name: 'foot',
 
 computed: {
     chats() {
+        console.log('in footer:', this.$store.getters.alerts);
+        
         return this.$store.getters.alerts
     }
 }

@@ -13,7 +13,7 @@ function init(http) {
 
     socket.on('chatRequest', data => {
       socket.join(data.roomId)
-      io.to(data.roomId).emit('chat message',{txt: 'new user connetec to room'});    
+      io.to(data.roomId).emit('chat message',{txt: 'new user conneted to room'});    
       console.log('sending alert:', data);
     });
 
@@ -24,10 +24,10 @@ function init(http) {
     });
     
     socket.on('chat newMessage', data => {
-        console.log('socketId')
-        pcl(data)
-        console.log('socketRooms' )
-        pcl(socket.adapter.rooms)
+        // console.log('socketId')
+        // pcl(data)
+        // console.log('socketRooms' )
+        // pcl(socket.adapter.rooms)
         io.to(data.roomId).emit('chat message', data);  
         io.emit('alert user', data)
     });

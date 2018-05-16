@@ -32,7 +32,8 @@ export default {
     sockets: {
         ['alert user'](data) {
             if (data.recipientId === this.$store.getters.loggedUser._id) {
-                this.$store.commit({type: 'recievedMsg', msg: data})
+                this.$store.commit({type: 'recieveNewChat', details: data}) 
+                this.$store.commit({type: 'recievedMsg', msg: data}) 
             }
         }
     },
@@ -44,8 +45,6 @@ export default {
           return this.$store.getters.chatWith
       },
       onChatPage() {
-          console.log('on caht page?', this.$store.getters.isChatPage);
-          
           return this.$store.getters.isChatPage
       }
   }

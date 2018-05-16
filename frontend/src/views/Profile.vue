@@ -86,8 +86,9 @@ export default {
         msg.senderId = this.loggedUser._id;
         msg.senderName = this.loggedUser.fullName;
         var sortedIds = [this.loggedUser._id, msg.recipientId].sort();
-        msg.roomId = sortedIds[0] + sortedIds[1];        
+        msg.roomId = sortedIds[0] + sortedIds[1];   
         this.$store.commit({type: 'startNewChat', details: msg})
+        this.$socket.emit('chat newMessage', msg);
         // var msg = this.$store.getters.newMsg;
         // console.log('sending chat to:', msg);
         // msg.txt = `Hello ${this.teacher.fullName}. 
@@ -96,7 +97,6 @@ export default {
         // msg.senderName = this.loggedUser.fullName;
         // msg.recipientId = this.user._id;
         // console.log(msg);       
-        // this.$socket.emit('chat newMessage', msg);
     }
   },
   computed: {

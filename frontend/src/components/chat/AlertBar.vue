@@ -1,13 +1,12 @@
 <template>
   <section class="footer">
       <div class="chat-screen">
+          {{chattingWith}}
           <ChatCmp v-show="selectedChat.userId || newChat" :userId="selectedChat.userId" @removeChat="removeChat"></ChatCmp>
       </div>
       <ul class="flex">
           <li v-for="(chat, id) in chats" :key="id" @click="getUserId(id)">
-              <!-- <router-link :to="`/chat/${id}`"> -->
               <span class="badge">{{chat.new}}</span> {{chat.userName}}
-              <!-- </router-link> -->
           </li>
       </ul>
   </section>
@@ -32,10 +31,14 @@ computed: {
         return chats
     }, 
     newChat() {
-        console.log('setting userId:', this.$store.getters.startNewChat.recipientId);
+        console.log('setting userId:', this.$store.getters.startNewChat);
         
         this.selectedChat.userId = this.$store.getters.startNewChat.recipientId
         return this.$store.getters.startNewChat.isNewChat
+    },
+    chattingWith() {
+        this.selectedChat.userId = this.$store.getters.chatWith
+        return null
     }
 },
 methods: {
@@ -43,6 +46,7 @@ methods: {
         this.selectedChat.userId = null
         this.selectedChat.userId = userId
         console.log('msg with:', this.selectedChat.userId);
+        console.log('in room:', this.selectedChat.roomId);
         
         this.$store.commit({type: 'removeNewMsgs', recipient: userId})
 

@@ -5,8 +5,8 @@
         </h5>
         <ul class="msgs">
             <li v-for="msg in msgs" :key="msg.id">
-                <span v-if="msg.senderId === user._id" class="me">{{msg.txt}}</span>
-                <span v-else-if="msg.senderId === recipient._id" class="him">{{msg.txt}}</span>
+                <span v-if="msg.senderId === user._id" class="me"><u>{{user.fullName}}:</u> {{msg.txt}}</span>
+                <span v-else-if="msg.senderId === recipient._id" class="him"><u>{{msg.senderName}}:</u> {{msg.txt}}</span>
                 <span v-else class="general">{{msg.txt}}</span>
             </li>
         </ul>
@@ -38,11 +38,10 @@ export default {
         roomId: ''
       },
       roomId: '',
-      user: { _id: null },
+      user: { _id: null, fullName: null },
       recipient: { _id: null },
       msgs: MsgService.msgs,
       status: MsgService.status
-      // topic: 'food'
     };
   },
   created() {
@@ -97,43 +96,6 @@ export default {
       this.$store.dispatch({ type: 'recievedMsg', msg: data });
     }
   },
-  computed: {
-    // recipientId() {
-    //   console.log('recipientId', this.userId);
-    //   this.msg.recipientId = this.userId;
-    //   return this.userId;
-    // }
-  },
-//   watch: {
-//     userId(newVal) {
-//       this.msg.recipientId = newVal;
-//       console.log('changed user',newVal);
-//       // create ChatRoom ID
-//       var sortedIds = [this.$store.getters.loggedUser._id,this.msg.recipientId].sort();
-//       this.msg.roomId = sortedIds[0] + sortedIds[1];
-//       this.roomId = this.msg.roomId;
-//       console.log('ROOM ID:',this.msg.roomId );
-      
-//       // set sender data
-//       this.user = this.$store.getters.loggedUser;
-//       this.msg.senderName = this.user.userName;
-//       this.msg.senderId = this.user._id;
-//       // activate socket in this room
-//       this.$socket.emit('chatRequest', this.msg);
-//       // get recipient data for display on page
-//       this.$store
-//         .dispatch({ type: 'getUserById', userId: this.msg.recipientId })
-//         .then(recipient => (this.recipient = recipient));
-//       // remove 'new message' alerts
-//       var recipient = this.msg.recipientId;
-//     }
-//   }
-  //     'status.txt'() {
-  //         setTimeout(()=>{
-  //             this.status.txt = '';
-  //         }, 1000)
-  //     }
-  // }
 };
 </script>
 
@@ -199,7 +161,7 @@ h5 {
   background-color: #0e0f10;
 }
 .me {
-  font-weight: 600;
+  font-weight: 500;
   color: green;
   margin-left: 10px;
 }

@@ -1,5 +1,3 @@
-// import carService from '../services/car.service.js'
-
 export default ({
     strict: true,
     state: {
@@ -40,6 +38,10 @@ export default ({
         startNewChat(state, {details}) {
             state.isNewChat = true;
             state.chatWith = details.recipientId
+        },
+        recieveNewChat(state, {details}) {
+            // state.isNewChat = true;
+            state.chatWith = details.senderId
         }
     },
     getters: {
