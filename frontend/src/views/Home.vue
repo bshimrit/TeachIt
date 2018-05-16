@@ -46,15 +46,15 @@ export default {
     return {
       slickOptions: {
         slidesToShow: 4,
-        centerMode: true,
+        centerMode: false,
+        infinite: false,
         responsive: [
           {
             breakpoint: 1400,
             settings: {
               slidesToShow: 4,
               slidesToScroll: 1,
-              infinite: true,
-            }
+            } 
           },
           {
             breakpoint: 1024,
@@ -68,7 +68,6 @@ export default {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              centerMode: false
             }
           }
         // Any other options that can be got from plugin documentation
@@ -78,16 +77,27 @@ export default {
   },
   created(){
     this.$store.commit({type:'setTeacherTopicFilter', filter: TeacherTopicService.emptyTeacherTopicFilter()})
+  },
+  mounted() {
     this.$store.dispatch({type: 'loadPopularTeacherTopics'}).then(() =>{
-        this.$refs.slick.reSlick();
+      this.$store.dispatch({type: 'loadPopularTopics'}).then(() => {
+        // var n = this.$refs;
+        // console.log(n)
+        //   if (this.$refs.slick) this.$refs.slick.reSlick();
+        })
     })
-    this.$store.dispatch({type: 'loadPopularTopics'}).then(() => {
-    })
+  },
+  watch: {
+    '$refs': {
+      handler: function() { this.$refs.slick.reSlick(); },
+      deep: true
+    }
   },
   computed: {
     popularTeacherTopics() {    
-      console.log(this.$store.getters.popularTeacherTopicsForDisplay) 
-      return this.$store.getters.popularTeacherTopicsForDisplay;
+      var teacherTopics = this.$store.getters.popularTeacherTopicsForDisplay
+      // if (teacherTopics.length) this.$refs.slick.reSlick();
+      return teacherTopics;
     },
     popularByTopics() {
       return this.$store.getters.popularByTopicsForDisplay;
@@ -173,7 +183,9 @@ export default {
   .card-item {
     width: 250px;
   }
-
+  /* .slick-cloned {
+    z-index: -200;
+  } */
 
 
 </style>
