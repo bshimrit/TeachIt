@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style scoped>
-    input[type=text] {
+    .search-bar input[type=text] {
         width: 100%;
         box-sizing: border-box;
         border: 2px solid #5f3517;
@@ -109,11 +109,6 @@ export default {
         font-family: 'MontRegular';
     }
 
-    input[type=text]:focus {
-        width: 100%;
-       
-    }
-
     .filter-cmp {
         padding-top: 40px;
         width: 100%;
@@ -131,11 +126,5 @@ export default {
         height: 80px;
         max-width: 700px;
     }
-
-    /* @media (min-width: 750px){
-        input[type=text] {
-            width: 30%;
-        }
-    } */
 
 </style>

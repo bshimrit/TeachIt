@@ -1,5 +1,5 @@
 <template>
-    <div class="card" v-if="teacherTopic.teacher">
+    <div class="card" >
         <div class="card-image">
             <img @click="goToTeacherTopicProfile"  class="pointer topic-img" :src="teacherTopic.topicImage" />
             <a @click="goToTeacherProfile"  class="teacher-img btn-floating  waves-effect waves-light btn-large"><img
@@ -122,7 +122,7 @@ a.teacher-img img {
   height: 100%;
 }
 
-.card-content {
+.card .card-content {
   padding: 0 5px;
   font-size: 14px;
 }
@@ -136,7 +136,7 @@ a.teacher-img img {
 @media (min-width: 750px){
     .card {
         width: 250px;   
-        margin:0;
+        /* margin:0; */
     } 
 
     .topic-img {

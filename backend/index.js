@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("express-cors");
+// const cors = require("cors");
 var http = require("http");
 // var socket = require("socket.io");
 const clientSessions = require("client-sessions");
@@ -8,11 +9,14 @@ const SocketService = require('./services/SocketService');
 var UserService = require("./services/UserService");
 
 const app = express();
+
 app.use(
   cors({
-    allowedOrigins: ["localhost:8080", "127.0.0.1:8080"]
+    allowedOrigins: ["localhost:8080","127.0.0.1:8080","https://teachit-project.herokuapp.com"],
+    credentials: true
   })
 );
+
 app.use(bodyParser());
 http = http.Server(app);
 // var io = socket(http);

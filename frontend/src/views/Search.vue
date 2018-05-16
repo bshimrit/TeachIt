@@ -82,9 +82,8 @@ export default {
 .blank {
     visibility: hidden
 }
-.search {
-  /* margin-top: 200px */
-}
+
+
 .filter {
     position: fixed;
     z-index: 5;
@@ -107,11 +106,14 @@ export default {
     .teacher-map {
         display: inline-block;
         width: calc(100vw - 850px);
+        right: 80px;
 }
 }
 @media(min-width: 1400px){
     .teacher-map {
         width: calc(1400px - 850px);
+        right: 80px;
+        /* top: -20px; */
 }
 }
 

@@ -15,10 +15,8 @@ function query(criteria = {}) {
   };
   if (criteria.maxprice || criteria.topics) matchQuery.$match.$and = [];
   if (criteria.maxprice && criteria.minprice) {
-    console.log(criteria.maxprice,criteria.minprice)
-    var maxPrice = Number(criteria.maxprice)
     matchQuery.$match.$and.push({
-      pricePerHour: { $gt: +criteria.minprice, $lt: +criteria.maxprice }
+      pricePerHour: { $gt: +criteria.minprice, $lt: +criteria.maxprice}
     })
   }
   if (criteria.topics) {
@@ -30,8 +28,21 @@ function query(criteria = {}) {
       }
     });
   }
+  var nearValue = null;
+  if (criteria.geolocation){
+    curLocations = criteria.geolocation.split(',')
+    nearValue =  {
+      $geoNear: {
+         near: { type: "Point", coordinates: [+curLocations[0],+curLocations[1]]},
+         distanceField: "topicLocation",
+         maxDistance: 2000,
+         num: 50,
+         spherical: true
+      }
+    }
+  }
 
-  console.log(matchQuery)
+
 
   var sort = {};
   switch (criteria.sort) {
@@ -46,45 +57,47 @@ function query(criteria = {}) {
       break;
   }
   var sortValue = { $sort: sort };
-  console.log(sortValue)
 
+  var aggregates = baseAggregates();
+  aggregates.push(matchQuery,sortValue);
+  if (nearValue) aggregates.unshift(nearValue)
+  
   return new Promise((resolve, reject) => {
     return DBService.dbConnect().then(db => {
       db
         .collection("teacherTopic")
-        .aggregate([
-          {
-            $lookup: {
-              from: "user",
-              localField: "teacherId",
-              foreignField: "_id",
-              as: "teacher"
-            }
-          },
-          {
-            $unwind: "$teacher"
-          },
-          {
-            $lookup: {
-              from: "topic",
-              localField: "topicId",
-              foreignField: "_id",
-              as: "topic"
-            }
-          },
-          {
-            $unwind: "$topic"
-          },
-          matchQuery,
-          sortValue
-        ])
+        .aggregate(aggregates)
         .toArray((err, teacherTopics) => {
           if (err) return reject(err);
-          // console.log(teacherTopics)
           resolve(teacherTopics);
         });
     });
   });
+}
+
+function baseAggregates(){
+  return [{
+    $lookup: {
+      from: "user",
+      localField: "teacherId",
+      foreignField: "_id",
+      as: "teacher"
+    }
+  },
+  {
+    $unwind: "$teacher"
+  },
+  {
+    $lookup: {
+      from: "topic",
+      localField: "topicId",
+      foreignField: "_id",
+      as: "topic"
+    }
+  },
+  {
+    $unwind: "$topic"
+  }];
 }
 
 function add(teacherTopic) {
@@ -143,37 +156,17 @@ function update(teacherTopic) {
 // gets a specific teacherTopic by _id
 function getById(teacherTopicId) {
   teacherTopicId = new mongo.ObjectID(teacherTopicId);
+
+  var aggregates = baseAggregates();
+  aggregates.push({
+    $match: { _id: teacherTopicId }
+  });
+
   return new Promise((resolve, reject) => {
     DBService.dbConnect().then(db => {
       db
         .collection("teacherTopic")
-        .aggregate([
-          {
-            $lookup: {
-              from: "user",
-              localField: "teacherId",
-              foreignField: "_id",
-              as: "teacher"
-            }
-          },
-          {
-            $unwind: "$teacher"
-          },
-          {
-            $lookup: {
-              from: "topic",
-              localField: "topicId",
-              foreignField: "_id",
-              as: "topic"
-            }
-          },
-          {
-            $unwind: "$topic"
-          },
-          {
-            $match: { _id: teacherTopicId }
-          }
-        ])
+        .aggregate(aggregates)
         .toArray((err, teacherTopic) => {
           if (err) return reject(err);
           resolve(teacherTopic);
@@ -185,37 +178,16 @@ function getById(teacherTopicId) {
 // gets a specific all topics for a specific teacher by teacherId
 function getTeacherTopicsById(teacherId) {
   teacherId = new mongo.ObjectID(teacherId);
+  var aggregates = baseAggregates();
+  aggregates.push({
+    $match: { "teacher._id": teacherId }
+  });
+
   return new Promise((resolve, reject) => {
     DBService.dbConnect().then(db => {
       db
         .collection("teacherTopic")
-        .aggregate([
-          {
-            $lookup: {
-              from: "user",
-              localField: "teacherId",
-              foreignField: "_id",
-              as: "teacher"
-            }
-          },
-          {
-            $unwind: "$teacher"
-          },
-          {
-            $lookup: {
-              from: "topic",
-              localField: "topicId",
-              foreignField: "_id",
-              as: "topic"
-            }
-          },
-          {
-            $unwind: "$topic"
-          },
-          {
-            $match: { "teacher._id": teacherId }
-          }
-        ])
+        .aggregate(aggregates)
         .toArray((err, teacherTopics) => {
           if (err) return reject(err);
           resolve(teacherTopics);
@@ -227,37 +199,17 @@ function getTeacherTopicsById(teacherId) {
 // gets a specific all topics for a specific teacher by teacherId
 function getTopicsByTopicId(topicId) {
   topicId = new mongo.ObjectID(topicId);
+
+  var aggregates = baseAggregates();
+  aggregates.push({
+    $match: { "topic._id": topicId }
+  });
+
   return new Promise((resolve, reject) => {
     DBService.dbConnect().then(db => {
       db
         .collection("teacherTopic")
-        .aggregate([
-          {
-            $lookup: {
-              from: "user",
-              localField: "teacherId",
-              foreignField: "_id",
-              as: "teacher"
-            }
-          },
-          {
-            $unwind: "$teacher"
-          },
-          {
-            $lookup: {
-              from: "topic",
-              localField: "topicId",
-              foreignField: "_id",
-              as: "topic"
-            }
-          },
-          {
-            $unwind: "$topic"
-          },
-          {
-            $match: { "topic._id": topicId }
-          }
-        ])
+        .aggregate(aggregates)
         .toArray((err, teacherTopics) => {
           if (err) return reject(err);
           resolve(teacherTopics);
@@ -268,37 +220,16 @@ function getTopicsByTopicId(topicId) {
 
 // gets a  all topics for a specific title
 function getTopicsByTitle(title) {
+  var aggregates = baseAggregates();
+  aggregates.push({
+    $match: { "topic.title": title }
+  });
+
   return new Promise((resolve, reject) => {
     DBService.dbConnect().then(db => {
       db
         .collection("teacherTopic")
-        .aggregate([
-          {
-            $lookup: {
-              from: "user",
-              localField: "teacherId",
-              foreignField: "_id",
-              as: "teacher"
-            }
-          },
-          {
-            $unwind: "$teacher"
-          },
-          {
-            $lookup: {
-              from: "topic",
-              localField: "topicId",
-              foreignField: "_id",
-              as: "topic"
-            }
-          },
-          {
-            $unwind: "$topic"
-          },
-          {
-            $match: { "topic.title": title }
-          }
-        ])
+        .aggregate(aggregates)
         .toArray((err, teacherTopics) => {
           if (err) return reject(err);
           resolve(teacherTopics);
@@ -342,6 +273,7 @@ function getPopularTopics() {
     });
   });
 }
+
 
 module.exports = {
   query,

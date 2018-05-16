@@ -6,7 +6,7 @@
         <div v-else>Teacher review</div>
       </div>
       <template v-if="$mq !== 'sm'">
-        <reviewChart :reviewsCnt="reviewsCnt" :width="(reviews.length ? 100 : 0)" :height="(reviews.length ? 150 : 0)"></reviewChart>
+        <reviewChart :reviewsCnt="reviewsCnt" :width="(reviews.length ? 250 : 0)" :height="(reviews.length ? 150 : 0)"></reviewChart>
       </template>
     </section>
     <reviewAdd @addedReview="loadReviews" :teacherId="teacherId"></reviewAdd>

@@ -36,8 +36,8 @@ export default {
     return {
       editSection: "InfoEdit",
       userId: this.$route.params.userId,
-      imgPath: "/img/users/",
-      hack: 0
+      imgPath: "./img/users/",
+      isTeacherWatch: 0
     };
   },
   watch: {
@@ -45,21 +45,17 @@ export default {
       console.log('teacherTopics watch entered')
      if (this.teacherTopics.length !== 0) {
         this.userToUpdate.isTeacher = true;
-        this.$store
-          .dispatch({ type: "saveUser", user: this.userToUpdate })
-          .then(() => {
-            console.log('saved updated user')
-          })
-          this.hack++;
+        this.$store.dispatch({ type: "saveUser", user: this.userToUpdate })
+          .then(() => {console.log('saved updated user')})
+          this.isTeacherWatch++;
       }
     },
-    
   },
   methods: {
     saveUser() {
       this.$store
         .dispatch({ type: "saveUser", user: this.userToUpdate })
-        .then(addedUser => {
+        .then(savedUser => {
           this.$swal({
             type: "success",
             title: "Updated!"
@@ -75,7 +71,7 @@ export default {
     },
    
     addImg(url) {
-      this.userToUpdate.topicImage = url;
+      this.userToUpdate.img = url;
     }
   },
   created() {
@@ -85,17 +81,14 @@ export default {
     userToUpdate() {
       let loggedUser = this.$store.getters.loggedUser;
       console.log("user:", loggedUser);
-      return loggedUser
-        ? JSON.parse(JSON.stringify(loggedUser))
-        : UserService.emptyUser();
+      return JSON.parse(JSON.stringify(loggedUser));
     },
     teacherTopics() {
       return this.$store.getters.teacherTopicsForDisplay;
     },
     isTeacherClasses() {
       console.log('entered isTeacherClasses computation');
-      console.log(this.userToUpdate.isTeacher)
-      if (this.hack === -1) return;
+      if (this.isTeacherWatch === -1) return;
       if (this.userToUpdate.isTeacher) return "Classes";
       else return "Become A teacher";
     }

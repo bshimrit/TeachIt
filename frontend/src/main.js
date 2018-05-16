@@ -11,6 +11,11 @@ import 'font-awesome/css/font-awesome.css';
 import VueMq from 'vue-mq'
 import VuejsDialog from "vuejs-dialog"
 import VueSweetalert2 from 'vue-sweetalert2';
+import * as VueGoogleMaps from 'vue2-google-maps'
+import _ from 'lodash'
+import './css/main.css'
+// import socketio from 'socket.io-client'
+import VueSocketio from 'vue-socket.io';
  
 Vue.use(VueSweetalert2);
 
@@ -23,15 +28,11 @@ Vue.use(VuejsDialog, {
   animation: 'bounce', 
 })
 
-import * as VueGoogleMaps from 'vue2-google-maps'
-import _ from 'lodash'
-import './css/main.css'
-// import socketio from 'socket.io-client'
-import VueSocketio from 'vue-socket.io';
 
 const baseURL = (process.env.NODE_ENV !== 'development')? '' : '//127.0.0.1:3000'
+const socketURL = (process.env.NODE_ENV !== 'development')? '/' : '//127.0.0.1:3000'
 
-Vue.use(VueSocketio, baseURL, store);
+Vue.use(VueSocketio, socketURL, store);
 Vue.config.productionTip = false
 
 
