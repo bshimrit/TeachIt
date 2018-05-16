@@ -99,21 +99,20 @@ export default {
     width: initial;
   }
 }
-@media(min-width: 1024px){
+@media(min-width: 1150px){
     .cards-container {
       width: 850px;        
     }
     .teacher-map {
         display: inline-block;
-        width: calc(100vw - 850px);
+        width: calc(90vw - 850px);
         right: 80px;
 }
 }
-@media(min-width: 1400px){
+@media(min-width: 1450px){
     .teacher-map {
         width: calc(1400px - 850px);
         right: 80px;
-        /* top: -20px; */
 }
 }
 

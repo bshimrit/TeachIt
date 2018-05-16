@@ -57,7 +57,7 @@ export default {
     this.roomId = this.msg.roomId;
     // set sender data
     this.user = this.$store.getters.loggedUser;
-    this.msg.senderName = this.user.userName;
+    this.msg.senderName = this.user.fullName;
     this.msg.senderId = this.user._id;
     // activate socket in this room
     this.$socket.emit('chatRequest', this.msg);
