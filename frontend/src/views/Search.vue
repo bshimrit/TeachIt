@@ -12,7 +12,7 @@
               <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
           </li>
         </ul>
-        <teacher-map :teacherTopics="teacherTopics" v-if="$mq ==='lg'" class="teacher-map relative"></teacher-map>
+        <teacher-map v-if="$mq ==='lg'" class="teacher-map relative"></teacher-map>
       </section> 
     </section>
 </template>
@@ -106,6 +106,7 @@ export default {
     .teacher-map {
         display: inline-block;
         width: calc(100vw - 850px);
+        right: 80px;
 }
 }
 @media(min-width: 1400px){

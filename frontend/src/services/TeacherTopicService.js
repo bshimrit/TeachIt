@@ -15,6 +15,14 @@ function emptyTeacherTopic() {
     teacherId: null,
     level: "",
     pricePerHour: 0,
+    address : "Iben Gvirol 124",
+    topicLocation : {
+        type : "Point",
+        coordinates : [ 
+            32.0869602, 
+            34.784581
+        ]
+    },
     rating: null,
     shortDes: "",
     longDes:"",

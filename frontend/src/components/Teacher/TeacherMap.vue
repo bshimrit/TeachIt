@@ -28,7 +28,7 @@ import TeacherTopic from '@/components/topic/TeacherTopicPreview.vue'
 
 export default {
   name: "TeacherMap",
-  props: ['teacherTopics'],
+//   props: ['teacherTopics'],
   data() {
       return {
         infoWinOpen: false,
@@ -47,10 +47,14 @@ export default {
         teacherTopic: null
       }
   },
+  computed: {
+      teacherTopics(){
+      return this.$store.getters.teacherTopicsForDisplay;
+    }
+  },
   methods: {
       toggleInfoWindow: function(marker, idx) {
             this.infoWindowPos = {lat: marker.topicLocation.coordinates[0], lng: marker.topicLocation.coordinates[1]};
-            console.log(marker)
             this.teacherTopic = marker;
             //check if its the same marker that was selected if yes toggle
             if (this.currentMidx == idx) {
