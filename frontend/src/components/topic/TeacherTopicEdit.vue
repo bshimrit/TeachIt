@@ -74,14 +74,17 @@ export default {
     emitSave(){
       this.teacherClassToEdit.topicId = $('select').val();
       var newTeacherTopic = {
-        _id:  this.teacherClassToEdit._id,
-        topicId: this.teacherClassToEdit.topicId,
-        teacherId:  this.teacherClassToEdit.teacherId,
-        level:  this.teacherClassToEdit.level,
+        _id:            this.teacherClassToEdit._id,
+        topicId:        this.teacherClassToEdit.topicId,
+        teacherId:      this.teacherClassToEdit.teacherId,
+        level:          this.teacherClassToEdit.level,
         pricePerHour:  +this.teacherClassToEdit.pricePerHour,
-        shortDes:  this.teacherClassToEdit.shortDes,
-        longDes:  this.teacherClassToEdit.longDes,
-        topicImage:  this.teacherClassToEdit.topicImage
+        address :       this.teacherClassToEdit.address,
+        topicLocation:  this.teacherClassToEdit.topicLocation,
+        shortDes:       this.teacherClassToEdit.shortDes,
+        longDes:        this.teacherClassToEdit.longDes,
+        topicImage:     this.teacherClassToEdit.topicImage,
+        rating:         this.teacherClassToEdit.rating
       }
       this.$emit('emitToModal', newTeacherTopic);
 

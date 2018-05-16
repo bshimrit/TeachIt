@@ -1,6 +1,6 @@
 <template>
   <div class="upload">
-    <picture-input ref="pictureInput" @change="onChange" width="100" height="100" margin="16" accept="image/jpeg,image/png,image/jpg" size="10" :prefill="prefill" buttonClass="btn" :hideChangeButton="true" :customStrings="{
+    <picture-input ref="pictureInput" @change="onChange" width="250" height="150" margin="16" accept="image/jpeg,image/png,image/jpg" size="10" :prefill="prefill" buttonClass="btn" :hideChangeButton="true" :customStrings="{
         upload: '<h1>Bummer!</h1>',
         drag: 'Drag an image file'
       }">
