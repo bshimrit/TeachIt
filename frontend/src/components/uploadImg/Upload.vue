@@ -62,11 +62,10 @@ export default {
           }
         })
         .catch(err => {
-            console.log("err: ", err);
-          this.$emit(
-            "uploadImg",
-            this.imgPath + this.$refs.pictureInput.file.name
-          );
+            this.$emit(
+              "uploadImg",
+              this.imgPath + this.$refs.pictureInput.file.name
+            )
         });
     }
   }

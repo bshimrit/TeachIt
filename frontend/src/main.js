@@ -39,7 +39,7 @@ Vue.config.productionTip = false
 // This is needed for getting the session cookie via CORS
 window.axios = axios.create({
   baseURL,
-  withCredentials: true
+  withCredentials: false
 });
 
 Vue.use(VueMq, {
