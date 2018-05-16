@@ -1,6 +1,6 @@
 <template>
   <section class="chat">
-        <h5><span @click="showId">Chatting with</span>  {{recipient.userName}} 
+        <h5><span @click="showId">Chatting with</span>  {{recipient.fullName}} 
             <button class="clear-btn" @click="removeUser"><i class="fa fa-times-circle"></i></button>
         </h5>
         <ul class="msgs">
@@ -148,7 +148,7 @@ form button {
   position: absolute;
   height: 70vh;
   bottom: 0px;
-  width: 500px;
+  width: 550px;
   z-index: -1;
   margin-bottom: 0px;
   background-color: currentColor;
