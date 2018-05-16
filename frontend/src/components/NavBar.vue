@@ -110,8 +110,13 @@ nav {
 .hide-nav {
   top: -100%;
 }
+
 .profile-img {
   padding-right: 0;
+}
+
+.profile-img img {
+    object-fit: cover;
 }
 
 .brand-logo {

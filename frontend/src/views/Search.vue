@@ -111,6 +111,8 @@ export default {
 @media(min-width: 1400px){
     .teacher-map {
         width: calc(1400px - 850px);
+        right: 80px;
+        /* top: -20px; */
 }
 }
 

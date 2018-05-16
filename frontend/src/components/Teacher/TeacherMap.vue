@@ -8,7 +8,9 @@
         style="width: 100%; height: 100%; border: 1px solid #577594"
         >
         <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false"  @mouseout="toggleInfoWindow(m,index)">
-             <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+             <div class="info-win">
+                <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+             </div>
         </gmap-info-window>
             <GmapMarker :key="index" 
                 v-for="(m, index) in teacherTopics" 
@@ -79,5 +81,11 @@ export default {
     position: fixed;
     right: 0;
     height: 100%; 
+}
+
+.info-win {
+    width: 250px;
+    margin: 0;
+    padding: 0;
 }
 </style>
