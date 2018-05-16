@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const cors = require("express-cors");
-const cors = require("cors");
+const cors = require("express-cors");
+// const cors = require("cors");
 var http = require("http");
 // var socket = require("socket.io");
 const clientSessions = require("client-sessions");
@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    allowedOrigins: ["localhost:8080", "localhost:5000", "127.0.0.1:8080","https://teachit-project.herokuapp.com"],
+    allowedOrigins: ["localhost:8080","127.0.0.1:8080","https://teachit-project.herokuapp.com"],
     credentials: true
   })
 );

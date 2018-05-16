@@ -136,7 +136,7 @@ a.teacher-img img {
 @media (min-width: 750px){
     .card {
         width: 250px;   
-        margin:0;
+        /* margin:0; */
     } 
 
     .topic-img {

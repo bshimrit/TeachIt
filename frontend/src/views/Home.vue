@@ -22,7 +22,7 @@
                   <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
                 </li>
               </ul> -->
-              <slick ref="slick" :options="slickOptions">    
+              <slick ref="slick" :options="slickOptions" class="responsive">    
                 <div class="card-item" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
                   <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
                 </div>                
@@ -47,8 +47,33 @@ export default {
       slickOptions: {
         slidesToShow: 4,
         centerMode: true,
+        responsive: [
+          {
+            breakpoint: 1400,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              infinite: true,
+            }
+          },
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 750,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              centerMode: false
+            }
+          }
         // Any other options that can be got from plugin documentation
-            },
+        ]
+      }
     }
   },
   created(){
@@ -57,15 +82,8 @@ export default {
         this.$refs.slick.reSlick();
     })
     this.$store.dispatch({type: 'loadPopularTopics'}).then(() => {
-      // this.$refs.slickA.reSlick();
     })
   },
-  // mounted() {
-  //   this.$refs.slick.reSlick();
-  // },
-  // updated() {
-  //   this.$refs.slick.reSlick();
-  // },
   computed: {
     popularTeacherTopics() {    
       console.log(this.$store.getters.popularTeacherTopicsForDisplay) 
