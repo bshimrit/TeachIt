@@ -122,7 +122,7 @@ a.teacher-img img {
   height: 100%;
 }
 
-.card-content {
+.card .card-content {
   padding: 0 5px;
   font-size: 14px;
 }
