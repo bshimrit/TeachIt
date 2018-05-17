@@ -11,7 +11,7 @@ export default {
     teacherTopicsByTeacherId: [],
     teacherTopicFilter: TeacherTopicService.emptyTeacherTopicFilter(),
     popularByTopics: [],
-    MAX_VIEW: 5
+    MAX_VIEW: 10
   },
   mutations: {
     setTeacherTopicFilter(state, { filter }) {
@@ -68,7 +68,7 @@ export default {
     loadPopularTeacherTopics(store) {
       return TeacherTopicService.getTeacherTopics(TeacherTopicService.emptyTeacherTopicFilter())
       .then(popularTeacherTopics => {
-          // popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_VIEW);
+          popularTeacherTopics = popularTeacherTopics.slice(0,store.state.MAX_VIEW);
           store.commit({ type: 'setPopularTeacherTopics', popularTeacherTopics });
         })
     }, 
@@ -106,7 +106,7 @@ export default {
     loadPopularTopics(store) {
       return TeacherTopicService.getPopularTopics()
           .then(popularTopics => {
-            // if (popularTopics) popularTopics = popularTopics.slice(0,store.state.MAX_VIEW);
+            if (popularTopics) popularTopics = popularTopics.slice(0,store.state.MAX_VIEW);
             var popularByTopics = popularTopics.map(popularTopic => {
               return {topic: popularTopic[0].topic,teacherTopics:popularTopic}
             })

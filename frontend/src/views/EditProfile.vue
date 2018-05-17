@@ -42,11 +42,11 @@ export default {
   },
   watch: {
     teacherTopics() {
-      console.log('teacherTopics watch entered')
+      // console.log('teacherTopics watch entered')
      if (this.teacherTopics.length !== 0) {
         this.userToUpdate.isTeacher = true;
         this.$store.dispatch({ type: "saveUser", user: this.userToUpdate })
-          .then(() => {console.log('saved updated user')})
+          .then(() => {})
           this.isTeacherWatch++;
       }
     },
@@ -87,7 +87,7 @@ export default {
       return this.$store.getters.teacherTopicsForDisplay;
     },
     isTeacherClasses() {
-      console.log('entered isTeacherClasses computation');
+      // console.log('entered isTeacherClasses computation');
       if (this.isTeacherWatch === -1) return;
       if (this.userToUpdate.isTeacher) return "Classes";
       else return "Become A teacher";

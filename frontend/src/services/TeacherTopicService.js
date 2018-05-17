@@ -15,18 +15,19 @@ function emptyTeacherTopic() {
     teacherId: null,
     level: "",
     pricePerHour: 0,
-    address : "Iben Gvirol 124",
+    address : "Tel Aviv",
     topicLocation : {
-        type : "Point",
-        coordinates : [ 
-            32.0869602, 
-            34.784581
-        ]
+      type : "Point",
+      coordinates : [ 
+          32.0879122,34.8672863
+      ]
     },
     rating: null,
     shortDes: "",
     longDes:"",
-    topicImage: ""
+    topicImage: "",
+    rating: 0
+
   };
 }
 

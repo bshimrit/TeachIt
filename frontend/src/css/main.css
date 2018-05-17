@@ -162,7 +162,7 @@ button.slick-prev:before, button.slick-next:before  {
         height: 275px;
     }
 
-    .profile-card {
+    /* .profile-card {
         flex-direction: row;
-  }
+  } */
 }
