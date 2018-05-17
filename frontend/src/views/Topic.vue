@@ -2,18 +2,20 @@
   <section>
   <div v-if="teacherTopic.topic" class="container card-container">
     <div class="profile-card card flex">
-      <div class="card-image" style="padding: 10px; display: flex;">
+      <div class="card-image flex">
         <div class="user-img" :style="{backgroundImage: 'url(' + teacherTopic.topicImage + ')'}"></div>     
-      </div>
-      <div class="card-stacked">
-        <div class="card-content">
-          <h4>{{teacherTopic.topic.subtitle}}
-              <StarRating v-model="reviewsAvg" :star-size="20" :read-only="true" :show-rating="false"/>
-          </h4>
-          <p>{{teacherTopic.pricePerHour}}$/PerHour</p>
-          <p class="font-bold">{{teacherTopic.shortDes}}</p>
-          <p>{{teacherTopic.longDes}}</p>
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4>{{teacherTopic.topic.subtitle}}
+                <StarRating v-model="reviewsAvg" :star-size="20" :read-only="true" :show-rating="false"/>
+            </h4>
+            <p>{{teacherTopic.pricePerHour}}$/PerHour</p>
+          </div>
         </div>
+      </div>
+      <div class="descriptions">
+        <p class="font-bold">{{teacherTopic.shortDes}}</p>  
+        <p>{{teacherTopic.longDes}}</p> 
       </div>
     </div>
     <div class="teacher-details flex">
@@ -176,14 +178,39 @@ li {
 
 
  .card .card-content {
-    padding:10px;
+    padding-left:10px;
+    padding-top: 0px;
+    padding-right:10px;
   }
+
+.user-img   {
+  width: 230px;
+  height: 140px;
+}
+
+.card-image {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.descriptions {
+  padding-left: 10px;
+}
+
+.descriptions p {
+  margin: 3px;
+}
 
 @media (min-width: 750px){
   .teacher-details {
     flex-direction: row;
-    align-items: center;
-}
+    align-items: left;
+  }
+  .user-img   {
+    width: 300px;
+    height: 180px;
+  }
+
   
 }
 

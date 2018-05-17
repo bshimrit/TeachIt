@@ -130,7 +130,7 @@ export default {
   max-width: 900px;
   padding: 20px;
 }
-.form-container {
+.container .row.form-container {
   width: 80%;
   margin: 0 auto;
 }
