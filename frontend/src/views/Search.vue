@@ -12,7 +12,7 @@
               <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
           </li>
         </ul>
-        <teacher-map v-if="$mq ==='lg'" class="teacher-map relative"></teacher-map>
+        <teacher-map v-if="$mq ==='lg'" class="teacher-map"></teacher-map>
       </section> 
     </section>
 </template>

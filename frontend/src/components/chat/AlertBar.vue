@@ -96,4 +96,10 @@ a {
     background-color: #ffffff00;
     border: 1px solid #0e0f10
 }
+@media(min-width: 750px){
+  .chat-screen{
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>
