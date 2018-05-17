@@ -113,7 +113,8 @@ form {
   padding: 3px;
   position: fixed;
   bottom: 0;
-  width: 550px;
+  width: 100%;
+
 }
 form input {
   border: 0;
@@ -146,9 +147,9 @@ form button {
 }
 .chat {
   position: absolute;
-  height: 70vh;
+  width: 100vw;
+  height: 100vh;
   bottom: 0px;
-  width: 550px;
   z-index: -1;
   margin-bottom: 0px;
   background-color: currentColor;
@@ -171,13 +172,13 @@ h5 {
 .him {
   color: black;
 }
-@media(max-width: 750px){
+@media(min-width: 750px){
   .chat{
-    width: 100vw;
-    height: 100vh;
+    width: 550px;
+    height: 70vh;
   }
   form {
-      width: 100%
+    width: 550px;  
   }
 }
 </style>

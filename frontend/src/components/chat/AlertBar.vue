@@ -90,16 +90,15 @@ a {
 }
 .chat-screen {
     position: absolute;
-    height: 450px;
-    /* width: 450px; */
-    /* padding: 10px; */
+    width: 100%;
+    height: 100%;
     background-color: #ffffff00;
-    border: 1px solid #0e0f10
+    border: 1px solid #0e0f10;
+    z-index: -1;
 }
 @media(min-width: 750px){
   .chat-screen{
-    width: 100%;
-    height: 100%;
+    height: 450px;
   }
 }
 </style>
