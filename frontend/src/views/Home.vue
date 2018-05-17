@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="popularTeacherTopics.length">
     <div class="hero flex justify-center align-center flex-column">
       <div class="comp-name">
         <h1>TeachIt</h1>
@@ -8,27 +8,22 @@
       <FilterCmp @filtered="filterTeacherTopic"></FilterCmp>
     </div>
     <div class="container header-margin">
-        <h4 class="tt-header">Most Popular</h4>
-        <slick ref="slick" :options="slickOptions">    
-          <div  class="card-item" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
+      <h4 class="tt-header">Most Popular</h4>
+      <slick ref="slick" :options="slickOptions">    
+        <div  class="card-item" v-for="teacherTopic in popularTeacherTopics" :key="teacherTopic._id">
+          <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
+        </div>
+      </slick>
+      <h4 class="tt-header">Categories</h4>
+      <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
+        <p class="tt-header font-bold">{{popularTopic.topic.title}}</p>
+        <slick ref="slick" :options="slickOptions" class="responsive">    
+          <div class="card-item" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
             <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-          </div>
+          </div>                
         </slick>
-        <h4 class="tt-header">Categories</h4>
-            <div v-for="popularTopic in popularByTopics" :key="popularTopic.topic._id">
-              <p class="tt-header font-bold">{{popularTopic.topic.title}}</p>
-              <!-- <ul class="cards-container flex flex-wrap">
-                <li class="card-item" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
-                  <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-                </li>
-              </ul> -->
-              <slick ref="slick" :options="slickOptions" class="responsive">    
-                <div class="card-item" v-for="teacherTopic in popularTopic.teacherTopics" :key="teacherTopic._id">
-                  <TeacherTopic :teacherTopic="teacherTopic" :showLongDesc="false"></TeacherTopic>
-                </div>                
-              </slick>
-            </div>
       </div>
+    </div>
   </section>
 </template>
 
@@ -48,26 +43,24 @@ export default {
         slidesToShow: 4,
         centerMode: false,
         infinite: false,
+        slidesToScroll: 1,
         responsive: [
           {
             breakpoint: 1400,
             settings: {
-              slidesToShow: 4,
-              slidesToScroll: 1,
+              slidesToShow: 4
             } 
           },
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1
+              slidesToShow: 3
             }
           },
           {
             breakpoint: 750,
             settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
+              slidesToShow: 1
             }
           }
         // Any other options that can be got from plugin documentation
@@ -81,23 +74,19 @@ export default {
   mounted() {
     this.$store.dispatch({type: 'loadPopularTeacherTopics'}).then(() =>{
       this.$store.dispatch({type: 'loadPopularTopics'}).then(() => {
-        // var n = this.$refs;
-        // console.log(n)
-        //   if (this.$refs.slick) this.$refs.slick.reSlick();
         })
     })
   },
   watch: {
-    '$refs': {
-      handler: function() { this.$refs.slick.reSlick(); },
-      deep: true
-    }
+    popularTeacherTopics: function(newVal) {
+        console.log(this.$refs, newVal.length)
+        if (this.$refs.slick)
+          this.$refs.slick.reSlick(); 
+    },
   },
   computed: {
     popularTeacherTopics() {    
-      var teacherTopics = this.$store.getters.popularTeacherTopicsForDisplay
-      // if (teacherTopics.length) this.$refs.slick.reSlick();
-      return teacherTopics;
+      return this.$store.getters.popularTeacherTopicsForDisplay;
     },
     popularByTopics() {
       return this.$store.getters.popularByTopicsForDisplay;
