@@ -210,7 +210,9 @@ li {
     width: 300px;
     height: 180px;
   }
-
+  .profile-card {
+    flex-direction: column;
+  }
   
 }
 
